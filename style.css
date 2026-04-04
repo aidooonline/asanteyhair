@@ -869,3 +869,9 @@ select.form-control{
 /* Image handling — universal */
 .img-cover{width:100%;height:100%;object-fit:cover}
 .img-contain{width:100%;height:100%;object-fit:contain}
+
+/* ── WORDPRESS ADMIN BAR FIX ─────────────────────────────── */
+.admin-bar .hdr { top: 32px; }
+@media screen and (max-width: 782px) {
+  .admin-bar .hdr { top: 46px; }
+}
