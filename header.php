@@ -60,7 +60,7 @@
          class="btn btn--ow btn--sm"
          target="_blank" rel="noopener noreferrer"
          style="display:none;" id="hdr-book">Book</a>
-      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order with Asantey Hair & Beauty.')); ?>"
+      <a href="<?php echo esc_url(ah_whatsapp_url( 'Hello! I would like to order with Asantey Hair and Beauty.' )); ?>"
          class="btn btn--w btn--sm"
          target="_blank" rel="noopener noreferrer">
         Order Now

@@ -6,8 +6,8 @@ get_header();
 
 // Unsplash hero images — landscape, African beauty/hair editorial
 // These load directly from Unsplash CDN on the live site
-define('AH_HERO_1', 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=88&auto=format&fit=crop&crop=top');
-define('AH_HERO_2', 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1920&q=88&auto=format&fit=crop&crop=top');
+defined('AH_HERO_1') || define('AH_HERO_1', 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=88&auto=format&fit=crop&crop=top');
+defined('AH_HERO_2') || define('AH_HERO_2', 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1920&q=88&auto=format&fit=crop&crop=top');
 
 $hero_image = get_theme_mod('ah_hero_image', AH_HERO_1);
 $hero_title = get_theme_mod('ah_hero_title', 'Luxury Hair.\nReal Results.');

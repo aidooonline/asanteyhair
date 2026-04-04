@@ -6,7 +6,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AH_VERSION',   '1.0.0' );
+define( 'AH_VERSION',   '3.0.0' );
 define( 'AH_DIR',       get_template_directory() );
 define( 'AH_URI',       get_template_directory_uri() );
 define( 'AH_ASSETS',    AH_URI . '/assets' );

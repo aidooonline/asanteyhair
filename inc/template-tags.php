@@ -121,7 +121,7 @@ function ah_pricing_table( string $type, string $caption = '', string $note = ''
         echo '<tr>';
         echo '<td>' . esc_html( $length ) . '"</td>';
         echo '<td class="price-col">&pound;' . esc_html( $price ) . '</td>';
-        echo '<td><a href="' . esc_url( ah_whatsapp_url( $wa_msg ) ) . '" class="btn btn--wa btn--sm" target="_blank" rel="noopener noreferrer">' . ah_svg( 'whatsapp', 'ah-wa-float__icon' ) . ' Order</a></td>';
+        echo '<td><a href="' . esc_url( ah_whatsapp_url( $wa_msg ) ) . '" class="btn btn--wa btn--sm" target="_blank" rel="noopener noreferrer">' . ah_svg( 'whatsapp' ) . ' Order</a></td>';
         echo '</tr>';
     }
 
@@ -164,7 +164,7 @@ function ah_social_links( string $class = 'ah-social-links' ): void {
    STAR RATING
    ============================================================ */
 function ah_stars( int $count = 5 ): string {
-    $out = '<div class="testimonial__stars" aria-label="' . $count . ' out of 5 stars">';
+    $out = '<div class="tcard__stars" aria-label="' . $count . ' out of 5 stars">';
     for ( $i = 0; $i < $count; $i++ ) {
         $out .= ah_svg( 'star' );
     }
