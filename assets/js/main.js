@@ -249,6 +249,7 @@ function initAnchors(){
 
 /* ── INIT ────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded',()=>{
+  initHeroSlider();
   initHeader();
   initHamburger();
   initDropdowns();

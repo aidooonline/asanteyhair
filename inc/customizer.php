@@ -264,6 +264,87 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
         $text( "ah_price_13x6_{$len}", "{$len}\" — Price (£)", 'ah_price_13x6', $price );
     }
 
+
+    /* --------------------------------------------------------
+       SECTION: HOMEPAGE CONTENT
+       -------------------------------------------------------- */
+    $wp_customize->add_section( 'ah_homepage', [
+        'title' => 'Homepage Content',
+        'panel' => 'ah_panel',
+    ] );
+
+    // Categories section
+    $text( 'ah_cats_label',    'Categories Label',    'ah_homepage', 'Our Collections' );
+    $text( 'ah_cats_title',    'Categories Title',    'ah_homepage', 'The Asantey Standard' );
+    $textarea( 'ah_cats_desc', 'Categories Description', 'ah_homepage', 'Every bundle, closure, and frontal is cuticle-aligned, single-donor, and held to exacting quality standards before it reaches your door.' );
+
+    // Why section
+    $text( 'ah_why_label',  'Why Section Label', 'ah_homepage', 'Why Asantey' );
+    $text( 'ah_why_title',  'Why Section Title', 'ah_homepage', 'Hair That Speaks for Itself' );
+
+    // Products section
+    $text( 'ah_prod_label', 'Products Label', 'ah_homepage', 'Featured Products' );
+    $text( 'ah_prod_title', 'Products Title', 'ah_homepage', 'Shop the Collection' );
+
+    // Gallery section
+    $text( 'ah_gal_label',  'Gallery Label',  'ah_homepage', 'Real Women. Real Results.' );
+    $text( 'ah_gal_title',  'Gallery Title',  'ah_homepage', 'See It to Believe It' );
+
+    // Brand story split
+    $text(     'ah_story_label',    'Story Label',    'ah_homepage', 'Our Story' );
+    $text(     'ah_story_title',    'Story Title',    'ah_homepage', 'The Asantey Standard' );
+    $textarea( 'ah_story_body1',    'Story Paragraph 1', 'ah_homepage', 'Founded on the belief that every woman deserves hair she is genuinely proud of. We source our Cambodian hair directly — single donor, cuticle-aligned, never chemically altered.' );
+    $textarea( 'ah_story_body2',    'Story Paragraph 2', 'ah_homepage', 'What you receive is exactly as nature intended: just better selected, better prepared, and built to last 3-5 years with the right care. That is the Asantey promise.' );
+    $image(    'ah_story_image',    'Story Image',    'ah_homepage' );
+
+    // Testimonials section
+    $text( 'ah_test_label', 'Testimonials Label', 'ah_homepage', 'Client Love' );
+    $text( 'ah_test_title', 'Testimonials Title', 'ah_homepage', 'What Our Clients Say' );
+    $textarea( 'ah_test1_quote',  'Testimonial 1 — Quote',  'ah_homepage', 'I have been buying hair for over 10 years and Asantey is hands down the best quality I have ever experienced. No shedding, silky soft, and took colour perfectly.' );
+    $text(     'ah_test1_author', 'Testimonial 1 — Author', 'ah_homepage', 'Naomi A., London' );
+    $textarea( 'ah_test2_quote',  'Testimonial 2 — Quote',  'ah_homepage', 'My 28 inch raw body wave bundle is still going strong 2 years later. Worth every penny.' );
+    $text(     'ah_test2_author', 'Testimonial 2 — Author', 'ah_homepage', 'Blessing O., Birmingham' );
+    $textarea( 'ah_test3_quote',  'Testimonial 3 — Quote',  'ah_homepage', 'The HD lace frontal is unreal. My stylist could not believe it was not my natural hairline. Ordered on WhatsApp and received it in 2 days.' );
+    $text(     'ah_test3_author', 'Testimonial 3 — Author', 'ah_homepage', 'Jade K., Manchester' );
+
+    // CTA section
+    $text(     'ah_cta_title',    'CTA Title',    'ah_homepage', 'Your Best Hair Starts Here' );
+    $textarea( 'ah_cta_body',     'CTA Body',     'ah_homepage', 'Browse our full collection or order directly on WhatsApp. We guide you through every step.' );
+    $text(     'ah_cta_btn1',     'CTA Button 1', 'ah_homepage', 'Shop Collections' );
+    $url(      'ah_cta_btn1_url', 'CTA Button 1 URL', 'ah_homepage', '/shop/' );
+    $text(     'ah_cta_btn2',     'CTA Button 2', 'ah_homepage', 'WhatsApp Order' );
+
+    /* --------------------------------------------------------
+       SECTION: HERO SLIDES (up to 3 slides)
+       -------------------------------------------------------- */
+    $wp_customize->add_section( 'ah_hero_slides', [
+        'title' => 'Hero Slides',
+        'panel' => 'ah_panel',
+        'description' => 'Set up to 3 hero slides. Each slide can be an image or a video (YouTube URL or direct MP4 URL).',
+    ] );
+
+    for ( $i = 1; $i <= 3; $i++ ) :
+        $wp_customize->add_setting( "ah_slide{$i}_type", [
+            'default'           => $i === 1 ? 'image' : '',
+            'sanitize_callback' => 'sanitize_text_field',
+        ] );
+        $wp_customize->add_control( "ah_slide{$i}_type", [
+            'label'   => "Slide {$i} — Type",
+            'section' => 'ah_hero_slides',
+            'type'    => 'select',
+            'choices' => [ '' => 'Disabled', 'image' => 'Image', 'video' => 'Video (YouTube/MP4)' ],
+        ] );
+        $image( "ah_slide{$i}_image", "Slide {$i} — Image", 'ah_hero_slides' );
+        $url(   "ah_slide{$i}_video", "Slide {$i} — Video URL (YouTube embed or .mp4)", 'ah_hero_slides', '' );
+        $text(  "ah_slide{$i}_label",    "Slide {$i} — Label",    'ah_hero_slides', $i === 1 ? 'Premium Cambodian Hair Extensions' : '' );
+        $text(  "ah_slide{$i}_title",    "Slide {$i} — Title",    'ah_hero_slides', $i === 1 ? 'Luxury Hair.' : '' );
+        $text(  "ah_slide{$i}_italic",   "Slide {$i} — Title (italic line)", 'ah_hero_slides', $i === 1 ? 'Real Results.' : '' );
+        $textarea( "ah_slide{$i}_sub",   "Slide {$i} — Subtitle", 'ah_hero_slides', $i === 1 ? 'Premium Cambodian Raw and Virgin Hair Extensions — crafted for women who demand quality that lasts 3-5 years.' : '' );
+        $text(  "ah_slide{$i}_cta1",     "Slide {$i} — CTA 1 Text", 'ah_hero_slides', $i === 1 ? 'Shop Collections' : '' );
+        $url(   "ah_slide{$i}_cta1_url", "Slide {$i} — CTA 1 URL",  'ah_hero_slides', $i === 1 ? '/shop/' : '' );
+        $text(  "ah_slide{$i}_cta2",     "Slide {$i} — CTA 2 Text", 'ah_hero_slides', $i === 1 ? 'Order on WhatsApp' : '' );
+    endfor;
+
 } );
 
 /* ============================================================
