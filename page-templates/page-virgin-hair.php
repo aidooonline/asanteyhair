@@ -121,7 +121,7 @@ echo ah_schema_faq($faqs);
   </div>
 </section>
 
-<section class="ah-section ah-section--cream" id="pricing">
+<section class="ah-section ah-section--grey" id="pricing">
   <div class="ah-container">
     <div class="ah-section-header--center ah-reveal">
       <span class="ah-subheading">Transparent Pricing</span>

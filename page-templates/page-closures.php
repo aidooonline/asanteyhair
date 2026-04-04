@@ -70,7 +70,12 @@ echo ah_schema_faq($faqs);
       $benefits = ['Ultra-thin Swiss lace — zero bulge','Matches every skin tone naturally','No bleaching required','Available in 6 sizes — closures and frontals','All textures available'];
       foreach($benefits as $b):?>
         <li style="display:flex;align-items:center;gap:var(--ah-space-3);font-size:var(--ah-text-sm);color:var(--ah-grey-700);">
-          <?php echo ah_svg('check','');?><span><?php echo esc_html($b);?></span>
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--ah-gold);border-radius:50%;flex-shrink:0;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width:10px;height:10px;display:block;">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
+          <span><?php echo esc_html($b);?></span>
         </li>
       <?php endforeach;?>
     </ul>
@@ -78,7 +83,7 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- Size Guide -->
-<section class="ah-section ah-section--cream" id="sizes">
+<section class="ah-section ah-section--grey" id="sizes">
   <div class="ah-container">
     <div class="ah-section-header--center ah-reveal">
       <span class="ah-subheading">Choose Your Size</span>
@@ -163,7 +168,7 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- How Many Bundles Guide -->
-<section class="ah-section ah-section--cream">
+<section class="ah-section ah-section--grey">
   <div class="ah-container ah-container--sm ah-reveal">
     <div class="ah-section-header--center">
       <span class="ah-subheading">Bundle Guide</span>

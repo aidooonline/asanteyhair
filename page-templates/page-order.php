@@ -68,7 +68,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
 </section>
 
 <!-- Product Quick Links -->
-<section class="ah-section ah-section--cream">
+<section class="ah-section ah-section--grey">
   <div class="ah-container">
     <div class="ah-section-header--center ah-reveal">
       <span class="ah-subheading">Browse Before You Order</span>

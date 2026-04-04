@@ -97,7 +97,7 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Quality Callout -->
-<div class="ah-section ah-section--cream">
+<div class="ah-section ah-section--grey">
   <div class="ah-container ah-reveal" style="text-align:center;max-width:800px;">
     <span class="ah-subheading">The Asantey Guarantee</span>
     <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">

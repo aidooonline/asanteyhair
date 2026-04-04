@@ -121,7 +121,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 </section>
 
 <!-- Beauty Services -->
-<section class="ah-section ah-section--cream" id="beauty-services" aria-labelledby="beauty-heading">
+<section class="ah-section ah-section--grey" id="beauty-services" aria-labelledby="beauty-heading">
   <div class="ah-container">
 
     <div class="ah-section-header--center ah-reveal">
@@ -223,7 +223,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 </section>
 
 <!-- Testimonials -->
-<section class="ah-section ah-section--cream" aria-labelledby="reviews-heading">
+<section class="ah-section ah-section--grey" aria-labelledby="reviews-heading">
   <div class="ah-container">
     <div class="ah-section-header--center ah-reveal">
       <span class="ah-subheading">Client Love</span>

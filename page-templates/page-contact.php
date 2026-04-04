@@ -175,7 +175,7 @@ $map_url = get_theme_mod('ah_contact_map',     '');
 <?php endif; ?>
 
 <!-- Order via WhatsApp Alt -->
-<div class="ah-section ah-section--cream" style="padding:var(--ah-space-16) var(--ah-space-6);">
+<div class="ah-section ah-section--grey" style="padding:var(--ah-space-16) var(--ah-space-6);">
   <div class="ah-container" style="text-align:center;">
     <div class="ah-reveal">
       <h3 class="ah-heading-md" style="margin-bottom:var(--ah-space-4);">Prefer to Order Directly?</h3>

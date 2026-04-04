@@ -64,7 +64,7 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Our Values -->
-<section class="ah-section ah-section--cream" aria-labelledby="values-heading">
+<section class="ah-section ah-section--grey" aria-labelledby="values-heading">
   <div class="ah-container">
     <div class="ah-section-header--center ah-reveal">
       <span class="ah-subheading">What We Stand For</span>

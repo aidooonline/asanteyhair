@@ -18,20 +18,20 @@ Tags:              custom-background, custom-logo, custom-menu, featured-images,
    ============================================================ */
 :root {
   /* Brand Colors */
-  --ah-black:        #1a1a1a;
-  --ah-black-soft:   #2c2c2c;
+  --ah-black:        #111111;
+  --ah-black-soft:   #1e1e1e;
   --ah-gold:         #c9a47e;
   --ah-gold-dark:    #a8824f;
   --ah-gold-light:   #e8d5bc;
   --ah-cream:        #f5e6d3;
-  --ah-cream-light:  #fdf8f3;
-  --ah-white:        #fafafa;
+  --ah-cream-light:  #faf7f4;
+  --ah-white:        #ffffff;
   --ah-pure-white:   #ffffff;
-  --ah-grey-100:     #f4f4f4;
-  --ah-grey-200:     #e8e8e8;
+  --ah-grey-100:     #f6f6f6;
+  --ah-grey-200:     #ebebeb;
   --ah-grey-300:     #d0d0d0;
   --ah-grey-500:     #888888;
-  --ah-grey-700:     #555555;
+  --ah-grey-700:     #444444;
   --ah-error:        #c0392b;
   --ah-success:      #27ae60;
 
@@ -117,6 +117,11 @@ body {
   overflow-x: hidden;
 }
 
+/* Force pure white on all standard sections */
+.ah-section {
+  background-color: var(--ah-white);
+}
+
 img, video {
   max-width: 100%;
   height: auto;
@@ -194,8 +199,12 @@ p:last-child { margin-bottom: 0; }
   color: var(--ah-white);
 }
 
+.ah-section--grey {
+  background-color: var(--ah-grey-100);
+}
+
 .ah-section--cream {
-  background-color: var(--ah-cream-light);
+  background-color: var(--ah-grey-100);
 }
 
 .ah-section--gold {
@@ -534,7 +543,7 @@ p:last-child { margin-bottom: 0; }
 .ah-category-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.1) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(17,17,17,0.90) 0%, rgba(17,17,17,0.2) 45%, transparent 100%);
   transition: background var(--ah-transition);
 }
 
@@ -589,18 +598,27 @@ p:last-child { margin-bottom: 0; }
 .ah-feature-card {
   padding: var(--ah-space-8);
   border-top: 1px solid var(--ah-grey-200);
-  transition: background var(--ah-transition);
+  background: var(--ah-white);
+  transition: background var(--ah-transition), border-color var(--ah-transition);
 }
 
 .ah-feature-card:hover {
-  background: var(--ah-cream-light);
+  background: var(--ah-white);
+  border-top-color: var(--ah-gold);
 }
 
 .ah-feature-card__icon {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   margin-bottom: var(--ah-space-5);
   color: var(--ah-gold);
+  display: block;
+}
+
+.ah-feature-card__icon svg {
+  width: 32px;
+  height: 32px;
+  display: block;
 }
 
 .ah-feature-card__title {
@@ -1113,9 +1131,45 @@ select.ah-form-control {
   justify-content: center;
 }
 
-/* ============================================================
-   TRUST BAR
-   ============================================================ */
+/* Constrain all inline SVGs so they never render oversized */
+svg {
+  max-width: 100%;
+}
+
+/* Specific inline SVG contexts */
+.ah-feature-card__icon svg,
+.ah-contact-item__icon svg,
+.ah-trust-bar__item svg,
+.ah-footer__contact-item svg,
+.ah-accordion__icon svg,
+.ah-btn svg,
+.ah-wa-float__icon svg,
+.ah-social-links svg,
+.ah-header__logo svg {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Fixed-size contexts */
+.ah-feature-card__icon svg { width: 28px; height: 28px; }
+.ah-contact-item__icon svg { width: 20px; height: 20px; }
+.ah-trust-bar__item svg    { width: 16px; height: 16px; }
+.ah-footer__contact-item svg { width: 16px; height: 16px; }
+.ah-btn svg                { width: 16px; height: 16px; }
+.ah-wa-float__icon         { width: 22px; height: 22px; }
+.ah-wa-float__icon svg     { width: 22px; height: 22px; }
+
+/* Inline check list items (closures page benefits list) */
+li svg, p svg {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
 .ah-trust-bar {
   background: var(--ah-black);
   padding: var(--ah-space-5) var(--ah-space-6);
@@ -1147,6 +1201,9 @@ select.ah-form-control {
 .ah-trust-bar__item svg {
   color: var(--ah-gold);
   flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .ah-trust-bar__divider {
@@ -1160,8 +1217,11 @@ select.ah-form-control {
    ============================================================ */
 .ah-testimonial {
   padding: var(--ah-space-10);
-  background: var(--ah-pure-white);
-  border-top: 3px solid var(--ah-gold);
+  background: var(--ah-white);
+  border-top: 2px solid var(--ah-gold);
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--ah-grey-200);
 }
 
 .ah-testimonial__stars {

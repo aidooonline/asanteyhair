@@ -168,7 +168,7 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [4] WHY ASANTEY
      ============================================================ -->
-<section class="ah-section ah-section--cream" aria-labelledby="why-heading">
+<section class="ah-section" style="background:#ffffff;border-top:1px solid var(--ah-grey-200);" aria-labelledby="why-heading">
   <div class="ah-container">
     <div class="ah-section-header--center ah-reveal">
       <span class="ah-subheading">Why Choose Asantey</span>
@@ -387,7 +387,7 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [9] TESTIMONIALS
      ============================================================ -->
-<section class="ah-section ah-section--cream" aria-labelledby="testimonials-heading">
+<section class="ah-section" style="background:#f6f6f6;" aria-labelledby="testimonials-heading">
   <div class="ah-container">
 
     <div class="ah-section-header--center ah-reveal">

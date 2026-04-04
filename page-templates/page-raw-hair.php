@@ -145,7 +145,7 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- Full Pricing Table -->
-<section class="ah-section ah-section--cream" id="pricing" aria-labelledby="pricing-heading">
+<section class="ah-section ah-section--grey" id="pricing" aria-labelledby="pricing-heading">
   <div class="ah-container">
     <div class="ah-section-header--center ah-reveal">
       <span class="ah-subheading">Transparent Pricing</span>
