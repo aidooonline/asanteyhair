@@ -135,19 +135,19 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 .site-logo{justify-self:center;text-align:center;text-decoration:none}
 .site-logo img{height:36px;width:auto;margin-inline:auto}
 .site-logo__name{
-  font-family:var(--serif);font-size:1.35rem;font-weight:700;
-  letter-spacing:.22em;text-transform:uppercase;
+  font-family:var(--serif);font-size:.95rem;font-weight:600;
+  letter-spacing:.3em;text-transform:uppercase;
   color:#000000;line-height:1}
 .site-logo__sub{
-  font-family:var(--sans);font-size:.48rem;font-weight:500;
-  letter-spacing:.42em;text-transform:uppercase;
-  color:#999999;margin-top:4px}
+  font-family:var(--sans);font-size:.46rem;font-weight:500;
+  letter-spacing:.35em;text-transform:uppercase;
+  color:#999999;margin-top:3px}
 
 .site-nav{display:flex;align-items:center;list-style:none}
 .site-nav a{
   display:block;padding:.35rem .5rem;
-  font-size:.54rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:#000000;position:relative;transition:color var(--t);white-space:nowrap;line-height:1.2}
+  font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:#000000;position:relative;transition:color var(--t);white-space:nowrap;line-height:1}
 .site-nav a::after{
   content:'';position:absolute;bottom:-1px;left:.55rem;right:.55rem;
   height:1px;background:var(--ink);
