@@ -18,32 +18,7 @@
 <header class="hdr" id="site-header" role="banner">
   <div class="hdr__inner">
 
-    <!-- Left: Navigation -->
-    <nav aria-label="Primary">
-      <?php wp_nav_menu([
-        'theme_location' => 'primary',
-        'container'      => false,
-        'menu_class'     => 'site-nav',
-        'fallback_cb'    => function() {
-          echo '<ul class="site-nav">';
-          $links = [
-            'Shop'              =>'/shop/',
-            'Raw Hair'          =>'/raw-hair/',
-            'Virgin Hair'       =>'/virgin-hair/',
-            'HD Lace'=>'/closures-frontals/',
-            'Salon'=>'/salon-services/',
-            'Gallery'           =>'/gallery/',
-            'FAQ'               =>'/faq/',
-            'Contact'           =>'/contact/',
-          ];
-          foreach($links as $label=>$url)
-            echo '<li><a href="'.esc_url(home_url($url)).'">'.$label.'</a></li>';
-          echo '</ul>';
-        },
-      ]); ?>
-    </nav>
-
-    <!-- Center: Logo -->
+    <!-- 1. Logo — always first -->
     <a class="site-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Asantey Hair &amp; Beauty — Home">
       <?php if(has_custom_logo()):
         $logo_id = get_theme_mod('custom_logo');
@@ -54,16 +29,35 @@
       <?php endif; ?>
     </a>
 
-    <!-- Right: Actions + Hamburger -->
+    <!-- 2. Navigation -->
+    <nav aria-label="Primary">
+      <?php wp_nav_menu([
+        'theme_location' => 'primary',
+        'container'      => false,
+        'menu_class'     => 'site-nav',
+        'fallback_cb'    => function() {
+          echo '<ul class="site-nav">';
+          $links = [
+            'Shop'         => '/shop/',
+            'Raw Hair'     => '/raw-hair/',
+            'Virgin Hair'  => '/virgin-hair/',
+            'HD Lace'      => '/closures-frontals/',
+            'Salon'        => '/salon-services/',
+            'Gallery'      => '/gallery/',
+            'FAQ'          => '/faq/',
+            'Contact'      => '/contact/',
+          ];
+          foreach($links as $label => $url)
+            echo '<li><a href="'.esc_url(home_url($url)).'">'.$label.'</a></li>';
+          echo '</ul>';
+        },
+      ]); ?>
+    </nav>
+
+    <!-- 3. Actions — right side -->
     <div class="hdr__actions">
-      <a href="https://asanteyhair.as.me/"
-         class="btn btn--ow btn--sm"
-         target="_blank" rel="noopener noreferrer"
-         style="display:none;" id="hdr-book">Book</a>
       <a href="<?php echo esc_url(ah_whatsapp_url( 'Hello! I would like to order with Asantey Hair and Beauty.' )); ?>"
-         style="display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.4rem;font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.08em;color:#000000;border:1px solid #000000;background:transparent;text-decoration:none;white-space:nowrap;transition:all .2s ease;"
-         onmouseover="this.style.background='#000000';this.style.color='#ffffff';"
-         onmouseout="this.style.background='transparent';this.style.color='#000000';"
+         class="hdr-order-btn"
          target="_blank" rel="noopener noreferrer">
         Order Now
       </a>
