@@ -211,6 +211,7 @@
             'Raw Hair'           => '/raw-hair/',
             'Virgin Hair'        => '/virgin-hair/',
             'Closures & Frontals'=> '/closures-frontals/',
+            'Salon Services'     => '/salon-services/',
             'Gallery'            => '/gallery/',
             'FAQ'                => '/faq/',
             'Contact'            => '/contact/',
@@ -226,6 +227,12 @@
 
     <!-- Right Actions -->
     <div class="ah-header__actions">
+      <a href="https://asanteyhair.as.me/"
+         class="ah-btn ah-btn--outline ah-btn--sm"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Book a salon appointment">
+        Book Appointment
+      </a>
       <a href="<?php echo esc_url( ah_whatsapp_url( 'Hello! I\'d like to place an order with Asantey Hair & Beauty.' ) ); ?>"
          class="ah-btn ah-btn--gold ah-btn--sm"
          target="_blank" rel="noopener noreferrer"

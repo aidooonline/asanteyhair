@@ -109,13 +109,14 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
     ] );
 
     $text(     'ah_contact_name',    'Business Name',       'ah_contact', 'Asantey Hair & Beauty' );
-    $text(     'ah_contact_phone',   'Phone Number',        'ah_contact', '' );
+    $text(     'ah_contact_phone',   'Phone Number',        'ah_contact', '07827 129797' );
     $text(     'ah_contact_email',   'Email Address',       'ah_contact', '' );
-    $text(     'ah_whatsapp_number', 'WhatsApp Number (international format, e.g. 447911123456)', 'ah_contact', '' );
-    $textarea( 'ah_contact_address', 'Full Address',        'ah_contact', '' );
+    $text(     'ah_whatsapp_number', 'WhatsApp Number (international format, e.g. 447911123456)', 'ah_contact', '447827129797' );
+    $textarea( 'ah_contact_address', 'Full Address',        'ah_contact', '358 Radford Road, Nottingham, NG7 5GQ' );
     $text(     'ah_contact_hours',   'Business Hours',      'ah_contact', 'Mon–Sat: 9am–7pm' );
-    $url(      'ah_contact_map',     'Google Maps Embed URL (iframe src)', 'ah_contact', '' );
-    $text(     'ah_contact_city',    'City / Region',       'ah_contact', 'United Kingdom' );
+    $url(      'ah_contact_map',     'Google Maps Embed URL (iframe src)', 'ah_contact', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2403.8!2d-1.165!3d52.965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879c13b!2s358+Radford+Road+Nottingham+NG7+5GQ!5e0!3m2!1sen!2suk!4v1' );
+    $text(     'ah_contact_city',    'City / Region',       'ah_contact', 'Nottingham, UK' );
+    $url(      'ah_booking_url',     'Booking Link (Acuity/Calendly)',     'ah_contact', 'https://asanteyhair.as.me/' );
 
     /* --------------------------------------------------------
        SECTION: SOCIAL MEDIA
@@ -125,9 +126,9 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
         'panel' => 'ah_panel',
     ] );
 
-    $url( 'ah_social_instagram', 'Instagram URL', 'ah_social', '' );
+    $url( 'ah_social_instagram', 'Instagram URL', 'ah_social', 'https://www.instagram.com/ahb_salon' );
     $url( 'ah_social_facebook',  'Facebook URL',  'ah_social', '' );
-    $url( 'ah_social_tiktok',    'TikTok URL',    'ah_social', '' );
+    $url( 'ah_social_tiktok',    'TikTok URL',    'ah_social', 'https://www.tiktok.com/@ahbsalon' );
     $url( 'ah_social_youtube',   'YouTube URL',   'ah_social', '' );
 
     /* --------------------------------------------------------

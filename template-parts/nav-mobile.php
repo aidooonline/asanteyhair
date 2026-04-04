@@ -92,6 +92,7 @@
         <li><a href="<?php echo esc_url( home_url('/closures-frontals/') ); ?>">Closures &amp; Frontals</a></li>
       </ul>
     </li>
+    <li><a href="<?php echo esc_url( home_url('/salon-services/') ); ?>">Salon Services</a></li>
     <li><a href="<?php echo esc_url( home_url('/gallery/') ); ?>">Gallery</a></li>
     <li><a href="<?php echo esc_url( home_url('/about/') ); ?>">About</a></li>
     <li><a href="<?php echo esc_url( home_url('/hair-care-guide/') ); ?>">Hair Care</a></li>
@@ -101,13 +102,16 @@
 
   <div class="ah-nav-mobile__footer">
     <div class="ah-nav-mobile__cta">
+      <a href="https://asanteyhair.as.me/"
+         class="ah-btn ah-btn--primary"
+         target="_blank" rel="noopener noreferrer">
+        Book Appointment
+      </a>
       <a href="<?php echo esc_url( ah_whatsapp_url() ); ?>"
          class="ah-btn ah-btn--gold"
          target="_blank" rel="noopener noreferrer">
-        <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
+        <?php echo ah_svg('whatsapp'); ?> Order Hair
       </a>
-      <a href="<?php echo esc_url( home_url('/order/') ); ?>"
-         class="ah-btn ah-btn--outline-white">Order Enquiry</a>
     </div>
     <?php ah_social_links(); ?>
   </div>

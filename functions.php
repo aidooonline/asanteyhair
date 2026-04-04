@@ -143,6 +143,16 @@ add_action( 'widgets_init', function () {
 function ah_create_pages() {
     $pages = [
         [
+            'title'    => 'Salon Services',
+            'slug'     => 'salon-services',
+            'template' => 'page-templates/page-salon.php',
+        ],
+        [
+            'title'    => 'Book Appointment',
+            'slug'     => 'book-appointment',
+            'template' => '',
+        ],
+        [
             'title'    => 'Home',
             'slug'     => 'home',
             'template' => '',

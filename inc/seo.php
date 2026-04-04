@@ -85,9 +85,9 @@ add_action( 'wp_head', function () {
    ============================================================ */
 function ah_schema_local_business(): array {
     $name    = get_theme_mod( 'ah_contact_name',    'Asantey Hair & Beauty' );
-    $phone   = get_theme_mod( 'ah_contact_phone',   '' );
+    $phone   = get_theme_mod( 'ah_contact_phone',   '07827 129797' );
     $email   = get_theme_mod( 'ah_contact_email',   '' );
-    $address = get_theme_mod( 'ah_contact_address', '' );
+    $address = get_theme_mod( 'ah_contact_address', '358 Radford Road, Nottingham, NG7 5GQ' );
     $hours   = get_theme_mod( 'ah_contact_hours',   'Mon-Sat 09:00-19:00' );
 
     return array_filter( [
