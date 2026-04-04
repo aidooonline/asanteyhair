@@ -111,7 +111,7 @@ function ah_handle_order_form(): void {
                    . "Texture:  {$texture}\n"
                    . "Length:   {$length}\"\n"
                    . "Quantity: {$quantity} bundle(s)\n\n"
-                   . "We'll confirm availability and send you a payment link within 24 hours. Your hair will ship within 2-3 business days of payment.\n\n"
+                   . "We will confirm availability and send you a payment link within 24 hours. Your hair will ship within 2-3 business days of payment.\n\n"
                    . "For faster service, reply to this email or WhatsApp us directly.\n\n"
                    . "Warm regards,\nAsantey Hair & Beauty Team";
         wp_mail( $email, 'Your Order Enquiry — Asantey Hair & Beauty', $auto_body, [ 'Content-Type: text/plain; charset=UTF-8' ] );

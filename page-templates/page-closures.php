@@ -186,7 +186,7 @@ echo ah_schema_faq($faqs);
       </table>
       <p style="font-size:var(--ah-text-sm);color:var(--g9);font-style:italic;">
         Bundle counts are approximate and may vary based on desired fullness, head size, and install method.
-        Not sure? WhatsApp us — we'll help you choose the perfect combination.
+        Not sure? WhatsApp us — we will help you choose the perfect combination.
       </p>
     </div>
   </div>
@@ -220,7 +220,7 @@ echo ah_schema_faq($faqs);
   <div class="wrap"><div class="reveal">
     <span class="t-label t-label--white">Ready for Your Perfect Hairline?</span>
     <h2 class="t-h1">Order Your HD Lace Today</h2>
-    <p class="t-body">Tell us your closure size, texture, and length — we'll send your invoice within hours.</p>
+    <p class="t-body">Tell us your closure size, texture, and length — we will send your invoice within hours.</p>
     <div class="btn-group" style="justify-content:center;">
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order an HD Lace Closure or Frontal.')); ?>"
          class="btn btn--wa" target="_blank" rel="noopener noreferrer">

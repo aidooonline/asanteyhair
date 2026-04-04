@@ -69,7 +69,7 @@ echo ah_schema_faq( $raw_faqs );
     <p class="t-body">
       Raw hair can be coloured, bleached, and heat-styled just like your natural hair.
       It absorbs moisture naturally and maintains its pattern through wash after wash.
-      When we say it lasts 3–5 years, that's not a marketing line. It's what our
+      When we say it lasts 3–5 years, that is not a marketing line. It is what our
       clients actually experience.
     </p>
     <div class="btn-group" style="margin-top:var(--gap6);">

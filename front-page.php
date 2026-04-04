@@ -37,7 +37,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
       <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--w">
         Shop Collections <?php echo ah_svg('arrow-right'); ?>
       </a>
-      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I'd like to order hair extensions.')); ?>"
+      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order hair extensions.')); ?>"
          class="btn btn--ow" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
       </a>
@@ -146,7 +146,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
       <?php
       $feats = [
         ['gem',    'Cambodian Origin',   'Single-donor Cambodian hair, ethically sourced, never chemically processed. Full cuticle alignment for unmatched softness.'],
-        ['shield', '3–5 Year Lifespan',  'Not a claim — it's what our clients experience. Invest once, wear for years. The maths speak for themselves.'],
+        ['shield', '3–5 Year Lifespan',  'Not a claim — it is what our clients experience. Invest once, wear for years. The maths speak for themselves.'],
         ['sparkle','10+ Textures',       'Body wave to Burmese curls. Straight to deep wave. Every texture in 10"–30" lengths. Wear it your way.'],
         ['check',  'Minimal Shedding',   'Double weft, double drawn. Cuticle-aligned from root to tip. The science behind hair that stays full.'],
         ['heart',  'HD Lace Specialists','Our HD closures and frontals melt into every skin tone — no bleaching, no tinting. Undetectable.'],
@@ -203,7 +203,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
               <p class="product-card__desc"><?php echo esc_html($desc); ?></p>
               <div class="product-card__price">from &pound;<?php echo esc_html($price); ?> <small>per bundle</small></div>
               <div class="product-card__actions">
-                <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I'm interested in: '.$title)); ?>"
+                <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I am interested in: '.$title)); ?>"
                    class="btn btn--w btn--sm" target="_blank" rel="noopener noreferrer">
                    <?php echo ah_svg('whatsapp'); ?> Order
                 </a>
