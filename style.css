@@ -271,7 +271,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 
 .hero__title{
   font-family:var(--serif);
-  font-size:clamp(4.5rem,12vw,11rem);
+  font-size:clamp(3rem,7vw,6.5rem);
   font-weight:300;line-height:.88;
   letter-spacing:-.04em;color:var(--paper);
   margin-bottom:2rem;max-width:14ch}
@@ -929,13 +929,19 @@ select.form-control{
 .hs-slide{
   position:absolute;inset:0;
   display:flex;align-items:flex-end;
-  opacity:0;
-  transition:opacity 1s ease;
+  opacity:0;visibility:hidden;
+  transition:opacity 1s ease,visibility 1s ease;
   pointer-events:none}
 .hs-slide--active{
-  opacity:1;
+  opacity:1;visibility:visible;
   pointer-events:all;
-  position:relative}
+  position:relative;inset:auto}
+/* Single slide - always show */
+.hero-slider:only-child .hs-slide,
+.hs-slide:first-child:last-child{
+  opacity:1;visibility:visible;
+  pointer-events:all;
+  position:relative;inset:auto}
 
 /* Background */
 .hs-slide__bg{
@@ -970,7 +976,7 @@ select.form-control{
   color:rgba(255,255,255,.4);margin-bottom:1.5rem}
 .hs-slide__title{
   font-family:var(--serif);
-  font-size:clamp(4rem,11vw,10rem);
+  font-size:clamp(3rem,7vw,6.5rem);
   font-weight:300;line-height:.9;
   letter-spacing:-.04em;color:#ffffff;
   margin-bottom:2rem;max-width:14ch}

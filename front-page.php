@@ -270,7 +270,7 @@ $story_label  = get_theme_mod('ah_story_label', 'Our Story');
 $story_title  = get_theme_mod('ah_story_title', 'The Asantey Standard');
 $story_body1  = get_theme_mod('ah_story_body1', 'Founded on the belief that every woman deserves hair she is genuinely proud of. We source our Cambodian hair directly — single donor, cuticle-aligned, never chemically altered.');
 $story_body2  = get_theme_mod('ah_story_body2', 'What you receive is exactly as nature intended: just better selected, better prepared, and built to last 3-5 years with the right care.');
-$story_image  = get_theme_mod('ah_story_image', AH_URI.'/assets/images/client-result-1.jpg');
+$story_image  = get_theme_mod('ah_story_image') ?: AH_URI.'/assets/images/client-result-1.jpg';
 ?>
 <div class="split split--dark">
     <div class="split__media">
