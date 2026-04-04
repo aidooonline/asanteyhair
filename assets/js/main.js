@@ -16,7 +16,7 @@
      STICKY HEADER
      ============================================================ */
   function initStickyHeader() {
-    const header = $('.ah-header');
+    const header = $('.site-header');
     if (!header) return;
 
     let lastScroll = 0;
@@ -25,16 +25,16 @@
       const scrollY = window.scrollY;
 
       if (scrollY > 80) {
-        header.classList.add('ah-header--scrolled');
+        header.classList.add('scrolled');
       } else {
-        header.classList.remove('ah-header--scrolled');
+        header.classList.remove('scrolled');
       }
 
       // Hide on scroll down, show on scroll up
       if (scrollY > lastScroll && scrollY > 200) {
-        header.classList.add('ah-header--hidden');
+        header.classList.add('hidden');
       } else {
-        header.classList.remove('ah-header--hidden');
+        header.classList.remove('hidden');
       }
 
       lastScroll = scrollY;
@@ -45,8 +45,8 @@
      MOBILE HAMBURGER MENU
      ============================================================ */
   function initHamburger() {
-    const toggle = $('.ah-header__hamburger');
-    const nav    = $('.ah-nav-mobile');
+    const toggle = $('.hamburger');
+    const nav    = $('.mobile-nav');
     const body   = document.body;
 
     if (!toggle || !nav) return;
@@ -54,18 +54,18 @@
     toggle.addEventListener('click', () => {
       const isOpen = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', !isOpen);
-      toggle.classList.toggle('ah-header__hamburger--open');
-      nav.classList.toggle('ah-nav-mobile--open');
-      body.classList.toggle('ah-menu-open');
+      toggle.classList.toggle('open');
+      nav.classList.toggle('open');
+      body.classList.toggle('menu-open');
     });
 
     // Close on outside click
     document.addEventListener('click', (e) => {
       if (!toggle.contains(e.target) && !nav.contains(e.target)) {
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.classList.remove('ah-header__hamburger--open');
-        nav.classList.remove('ah-nav-mobile--open');
-        body.classList.remove('ah-menu-open');
+        toggle.classList.remove('open');
+        nav.classList.remove('open');
+        body.classList.remove('menu-open');
       }
     });
 
@@ -73,9 +73,9 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.classList.remove('ah-header__hamburger--open');
-        nav.classList.remove('ah-nav-mobile--open');
-        body.classList.remove('ah-menu-open');
+        toggle.classList.remove('open');
+        nav.classList.remove('open');
+        body.classList.remove('menu-open');
       }
     });
   }
@@ -84,7 +84,7 @@
      GALLERY LIGHTBOX
      ============================================================ */
   function initLightbox() {
-    const items = $$('.ah-gallery__item');
+    const items = $$('.gallery-item');
     if (!items.length) return;
 
     // Create lightbox DOM
@@ -103,10 +103,10 @@
     `;
     document.body.appendChild(lb);
 
-    const img   = lb.querySelector('.ah-lightbox__img');
-    const close = lb.querySelector('.ah-lightbox__close');
-    const prev  = lb.querySelector('.ah-lightbox__prev');
-    const next  = lb.querySelector('.ah-lightbox__next');
+    const img   = lb.querySelector('.lightbox__img');
+    const close = lb.querySelector('.lightbox__close');
+    const prev  = lb.querySelector('.lightbox__prev');
+    const next  = lb.querySelector('.lightbox__next');
     let current = 0;
 
     const srcs = items.map(item => ({
@@ -118,13 +118,13 @@
       current = index;
       img.src = srcs[index].src;
       img.alt = srcs[index].alt;
-      lb.classList.add('ah-lightbox--open');
+      lb.classList.add('open');
       document.body.style.overflow = 'hidden';
       close.focus();
     }
 
     function closeLb() {
-      lb.classList.remove('ah-lightbox--open');
+      lb.classList.remove('open');
       document.body.style.overflow = '';
     }
 
@@ -145,7 +145,7 @@
     lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
 
     document.addEventListener('keydown', e => {
-      if (!lb.classList.contains('ah-lightbox--open')) return;
+      if (!lb.classList.contains('open')) return;
       if (e.key === 'ArrowLeft')  showPrev();
       if (e.key === 'ArrowRight') showNext();
       if (e.key === 'Escape')     closeLb();
@@ -156,7 +156,7 @@
      AJAX FORMS
      ============================================================ */
   function initForms() {
-    $$('.ah-form').forEach(form => {
+    $$('.ah-form, form[data-action]').forEach(form => {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -213,14 +213,14 @@
      SCROLL REVEAL
      ============================================================ */
   function initScrollReveal() {
-    const els = $$('.ah-reveal');
+    const els = $$('.reveal');
     if (!els.length) return;
 
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('ah-reveal--visible');
+            entry.target.classList.add('visible');
             observer.unobserve(entry.target);
           }
         });
@@ -229,7 +229,7 @@
       els.forEach(el => observer.observe(el));
     } else {
       // Fallback: show all
-      els.forEach(el => el.classList.add('ah-reveal--visible'));
+      els.forEach(el => el.classList.add('visible'));
     }
   }
 
@@ -237,8 +237,8 @@
      PRODUCT FILTER
      ============================================================ */
   function initFilter() {
-    const filterBtns = $$('.ah-filter-btn');
-    const cards      = $$('.ah-card[data-category]');
+    const filterBtns = $$('.filter-btn');
+    const cards      = $$('.product-card[data-category]');
 
     if (!filterBtns.length || !cards.length) return;
 
@@ -246,8 +246,8 @@
       btn.addEventListener('click', () => {
         const cat = btn.dataset.filter;
 
-        filterBtns.forEach(b => b.classList.remove('ah-filter-btn--active'));
-        btn.classList.add('ah-filter-btn--active');
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
         cards.forEach(card => {
           if (cat === 'all' || card.dataset.category === cat) {
@@ -267,20 +267,20 @@
      FAQ ACCORDION
      ============================================================ */
   function initAccordion() {
-    $$('.ah-accordion__trigger').forEach(trigger => {
+    $$('.accordion__trigger').forEach(trigger => {
       trigger.addEventListener('click', () => {
-        const item    = trigger.closest('.ah-accordion__item');
-        const isOpen  = item.classList.contains('ah-accordion__item--open');
+        const item    = trigger.closest('.accordion__item');
+        const isOpen  = item.classList.contains('accordion__item--open');
         const content = item.querySelector('.ah-accordion__content');
 
         // Close siblings
         $$('.ah-accordion__item--open').forEach(openItem => {
-          openItem.classList.remove('ah-accordion__item--open');
-          openItem.querySelector('.ah-accordion__trigger').setAttribute('aria-expanded', 'false');
+          openItem.classList.remove('accordion__item--open');
+          openItem.querySelector('.accordion__trigger').setAttribute('aria-expanded', 'false');
         });
 
         if (!isOpen) {
-          item.classList.add('ah-accordion__item--open');
+          item.classList.add('accordion__item--open');
           trigger.setAttribute('aria-expanded', 'true');
         }
       });
@@ -332,7 +332,7 @@
      HEADER NAVIGATION DROPDOWNS (desktop)
      ============================================================ */
   function initNavDropdowns() {
-    $$('.ah-header__nav > .menu-item-has-children').forEach(item => {
+    $$('.site-nav > .menu-item-has-children').forEach(item => {
       const link = item.querySelector('a');
       const sub  = item.querySelector('.sub-menu');
       if (!sub) return;

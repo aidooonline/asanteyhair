@@ -22,22 +22,22 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [1] HERO
      ============================================================ -->
-<section class="ah-hero" aria-label="Hero">
-  <div class="ah-hero__bg">
+<section class="hero" aria-label="Hero">
+  <div class="hero__bg">
     <img src="<?php echo esc_url( $hero_image ); ?>"
          alt="Asantey Hair &amp; Beauty — Premium Cambodian Hair Extensions"
          loading="eager" width="1920" height="1080"
          fetchpriority="high">
   </div>
-  <div class="ah-hero__overlay"></div>
+  <div class="hero__overlay"></div>
 
-  <div class="ah-container">
-    <div class="ah-hero__content">
+  <div class="wrap">
+    <div class="hero__content">
       <?php if ( $hero_label ) : ?>
-        <span class="ah-hero__label"><?php echo esc_html( $hero_label ); ?></span>
+        <span class="hero__label"><?php echo esc_html( $hero_label ); ?></span>
       <?php endif; ?>
 
-      <h1 class="ah-hero__title">
+      <h1 class="hero__title">
         <?php
         // Split title to italicise last word
         $words = explode(' ', $hero_title);
@@ -46,16 +46,16 @@ echo ah_schema_breadcrumb([
         ?>
       </h1>
 
-      <p class="ah-hero__subtitle"><?php echo esc_html( $hero_subtitle ); ?></p>
+      <p class="hero__subtitle"><?php echo esc_html( $hero_subtitle ); ?></p>
 
-      <div class="ah-btn-group">
+      <div class="btn-group">
         <a href="<?php echo esc_url( $hero_cta1_url ); ?>"
-           class="ah-btn ah-btn--gold ah-btn--lg">
+           class="btn btn--black">
           <?php echo esc_html( $hero_cta1_text ); ?>
           <?php echo ah_svg('arrow-right'); ?>
         </a>
         <a href="<?php echo esc_url( ah_whatsapp_url('Hello! I\'d like to order hair extensions.') ); ?>"
-           class="ah-btn ah-btn--outline-white ah-btn--lg"
+           class="btn btn--outline-white"
            target="_blank" rel="noopener noreferrer">
           <?php echo ah_svg('whatsapp'); ?>
           <?php echo esc_html( $hero_cta2_text ); ?>
@@ -64,7 +64,7 @@ echo ah_schema_breadcrumb([
     </div>
   </div>
 
-  <div class="ah-hero__scroll" aria-hidden="true">
+  <div class="hero__scroll" aria-hidden="true">
     <span>Scroll</span>
     <?php echo ah_svg('arrow-down'); ?>
   </div>
@@ -73,8 +73,8 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [2] TRUST BAR
      ============================================================ -->
-<div class="ah-trust-bar" role="complementary" aria-label="Trust signals">
-  <div class="ah-trust-bar__inner">
+<div class="trust-bar" role="complementary" aria-label="Trust signals">
+  <div class="trust-bar__inner">
     <?php
     $trust = [
       ['sparkle', 'Premium Cambodian Hair'],
@@ -84,11 +84,11 @@ echo ah_schema_breadcrumb([
       ['location','UK Based'],
     ];
     foreach ( $trust as $i => $item ) :
-      echo '<span class="ah-trust-bar__item">';
+      echo '<span class="trust-bar__item">';
       echo ah_svg( $item[0] );
       echo esc_html( $item[1] );
       echo '</span>';
-      if ( $i < count($trust) - 1 ) echo '<span class="ah-trust-bar__divider" aria-hidden="true"></span>';
+      if ( $i < count($trust) - 1 ) echo '<span class="trust-bar__divider" aria-hidden="true"></span>';
     endforeach;
     ?>
   </div>
@@ -97,22 +97,22 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [3] FEATURED CATEGORIES
      ============================================================ -->
-<section class="ah-section" aria-labelledby="categories-heading">
-  <div class="ah-container">
+<section class="section" aria-labelledby="categories-heading">
+  <div class="wrap">
 
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Our Collections</span>
-      <h2 id="categories-heading" class="ah-heading-lg">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Our Collections</span>
+      <h2 id="categories-heading" class="t-h2">
         The Asantey Standard
       </h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
-      <p class="ah-body-lg">
+      <span class="rule rule--center"></span>
+      <p class="t-body--lg">
         Every bundle, closure, and frontal is cuticle-aligned, single-donor,
         and held to exacting quality standards before it reaches your door.
       </p>
     </div>
 
-    <div class="ah-grid ah-grid--3" style="gap:var(--ah-space-4);">
+    <div class="grid-3" style="gap:var(--ah-space-4);">
 
       <?php
       $categories = [
@@ -149,12 +149,12 @@ echo ah_schema_breadcrumb([
           <img src="<?php echo esc_url( $cat['image'] ); ?>"
                alt="<?php echo esc_attr( $cat['title'] ); ?>"
                loading="lazy" width="600" height="900">
-          <div class="ah-category-card__overlay"></div>
-          <div class="ah-category-card__content">
-            <span class="ah-category-card__label">from &pound;<?php echo esc_html( $cat['from'] ); ?></span>
-            <h3 class="ah-category-card__title"><?php echo esc_html( $cat['title'] ); ?></h3>
-            <p class="ah-category-card__tagline"><?php echo esc_html( $cat['tagline'] ); ?></p>
-            <a href="<?php echo esc_url( $cat['url'] ); ?>" class="ah-category-card__link">
+          <div class="cat-card__overlay"></div>
+          <div class="cat-card__body">
+            <span class="cat-card__label">from &pound;<?php echo esc_html( $cat['from'] ); ?></span>
+            <h3 class="cat-card__title"><?php echo esc_html( $cat['title'] ); ?></h3>
+            <p class="cat-card__tag"><?php echo esc_html( $cat['tagline'] ); ?></p>
+            <a href="<?php echo esc_url( $cat['url'] ); ?>" class="cat-card__link">
               Explore <?php echo ah_svg('arrow-right'); ?>
             </a>
           </div>
@@ -168,17 +168,17 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [4] WHY ASANTEY
      ============================================================ -->
-<section class="ah-section" style="background:#ffffff;border-top:1px solid var(--ah-grey-200);" aria-labelledby="why-heading">
-  <div class="ah-container">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Why Choose Asantey</span>
-      <h2 id="why-heading" class="ah-heading-lg">
+<section class="section" style="background:#ffffff;border-top:1px solid var(--ah-grey-200);" aria-labelledby="why-heading">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Why Choose Asantey</span>
+      <h2 id="why-heading" class="t-h2">
         Hair That Speaks for Itself
       </h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+      <span class="rule rule--center"></span>
     </div>
 
-    <div class="ah-grid ah-grid--3">
+    <div class="grid-3">
       <?php
       $features = [
         [
@@ -213,12 +213,12 @@ echo ah_schema_breadcrumb([
         ],
       ];
       foreach ( $features as $i => $feat ) : ?>
-        <div class="ah-feature-card ah-reveal ah-reveal--delay-<?php echo ($i % 3) + 1; ?>">
-          <div class="ah-feature-card__icon">
+        <div class="feature-card ah-reveal ah-reveal--delay-<?php echo ($i % 3) + 1; ?>">
+          <div class="feature-card__icon">
             <?php echo ah_svg( $feat['icon'] ); ?>
           </div>
-          <h3 class="ah-feature-card__title"><?php echo esc_html( $feat['title'] ); ?></h3>
-          <p class="ah-feature-card__body"><?php echo esc_html( $feat['body'] ); ?></p>
+          <h3 class="feature-card__title"><?php echo esc_html( $feat['title'] ); ?></h3>
+          <p class="feature-card__body"><?php echo esc_html( $feat['body'] ); ?></p>
         </div>
       <?php endforeach; ?>
     </div>
@@ -229,22 +229,22 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [5] PRODUCT SPOTLIGHT
      ============================================================ -->
-<section class="ah-section" aria-labelledby="products-heading">
-  <div class="ah-container">
+<section class="section" aria-labelledby="products-heading">
+  <div class="wrap">
 
-    <div class="ah-section-header ah-flex ah-flex--between ah-reveal" style="align-items:flex-end;">
+    <div class="section-head" style="display:flex;align-items:flex-end;justify-content:space-between;" style="align-items:flex-end;">
       <div>
-        <span class="ah-subheading">Featured Products</span>
-        <h2 id="products-heading" class="ah-heading-lg">Shop the Collection</h2>
-        <span class="ah-accent-line"></span>
+        <span class="t-label">Featured Products</span>
+        <h2 id="products-heading" class="t-h2">Shop the Collection</h2>
+        <span class="rule"></span>
       </div>
       <a href="<?php echo esc_url( home_url('/shop/') ); ?>"
-         class="ah-btn ah-btn--outline">
+         class="btn btn--outline">
         View All <?php echo ah_svg('arrow-right'); ?>
       </a>
     </div>
 
-    <div class="ah-grid ah-grid--4">
+    <div class="grid-4">
       <?php
       $products = get_posts([
         'post_type'      => 'hair_product',
@@ -282,16 +282,16 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [6] CLIENT RESULTS GALLERY
      ============================================================ -->
-<section class="ah-section ah-section--dark" aria-labelledby="results-heading">
-  <div class="ah-container">
+<section class="section section--black" aria-labelledby="results-heading">
+  <div class="wrap">
 
-    <div class="ah-section-header--center ah-reveal" style="margin-bottom:var(--ah-space-12);">
-      <span class="ah-subheading" style="color:var(--ah-gold);">Real Women. Real Results.</span>
-      <h2 id="results-heading" class="ah-heading-lg" style="color:var(--ah-pure-white);">
+    <div class="section-head section-head--center reveal" style="margin-bottom:var(--ah-space-12);">
+      <span class="t-label" style="color:var(--ah-gold);">Real Women. Real Results.</span>
+      <h2 id="results-heading" class="t-h2" style="color:var(--ah-pure-white);">
         See It to Believe It
       </h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
-      <p class="ah-body" style="color:rgba(255,255,255,0.65);max-width:560px;margin:0 auto;">
+      <span class="rule rule--center"></span>
+      <p class="t-body" style="color:rgba(255,255,255,0.65);max-width:560px;margin:0 auto;">
         Every photo is a real Asantey client. No filters. No stock images.
         Just genuine results from women who chose quality.
       </p>
@@ -307,20 +307,20 @@ echo ah_schema_breadcrumb([
       foreach ( $results as $j => $src ) :
         if ( $j >= 6 ) break;
         ?>
-        <div class="ah-gallery__item">
+        <div class="gallery-item">
           <img src="<?php echo esc_url( $src ); ?>"
                alt="Asantey Hair &amp; Beauty client result <?php echo $j + 1; ?>"
                loading="lazy" width="400" height="500">
-          <div class="ah-gallery__overlay">
-            <span class="ah-gallery__caption">Client Result</span>
+          <div class="gallery-item__ov">
+            <span >Client Result</span>
           </div>
         </div>
       <?php endforeach; ?>
     </div>
 
-    <div style="text-align:center;margin-top:var(--ah-space-12);" class="ah-reveal">
+    <div style="text-align:center;margin-top:var(--ah-space-12);" class="reveal">
       <a href="<?php echo esc_url( home_url('/gallery/') ); ?>"
-         class="ah-btn ah-btn--outline-white ah-btn--lg">
+         class="btn btn--outline-white">
         View Full Gallery <?php echo ah_svg('arrow-right'); ?>
       </a>
     </div>
@@ -332,10 +332,10 @@ echo ah_schema_breadcrumb([
      [7] PRICING PREVIEW BAND
      ============================================================ -->
 <div style="background:var(--ah-black);padding:var(--ah-space-12) var(--ah-space-6);">
-  <div class="ah-container">
+  <div class="wrap">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--ah-space-6);">
       <div>
-        <span class="ah-subheading" style="display:block;margin-bottom:var(--ah-space-3);">Transparent Pricing</span>
+        <span class="t-label" style="display:block;margin-bottom:var(--ah-space-3);">Transparent Pricing</span>
         <p style="font-family:var(--ah-font-display);font-size:clamp(1rem,2.5vw,1.375rem);line-height:1.5;color:rgba(255,255,255,0.85);margin:0;">
           Cambodian Raw Hair from <strong style="color:var(--ah-gold);">&pound;60</strong> &nbsp;&middot;&nbsp;
           Virgin Hair from <strong style="color:var(--ah-gold);">&pound;50</strong> &nbsp;&middot;&nbsp;
@@ -344,7 +344,7 @@ echo ah_schema_breadcrumb([
         </p>
       </div>
       <a href="<?php echo esc_url( home_url('/shop/') ); ?>"
-         class="ah-btn ah-btn--outline-white">
+         class="btn btn--outline-white">
         View Full Price List <?php echo ah_svg('arrow-right'); ?>
       </a>
     </div>
@@ -354,23 +354,23 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [8] ABOUT SPLIT
      ============================================================ -->
-<section class="ah-split ah-section--sm" aria-labelledby="about-heading">
-  <div class="ah-split__image">
+<section class="split section--sm" aria-labelledby="about-heading">
+  <div class="split__media">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-loose-wave.jpg' ); ?>"
          alt="Asantey Hair &amp; Beauty — premium loose wave hair extensions"
          loading="lazy" width="800" height="1000">
   </div>
-  <div class="ah-split__content ah-reveal">
-    <span class="ah-subheading">Our Story</span>
-    <h2 id="about-heading" class="ah-heading-md" style="margin:var(--ah-space-4) 0;">
+  <div class="split__body ah-reveal">
+    <span class="t-label">Our Story</span>
+    <h2 id="about-heading" class="t-h3" style="margin:var(--ah-space-4) 0;">
       The Asantey Standard
     </h2>
-    <span class="ah-accent-line"></span>
-    <p class="ah-body-lg">
+    <span class="rule"></span>
+    <p class="t-body--lg">
       Founded on the belief that every woman deserves hair she's genuinely proud of,
       Asantey Hair & Beauty was built around one obsession: quality.
     </p>
-    <p class="ah-body">
+    <p class="t-body">
       We source our Cambodian hair directly, ensuring each bundle retains its natural
       cuticle alignment — the secret behind our signature softness, longevity, and
       virtually zero shedding. Our raw hair has never been chemically processed.
@@ -378,7 +378,7 @@ echo ah_schema_breadcrumb([
       as nature intended — just better selected, better prepared, and shipped to your door.
     </p>
     <a href="<?php echo esc_url( home_url('/about/') ); ?>"
-       class="ah-btn ah-btn--primary" style="margin-top:var(--ah-space-6);">
+       class="btn btn--black" style="margin-top:var(--ah-space-6);">
       Our Story <?php echo ah_svg('arrow-right'); ?>
     </a>
   </div>
@@ -387,16 +387,16 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [9] TESTIMONIALS
      ============================================================ -->
-<section class="ah-section" style="background:#f6f6f6;" aria-labelledby="testimonials-heading">
-  <div class="ah-container">
+<section class="section" style="background:#f6f6f6;" aria-labelledby="testimonials-heading">
+  <div class="wrap">
 
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Client Love</span>
-      <h2 id="testimonials-heading" class="ah-heading-lg">What Our Clients Say</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Client Love</span>
+      <h2 id="testimonials-heading" class="t-h2">What Our Clients Say</h2>
+      <span class="rule rule--center"></span>
     </div>
 
-    <div class="ah-grid ah-grid--3">
+    <div class="grid-3">
       <?php
       $testimonials = [
         [
@@ -418,8 +418,8 @@ echo ah_schema_breadcrumb([
       foreach ( $testimonials as $i => $t ) : ?>
         <div class="ah-testimonial ah-reveal ah-reveal--delay-<?php echo $i + 1; ?>">
           <?php echo ah_stars( $t['stars'] ); ?>
-          <p class="ah-testimonial__quote">&ldquo;<?php echo esc_html( $t['quote'] ); ?>&rdquo;</p>
-          <span class="ah-testimonial__author">&mdash; <?php echo esc_html( $t['author'] ); ?></span>
+          <p class="testimonial__quote">&ldquo;<?php echo esc_html( $t['quote'] ); ?>&rdquo;</p>
+          <span class="testimonial__author">&mdash; <?php echo esc_html( $t['author'] ); ?></span>
         </div>
       <?php endforeach; ?>
     </div>
@@ -430,24 +430,24 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [10] FINAL CTA BAND
      ============================================================ -->
-<div class="ah-cta-band">
-  <div class="ah-container">
-    <div class="ah-reveal">
-      <span class="ah-cta-band__label">Ready to Elevate Your Look?</span>
-      <h2 class="ah-cta-band__heading">
+<div class="cta-band">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="t-label t-label--white">Ready to Elevate Your Look?</span>
+      <h2 class="t-h1">
         Your Best Hair Starts Here
       </h2>
-      <p class="ah-cta-band__body">
+      <p class="t-body">
         Browse our full collection or order directly on WhatsApp — we'll guide you
         through every step, from texture to length to your perfect install.
       </p>
-      <div class="ah-btn-group" style="justify-content:center;">
+      <div class="btn-group" style="justify-content:center;">
         <a href="<?php echo esc_url( home_url('/shop/') ); ?>"
-           class="ah-btn ah-btn--gold ah-btn--lg">
+           class="btn btn--black">
           Shop Collections <?php echo ah_svg('arrow-right'); ?>
         </a>
         <a href="<?php echo esc_url( ah_whatsapp_url() ); ?>"
-           class="ah-btn ah-btn--outline-white ah-btn--lg"
+           class="btn btn--outline-white"
            target="_blank" rel="noopener noreferrer">
           <?php echo ah_svg('whatsapp'); ?> WhatsApp Order
         </a>

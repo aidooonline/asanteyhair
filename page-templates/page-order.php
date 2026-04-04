@@ -7,26 +7,26 @@ get_header();
 echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order Enquiry','url'=>get_permalink()]]);
 ?>
 
-<div class="ah-header-offset"></div>
-<section class="ah-page-hero">
-  <div class="ah-page-hero__content">
-    <span class="ah-page-hero__label">Place Your Order</span>
-    <h1 class="ah-page-hero__title">Order Enquiry</h1>
-    <p class="ah-page-hero__subtitle">Fill in the form below and we&rsquo;ll confirm availability and send your invoice within 24 hours.</p>
+<div class="header-offset"></div>
+<section class="page-hero">
+  <div class="page-hero__content">
+    <span class="t-label">Place Your Order</span>
+    <h1 class="t-h1">Order Enquiry</h1>
+    <p >Fill in the form below and we&rsquo;ll confirm availability and send your invoice within 24 hours.</p>
   </div>
 </section>
 <?php ah_breadcrumb(); ?>
 
-<section class="ah-section">
-  <div class="ah-container">
-    <div class="ah-grid ah-grid--2" style="gap:var(--ah-space-16);align-items:start;">
+<section class="section">
+  <div class="wrap">
+    <div class="grid-2" style="gap:var(--ah-space-16);align-items:start;">
 
       <!-- How It Works -->
-      <div class="ah-reveal">
-        <span class="ah-subheading">Simple &amp; Straightforward</span>
-        <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">How Ordering Works</h2>
-        <span class="ah-accent-line"></span>
-        <div class="ah-steps" style="grid-template-columns:1fr;margin-top:var(--ah-space-8);">
+      <div class="reveal">
+        <span class="t-label">Simple &amp; Straightforward</span>
+        <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">How Ordering Works</h2>
+        <span class="rule"></span>
+        <div class="steps" style="grid-template-columns:1fr;margin-top:var(--ah-space-8);">
           <?php
           $steps = [
             ['Fill in the Order Form','Select your product category, texture, length, and quantity. Add any special requests in the notes field.'],
@@ -34,29 +34,29 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
             ['Payment & Dispatch','Once payment is received, your hair is prepared and dispatched within 2–3 business days with a tracking number.'],
           ];
           foreach($steps as $s): ?>
-            <div class="ah-step">
-              <h3 class="ah-step__title"><?php echo esc_html($s[0]); ?></h3>
-              <p class="ah-step__body"><?php echo $s[1]; ?></p>
+            <div class="step">
+              <h3 class="step__title"><?php echo esc_html($s[0]); ?></h3>
+              <p class="step__body"><?php echo $s[1]; ?></p>
             </div>
           <?php endforeach; ?>
         </div>
 
         <div style="margin-top:var(--ah-space-10);padding:var(--ah-space-6);background:var(--ah-grey-100);border-left:3px solid var(--ah-gold);">
           <h4 style="font-family:var(--ah-font-display);font-size:var(--ah-text-2xl);margin-bottom:var(--ah-space-2);">Prefer WhatsApp?</h4>
-          <p class="ah-body" style="margin-bottom:var(--ah-space-5);">If you&rsquo;d rather order directly and get an instant response, WhatsApp is always the fastest route.</p>
+          <p class="t-body" style="margin-bottom:var(--ah-space-5);">If you&rsquo;d rather order directly and get an instant response, WhatsApp is always the fastest route.</p>
           <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to place an order.')); ?>"
-             class="ah-btn ah-btn--whatsapp" target="_blank" rel="noopener noreferrer">
+             class="btn btn--wa" target="_blank" rel="noopener noreferrer">
             <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
           </a>
         </div>
       </div>
 
       <!-- Order Form -->
-      <div class="ah-reveal ah-reveal--delay-2">
-        <span class="ah-subheading">Ready to Order?</span>
-        <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">Order Enquiry Form</h2>
-        <span class="ah-accent-line"></span>
-        <p class="ah-body" style="margin-bottom:var(--ah-space-8);">
+      <div class="reveal d2">
+        <span class="t-label">Ready to Order?</span>
+        <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">Order Enquiry Form</h2>
+        <span class="rule"></span>
+        <p class="t-body" style="margin-bottom:var(--ah-space-8);">
           Complete the form and we&rsquo;ll send a confirmation and invoice within 24 hours.
           You&rsquo;ll also receive an automatic copy of your enquiry.
         </p>
@@ -68,14 +68,14 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
 </section>
 
 <!-- Product Quick Links -->
-<section class="ah-section ah-section--grey">
-  <div class="ah-container">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Browse Before You Order</span>
-      <h2 class="ah-heading-lg">View Full Collections</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+<section class="section section--grey">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Browse Before You Order</span>
+      <h2 class="t-h2">View Full Collections</h2>
+      <span class="rule rule--center"></span>
     </div>
-    <div class="ah-grid ah-grid--3">
+    <div class="grid-3">
       <?php
       $products = [
         ['Cambodian Raw Hair','Unprocessed. Single-donor. 10+ textures, 10"–30".','60',home_url('/raw-hair/'),'raw-straight.jpg'],
@@ -91,7 +91,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
             <h3 style="font-family:var(--ah-font-display);font-size:var(--ah-text-2xl);margin-bottom:var(--ah-space-2);"><?php echo esc_html($p[0]); ?></h3>
             <p style="font-size:var(--ah-text-sm);color:var(--ah-grey-700);margin-bottom:var(--ah-space-4);"><?php echo esc_html($p[1]); ?></p>
             <p style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);font-weight:600;margin-bottom:var(--ah-space-4);">from &pound;<?php echo esc_html($p[2]); ?></p>
-            <a href="<?php echo esc_url($p[3]); ?>" class="ah-btn ah-btn--outline ah-btn--sm">View Collection <?php echo ah_svg('arrow-right'); ?></a>
+            <a href="<?php echo esc_url($p[3]); ?>" class="btn btn--outline btn--sm">View Collection <?php echo ah_svg('arrow-right'); ?></a>
           </div>
         </div>
       <?php endforeach; ?>

@@ -76,41 +76,41 @@ echo ah_schema_faq($schema_faqs);
 echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'FAQ','url'=>get_permalink()]]);
 ?>
 
-<div class="ah-header-offset"></div>
-<section class="ah-page-hero">
-  <div class="ah-page-hero__content">
-    <span class="ah-page-hero__label">Got Questions?</span>
-    <h1 class="ah-page-hero__title">Frequently Asked<br>Questions</h1>
-    <p class="ah-page-hero__subtitle">Everything you need to know about our hair, ordering, and care. Still unsure? WhatsApp us.</p>
+<div class="header-offset"></div>
+<section class="page-hero">
+  <div class="page-hero__content">
+    <span class="t-label">Got Questions?</span>
+    <h1 class="t-h1">Frequently Asked<br>Questions</h1>
+    <p >Everything you need to know about our hair, ordering, and care. Still unsure? WhatsApp us.</p>
   </div>
 </section>
 <?php ah_breadcrumb(); ?>
 
-<section class="ah-section">
-  <div class="ah-container ah-container--sm">
+<section class="section">
+  <div class="wrap wrap--narrow">
     <?php foreach($all_faqs as $category => $faqs): ?>
-      <div style="margin-bottom:var(--ah-space-16);" class="ah-reveal">
-        <span class="ah-subheading"><?php echo esc_html($category); ?></span>
-        <h2 class="ah-heading-sm" style="margin:var(--ah-space-3) 0 var(--ah-space-8);"><?php echo esc_html($category); ?></h2>
-        <div class="ah-accordion">
+      <div style="margin-bottom:var(--ah-space-16);" class="reveal">
+        <span class="t-label"><?php echo esc_html($category); ?></span>
+        <h2 class="t-h4" style="margin:var(--ah-space-3) 0 var(--ah-space-8);"><?php echo esc_html($category); ?></h2>
+        <div class="accordion">
           <?php foreach($faqs as $faq): ?>
-            <div class="ah-accordion__item">
-              <button class="ah-accordion__trigger" type="button" aria-expanded="false">
-                <span class="ah-accordion__question"><?php echo esc_html($faq[0]); ?></span>
-                <span class="ah-accordion__icon"><?php echo ah_svg('plus'); ?></span>
+            <div class="accordion__item">
+              <button class="accordion__trigger" type="button" aria-expanded="false">
+                <span class="accordion__q"><?php echo esc_html($faq[0]); ?></span>
+                <span class="accordion__icon"><?php echo ah_svg('plus'); ?></span>
               </button>
-              <div class="ah-accordion__content"><p class="ah-accordion__answer"><?php echo esc_html($faq[1]); ?></p></div>
+              <div class="accordion__body"><p class="accordion__ans"><?php echo esc_html($faq[1]); ?></p></div>
             </div>
           <?php endforeach; ?>
         </div>
       </div>
     <?php endforeach; ?>
 
-    <div class="ah-reveal" style="background:var(--ah-grey-100);padding:var(--ah-space-10);text-align:center;">
-      <h3 class="ah-heading-sm" style="margin-bottom:var(--ah-space-3);">Still Have Questions?</h3>
-      <p class="ah-body" style="margin-bottom:var(--ah-space-6);">Our team is available on WhatsApp to help you choose the right product, answer care questions, or assist with your order.</p>
+    <div class="reveal" style="background:var(--ah-grey-100);padding:var(--ah-space-10);text-align:center;">
+      <h3 class="t-h4" style="margin-bottom:var(--ah-space-3);">Still Have Questions?</h3>
+      <p class="t-body" style="margin-bottom:var(--ah-space-6);">Our team is available on WhatsApp to help you choose the right product, answer care questions, or assist with your order.</p>
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I have a question about Asantey Hair & Beauty.')); ?>"
-         class="ah-btn ah-btn--whatsapp" target="_blank" rel="noopener noreferrer">
+         class="btn btn--wa" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Chat with Us on WhatsApp
       </a>
     </div>

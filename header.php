@@ -174,13 +174,13 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="ah-visually-hidden" href="#main-content">Skip to main content</a>
+<a class="sr-only" href="#main-content">Skip to main content</a>
 
-<header class="ah-header" role="banner" aria-label="Site header">
-  <div class="ah-header__inner">
+<header class="site-header" role="banner" aria-label="Site header">
+  <div class="site-header__inner">
 
     <!-- Logo -->
-    <a class="ah-header__logo" href="<?php echo esc_url( home_url('/') ); ?>" aria-label="Asantey Hair & Beauty — Home">
+    <a class="site-logo" href="<?php echo esc_url( home_url('/') ); ?>" aria-label="Asantey Hair & Beauty — Home">
       <?php
       $logo_src = AH_URI . '/assets/images/logo.jpg';
       if ( has_custom_logo() ) {
@@ -189,7 +189,7 @@
         echo '<img src="' . esc_url( $logo_src ) . '" alt="Asantey Hair &amp; Beauty" width="160" height="48">';
       } else {
         ?>
-        <span class="ah-header__logo-text">
+        <span class="site-logo__name">
           Asantey
           <span>Hair &amp; Beauty</span>
         </span>
@@ -206,7 +206,7 @@
         'container'      => false,
         'menu_class'     => 'ah-header__nav',
         'fallback_cb'    => function() {
-          echo '<ul class="ah-header__nav">';
+          echo '<ul class="site-nav">';
           $nav_items = [
             'Shop'               => '/shop/',
             'Raw Hair'           => '/raw-hair/',
@@ -227,15 +227,15 @@
     </nav>
 
     <!-- Right Actions -->
-    <div class="ah-header__actions">
+    <div class="site-header__actions">
       <a href="https://asanteyhair.as.me/"
-         class="ah-btn ah-btn--outline ah-btn--sm"
+         class="btn btn--outline btn--sm"
          target="_blank" rel="noopener noreferrer"
          aria-label="Book a salon appointment">
         Book Appointment
       </a>
       <a href="<?php echo esc_url( ah_whatsapp_url( 'Hello! I\'d like to place an order with Asantey Hair & Beauty.' ) ); ?>"
-         class="ah-btn ah-btn--gold ah-btn--sm"
+         class="btn btn--black btn--sm"
          target="_blank" rel="noopener noreferrer"
          aria-label="Order now via WhatsApp">
         <?php echo ah_svg('whatsapp'); ?>
@@ -243,9 +243,9 @@
       </a>
 
       <!-- Mobile hamburger -->
-      <button class="ah-header__hamburger"
+      <button class="hamburger"
               aria-expanded="false"
-              aria-controls="ah-mobile-nav"
+              aria-controls="mobile-nav"
               aria-label="Toggle navigation menu">
         <span></span>
         <span></span>
@@ -260,11 +260,11 @@
 
 <!-- Floating WhatsApp Button -->
 <a href="<?php echo esc_url( ah_whatsapp_url() ); ?>"
-   class="ah-wa-float"
+   class="wa-float"
    target="_blank" rel="noopener noreferrer"
    aria-label="Chat with us on WhatsApp">
   <?php echo ah_svg('whatsapp', 'ah-wa-float__icon'); ?>
-  <span class="ah-wa-float__text">WhatsApp Us</span>
+  <span class="wa-float__txt">WhatsApp Us</span>
 </a>
 
 <main id="main-content" role="main">

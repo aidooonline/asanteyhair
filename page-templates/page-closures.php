@@ -27,39 +27,39 @@ $faqs = [
 echo ah_schema_faq($faqs);
 ?>
 
-<div class="ah-header-offset"></div>
+<div class="header-offset"></div>
 
-<section class="ah-page-hero">
-  <div class="ah-page-hero__bg">
+<section class="page-hero">
+  <div class="page-hero__bg">
     <img src="<?php echo esc_url(AH_URI.'/assets/images/closures-frontals-pricelist.jpg'); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
-  <div class="ah-page-hero__content">
-    <span class="ah-page-hero__label">The Perfect Finish</span>
-    <h1 class="ah-page-hero__title">HD Lace Closures<br>&amp; Frontals</h1>
-    <p class="ah-page-hero__subtitle">Invisible lace that melts into every skin tone. The final touch that makes every install flawless.</p>
+  <div class="page-hero__content">
+    <span class="t-label">The Perfect Finish</span>
+    <h1 class="t-h1">HD Lace Closures<br>&amp; Frontals</h1>
+    <p >Invisible lace that melts into every skin tone. The final touch that makes every install flawless.</p>
   </div>
 </section>
 
 <?php ah_breadcrumb(); ?>
 
 <!-- What is HD Lace -->
-<section class="ah-split ah-section--sm">
-  <div class="ah-split__image">
+<section class="split section--sm">
+  <div class="split__media">
     <img src="<?php echo esc_url(AH_URI.'/assets/images/hd-lace-sizes.png'); ?>"
          alt="HD lace closure and frontal sizes guide"
          loading="lazy" width="800" height="800">
   </div>
-  <div class="ah-split__content ah-reveal">
-    <span class="ah-subheading">Why HD Lace?</span>
-    <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">The Invisible Lace Standard</h2>
-    <span class="ah-accent-line"></span>
-    <p class="ah-body-lg">
+  <div class="split__body ah-reveal">
+    <span class="t-label">Why HD Lace?</span>
+    <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">The Invisible Lace Standard</h2>
+    <span class="rule"></span>
+    <p class="t-body--lg">
       HD lace is the most advanced lace technology available in the hair industry.
       Ultra-thin Swiss lace that adapts to your skin tone without bleaching —
       so your hairline looks undetectable from every angle.
     </p>
-    <p class="ah-body">
+    <p class="t-body">
       Regular lace often requires tinting or bleaching to match the scalp. HD lace doesn&rsquo;t.
       It virtually disappears, creating the illusion that the hair is growing directly
       from your scalp. The result is an install so natural, even your stylist
@@ -83,18 +83,18 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- Size Guide -->
-<section class="ah-section ah-section--grey" id="sizes">
-  <div class="ah-container">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Choose Your Size</span>
-      <h2 class="ah-heading-lg">Available Sizes &amp; Textures</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+<section class="section section--grey" id="sizes">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Choose Your Size</span>
+      <h2 class="t-h2">Available Sizes &amp; Textures</h2>
+      <span class="rule rule--center"></span>
     </div>
 
-    <div class="ah-grid ah-grid--2" style="gap:var(--ah-space-8);">
+    <div class="grid-2" style="gap:var(--ah-space-8);">
       <!-- Closures -->
-      <div class="ah-reveal">
-        <h3 class="ah-heading-sm" style="margin-bottom:var(--ah-space-4);">HD Lace Closures</h3>
+      <div class="reveal">
+        <h3 class="t-h4" style="margin-bottom:var(--ah-space-4);">HD Lace Closures</h3>
         <?php
         $closure_sizes = [
           '2x6'  => '2x6 Closure — Deep Centre Part',
@@ -116,8 +116,8 @@ echo ah_schema_faq($faqs);
         <?php endforeach;?>
       </div>
       <!-- Frontals -->
-      <div class="ah-reveal ah-reveal--delay-2">
-        <h3 class="ah-heading-sm" style="margin-bottom:var(--ah-space-4);">HD Lace Frontals</h3>
+      <div class="reveal d2">
+        <h3 class="t-h4" style="margin-bottom:var(--ah-space-4);">HD Lace Frontals</h3>
         <?php
         $frontal_sizes = [
           '13x4' => '13x4 Frontal — Ear to Ear',
@@ -149,12 +149,12 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- Full Pricing Tables -->
-<section class="ah-section" id="pricing">
-  <div class="ah-container">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Full Pricing</span>
-      <h2 class="ah-heading-lg">Closures &amp; Frontals — Price Lists</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Full Pricing</span>
+      <h2 class="t-h2">Closures &amp; Frontals — Price Lists</h2>
+      <span class="rule rule--center"></span>
     </div>
     <div class="ah-pricing-grid ah-reveal">
       <?php ah_pricing_table('2x6',  '2x6 HD Lace Closure',  '12"–22" available'); ?>
@@ -168,14 +168,14 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- How Many Bundles Guide -->
-<section class="ah-section ah-section--grey">
-  <div class="ah-container ah-container--sm ah-reveal">
-    <div class="ah-section-header--center">
-      <span class="ah-subheading">Bundle Guide</span>
-      <h2 class="ah-heading-lg">How Many Bundles Do I Need?</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+<section class="section section--grey">
+  <div class="wrap wrap--narrow ah-reveal">
+    <div class="section-head section-head--center">
+      <span class="t-label">Bundle Guide</span>
+      <h2 class="t-h2">How Many Bundles Do I Need?</h2>
+      <span class="rule rule--center"></span>
     </div>
-    <div class="ah-prose">
+    <div class="prose">
       <table>
         <thead><tr><th>Length</th><th>With Closure</th><th>With Frontal</th></tr></thead>
         <tbody>
@@ -193,22 +193,22 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- FAQ -->
-<section class="ah-section" id="faq">
-  <div class="ah-container ah-container--sm">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Common Questions</span>
-      <h2 class="ah-heading-lg">HD Lace FAQ</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+<section class="section" id="faq">
+  <div class="wrap wrap--narrow">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Common Questions</span>
+      <h2 class="t-h2">HD Lace FAQ</h2>
+      <span class="rule rule--center"></span>
     </div>
     <div class="ah-accordion ah-reveal">
       <?php foreach($faqs as $faq): ?>
-        <div class="ah-accordion__item">
-          <button class="ah-accordion__trigger" type="button" aria-expanded="false">
-            <span class="ah-accordion__question"><?php echo esc_html($faq['question']); ?></span>
-            <span class="ah-accordion__icon"><?php echo ah_svg('plus'); ?></span>
+        <div class="accordion__item">
+          <button class="accordion__trigger" type="button" aria-expanded="false">
+            <span class="accordion__q"><?php echo esc_html($faq['question']); ?></span>
+            <span class="accordion__icon"><?php echo ah_svg('plus'); ?></span>
           </button>
-          <div class="ah-accordion__content">
-            <p class="ah-accordion__answer"><?php echo esc_html($faq['answer']); ?></p>
+          <div class="accordion__body">
+            <p class="accordion__ans"><?php echo esc_html($faq['answer']); ?></p>
           </div>
         </div>
       <?php endforeach; ?>
@@ -216,17 +216,17 @@ echo ah_schema_faq($faqs);
   </div>
 </section>
 
-<div class="ah-cta-band">
-  <div class="ah-container"><div class="ah-reveal">
-    <span class="ah-cta-band__label">Ready for Your Perfect Hairline?</span>
-    <h2 class="ah-cta-band__heading">Order Your HD Lace Today</h2>
-    <p class="ah-cta-band__body">Tell us your closure size, texture, and length — we'll send your invoice within hours.</p>
-    <div class="ah-btn-group" style="justify-content:center;">
+<div class="cta-band">
+  <div class="wrap"><div class="reveal">
+    <span class="t-label t-label--white">Ready for Your Perfect Hairline?</span>
+    <h2 class="t-h1">Order Your HD Lace Today</h2>
+    <p class="t-body">Tell us your closure size, texture, and length — we'll send your invoice within hours.</p>
+    <div class="btn-group" style="justify-content:center;">
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order an HD Lace Closure or Frontal.')); ?>"
-         class="ah-btn ah-btn--whatsapp ah-btn--lg" target="_blank" rel="noopener noreferrer">
+         class="btn btn--wa" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
       </a>
-      <a href="<?php echo esc_url(home_url('/order/')); ?>" class="ah-btn ah-btn--outline-white ah-btn--lg">Use Order Form</a>
+      <a href="<?php echo esc_url(home_url('/order/')); ?>" class="btn btn--outline-white">Use Order Form</a>
     </div>
   </div></div>
 </div>

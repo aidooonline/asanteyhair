@@ -6,12 +6,12 @@
 get_header();
 echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Shipping &amp; Returns','url'=>get_permalink()]]);
 ?>
-<div class="ah-header-offset"></div>
-<section class="ah-page-hero"><div class="ah-page-hero__content"><span class="ah-page-hero__label">Policies</span><h1 class="ah-page-hero__title">Shipping &amp; Returns</h1><p class="ah-page-hero__subtitle">Everything you need to know about delivery and our returns process.</p></div></section>
+<div class="header-offset"></div>
+<section class="page-hero"><div class="page-hero__content"><span class="t-label">Policies</span><h1 class="t-h1">Shipping &amp; Returns</h1><p >Everything you need to know about delivery and our returns process.</p></div></section>
 <?php ah_breadcrumb(); ?>
 
-<div class="ah-legal">
-  <p class="ah-last-updated">Last Updated: January 2024</p>
+<div class="legal">
+  <p class="date">Last Updated: January 2024</p>
 
   <h2>UK Delivery</h2>
   <p>All orders are dispatched within <strong>2–3 business days</strong> of confirmed payment. We use tracked shipping services for all UK orders. Standard delivery typically takes <strong>1–3 business days</strong> from dispatch.</p>

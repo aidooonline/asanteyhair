@@ -167,33 +167,33 @@
 }
 </style>
 
-<footer class="ah-footer" role="contentinfo" aria-label="Site footer">
+<footer class="site-footer" role="contentinfo" aria-label="Site footer">
 
   <!-- Newsletter Strip -->
-  <div class="ah-footer__newsletter">
-    <div class="ah-footer__newsletter-inner">
-      <div class="ah-footer__newsletter-copy">
+  <div class="site-footer__newsletter">
+    <div class="wrap">
+      <div class="footer-news-copy">
         <strong>Join the Asantey Community</strong>
         <p>New arrivals, exclusive offers, and hair care tips — delivered to your inbox.</p>
       </div>
-      <div class="ah-footer__newsletter-form">
+      <div class="footer-news-form">
         <?php ah_newsletter_form(); ?>
       </div>
     </div>
   </div>
 
   <!-- Main Footer -->
-  <div class="ah-footer__top">
+  <div class="site-footer__top">
 
     <!-- Brand Column -->
-    <div class="ah-footer__brand">
+    <div class="site-footer__brand">
       <a href="<?php echo esc_url( home_url('/') ); ?>" class="ah-header__logo" aria-label="Asantey Hair & Beauty — Home">
         <span class="ah-header__logo-text">
           Asantey
           <span>Hair &amp; Beauty</span>
         </span>
       </a>
-      <p class="ah-footer__tagline">
+      <p class="footer-tagline">
         <?php echo esc_html( get_theme_mod('ah_footer_tagline', 'Premium Hair. Unmatched Quality. Timeless Beauty.') ); ?>
       </p>
       <?php ah_social_links(); ?>
@@ -201,8 +201,8 @@
 
     <!-- Quick Links -->
     <div>
-      <span class="ah-footer__nav-title">Explore</span>
-      <ul class="ah-footer__nav-list">
+      <span class="t-label">Explore</span>
+      <ul class="footer-links">
         <?php
         $nav_links = [
           'Shop All'            => '/shop/',
@@ -222,8 +222,8 @@
 
     <!-- Products -->
     <div>
-      <span class="ah-footer__nav-title">Products</span>
-      <ul class="ah-footer__nav-list">
+      <span class="t-label">Products</span>
+      <ul class="footer-links">
         <?php
         $product_links = [
           'Cambodian Raw Hair'      => '/raw-hair/',
@@ -243,38 +243,38 @@
 
     <!-- Contact -->
     <div>
-      <span class="ah-footer__nav-title">Contact Us</span>
+      <span class="t-label">Contact Us</span>
 
       <?php if ( get_theme_mod('ah_contact_phone') ) : ?>
-        <div class="ah-footer__contact-item">
+        <div class="contact-item">
           <?php echo ah_svg('phone'); ?>
           <span><a href="tel:<?php echo esc_attr( preg_replace('/[^0-9+]/', '', get_theme_mod('ah_contact_phone')) ); ?>"><?php echo esc_html( get_theme_mod('ah_contact_phone') ); ?></a></span>
         </div>
       <?php endif; ?>
 
       <?php if ( get_theme_mod('ah_contact_email') ) : ?>
-        <div class="ah-footer__contact-item">
+        <div class="contact-item">
           <?php echo ah_svg('mail'); ?>
           <span><a href="mailto:<?php echo esc_attr( get_theme_mod('ah_contact_email') ); ?>"><?php echo esc_html( get_theme_mod('ah_contact_email') ); ?></a></span>
         </div>
       <?php endif; ?>
 
       <?php if ( get_theme_mod('ah_contact_address') ) : ?>
-        <div class="ah-footer__contact-item">
+        <div class="contact-item">
           <?php echo ah_svg('location'); ?>
           <span><?php echo nl2br( esc_html( get_theme_mod('ah_contact_address') ) ); ?></span>
         </div>
       <?php endif; ?>
 
       <?php if ( get_theme_mod('ah_contact_hours') ) : ?>
-        <div class="ah-footer__contact-item">
+        <div class="contact-item">
           <?php echo ah_svg('clock'); ?>
           <span><?php echo esc_html( get_theme_mod('ah_contact_hours') ); ?></span>
         </div>
       <?php endif; ?>
 
       <a href="<?php echo esc_url( ah_whatsapp_url() ); ?>"
-         class="ah-btn ah-btn--whatsapp ah-btn--sm"
+         class="btn btn--wa btn--sm"
          target="_blank" rel="noopener noreferrer"
          style="margin-top:var(--ah-space-5);">
         <?php echo ah_svg('whatsapp'); ?> WhatsApp Order
@@ -284,11 +284,11 @@
   </div><!-- /.ah-footer__top -->
 
   <!-- Bottom Bar -->
-  <div class="ah-footer__bottom">
-    <span class="ah-footer__copyright">
+  <div class="site-footer__bottom">
+    <span class="footer-copy">
       <?php echo esc_html( get_theme_mod('ah_footer_copyright', '&copy; ' . date('Y') . ' Asantey Hair & Beauty. All Rights Reserved.') ); ?>
     </span>
-    <ul class="ah-footer__legal-links">
+    <ul class="footer-legal">
       <li><a href="<?php echo esc_url( home_url('/privacy-policy/') ); ?>">Privacy Policy</a></li>
       <li><a href="<?php echo esc_url( home_url('/terms-conditions/') ); ?>">Terms &amp; Conditions</a></li>
       <li><a href="<?php echo esc_url( home_url('/shipping-returns/') ); ?>">Shipping &amp; Returns</a></li>

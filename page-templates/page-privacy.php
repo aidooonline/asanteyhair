@@ -8,12 +8,12 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Priva
 $business = get_theme_mod('ah_contact_name','Asantey Hair & Beauty');
 $email    = get_theme_mod('ah_contact_email','');
 ?>
-<div class="ah-header-offset"></div>
-<section class="ah-page-hero"><div class="ah-page-hero__content"><span class="ah-page-hero__label">Legal</span><h1 class="ah-page-hero__title">Privacy Policy</h1></div></section>
+<div class="header-offset"></div>
+<section class="page-hero"><div class="page-hero__content"><span class="t-label">Legal</span><h1 class="t-h1">Privacy Policy</h1></div></section>
 <?php ah_breadcrumb(); ?>
 
-<div class="ah-legal">
-  <p class="ah-last-updated">Last Updated: January 2024</p>
+<div class="legal">
+  <p class="date">Last Updated: January 2024</p>
 
   <h2>1. Introduction</h2>
   <p><?php echo esc_html($business); ?> (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and protect your data when you use our website or purchase from us.</p>

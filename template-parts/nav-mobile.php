@@ -82,11 +82,11 @@
 .ah-nav-mobile .ah-social-links svg { width: 100%; height: 100%; }
 </style>
 
-<nav class="ah-nav-mobile" id="ah-mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
-  <ul class="ah-nav-mobile__list">
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+  <ul class="mobile-nav__list">
     <li>
       <a href="<?php echo esc_url( home_url('/shop/') ); ?>">Shop</a>
-      <ul class="ah-nav-mobile__sub">
+      <ul class="mobile-nav__sub">
         <li><a href="<?php echo esc_url( home_url('/raw-hair/') ); ?>">Raw Hair</a></li>
         <li><a href="<?php echo esc_url( home_url('/virgin-hair/') ); ?>">Virgin Hair</a></li>
         <li><a href="<?php echo esc_url( home_url('/closures-frontals/') ); ?>">Closures &amp; Frontals</a></li>
@@ -100,15 +100,15 @@
     <li><a href="<?php echo esc_url( home_url('/contact/') ); ?>">Contact</a></li>
   </ul>
 
-  <div class="ah-nav-mobile__footer">
-    <div class="ah-nav-mobile__cta">
+  <div class="mobile-nav__foot">
+    <div class="mobile-nav__btns">
       <a href="https://asanteyhair.as.me/"
-         class="ah-btn ah-btn--primary"
+         class="btn btn--black"
          target="_blank" rel="noopener noreferrer">
         Book Appointment
       </a>
       <a href="<?php echo esc_url( ah_whatsapp_url() ); ?>"
-         class="ah-btn ah-btn--gold"
+         class="btn btn--black"
          target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order Hair
       </a>

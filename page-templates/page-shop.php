@@ -11,17 +11,17 @@ echo ah_schema_breadcrumb([
 ]);
 ?>
 
-<div class="ah-header-offset"></div>
+<div class="header-offset"></div>
 
-<section class="ah-page-hero">
-  <div class="ah-page-hero__bg">
+<section class="page-hero">
+  <div class="page-hero__bg">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-straight.jpg' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
-  <div class="ah-page-hero__content">
-    <span class="ah-page-hero__label">The Asantey Collection</span>
-    <h1 class="ah-page-hero__title">Premium Cambodian<br>Hair Extensions</h1>
-    <p class="ah-page-hero__subtitle">
+  <div class="page-hero__content">
+    <span class="t-label">The Asantey Collection</span>
+    <h1 class="t-h1">Premium Cambodian<br>Hair Extensions</h1>
+    <p >
       Raw Hair &middot; Virgin Hair &middot; HD Lace Closures &middot; HD Lace Frontals
     </p>
   </div>
@@ -29,19 +29,19 @@ echo ah_schema_breadcrumb([
 
 <?php ah_breadcrumb(); ?>
 
-<section class="ah-section">
-  <div class="ah-container">
+<section class="section">
+  <div class="wrap">
 
     <!-- Filter Bar -->
-    <div class="ah-filter-bar" role="group" aria-label="Filter products">
-      <button class="ah-filter-btn ah-filter-btn--active" data-filter="all">All Products</button>
-      <button class="ah-filter-btn" data-filter="raw-hair">Raw Hair</button>
-      <button class="ah-filter-btn" data-filter="virgin-hair">Virgin Hair</button>
-      <button class="ah-filter-btn" data-filter="closures-frontals">Closures &amp; Frontals</button>
+    <div class="filter-bar" role="group" aria-label="Filter products">
+      <button class="filter-btn active" data-filter="all">All Products</button>
+      <button class="filter-btn" data-filter="raw-hair">Raw Hair</button>
+      <button class="filter-btn" data-filter="virgin-hair">Virgin Hair</button>
+      <button class="filter-btn" data-filter="closures-frontals">Closures &amp; Frontals</button>
     </div>
 
     <!-- Product Grid -->
-    <div class="ah-grid ah-grid--4">
+    <div class="grid-4">
       <?php
       $products = get_posts([
         'post_type'      => 'hair_product',
@@ -68,20 +68,20 @@ echo ah_schema_breadcrumb([
         foreach ( $static as $item ) :
           [$title, $cat, $price, $img, $desc] = $item;
           ?>
-          <article class="ah-card" data-category="<?php echo esc_attr($cat); ?>">
-            <div class="ah-card__image">
+          <article class="product-card" data-category="<?php echo esc_attr($cat); ?>">
+            <div class="product-card__img">
               <img src="<?php echo esc_url(AH_URI . '/assets/images/' . $img); ?>"
                    alt="<?php echo esc_attr($title); ?>" loading="lazy" width="600" height="800">
-              <span class="ah-card__badge"><?php echo esc_html(ucwords(str_replace('-', ' ', $cat))); ?></span>
+              <span class="product-card__badge"><?php echo esc_html(ucwords(str_replace('-', ' ', $cat))); ?></span>
             </div>
-            <div class="ah-card__body">
-              <span class="ah-card__category"><?php echo esc_html(ucwords(str_replace('-', ' ', $cat))); ?></span>
-              <h3 class="ah-card__title"><?php echo esc_html($title); ?></h3>
-              <p class="ah-card__textures"><?php echo esc_html($desc); ?></p>
-              <p class="ah-card__price">from &pound;<?php echo esc_html($price); ?> <span>per bundle</span></p>
-              <div class="ah-card__actions">
+            <div class="product-card__body">
+              <span class="product-card__cat"><?php echo esc_html(ucwords(str_replace('-', ' ', $cat))); ?></span>
+              <h3 class="product-card__title"><?php echo esc_html($title); ?></h3>
+              <p class="product-card__desc"><?php echo esc_html($desc); ?></p>
+              <p class="product-card__price">from &pound;<?php echo esc_html($price); ?> <span>per bundle</span></p>
+              <div class="product-card__actions">
                 <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'m interested in: ' . $title)); ?>"
-                   class="ah-btn ah-btn--gold ah-btn--sm" target="_blank" rel="noopener noreferrer">
+                   class="btn btn--black btn--sm" target="_blank" rel="noopener noreferrer">
                   <?php echo ah_svg('whatsapp'); ?> Order Now
                 </a>
               </div>
@@ -97,24 +97,24 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Quality Callout -->
-<div class="ah-section ah-section--grey">
+<div class="section section--grey">
   <div class="ah-container ah-reveal" style="text-align:center;max-width:800px;">
-    <span class="ah-subheading">The Asantey Guarantee</span>
-    <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">
+    <span class="t-label">The Asantey Guarantee</span>
+    <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">
       100% Human. 100% Cuticle-Aligned. Zero Compromise.
     </h2>
-    <p class="ah-body-lg">
+    <p class="t-body--lg">
       Every bundle in our collection is 100% human hair — no synthetic blends, no fillers.
       Sourced directly from single Cambodian donors, cuticle-aligned from root to tip.
       The science behind minimal shedding, maximum lifespan, and hair that looks
       just as good in year three as it did on day one.
     </p>
-    <div class="ah-btn-group" style="justify-content:center;margin-top:var(--ah-space-8);">
+    <div class="btn-group" style="justify-content:center;margin-top:var(--ah-space-8);">
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I need help choosing the right hair for me.')); ?>"
-         class="ah-btn ah-btn--gold" target="_blank" rel="noopener noreferrer">
+         class="btn btn--black" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Need Help Choosing?
       </a>
-      <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="ah-btn ah-btn--outline">
+      <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="btn btn--outline">
         View FAQ
       </a>
     </div>

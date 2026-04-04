@@ -9,12 +9,12 @@ $business = get_theme_mod('ah_contact_name','Asantey Hair & Beauty');
 $email    = get_theme_mod('ah_contact_email','');
 $url      = home_url('/');
 ?>
-<div class="ah-header-offset"></div>
-<section class="ah-page-hero"><div class="ah-page-hero__content"><span class="ah-page-hero__label">Legal</span><h1 class="ah-page-hero__title">Terms &amp; Conditions</h1></div></section>
+<div class="header-offset"></div>
+<section class="page-hero"><div class="page-hero__content"><span class="t-label">Legal</span><h1 class="t-h1">Terms &amp; Conditions</h1></div></section>
 <?php ah_breadcrumb(); ?>
 
-<div class="ah-legal">
-  <p class="ah-last-updated">Last Updated: January 2024</p>
+<div class="legal">
+  <p class="date">Last Updated: January 2024</p>
 
   <h2>1. Introduction</h2>
   <p>These Terms and Conditions govern your use of the <?php echo esc_html($business); ?> website at <?php echo esc_url($url); ?> and your purchase of products from us. By using our website or placing an order, you agree to be bound by these terms. Please read them carefully.</p>

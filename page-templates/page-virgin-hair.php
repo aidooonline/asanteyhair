@@ -25,74 +25,74 @@ $faqs = [
 echo ah_schema_faq($faqs);
 ?>
 
-<div class="ah-header-offset"></div>
+<div class="header-offset"></div>
 
-<section class="ah-page-hero">
-  <div class="ah-page-hero__bg">
+<section class="page-hero">
+  <div class="page-hero__bg">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/virgin-body-wave.png' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
-  <div class="ah-page-hero__content">
-    <span class="ah-page-hero__label">Cambodian Hair Collection</span>
-    <h1 class="ah-page-hero__title">Cambodian Virgin<br>Hair Bundles</h1>
-    <p class="ah-page-hero__subtitle">Pure Quality. Lasting Beauty. From &pound;50 per bundle.</p>
+  <div class="page-hero__content">
+    <span class="t-label">Cambodian Hair Collection</span>
+    <h1 class="t-h1">Cambodian Virgin<br>Hair Bundles</h1>
+    <p >Pure Quality. Lasting Beauty. From &pound;50 per bundle.</p>
   </div>
 </section>
 
 <?php ah_breadcrumb(); ?>
 
-<section class="ah-split ah-section--sm">
-  <div class="ah-split__image">
+<section class="split section--sm">
+  <div class="split__media">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/virgin-body-wave.png' ); ?>"
          alt="Cambodian virgin hair body wave bundles"
          loading="lazy" width="800" height="1000">
   </div>
-  <div class="ah-split__content ah-reveal">
-    <span class="ah-subheading">Pure. Natural. Versatile.</span>
-    <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">What is Virgin Hair?</h2>
-    <span class="ah-accent-line"></span>
-    <p class="ah-body-lg">
+  <div class="split__body ah-reveal">
+    <span class="t-label">Pure. Natural. Versatile.</span>
+    <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">What is Virgin Hair?</h2>
+    <span class="rule"></span>
+    <p class="t-body--lg">
       Our Cambodian virgin hair is 100% human, single-donor, and free from any
       chemical processing. It&rsquo;s the ideal choice for women who want
       premium quality without compromise — available in 10+ textures and up to 30 inches.
     </p>
-    <p class="ah-body">
+    <p class="t-body">
       The natural cuticle structure means exceptional softness, minimal shedding,
       and a lifespan that outlasts any synthetic or blended alternative.
       Whether you wear it straight, curled, or in its natural wave pattern,
       Asantey virgin hair adapts to your style — not the other way around.
     </p>
-    <div class="ah-btn-group" style="margin-top:var(--ah-space-6);">
-      <a href="#pricing" class="ah-btn ah-btn--gold">View Pricing <?php echo ah_svg('arrow-right'); ?></a>
+    <div class="btn-group" style="margin-top:var(--ah-space-6);">
+      <a href="#pricing" class="btn btn--black">View Pricing <?php echo ah_svg('arrow-right'); ?></a>
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order Cambodian Virgin Hair.')); ?>"
-         class="ah-btn ah-btn--outline" target="_blank" rel="noopener noreferrer">
+         class="btn btn--outline" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order Now
       </a>
     </div>
   </div>
 </section>
 
-<div class="ah-trust-bar">
-  <div class="ah-trust-bar__inner">
+<div class="trust-bar">
+  <div class="trust-bar__inner">
     <?php
     $t = [['gem','100% Human'],['sparkle','Single Donor'],['shield','3–5 Year Lifespan'],['check','Minimal Shedding'],['heart','10+ Textures']];
     foreach($t as $i=>$item){
-      echo '<span class="ah-trust-bar__item">'.ah_svg($item[0]).esc_html($item[1]).'</span>';
-      if($i<count($t)-1) echo '<span class="ah-trust-bar__divider"></span>';
+      echo '<span class="trust-bar__item">'.ah_svg($item[0]).esc_html($item[1]).'</span>';
+      if($i<count($t)-1) echo '<span class="trust-bar__divider"></span>';
     }
     ?>
   </div>
 </div>
 
-<section class="ah-section" id="textures">
-  <div class="ah-container">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Available Textures</span>
-      <h2 class="ah-heading-lg">Choose Your Texture</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
-      <p class="ah-body">All textures available in 10"–30" at the same price per length.</p>
+<section class="section" id="textures">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Available Textures</span>
+      <h2 class="t-h2">Choose Your Texture</h2>
+      <span class="rule rule--center"></span>
+      <p class="t-body">All textures available in 10"–30" at the same price per length.</p>
     </div>
-    <div class="ah-texture-grid">
+    <div class="texture-grid">
       <?php
       $textures = [
         ['raw-body-wave.jpg','Body Wave','Natural wave with incredible movement and versatility.'],
@@ -107,49 +107,49 @@ echo ah_schema_faq($faqs);
       $from = array_values(ah_get_pricing('virgin'))[0];
       foreach($textures as $i=>$t):[$img,$name,$desc]=$t;?>
         <div class="ah-texture-card ah-reveal ah-reveal--delay-<?php echo ($i%4)+1; ?>">
-          <div class="ah-texture-card__img">
+          <div class="texture-item__img">
             <img src="<?php echo esc_url(AH_URI.'/assets/images/'.$img); ?>"
                  alt="Cambodian virgin hair — <?php echo esc_attr($name); ?>"
                  loading="lazy" width="300" height="400">
           </div>
-          <h3 class="ah-texture-card__name"><?php echo esc_html($name); ?></h3>
-          <p class="ah-texture-card__price">from &pound;<?php echo esc_html($from); ?></p>
-          <p class="ah-body-sm" style="margin-top:var(--ah-space-2);"><?php echo esc_html($desc); ?></p>
+          <h3 class="texture-item__name"><?php echo esc_html($name); ?></h3>
+          <p class="texture-item__from">from &pound;<?php echo esc_html($from); ?></p>
+          <p class="t-body" style="margin-top:var(--ah-space-2);"><?php echo esc_html($desc); ?></p>
         </div>
       <?php endforeach; ?>
     </div>
   </div>
 </section>
 
-<section class="ah-section ah-section--grey" id="pricing">
-  <div class="ah-container">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Transparent Pricing</span>
-      <h2 class="ah-heading-lg">Virgin Hair Price Per Bundle</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+<section class="section section--grey" id="pricing">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Transparent Pricing</span>
+      <h2 class="t-h2">Virgin Hair Price Per Bundle</h2>
+      <span class="rule rule--center"></span>
     </div>
-    <div style="max-width:700px;margin:0 auto;" class="ah-reveal">
+    <div style="max-width:700px;margin:0 auto;" class="reveal">
       <?php ah_pricing_table('virgin','Cambodian Virgin Hair','All textures priced equally per length. Prices are per bundle.'); ?>
     </div>
   </div>
 </section>
 
-<section class="ah-section" id="faq">
-  <div class="ah-container ah-container--sm">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Common Questions</span>
-      <h2 class="ah-heading-lg">Virgin Hair FAQ</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+<section class="section" id="faq">
+  <div class="wrap wrap--narrow">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Common Questions</span>
+      <h2 class="t-h2">Virgin Hair FAQ</h2>
+      <span class="rule rule--center"></span>
     </div>
     <div class="ah-accordion ah-reveal">
       <?php foreach($faqs as $faq): ?>
-        <div class="ah-accordion__item">
-          <button class="ah-accordion__trigger" type="button" aria-expanded="false">
-            <span class="ah-accordion__question"><?php echo esc_html($faq['question']); ?></span>
-            <span class="ah-accordion__icon"><?php echo ah_svg('plus'); ?></span>
+        <div class="accordion__item">
+          <button class="accordion__trigger" type="button" aria-expanded="false">
+            <span class="accordion__q"><?php echo esc_html($faq['question']); ?></span>
+            <span class="accordion__icon"><?php echo ah_svg('plus'); ?></span>
           </button>
-          <div class="ah-accordion__content">
-            <p class="ah-accordion__answer"><?php echo esc_html($faq['answer']); ?></p>
+          <div class="accordion__body">
+            <p class="accordion__ans"><?php echo esc_html($faq['answer']); ?></p>
           </div>
         </div>
       <?php endforeach; ?>
@@ -157,17 +157,17 @@ echo ah_schema_faq($faqs);
   </div>
 </section>
 
-<div class="ah-cta-band">
-  <div class="ah-container"><div class="ah-reveal">
-    <span class="ah-cta-band__label">Ready to Order?</span>
-    <h2 class="ah-cta-band__heading">Order Your Virgin Hair Bundles</h2>
-    <p class="ah-cta-band__body">WhatsApp us or use our order form — we confirm within hours and dispatch in 2–3 business days.</p>
-    <div class="ah-btn-group" style="justify-content:center;">
+<div class="cta-band">
+  <div class="wrap"><div class="reveal">
+    <span class="t-label t-label--white">Ready to Order?</span>
+    <h2 class="t-h1">Order Your Virgin Hair Bundles</h2>
+    <p class="t-body">WhatsApp us or use our order form — we confirm within hours and dispatch in 2–3 business days.</p>
+    <div class="btn-group" style="justify-content:center;">
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order Cambodian Virgin Hair.')); ?>"
-         class="ah-btn ah-btn--whatsapp ah-btn--lg" target="_blank" rel="noopener noreferrer">
+         class="btn btn--wa" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
       </a>
-      <a href="<?php echo esc_url(home_url('/order/')); ?>" class="ah-btn ah-btn--outline-white ah-btn--lg">Use Order Form</a>
+      <a href="<?php echo esc_url(home_url('/order/')); ?>" class="btn btn--outline-white">Use Order Form</a>
     </div>
   </div></div>
 </div>

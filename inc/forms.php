@@ -162,30 +162,30 @@ function ah_handle_newsletter(): void {
 function ah_contact_form( string $action = 'ah_contact_form', string $submit_label = 'Send Message' ): void {
     ?>
     <form class="ah-form ah-contact-form" data-action="<?php echo esc_attr( $action ); ?>" novalidate>
-        <div class="ah-hp-field" aria-hidden="true">
+        <div class="hp-field" aria-hidden="true">
             <input type="text" name="ah_hp" tabindex="-1" autocomplete="off" value="">
         </div>
-        <div class="ah-form-grid">
-            <div class="ah-form-group">
-                <label class="ah-form-label" for="ah-name">Full Name *</label>
-                <input type="text" id="ah-name" name="name" class="ah-form-control" required placeholder="Your full name">
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label" for="ah-name">Full Name *</label>
+                <input type="text" id="ah-name" name="name" class="form-control" required placeholder="Your full name">
             </div>
-            <div class="ah-form-group">
-                <label class="ah-form-label" for="ah-email">Email Address *</label>
-                <input type="email" id="ah-email" name="email" class="ah-form-control" required placeholder="your@email.com">
+            <div class="form-group">
+                <label class="form-label" for="ah-email">Email Address *</label>
+                <input type="email" id="ah-email" name="email" class="form-control" required placeholder="your@email.com">
             </div>
         </div>
-        <div class="ah-form-group">
-            <label class="ah-form-label" for="ah-phone">Phone / WhatsApp</label>
-            <input type="tel" id="ah-phone" name="phone" class="ah-form-control" placeholder="+44 7xxx xxxxxx">
+        <div class="form-group">
+            <label class="form-label" for="ah-phone">Phone / WhatsApp</label>
+            <input type="tel" id="ah-phone" name="phone" class="form-control" placeholder="+44 7xxx xxxxxx">
         </div>
-        <div class="ah-form-group">
-            <label class="ah-form-label" for="ah-message">Message *</label>
-            <textarea id="ah-message" name="message" class="ah-form-control" required placeholder="How can we help you?"></textarea>
+        <div class="form-group">
+            <label class="form-label" for="ah-message">Message *</label>
+            <textarea id="ah-message" name="message" class="form-control" required placeholder="How can we help you?"></textarea>
         </div>
-        <div class="ah-form-msg ah-form-msg--success" role="alert"></div>
-        <div class="ah-form-msg ah-form-msg--error" role="alert"></div>
-        <button type="submit" class="ah-btn ah-btn--primary">
+        <div class="form-msg form-msg--success" role="alert"></div>
+        <div class="form-msg form-msg--error" role="alert"></div>
+        <button type="submit" class="btn btn--black">
             <?php echo esc_html( $submit_label ); ?>
             <?php echo ah_svg( 'arrow-right' ); ?>
         </button>
@@ -198,27 +198,27 @@ function ah_order_form(): void {
     $lengths  = ['10','12','14','16','18','20','22','24','26','28','30'];
     ?>
     <form class="ah-form ah-order-form" data-action="ah_order_form" novalidate>
-        <div class="ah-hp-field" aria-hidden="true">
+        <div class="hp-field" aria-hidden="true">
             <input type="text" name="ah_hp" tabindex="-1" autocomplete="off" value="">
         </div>
-        <div class="ah-form-grid">
-            <div class="ah-form-group">
-                <label class="ah-form-label" for="ord-name">Full Name *</label>
-                <input type="text" id="ord-name" name="name" class="ah-form-control" required placeholder="Your full name">
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label" for="ord-name">Full Name *</label>
+                <input type="text" id="ord-name" name="name" class="form-control" required placeholder="Your full name">
             </div>
-            <div class="ah-form-group">
-                <label class="ah-form-label" for="ord-email">Email Address *</label>
-                <input type="email" id="ord-email" name="email" class="ah-form-control" required placeholder="your@email.com">
+            <div class="form-group">
+                <label class="form-label" for="ord-email">Email Address *</label>
+                <input type="email" id="ord-email" name="email" class="form-control" required placeholder="your@email.com">
             </div>
         </div>
-        <div class="ah-form-group">
-            <label class="ah-form-label" for="ord-phone">Phone / WhatsApp *</label>
-            <input type="tel" id="ord-phone" name="phone" class="ah-form-control" required placeholder="+44 7xxx xxxxxx">
+        <div class="form-group">
+            <label class="form-label" for="ord-phone">Phone / WhatsApp *</label>
+            <input type="tel" id="ord-phone" name="phone" class="form-control" required placeholder="+44 7xxx xxxxxx">
         </div>
-        <div class="ah-form-grid">
-            <div class="ah-form-group">
-                <label class="ah-form-label" for="ord-product">Product Category *</label>
-                <select id="ord-product" name="product" class="ah-form-control" required>
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label" for="ord-product">Product Category *</label>
+                <select id="ord-product" name="product" class="form-control" required>
                     <option value="">Select category</option>
                     <option value="Cambodian Raw Hair">Cambodian Raw Hair</option>
                     <option value="Cambodian Virgin Hair">Cambodian Virgin Hair</option>
@@ -226,9 +226,9 @@ function ah_order_form(): void {
                     <option value="HD Lace Frontal">HD Lace Frontal</option>
                 </select>
             </div>
-            <div class="ah-form-group">
-                <label class="ah-form-label" for="ord-texture">Texture *</label>
-                <select id="ord-texture" name="texture" class="ah-form-control" required>
+            <div class="form-group">
+                <label class="form-label" for="ord-texture">Texture *</label>
+                <select id="ord-texture" name="texture" class="form-control" required>
                     <option value="">Select texture</option>
                     <?php foreach ( $textures as $slug => $label ) : ?>
                         <option value="<?php echo esc_attr( $label ); ?>"><?php echo esc_html( $label ); ?></option>
@@ -236,32 +236,32 @@ function ah_order_form(): void {
                 </select>
             </div>
         </div>
-        <div class="ah-form-grid">
-            <div class="ah-form-group">
-                <label class="ah-form-label" for="ord-length">Length *</label>
-                <select id="ord-length" name="length" class="ah-form-control" required>
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label" for="ord-length">Length *</label>
+                <select id="ord-length" name="length" class="form-control" required>
                     <option value="">Select length</option>
                     <?php foreach ( $lengths as $l ) : ?>
                         <option value="<?php echo esc_attr( $l ); ?>"><?php echo esc_html( $l ); ?>"</option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="ah-form-group">
-                <label class="ah-form-label" for="ord-quantity">Number of Bundles</label>
-                <select id="ord-quantity" name="quantity" class="ah-form-control">
+            <div class="form-group">
+                <label class="form-label" for="ord-quantity">Number of Bundles</label>
+                <select id="ord-quantity" name="quantity" class="form-control">
                     <?php for ( $i = 1; $i <= 10; $i++ ) : ?>
                         <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                     <?php endfor; ?>
                 </select>
             </div>
         </div>
-        <div class="ah-form-group">
-            <label class="ah-form-label" for="ord-notes">Additional Notes</label>
-            <textarea id="ord-notes" name="notes" class="ah-form-control" placeholder="Closure size, colour preference, special requests…"></textarea>
+        <div class="form-group">
+            <label class="form-label" for="ord-notes">Additional Notes</label>
+            <textarea id="ord-notes" name="notes" class="form-control" placeholder="Closure size, colour preference, special requests…"></textarea>
         </div>
-        <div class="ah-form-msg ah-form-msg--success" role="alert"></div>
-        <div class="ah-form-msg ah-form-msg--error" role="alert"></div>
-        <button type="submit" class="ah-btn ah-btn--gold ah-btn--lg">
+        <div class="form-msg form-msg--success" role="alert"></div>
+        <div class="form-msg form-msg--error" role="alert"></div>
+        <button type="submit" class="btn btn--black">
             Submit Order Enquiry <?php echo ah_svg( 'arrow-right' ); ?>
         </button>
     </form>
@@ -271,17 +271,17 @@ function ah_order_form(): void {
 function ah_newsletter_form(): void {
     ?>
     <form class="ah-form ah-newsletter-form" data-action="ah_newsletter" novalidate>
-        <div class="ah-hp-field" aria-hidden="true">
+        <div class="hp-field" aria-hidden="true">
             <input type="text" name="ah_hp" tabindex="-1" autocomplete="off" value="">
         </div>
         <div style="display:flex;gap:var(--ah-space-3);flex-wrap:wrap;">
-            <input type="email" name="email" class="ah-form-control" required
+            <input type="email" name="email" class="form-control" required
                    placeholder="Your email address"
                    style="flex:1;min-width:220px;">
-            <button type="submit" class="ah-btn ah-btn--gold">Subscribe</button>
+            <button type="submit" class="btn btn--black">Subscribe</button>
         </div>
-        <div class="ah-form-msg ah-form-msg--success" role="alert" style="margin-top:var(--ah-space-3);"></div>
-        <div class="ah-form-msg ah-form-msg--error"   role="alert" style="margin-top:var(--ah-space-3);"></div>
+        <div class="form-msg form-msg--success" role="alert" style="margin-top:var(--ah-space-3);"></div>
+        <div class="form-msg form-msg--error"   role="alert" style="margin-top:var(--ah-space-3);"></div>
     </form>
     <?php
 }

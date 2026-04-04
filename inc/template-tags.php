@@ -74,23 +74,23 @@ function ah_breadcrumb(): void {
         if ( $terms && ! is_wp_error( $terms ) ) {
             $items[] = esc_html( $terms[0]->name );
         }
-        $items[] = '<span class="ah-breadcrumb__current">' . esc_html( get_the_title() ) . '</span>';
+        $items[] = '<span class="breadcrumb__current">' . esc_html( get_the_title() ) . '</span>';
     } elseif ( is_page() ) {
         $ancestors = get_post_ancestors( get_the_ID() );
         foreach ( array_reverse( $ancestors ) as $ancestor_id ) {
             $items[] = '<a href="' . esc_url( get_permalink( $ancestor_id ) ) . '">' . esc_html( get_the_title( $ancestor_id ) ) . '</a>';
         }
-        $items[] = '<span class="ah-breadcrumb__current">' . esc_html( get_the_title() ) . '</span>';
+        $items[] = '<span class="breadcrumb__current">' . esc_html( get_the_title() ) . '</span>';
     } elseif ( is_archive() ) {
-        $items[] = '<span class="ah-breadcrumb__current">' . esc_html( get_the_archive_title() ) . '</span>';
+        $items[] = '<span class="breadcrumb__current">' . esc_html( get_the_archive_title() ) . '</span>';
     } elseif ( is_search() ) {
-        $items[] = '<span class="ah-breadcrumb__current">Search: ' . esc_html( get_search_query() ) . '</span>';
+        $items[] = '<span class="breadcrumb__current">Search: ' . esc_html( get_search_query() ) . '</span>';
     } elseif ( is_404() ) {
-        $items[] = '<span class="ah-breadcrumb__current">Page Not Found</span>';
+        $items[] = '<span class="breadcrumb__current">Page Not Found</span>';
     }
 
-    echo '<nav class="ah-breadcrumb" aria-label="Breadcrumb">';
-    echo implode( '<span class="ah-breadcrumb__sep">&#8250;</span>', $items );
+    echo '<nav class="breadcrumb" aria-label="Breadcrumb">';
+    echo implode( '<span class="breadcrumb__sep">&#8250;</span>', $items );
     echo '</nav>';
 }
 
@@ -105,8 +105,8 @@ function ah_pricing_table( string $type, string $caption = '', string $note = ''
     $prices = array_values( $rows );
     $from   = min( array_map( 'floatval', $prices ) );
 
-    echo '<div class="ah-pricing-wrap">';
-    echo '<table class="ah-pricing-table" itemscope itemtype="https://schema.org/PriceSpecification">';
+    echo '<div class="price-wrap">';
+    echo '<table class="price-table" itemscope itemtype="https://schema.org/PriceSpecification">';
     if ( $caption ) {
         echo '<caption>' . esc_html( $caption ) . '</caption>';
     }
@@ -120,14 +120,14 @@ function ah_pricing_table( string $type, string $caption = '', string $note = ''
         $wa_msg = 'Hello! I\'d like to order ' . $caption . ' ' . $length . '\" at £' . $price . '.';
         echo '<tr>';
         echo '<td>' . esc_html( $length ) . '"</td>';
-        echo '<td class="ah-price-col">&pound;' . esc_html( $price ) . '</td>';
-        echo '<td><a href="' . esc_url( ah_whatsapp_url( $wa_msg ) ) . '" class="ah-btn ah-btn--whatsapp ah-btn--sm" target="_blank" rel="noopener noreferrer">' . ah_svg( 'whatsapp', 'ah-wa-float__icon' ) . ' Order</a></td>';
+        echo '<td class="price-col">&pound;' . esc_html( $price ) . '</td>';
+        echo '<td><a href="' . esc_url( ah_whatsapp_url( $wa_msg ) ) . '" class="btn btn--wa btn--sm" target="_blank" rel="noopener noreferrer">' . ah_svg( 'whatsapp', 'ah-wa-float__icon' ) . ' Order</a></td>';
         echo '</tr>';
     }
 
     echo '</tbody></table>';
     if ( $note ) {
-        echo '<p class="ah-body-sm" style="margin-top:var(--ah-space-3);font-style:italic;">' . esc_html( $note ) . '</p>';
+        echo '<p class="t-body" style="margin-top:var(--ah-space-3);font-style:italic;">' . esc_html( $note ) . '</p>';
     }
     echo '</div>';
 }
@@ -164,7 +164,7 @@ function ah_social_links( string $class = 'ah-social-links' ): void {
    STAR RATING
    ============================================================ */
 function ah_stars( int $count = 5 ): string {
-    $out = '<div class="ah-testimonial__stars" aria-label="' . $count . ' out of 5 stars">';
+    $out = '<div class="testimonial__stars" aria-label="' . $count . ' out of 5 stars">';
     for ( $i = 0; $i < $count; $i++ ) {
         $out .= ah_svg( 'star' );
     }
@@ -186,32 +186,32 @@ function ah_product_card( WP_Post $post ): void {
                    ? get_the_post_thumbnail_url( $post->ID, 'ah-product' )
                    : AH_URI . '/assets/images/' . ( $image_file ?: 'logo.jpg' );
     ?>
-    <article class="ah-card" data-category="<?php echo esc_attr( sanitize_title( $category ) ); ?>">
-        <div class="ah-card__image">
+    <article class="product-card" data-category="<?php echo esc_attr( sanitize_title( $category ) ); ?>">
+        <div class="product-card__img">
             <img src="<?php echo esc_url( $img_src ); ?>"
                  alt="<?php echo esc_attr( get_the_title( $post ) ); ?>"
                  loading="lazy" width="600" height="800">
             <?php if ( $category ) : ?>
-                <span class="ah-card__badge"><?php echo esc_html( $category ); ?></span>
+                <span class="product-card__badge"><?php echo esc_html( $category ); ?></span>
             <?php endif; ?>
         </div>
-        <div class="ah-card__body">
+        <div class="product-card__body">
             <?php if ( $category ) : ?>
-                <span class="ah-card__category"><?php echo esc_html( $category ); ?></span>
+                <span class="product-card__cat"><?php echo esc_html( $category ); ?></span>
             <?php endif; ?>
-            <h3 class="ah-card__title"><?php echo esc_html( get_the_title( $post ) ); ?></h3>
-            <p class="ah-card__textures"><?php echo esc_html( get_the_excerpt( $post ) ); ?></p>
+            <h3 class="product-card__title"><?php echo esc_html( get_the_title( $post ) ); ?></h3>
+            <p class="product-card__desc"><?php echo esc_html( get_the_excerpt( $post ) ); ?></p>
             <?php if ( $price_from ) : ?>
-                <p class="ah-card__price">from &pound;<?php echo esc_html( $price_from ); ?> <span>per bundle</span></p>
+                <p class="product-card__price">from &pound;<?php echo esc_html( $price_from ); ?> <span>per bundle</span></p>
             <?php endif; ?>
-            <div class="ah-card__actions">
+            <div class="product-card__actions">
                 <a href="<?php echo esc_url( ah_whatsapp_url( $wa_msg ) ); ?>"
-                   class="ah-btn ah-btn--gold ah-btn--sm"
+                   class="btn btn--black btn--sm"
                    target="_blank" rel="noopener noreferrer">
                     <?php echo ah_svg( 'whatsapp' ); ?> Order Now
                 </a>
                 <a href="<?php echo esc_url( get_permalink( $post ) ); ?>"
-                   class="ah-btn ah-btn--outline ah-btn--sm">Details</a>
+                   class="btn btn--outline btn--sm">Details</a>
             </div>
         </div>
     </article>

@@ -27,17 +27,17 @@ $raw_faqs = [
 echo ah_schema_faq( $raw_faqs );
 ?>
 
-<div class="ah-header-offset"></div>
+<div class="header-offset"></div>
 
-<section class="ah-page-hero">
-  <div class="ah-page-hero__bg">
+<section class="page-hero">
+  <div class="page-hero__bg">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-body-wave.jpg' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
-  <div class="ah-page-hero__content">
-    <span class="ah-page-hero__label">Cambodian Hair Collection</span>
-    <h1 class="ah-page-hero__title">Cambodian Raw<br>Hair Bundles</h1>
-    <p class="ah-page-hero__subtitle">
+  <div class="page-hero__content">
+    <span class="t-label">Cambodian Hair Collection</span>
+    <h1 class="t-h1">Cambodian Raw<br>Hair Bundles</h1>
+    <p >
       Unprocessed. Uncoloured. Unapologetically Premium. From &pound;60 per bundle.
     </p>
   </div>
@@ -46,38 +46,38 @@ echo ah_schema_faq( $raw_faqs );
 <?php ah_breadcrumb(); ?>
 
 <!-- What is Raw Hair -->
-<section class="ah-split ah-section--sm" id="what-is-raw-hair">
-  <div class="ah-split__image">
+<section class="split section--sm" id="what-is-raw-hair">
+  <div class="split__media">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-kinky-straight.jpg' ); ?>"
          alt="Cambodian raw kinky straight hair — unprocessed single-donor"
          loading="lazy" width="800" height="1000">
   </div>
-  <div class="ah-split__content ah-reveal">
-    <span class="ah-subheading">What Makes It Different</span>
-    <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">What is Raw Hair?</h2>
-    <span class="ah-accent-line"></span>
-    <p class="ah-body-lg">
+  <div class="split__body ah-reveal">
+    <span class="t-label">What Makes It Different</span>
+    <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">What is Raw Hair?</h2>
+    <span class="rule"></span>
+    <p class="t-body--lg">
       Raw hair is the purest form of hair extension. Collected from a single Cambodian donor,
       it has never been treated with chemicals, heat-processed at the factory, or blended
       with hair from other sources.
     </p>
-    <p class="ah-body">
+    <p class="t-body">
       Because all cuticles run in the same direction — from root to tip — raw hair has
       virtually no friction between strands. That means no tangling, minimal shedding,
       and a natural shine that no coating or silicone spray can replicate.
     </p>
-    <p class="ah-body">
+    <p class="t-body">
       Raw hair can be coloured, bleached, and heat-styled just like your natural hair.
       It absorbs moisture naturally and maintains its pattern through wash after wash.
       When we say it lasts 3–5 years, that's not a marketing line. It's what our
       clients actually experience.
     </p>
-    <div class="ah-btn-group" style="margin-top:var(--ah-space-6);">
-      <a href="#pricing" class="ah-btn ah-btn--gold">
+    <div class="btn-group" style="margin-top:var(--ah-space-6);">
+      <a href="#pricing" class="btn btn--black">
         View Pricing <?php echo ah_svg('arrow-right'); ?>
       </a>
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order Cambodian Raw Hair.')); ?>"
-         class="ah-btn ah-btn--outline" target="_blank" rel="noopener noreferrer">
+         class="btn btn--outline" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
       </a>
     </div>
@@ -85,8 +85,8 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- Trust bar -->
-<div class="ah-trust-bar">
-  <div class="ah-trust-bar__inner">
+<div class="trust-bar">
+  <div class="trust-bar__inner">
     <?php
     $trust = [
       ['sparkle','Single Donor'],
@@ -96,24 +96,24 @@ echo ah_schema_faq( $raw_faqs );
       ['heart','Minimal Shedding'],
     ];
     foreach($trust as $i => $t):
-      echo '<span class="ah-trust-bar__item">' . ah_svg($t[0]) . esc_html($t[1]) . '</span>';
-      if($i < count($trust)-1) echo '<span class="ah-trust-bar__divider"></span>';
+      echo '<span class="trust-bar__item">' . ah_svg($t[0]) . esc_html($t[1]) . '</span>';
+      if($i < count($trust)-1) echo '<span class="trust-bar__divider"></span>';
     endforeach;
     ?>
   </div>
 </div>
 
 <!-- Texture Grid -->
-<section class="ah-section" id="textures" aria-labelledby="textures-heading">
-  <div class="ah-container">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Available Textures</span>
-      <h2 id="textures-heading" class="ah-heading-lg">8 Textures. One Standard.</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
-      <p class="ah-body-lg">Every texture available in all lengths, 10"–30", at the same price point.</p>
+<section class="section" id="textures" aria-labelledby="textures-heading">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Available Textures</span>
+      <h2 id="textures-heading" class="t-h2">8 Textures. One Standard.</h2>
+      <span class="rule rule--center"></span>
+      <p class="t-body--lg">Every texture available in all lengths, 10"–30", at the same price point.</p>
     </div>
 
-    <div class="ah-texture-grid">
+    <div class="texture-grid">
       <?php
       $textures = [
         ['raw-body-wave.jpg',      'Body Wave',     'Natural bounce and movement. The most versatile raw texture.'],
@@ -130,14 +130,14 @@ echo ah_schema_faq( $raw_faqs );
         [$img, $name, $desc] = $t;
         ?>
         <div class="ah-texture-card ah-reveal ah-reveal--delay-<?php echo ($i % 4) + 1; ?>">
-          <div class="ah-texture-card__img">
+          <div class="texture-item__img">
             <img src="<?php echo esc_url( AH_URI . '/assets/images/' . $img ); ?>"
                  alt="Cambodian raw hair — <?php echo esc_attr($name); ?>"
                  loading="lazy" width="300" height="400">
           </div>
-          <h3 class="ah-texture-card__name"><?php echo esc_html($name); ?></h3>
-          <p class="ah-texture-card__price">from &pound;<?php echo esc_html($raw_from); ?></p>
-          <p class="ah-body-sm" style="margin-top:var(--ah-space-2);"><?php echo esc_html($desc); ?></p>
+          <h3 class="texture-item__name"><?php echo esc_html($name); ?></h3>
+          <p class="texture-item__from">from &pound;<?php echo esc_html($raw_from); ?></p>
+          <p class="t-body" style="margin-top:var(--ah-space-2);"><?php echo esc_html($desc); ?></p>
         </div>
       <?php endforeach; ?>
     </div>
@@ -145,60 +145,60 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- Full Pricing Table -->
-<section class="ah-section ah-section--grey" id="pricing" aria-labelledby="pricing-heading">
-  <div class="ah-container">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Transparent Pricing</span>
-      <h2 id="pricing-heading" class="ah-heading-lg">Raw Hair Price Per Bundle</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
-      <p class="ah-body">All textures are priced equally by length. Prices are per bundle.</p>
+<section class="section section--grey" id="pricing" aria-labelledby="pricing-heading">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Transparent Pricing</span>
+      <h2 id="pricing-heading" class="t-h2">Raw Hair Price Per Bundle</h2>
+      <span class="rule rule--center"></span>
+      <p class="t-body">All textures are priced equally by length. Prices are per bundle.</p>
     </div>
-    <div style="max-width:700px;margin:0 auto;" class="ah-reveal">
+    <div style="max-width:700px;margin:0 auto;" class="reveal">
       <?php ah_pricing_table('raw', 'Cambodian Raw Hair', 'Prices are per bundle. All textures priced equally. Lengths 10"–30" available.'); ?>
     </div>
   </div>
 </section>
 
 <!-- Care Teaser -->
-<section class="ah-split ah-split--reverse ah-section--sm">
-  <div class="ah-split__image">
+<section class="split split--rev section--sm">
+  <div class="split__media">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-loose-wave.jpg' ); ?>"
          alt="Caring for your Cambodian raw hair extensions"
          loading="lazy" width="800" height="1000">
   </div>
-  <div class="ah-split__content ah-reveal">
-    <span class="ah-subheading">Protect Your Investment</span>
-    <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">How to Make It Last 5 Years</h2>
-    <span class="ah-accent-line"></span>
-    <p class="ah-body">
+  <div class="split__body ah-reveal">
+    <span class="t-label">Protect Your Investment</span>
+    <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">How to Make It Last 5 Years</h2>
+    <span class="rule"></span>
+    <p class="t-body">
       Raw hair is durable by nature, but the right care routine makes all the difference
       between 2 years and 5. Gentle washing, deep conditioning, minimal heat, and proper
       storage are the four pillars of long-lasting raw hair.
     </p>
     <a href="<?php echo esc_url(home_url('/hair-care-guide/')); ?>"
-       class="ah-btn ah-btn--outline" style="margin-top:var(--ah-space-6);">
+       class="btn btn--outline" style="margin-top:var(--ah-space-6);">
       Read the Hair Care Guide <?php echo ah_svg('arrow-right'); ?>
     </a>
   </div>
 </section>
 
 <!-- FAQ Accordion -->
-<section class="ah-section" id="faq" aria-labelledby="faq-heading">
-  <div class="ah-container ah-container--sm">
-    <div class="ah-section-header--center ah-reveal">
-      <span class="ah-subheading">Common Questions</span>
-      <h2 id="faq-heading" class="ah-heading-lg">Raw Hair FAQ</h2>
-      <span class="ah-accent-line ah-accent-line--center"></span>
+<section class="section" id="faq" aria-labelledby="faq-heading">
+  <div class="wrap wrap--narrow">
+    <div class="section-head section-head--center reveal">
+      <span class="t-label">Common Questions</span>
+      <h2 id="faq-heading" class="t-h2">Raw Hair FAQ</h2>
+      <span class="rule rule--center"></span>
     </div>
     <div class="ah-accordion ah-reveal">
       <?php foreach ( $raw_faqs as $faq ) : ?>
-        <div class="ah-accordion__item">
-          <button class="ah-accordion__trigger" type="button" aria-expanded="false">
-            <span class="ah-accordion__question"><?php echo esc_html($faq['question']); ?></span>
-            <span class="ah-accordion__icon" aria-hidden="true"><?php echo ah_svg('plus'); ?></span>
+        <div class="accordion__item">
+          <button class="accordion__trigger" type="button" aria-expanded="false">
+            <span class="accordion__q"><?php echo esc_html($faq['question']); ?></span>
+            <span class="accordion__icon" aria-hidden="true"><?php echo ah_svg('plus'); ?></span>
           </button>
-          <div class="ah-accordion__content">
-            <p class="ah-accordion__answer"><?php echo esc_html($faq['answer']); ?></p>
+          <div class="accordion__body">
+            <p class="accordion__ans"><?php echo esc_html($faq['answer']); ?></p>
           </div>
         </div>
       <?php endforeach; ?>
@@ -207,21 +207,21 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- CTA -->
-<div class="ah-cta-band">
-  <div class="ah-container">
-    <div class="ah-reveal">
-      <span class="ah-cta-band__label">Ready to Order?</span>
-      <h2 class="ah-cta-band__heading">Order Your Raw Hair Bundles</h2>
-      <p class="ah-cta-band__body">
+<div class="cta-band">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="t-label t-label--white">Ready to Order?</span>
+      <h2 class="t-h1">Order Your Raw Hair Bundles</h2>
+      <p class="t-body">
         WhatsApp us with your texture, length, and quantity — and we&rsquo;ll confirm
         availability and send you an invoice within hours.
       </p>
-      <div class="ah-btn-group" style="justify-content:center;">
+      <div class="btn-group" style="justify-content:center;">
         <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order Cambodian Raw Hair bundles.')); ?>"
-           class="ah-btn ah-btn--whatsapp ah-btn--lg" target="_blank" rel="noopener noreferrer">
+           class="btn btn--wa" target="_blank" rel="noopener noreferrer">
           <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
         </a>
-        <a href="<?php echo esc_url(home_url('/order/')); ?>" class="ah-btn ah-btn--outline-white ah-btn--lg">
+        <a href="<?php echo esc_url(home_url('/order/')); ?>" class="btn btn--outline-white">
           Use Order Form
         </a>
       </div>

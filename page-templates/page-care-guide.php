@@ -26,23 +26,23 @@ $faqs = [
 echo ah_schema_faq($faqs);
 ?>
 
-<div class="ah-header-offset"></div>
+<div class="header-offset"></div>
 
-<section class="ah-page-hero">
-  <div class="ah-page-hero__bg">
+<section class="page-hero">
+  <div class="page-hero__bg">
     <img src="<?php echo esc_url(AH_URI.'/assets/images/raw-loose-deep.jpg'); ?>" alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
-  <div class="ah-page-hero__content">
-    <span class="ah-page-hero__label">Education &amp; Care</span>
-    <h1 class="ah-page-hero__title">The Asantey<br>Hair Care Guide</h1>
-    <p class="ah-page-hero__subtitle">Protect your investment. Keep your hair looking salon-fresh — for years, not months.</p>
+  <div class="page-hero__content">
+    <span class="t-label">Education &amp; Care</span>
+    <h1 class="t-h1">The Asantey<br>Hair Care Guide</h1>
+    <p >Protect your investment. Keep your hair looking salon-fresh — for years, not months.</p>
   </div>
 </section>
 
 <?php ah_breadcrumb(); ?>
 
-<section class="ah-section">
-  <div class="ah-container ah-container--sm">
+<section class="section">
+  <div class="wrap wrap--narrow">
 
     <!-- TOC -->
     <div class="ah-toc ah-reveal">
@@ -120,9 +120,9 @@ echo ah_schema_faq($faqs);
     </div>
 
     <!-- Do / Don't -->
-    <div id="dos-donts" class="ah-reveal" style="margin-bottom:var(--ah-space-16);">
-      <h3 class="ah-heading-sm" style="margin-bottom:var(--ah-space-6);">Quick Reference: Do&rsquo;s &amp; Don&rsquo;ts</h3>
-      <div class="ah-do-dont">
+    <div id="dos-donts" class="reveal" style="margin-bottom:var(--ah-space-16);">
+      <h3 class="t-h4" style="margin-bottom:var(--ah-space-6);">Quick Reference: Do&rsquo;s &amp; Don&rsquo;ts</h3>
+      <div class="do-dont">
         <div class="ah-do-dont__col ah-do-dont__col--do">
           <div class="ah-do-dont__heading">Do</div>
           <ul>
@@ -151,16 +151,16 @@ echo ah_schema_faq($faqs);
     </div>
 
     <!-- FAQ -->
-    <div id="care-faq" class="ah-reveal">
-      <h2 class="ah-heading-md" style="margin-bottom:var(--ah-space-8);">Hair Care FAQ</h2>
-      <div class="ah-accordion">
+    <div id="care-faq" class="reveal">
+      <h2 class="t-h3" style="margin-bottom:var(--ah-space-8);">Hair Care FAQ</h2>
+      <div class="accordion">
         <?php foreach($faqs as $faq): ?>
-          <div class="ah-accordion__item">
-            <button class="ah-accordion__trigger" type="button" aria-expanded="false">
-              <span class="ah-accordion__question"><?php echo esc_html($faq['question']); ?></span>
-              <span class="ah-accordion__icon"><?php echo ah_svg('plus'); ?></span>
+          <div class="accordion__item">
+            <button class="accordion__trigger" type="button" aria-expanded="false">
+              <span class="accordion__q"><?php echo esc_html($faq['question']); ?></span>
+              <span class="accordion__icon"><?php echo ah_svg('plus'); ?></span>
             </button>
-            <div class="ah-accordion__content"><p class="ah-accordion__answer"><?php echo esc_html($faq['answer']); ?></p></div>
+            <div class="accordion__body"><p class="accordion__ans"><?php echo esc_html($faq['answer']); ?></p></div>
           </div>
         <?php endforeach; ?>
       </div>
@@ -169,14 +169,14 @@ echo ah_schema_faq($faqs);
   </div>
 </section>
 
-<div class="ah-cta-band">
-  <div class="ah-container"><div class="ah-reveal">
-    <span class="ah-cta-band__label">Ready to Invest in Quality?</span>
-    <h2 class="ah-cta-band__heading">Shop the Asantey Collection</h2>
-    <p class="ah-cta-band__body">Hair worth caring for. Browse our Raw Hair, Virgin Hair, and HD Lace collections — all in stock and ready to ship.</p>
-    <div class="ah-btn-group" style="justify-content:center;">
-      <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="ah-btn ah-btn--gold ah-btn--lg">Shop Now <?php echo ah_svg('arrow-right'); ?></a>
-      <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="ah-btn ah-btn--outline-white">View FAQ</a>
+<div class="cta-band">
+  <div class="wrap"><div class="reveal">
+    <span class="t-label t-label--white">Ready to Invest in Quality?</span>
+    <h2 class="t-h1">Shop the Asantey Collection</h2>
+    <p class="t-body">Hair worth caring for. Browse our Raw Hair, Virgin Hair, and HD Lace collections — all in stock and ready to ship.</p>
+    <div class="btn-group" style="justify-content:center;">
+      <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--black">Shop Now <?php echo ah_svg('arrow-right'); ?></a>
+      <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="btn btn--outline-white">View FAQ</a>
     </div>
   </div></div>
 </div>
