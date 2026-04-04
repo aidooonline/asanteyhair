@@ -15,18 +15,12 @@ function initHeader(){
 
   function update(){
     const y = window.scrollY;
-    // Solid white once scrolled past hero eyebrow
-    if(y > 60) hdr.classList.add('solid');
-    else hdr.classList.remove('solid');
     // Hide on scroll down, show on scroll up
     if(y > 200){
       if(y > last) hdr.classList.add('up');
       else hdr.classList.remove('up');
-    }
-    // Show Book button once past hero
-    const bookBtn = $('#hdr-book');
-    if(bookBtn){
-      bookBtn.style.display = y > window.innerHeight*0.8 ? '' : 'none';
+    } else {
+      hdr.classList.remove('up');
     }
     last=y; ticking=false;
   }
@@ -34,7 +28,6 @@ function initHeader(){
   window.addEventListener('scroll',()=>{
     if(!ticking){ requestAnimationFrame(update); ticking=true; }
   },{passive:true});
-  update();
 }
 
 /* ── HAMBURGER ───────────────────────────────────────────────── */
