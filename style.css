@@ -924,23 +924,17 @@ select.form-control{
   overflow:hidden;
   background:var(--ink)}
 
-/* Each slide */
+/* Each slide - ALL stay position:absolute, only opacity changes */
 .hs-slide{
   position:absolute;inset:0;
   display:flex;align-items:flex-end;
-  opacity:0;visibility:hidden;
-  transition:opacity 1s ease,visibility 1s ease;
+  opacity:0;
+  transition:opacity 1s ease;
   pointer-events:none}
 .hs-slide--active{
-  opacity:1;visibility:visible;
+  opacity:1;
   pointer-events:all;
-  position:relative;inset:auto}
-/* Single slide - always show */
-.hero-slider:only-child .hs-slide,
-.hs-slide:first-child:last-child{
-  opacity:1;visibility:visible;
-  pointer-events:all;
-  position:relative;inset:auto}
+  z-index:1}
 
 /* Background */
 .hs-slide__bg{
