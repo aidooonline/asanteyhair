@@ -922,8 +922,7 @@ select.form-control{
   position:relative;
   height:100svh;min-height:660px;
   overflow:hidden;
-  background:var(--ink);
-  padding-top:var(--hh)}
+  background:var(--ink)}
 
 /* Each slide */
 .hs-slide{
