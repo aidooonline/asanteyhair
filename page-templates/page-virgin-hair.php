@@ -47,9 +47,9 @@ echo ah_schema_faq($faqs);
          alt="Cambodian virgin hair body wave bundles"
          loading="lazy" width="800" height="1000">
   </div>
-  <div class="split__body ah-reveal">
+  <div class="split__body reveal">
     <span class="t-label">Pure. Natural. Versatile.</span>
-    <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">What is Virgin Hair?</h2>
+    <h2 class="t-h3" style="margin:var(--gap4) 0;">What is Virgin Hair?</h2>
     <span class="rule"></span>
     <p class="t-body--lg">
       Our Cambodian virgin hair is 100% human, single-donor, and free from any
@@ -62,7 +62,7 @@ echo ah_schema_faq($faqs);
       Whether you wear it straight, curled, or in its natural wave pattern,
       Asantey virgin hair adapts to your style — not the other way around.
     </p>
-    <div class="btn-group" style="margin-top:var(--ah-space-6);">
+    <div class="btn-group" style="margin-top:var(--gap6);">
       <a href="#pricing" class="btn btn--black">View Pricing <?php echo ah_svg('arrow-right'); ?></a>
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order Cambodian Virgin Hair.')); ?>"
          class="btn btn--outline" target="_blank" rel="noopener noreferrer">
@@ -114,7 +114,7 @@ echo ah_schema_faq($faqs);
           </div>
           <h3 class="texture-item__name"><?php echo esc_html($name); ?></h3>
           <p class="texture-item__from">from &pound;<?php echo esc_html($from); ?></p>
-          <p class="t-body" style="margin-top:var(--ah-space-2);"><?php echo esc_html($desc); ?></p>
+          <p class="t-body" style="margin-top:var(--gap2);"><?php echo esc_html($desc); ?></p>
         </div>
       <?php endforeach; ?>
     </div>

@@ -45,8 +45,8 @@ echo ah_schema_faq($faqs);
   <div class="wrap wrap--narrow">
 
     <!-- TOC -->
-    <div class="ah-toc ah-reveal">
-      <div class="ah-toc__title">In This Guide</div>
+    <div class="toc reveal">
+      <div class="t-label">In This Guide</div>
       <ol>
         <li><a href="#how-to-wash">How to Wash Your Extensions</a></li>
         <li><a href="#heat-styling">Heat Styling Guide</a></li>
@@ -58,7 +58,7 @@ echo ah_schema_faq($faqs);
     </div>
 
     <!-- How to Wash -->
-    <div id="how-to-wash" class="ah-prose ah-reveal" style="margin-bottom:var(--ah-space-16);">
+    <div id="how-to-wash" class="prose reveal" style="margin-bottom:var(--gap16);">
       <h2>How to Wash Your Extensions</h2>
       <p>Proper washing is the foundation of long-lasting hair extensions. The goal is to cleanse without stripping — removing product buildup and sweat while preserving the hair&rsquo;s natural oils and moisture.</p>
       <h3>Step-by-Step Washing Routine</h3>
@@ -73,7 +73,7 @@ echo ah_schema_faq($faqs);
     </div>
 
     <!-- Heat Styling -->
-    <div id="heat-styling" class="ah-prose ah-reveal" style="margin-bottom:var(--ah-space-16);">
+    <div id="heat-styling" class="prose reveal" style="margin-bottom:var(--gap16);">
       <h2>Heat Styling Guide</h2>
       <p>Cambodian raw and virgin hair handles heat beautifully — but like any hair, repeated high heat without protection will cause long-term damage. The key is protection and moderation.</p>
       <h3>Temperature Guidelines</h3>
@@ -93,7 +93,7 @@ echo ah_schema_faq($faqs);
     </div>
 
     <!-- Make It Last -->
-    <div id="make-it-last" class="ah-prose ah-reveal" style="margin-bottom:var(--ah-space-16);">
+    <div id="make-it-last" class="prose reveal" style="margin-bottom:var(--gap16);">
       <h2>How to Make Your Hair Last 3–5 Years</h2>
       <p>The lifespan of your extensions is directly proportional to how well you care for them. Here are the four pillars of long-lasting Cambodian hair:</p>
       <h3>1. Moisture is Everything</h3>
@@ -107,7 +107,7 @@ echo ah_schema_faq($faqs);
     </div>
 
     <!-- Storage Tips -->
-    <div id="storage" class="ah-prose ah-reveal" style="margin-bottom:var(--ah-space-16);">
+    <div id="storage" class="prose reveal" style="margin-bottom:var(--gap16);">
       <h2>Storage Tips</h2>
       <p>How you store your hair when you&rsquo;re not wearing it matters more than most people realise. Poor storage leads to tangling, matting, and premature wear.</p>
       <ul>
@@ -120,8 +120,8 @@ echo ah_schema_faq($faqs);
     </div>
 
     <!-- Do / Don't -->
-    <div id="dos-donts" class="reveal" style="margin-bottom:var(--ah-space-16);">
-      <h3 class="t-h4" style="margin-bottom:var(--ah-space-6);">Quick Reference: Do&rsquo;s &amp; Don&rsquo;ts</h3>
+    <div id="dos-donts" class="reveal" style="margin-bottom:var(--gap16);">
+      <h3 class="t-h4" style="margin-bottom:var(--gap6);">Quick Reference: Do&rsquo;s &amp; Don&rsquo;ts</h3>
       <div class="do-dont">
         <div class="ah-do-dont__col ah-do-dont__col--do">
           <div class="ah-do-dont__heading">Do</div>
@@ -152,7 +152,7 @@ echo ah_schema_faq($faqs);
 
     <!-- FAQ -->
     <div id="care-faq" class="reveal">
-      <h2 class="t-h3" style="margin-bottom:var(--ah-space-8);">Hair Care FAQ</h2>
+      <h2 class="t-h3" style="margin-bottom:var(--gap8);">Hair Care FAQ</h2>
       <div class="accordion">
         <?php foreach($faqs as $faq): ?>
           <div class="accordion__item">

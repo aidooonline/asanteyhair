@@ -32,7 +32,7 @@ function ah_product_details_callback( WP_Post $post ): void {
     .ah-mb input, .ah-mb select { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:3px; }
     .ah-mb .full { grid-column: 1/-1; }
     </style>
-    <div class="ah-mb">
+    <div class="meta-box-grid">
         <div>
             <label>Price From (£)</label>
             <input type="number" name="ah_price_from" value="<?php echo esc_attr( $price_from ); ?>" placeholder="e.g. 60" min="0" step="0.01">

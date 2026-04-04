@@ -8,11 +8,11 @@ get_header();
 <section class="section" style="min-height:70vh;display:flex;align-items:center;">
   <div class="wrap" style="text-align:center;">
     <span class="t-label">Error 404</span>
-    <h1 class="t-h1" style="margin:var(--ah-space-4) 0;font-family:var(--ah-font-display);font-weight:300;">
+    <h1 class="t-h1" style="margin:var(--gap4) 0;font-family:var(--ah-font-display);font-weight:300;">
       Looks Like This Page<br>Took a Day Off
     </h1>
     <span class="rule rule--center"></span>
-    <p class="t-body--lg" style="max-width:520px;margin:var(--ah-space-6) auto var(--ah-space-10);">
+    <p class="t-body--lg" style="max-width:520px;margin:var(--gap6) auto var(--gap10);">
       The page you&rsquo;re looking for doesn&rsquo;t exist or has been moved.
       Let&rsquo;s get you back to the good stuff.
     </p>

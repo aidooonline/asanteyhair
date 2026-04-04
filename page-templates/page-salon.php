@@ -26,7 +26,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
     <p >
       Expert hair and beauty services in Nottingham. Book your appointment online in minutes.
     </p>
-    <div class="btn-group" style="margin-top:var(--ah-space-8);">
+    <div class="btn-group" style="margin-top:var(--gap8);">
       <a href="<?php echo esc_url($booking_url); ?>"
          class="btn btn--black"
          target="_blank" rel="noopener noreferrer">
@@ -109,7 +109,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
         ],
       ];
       foreach($hair_services as $i => $s): ?>
-        <div class="feature-card ah-reveal ah-reveal--delay-<?php echo ($i%3)+1; ?>">
+        <div class="feat-card reveal ah-reveal--delay-<?php echo ($i%3)+1; ?>">
           <div class="feature-card__icon"><?php echo ah_svg($s['icon']); ?></div>
           <h3 class="feature-card__title"><?php echo esc_html($s['title']); ?></h3>
           <p class="feature-card__body"><?php echo esc_html($s['body']); ?></p>
@@ -154,7 +154,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
         ],
       ];
       foreach($beauty_services as $i => $s): ?>
-        <div class="feature-card ah-reveal ah-reveal--delay-<?php echo $i+1; ?>">
+        <div class="feat-card reveal ah-reveal--delay-<?php echo $i+1; ?>">
           <div class="feature-card__icon"><?php echo ah_svg($s['icon']); ?></div>
           <h3 class="feature-card__title"><?php echo esc_html($s['title']); ?></h3>
           <p class="feature-card__body"><?php echo esc_html($s['body']); ?></p>
@@ -172,14 +172,14 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
          alt="AHB Salon — Nottingham hair and beauty salon"
          loading="lazy" width="800" height="1000">
   </div>
-  <div class="split__body ah-reveal">
+  <div class="split__body reveal">
     <span class="t-label">Visit Us</span>
-    <h2 class="t-h3" style="margin:var(--ah-space-4) 0;">
+    <h2 class="t-h3" style="margin:var(--gap4) 0;">
       AHB Salon, Nottingham
     </h2>
     <span class="rule"></span>
 
-    <div class="contact-list" style="margin:var(--ah-space-8) 0;">
+    <div class="contact-list" style="margin:var(--gap8) 0;">
       <div class="contact-item">
         <?php echo ah_svg('location'); ?>
         <div>

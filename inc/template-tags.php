@@ -127,7 +127,7 @@ function ah_pricing_table( string $type, string $caption = '', string $note = ''
 
     echo '</tbody></table>';
     if ( $note ) {
-        echo '<p class="t-body" style="margin-top:var(--ah-space-3);font-style:italic;">' . esc_html( $note ) . '</p>';
+        echo '<p class="t-body" style="margin-top:var(--gap3);font-style:italic;">' . esc_html( $note ) . '</p>';
     }
     echo '</div>';
 }

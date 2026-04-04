@@ -161,7 +161,7 @@ function ah_handle_newsletter(): void {
    ============================================================ */
 function ah_contact_form( string $action = 'ah_contact_form', string $submit_label = 'Send Message' ): void {
     ?>
-    <form class="ah-form ah-contact-form" data-action="<?php echo esc_attr( $action ); ?>" novalidate>
+    <form class="contact-form" data-action="<?php echo esc_attr( $action ); ?>" novalidate>
         <div class="hp-field" aria-hidden="true">
             <input type="text" name="ah_hp" tabindex="-1" autocomplete="off" value="">
         </div>
@@ -197,7 +197,7 @@ function ah_order_form(): void {
     $textures = ah_textures_list();
     $lengths  = ['10','12','14','16','18','20','22','24','26','28','30'];
     ?>
-    <form class="ah-form ah-order-form" data-action="ah_order_form" novalidate>
+    <form class="order-form" data-action="ah_order_form" novalidate>
         <div class="hp-field" aria-hidden="true">
             <input type="text" name="ah_hp" tabindex="-1" autocomplete="off" value="">
         </div>
@@ -270,18 +270,18 @@ function ah_order_form(): void {
 
 function ah_newsletter_form(): void {
     ?>
-    <form class="ah-form ah-newsletter-form" data-action="ah_newsletter" novalidate>
+    <form class="newsletter-form" data-action="ah_newsletter" novalidate>
         <div class="hp-field" aria-hidden="true">
             <input type="text" name="ah_hp" tabindex="-1" autocomplete="off" value="">
         </div>
-        <div style="display:flex;gap:var(--ah-space-3);flex-wrap:wrap;">
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
             <input type="email" name="email" class="form-control" required
                    placeholder="Your email address"
                    style="flex:1;min-width:220px;">
             <button type="submit" class="btn btn--black">Subscribe</button>
         </div>
-        <div class="form-msg form-msg--success" role="alert" style="margin-top:var(--ah-space-3);"></div>
-        <div class="form-msg form-msg--error"   role="alert" style="margin-top:var(--ah-space-3);"></div>
+        <div class="form-msg form-msg--success" role="alert" style="margin-top:.875rem;"></div>
+        <div class="form-msg form-msg--error"   role="alert" style="margin-top:.875rem;"></div>
     </form>
     <?php
 }

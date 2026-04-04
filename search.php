@@ -9,7 +9,7 @@ get_header();
   <div class="page-hero__content">
     <span class="t-label">Search Results</span>
     <h1 class="t-h1">
-      <?php printf('Results for: "%s"', '<em style="color:var(--ah-gold);">' . esc_html(get_search_query()) . '</em>'); ?>
+      <?php printf('Results for: "%s"', '<em style="color:var(--gold);">' . esc_html(get_search_query()) . '</em>'); ?>
     </h1>
   </div>
 </section>
@@ -35,7 +35,7 @@ get_header();
       <div style="text-align:center;max-width:600px;margin:0 auto;">
         <p class="t-body--lg">No results found for &ldquo;<?php echo esc_html(get_search_query()); ?>&rdquo;. Try a different search or browse our collections.</p>
         <?php get_search_form(); ?>
-        <div class="btn-group" style="justify-content:center;margin-top:var(--ah-space-8);">
+        <div class="btn-group" style="justify-content:center;margin-top:var(--gap8);">
           <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--black">Browse All Products</a>
           <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="btn btn--outline">View FAQ</a>
         </div>

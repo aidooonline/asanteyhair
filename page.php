@@ -13,7 +13,7 @@ get_header();
   </section>
   <?php ah_breadcrumb(); ?>
   <section class="section">
-    <div class="wrap wrap--narrow ah-prose">
+    <div class="wrap wrap--narrow prose">
       <?php the_content(); ?>
     </div>
   </section>

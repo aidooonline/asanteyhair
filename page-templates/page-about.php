@@ -37,9 +37,9 @@ echo ah_schema_breadcrumb([
          alt="Asantey Hair &amp; Beauty — premium Cambodian hair bundles"
          loading="lazy" width="800" height="1000">
   </div>
-  <div class="split__body ah-reveal">
+  <div class="split__body reveal">
     <span class="t-label">Why We Exist</span>
-    <h2 id="story-heading" class="t-h3" style="margin:var(--ah-space-4) 0;">
+    <h2 id="story-heading" class="t-h3" style="margin:var(--gap4) 0;">
       Founded on a Single Obsession: Quality
     </h2>
     <span class="rule"></span>
@@ -79,7 +79,7 @@ echo ah_schema_breadcrumb([
         ['heart',   'Client First',   'Your satisfaction is not a KPI — it\'s the reason we do this. We\'re here to guide, advise, and make your hair journey as smooth as our extensions.'],
       ];
       foreach ( $values as $i => $v ) : ?>
-        <div class="feature-card ah-reveal ah-reveal--delay-<?php echo $i + 1; ?>">
+        <div class="feat-card reveal ah-reveal--delay-<?php echo $i + 1; ?>">
           <div class="feature-card__icon"><?php echo ah_svg($v[0]); ?></div>
           <h3 class="feature-card__title"><?php echo esc_html($v[1]); ?></h3>
           <p class="feature-card__body"><?php echo esc_html($v[2]); ?></p>
@@ -96,9 +96,9 @@ echo ah_schema_breadcrumb([
          alt="Cambodian raw hair extensions — deep wave texture"
          loading="lazy" width="800" height="1000">
   </div>
-  <div class="split__body ah-reveal">
+  <div class="split__body reveal">
     <span class="t-label">The Science of Quality</span>
-    <h2 id="cambodian-heading" class="t-h3" style="margin:var(--ah-space-4) 0;">
+    <h2 id="cambodian-heading" class="t-h3" style="margin:var(--gap4) 0;">
       Why Cambodian Hair?
     </h2>
     <span class="rule"></span>
@@ -119,7 +119,7 @@ echo ah_schema_breadcrumb([
       Cambodian hair holds up. That&rsquo;s not a marketing promise. It&rsquo;s simply
       what quality hair does.
     </p>
-    <div style="display:flex;gap:var(--ah-space-5);flex-wrap:wrap;margin-top:var(--ah-space-6);">
+    <div style="display:flex;gap:var(--gap5);flex-wrap:wrap;margin-top:var(--gap6);">
       <a href="<?php echo esc_url(home_url('/raw-hair/')); ?>" class="btn btn--black">
         Shop Raw Hair <?php echo ah_svg('arrow-right'); ?>
       </a>
@@ -131,8 +131,8 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Stats Strip -->
-<div class="trust-bar" style="padding:var(--ah-space-10) var(--ah-space-6);">
-  <div class="trust-bar__inner" style="gap:var(--ah-space-16);">
+<div class="trust-bar" style="padding:var(--gap10) var(--gap6);">
+  <div class="trust-bar__inner" style="gap:var(--gap16);">
     <?php
     $stats = [
       ['10+',      'Hair Textures Available'],
@@ -143,10 +143,10 @@ echo ah_schema_breadcrumb([
     ];
     foreach ( $stats as $stat ) : ?>
       <div style="text-align:center;">
-        <div style="font-family:var(--ah-font-display);font-size:var(--ah-text-4xl);font-weight:300;color:var(--ah-gold);line-height:1;">
+        <div style="font-family:var(--ah-font-display);font-size:var(--ah-text-4xl);font-weight:300;color:var(--gold);line-height:1;">
           <?php echo esc_html($stat[0]); ?>
         </div>
-        <div style="font-size:var(--ah-text-xs);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:var(--ah-space-2);">
+        <div style="font-size:var(--ah-text-xs);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:var(--gap2);">
           <?php echo esc_html($stat[1]); ?>
         </div>
       </div>
