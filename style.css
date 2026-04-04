@@ -145,14 +145,14 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 
 .site-nav{display:flex;align-items:center;list-style:none}
 .site-nav a{
-  display:block;padding:.35rem .875rem;
-  font-size:.58rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(255,255,255,.75);position:relative;transition:color var(--t)}
+  display:block;padding:.35rem .5rem;
+  font-size:.54rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:#000000;position:relative;transition:color var(--t);white-space:nowrap;line-height:1.2}
 .site-nav a::after{
   content:'';position:absolute;bottom:-1px;left:.55rem;right:.55rem;
   height:1px;background:var(--ink);
   transform:scaleX(0);transform-origin:left;transition:transform var(--t)}
-.site-nav a:hover{color:var(--paper)}
+.site-nav a:hover{color:#333333}
 .site-nav a:hover::after,.site-nav li.current-menu-item a::after{transform:scaleX(1)}
 .site-nav .sub-menu{
   position:absolute;top:calc(100% + 1px);left:0;min-width:210px;
