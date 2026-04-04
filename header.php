@@ -61,7 +61,9 @@
          target="_blank" rel="noopener noreferrer"
          style="display:none;" id="hdr-book">Book</a>
       <a href="<?php echo esc_url(ah_whatsapp_url( 'Hello! I would like to order with Asantey Hair and Beauty.' )); ?>"
-         class="btn btn--w btn--sm"
+         style="display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.4rem;font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.08em;color:#000000;border:1px solid #000000;background:transparent;text-decoration:none;white-space:nowrap;transition:all .2s ease;"
+         onmouseover="this.style.background='#000000';this.style.color='#ffffff';"
+         onmouseout="this.style.background='transparent';this.style.color='#000000';"
          target="_blank" rel="noopener noreferrer">
         Order Now
       </a>
