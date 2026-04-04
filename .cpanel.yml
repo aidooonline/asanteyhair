@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/asannmly/public_html/wp-content/themes/asanteyhair/
+    - /bin/cp -R . $DEPLOYPATH
