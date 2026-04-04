@@ -136,7 +136,7 @@ echo ah_schema_faq($faqs);
           </div>
         <?php endforeach;?>
 
-        <div style="background:var(--ah-cream);padding:var(--ah-space-5);margin-top:var(--ah-space-4);">
+        <div style="background:var(--ah-grey-100);padding:var(--ah-space-5);margin-top:var(--ah-space-4);">
           <h4 style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);margin-bottom:var(--ah-space-2);">Textures Available</h4>
           <p style="font-size:var(--ah-text-sm);color:var(--ah-grey-700);">
             Straight &middot; Kinky Straight &middot; Yaki Straight &middot; Deep Wave &middot;

@@ -169,7 +169,7 @@
   border-left: 3px solid var(--ah-gold);
   padding: var(--ah-space-5) var(--ah-space-6);
   margin: var(--ah-space-8) 0;
-  background: var(--ah-cream-light);
+  background: var(--ah-grey-100);
   font-family: var(--ah-font-display);
   font-size: var(--ah-text-2xl);
   font-style: italic;
@@ -213,7 +213,7 @@
 .ah-contact-item__icon {
   width: 44px;
   height: 44px;
-  background: var(--ah-cream);
+  background: var(--ah-grey-100);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -281,7 +281,7 @@
 
 /* TOC (Table of Contents) */
 .ah-toc {
-  background: var(--ah-cream-light);
+  background: var(--ah-grey-100);
   border-left: 3px solid var(--ah-gold);
   padding: var(--ah-space-6) var(--ah-space-8);
   margin-bottom: var(--ah-space-10);

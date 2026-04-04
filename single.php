@@ -24,7 +24,7 @@ while(have_posts()): the_post();
       <?php the_content(); ?>
     </article>
     <aside style="position:sticky;top:calc(var(--ah-header-height) + var(--ah-space-8));">
-      <div style="background:var(--ah-cream-light);padding:var(--ah-space-8);">
+      <div style="background:var(--ah-grey-100);padding:var(--ah-space-8);">
         <h3 style="font-family:var(--ah-font-display);font-size:var(--ah-text-2xl);margin-bottom:var(--ah-space-4);">Shop Our Hair</h3>
         <p style="font-size:var(--ah-text-sm);color:var(--ah-grey-700);margin-bottom:var(--ah-space-5);">Premium Cambodian hair extensions. Raw, virgin, closures, and frontals.</p>
         <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="ah-btn ah-btn--primary" style="width:100%;justify-content:center;">Shop Now</a>

@@ -41,7 +41,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
           <?php endforeach; ?>
         </div>
 
-        <div style="margin-top:var(--ah-space-10);padding:var(--ah-space-6);background:var(--ah-cream-light);border-left:3px solid var(--ah-gold);">
+        <div style="margin-top:var(--ah-space-10);padding:var(--ah-space-6);background:var(--ah-grey-100);border-left:3px solid var(--ah-gold);">
           <h4 style="font-family:var(--ah-font-display);font-size:var(--ah-text-2xl);margin-bottom:var(--ah-space-2);">Prefer WhatsApp?</h4>
           <p class="ah-body" style="margin-bottom:var(--ah-space-5);">If you&rsquo;d rather order directly and get an instant response, WhatsApp is always the fastest route.</p>
           <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to place an order.')); ?>"

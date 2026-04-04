@@ -24,7 +24,7 @@ Tags:              custom-background, custom-logo, custom-menu, featured-images,
   --ah-gold-dark:    #a8824f;
   --ah-gold-light:   #e8d5bc;
   --ah-cream:        #f5e6d3;
-  --ah-cream-light:  #faf7f4;
+  --ah-cream-light:  #f6f6f6;
   --ah-white:        #ffffff;
   --ah-pure-white:   #ffffff;
   --ah-grey-100:     #f6f6f6;
@@ -1614,4 +1614,188 @@ li svg, p svg {
   .ah-cta-band, .ah-hero__scroll { display: none !important; }
   body { font-size: 12pt; color: #000; }
   a { text-decoration: underline; }
+}
+
+/* ============================================================
+   LUXURY REFINEMENTS — BLACK/WHITE PREMIUM AESTHETIC
+   ============================================================ */
+
+/* Sharper page hero — full black, no grey */
+.ah-page-hero {
+  background: var(--ah-black);
+}
+
+/* Stronger section dividers between white sections */
+.ah-section + .ah-section {
+  border-top: 1px solid var(--ah-grey-200);
+}
+.ah-section--dark + .ah-section,
+.ah-section + .ah-section--dark {
+  border-top: none;
+}
+
+/* Cards — crisp white, sharp border, no radius */
+.ah-card {
+  border: 1px solid var(--ah-grey-200);
+  border-radius: 0;
+}
+.ah-card:hover {
+  border-color: var(--ah-gold);
+}
+
+/* Product card price — stronger */
+.ah-card__price {
+  font-size: var(--ah-text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Buttons — sharper, no border-radius */
+.ah-btn {
+  border-radius: 0;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+}
+
+/* Subheading — gold, slightly bigger tracking */
+.ah-subheading {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  font-weight: 600;
+  color: var(--ah-gold);
+}
+
+/* Section header spacing — more editorial breathing */
+.ah-section-header--center {
+  margin-bottom: var(--ah-space-20);
+}
+
+/* Accent line — thinner, more refined */
+.ah-accent-line {
+  width: 40px;
+  height: 1px;
+  background: var(--ah-gold);
+  margin: var(--ah-space-5) 0;
+  display: block;
+}
+.ah-accent-line--center {
+  margin: var(--ah-space-5) auto;
+}
+
+/* Gallery items — no border-radius, sharp crop */
+.ah-gallery__item,
+.ah-gallery__item img {
+  border-radius: 0;
+}
+
+/* Texture cards — clean */
+.ah-texture-card__img {
+  border-radius: 0;
+}
+.ah-texture-card__img img {
+  border-radius: 0;
+}
+
+/* Pricing table — sharper header */
+.ah-pricing-table thead tr {
+  background: var(--ah-black);
+}
+.ah-pricing-table tbody tr:nth-child(even) {
+  background: var(--ah-grey-100);
+}
+.ah-pricing-table tbody tr:hover {
+  background: #f0f0f0;
+}
+
+/* Footer — even deeper black for contrast */
+.ah-footer {
+  background: #0a0a0a;
+}
+
+/* WhatsApp float — keep bottom-right, ensure it clears content */
+.ah-wa-float {
+  border-radius: 0;
+}
+
+/* CTA Band heading — more dramatic */
+.ah-cta-band__heading {
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+/* Split section — ensure images fill completely */
+.ah-split__image img {
+  transition: transform 0.8s ease;
+}
+.ah-split:hover .ah-split__image img {
+  transform: scale(1.03);
+}
+
+/* Breadcrumb — subtle, elegant */
+.ah-breadcrumb {
+  border-bottom: 1px solid var(--ah-grey-200);
+  padding: var(--ah-space-3) 0;
+  margin: 0 var(--ah-space-6);
+  max-width: var(--ah-container);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Form controls — sharper */
+.ah-form-control {
+  border-radius: 0;
+  border-color: #d0d0d0;
+}
+.ah-form-control:focus {
+  border-color: var(--ah-black);
+  box-shadow: none;
+  outline: 2px solid var(--ah-gold);
+  outline-offset: 0px;
+}
+
+/* Accordion — tighter, more editorial */
+.ah-accordion__question {
+  font-size: var(--ah-text-lg);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* TOC block — use grey not cream */
+.ah-toc {
+  background: var(--ah-grey-100);
+  border-left: 2px solid var(--ah-gold);
+}
+
+/* Do/don't columns */
+.ah-do-dont__col--do   { background: #f8fdf9; }
+.ah-do-dont__col--dont { background: #fdf8f8; }
+
+/* Contact item icon — white bg not cream */
+.ah-contact-item__icon {
+  background: var(--ah-grey-100);
+}
+
+/* Step counter — subtler */
+.ah-step::before {
+  opacity: 0.25;
+}
+
+/* Page hero subtitle max-width */
+.ah-page-hero__subtitle {
+  max-width: 600px;
+}
+
+/* Hero overlay — stronger for legibility */
+.ah-hero__overlay {
+  background: linear-gradient(
+    105deg,
+    rgba(17,17,17,0.85) 0%,
+    rgba(17,17,17,0.5) 55%,
+    rgba(17,17,17,0.1) 100%
+  );
+}
+
+/* Mobile nav — slightly lighter */
+.ah-nav-mobile {
+  background: #0d0d0d;
 }

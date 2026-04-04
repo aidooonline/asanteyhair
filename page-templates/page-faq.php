@@ -106,7 +106,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'FAQ',
       </div>
     <?php endforeach; ?>
 
-    <div class="ah-reveal" style="background:var(--ah-cream-light);padding:var(--ah-space-10);text-align:center;">
+    <div class="ah-reveal" style="background:var(--ah-grey-100);padding:var(--ah-space-10);text-align:center;">
       <h3 class="ah-heading-sm" style="margin-bottom:var(--ah-space-3);">Still Have Questions?</h3>
       <p class="ah-body" style="margin-bottom:var(--ah-space-6);">Our team is available on WhatsApp to help you choose the right product, answer care questions, or assist with your order.</p>
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I have a question about Asantey Hair & Beauty.')); ?>"

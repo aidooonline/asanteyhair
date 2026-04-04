@@ -331,20 +331,20 @@ echo ah_schema_breadcrumb([
 <!-- ============================================================
      [7] PRICING PREVIEW BAND
      ============================================================ -->
-<div class="ah-section--gold" style="padding:var(--ah-space-12) var(--ah-space-6);">
+<div style="background:var(--ah-black);padding:var(--ah-space-12) var(--ah-space-6);">
   <div class="ah-container">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--ah-space-6);">
       <div>
         <span class="ah-subheading" style="display:block;margin-bottom:var(--ah-space-3);">Transparent Pricing</span>
-        <p style="font-family:var(--ah-font-display);font-size:clamp(1rem,2.5vw,1.375rem);line-height:1.5;color:var(--ah-black);margin:0;">
-          Cambodian Raw Hair from <strong>&pound;60</strong> &nbsp;&middot;&nbsp;
-          Virgin Hair from <strong>&pound;50</strong> &nbsp;&middot;&nbsp;
-          HD Lace Closures from <strong>&pound;49</strong> &nbsp;&middot;&nbsp;
-          Frontals from <strong>&pound;80</strong>
+        <p style="font-family:var(--ah-font-display);font-size:clamp(1rem,2.5vw,1.375rem);line-height:1.5;color:rgba(255,255,255,0.85);margin:0;">
+          Cambodian Raw Hair from <strong style="color:var(--ah-gold);">&pound;60</strong> &nbsp;&middot;&nbsp;
+          Virgin Hair from <strong style="color:var(--ah-gold);">&pound;50</strong> &nbsp;&middot;&nbsp;
+          HD Lace Closures from <strong style="color:var(--ah-gold);">&pound;49</strong> &nbsp;&middot;&nbsp;
+          Frontals from <strong style="color:var(--ah-gold);">&pound;80</strong>
         </p>
       </div>
       <a href="<?php echo esc_url( home_url('/shop/') ); ?>"
-         class="ah-btn ah-btn--primary">
+         class="ah-btn ah-btn--outline-white">
         View Full Price List <?php echo ah_svg('arrow-right'); ?>
       </a>
     </div>
