@@ -46,7 +46,7 @@ echo ah_schema_breadcrumb([
     <p class="t-body--lg">
       Asantey Hair &amp; Beauty was founded because we saw too many women paying premium
       prices for hair that tangled after two washes, shed excessively, or simply
-      didn't perform as promised.
+      did not perform as promised.
     </p>
     <p class="t-body">
       We went back to the source. Cambodian hair — sourced directly from single donors,

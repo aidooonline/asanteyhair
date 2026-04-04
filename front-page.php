@@ -300,9 +300,9 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
     <div class="grid-3">
       <?php
       $tests = [
-        ['I have been buying hair for over 10 years and Asantey is hands down the best quality I've ever experienced. No shedding, silky soft, and took colour perfectly.','Naomi A., London',5],
+        ['I have been buying hair for over 10 years and Asantey is hands down the best quality I have ever experienced. No shedding, silky soft, and took colour perfectly.','Naomi A., London',5],
         ['My 28" raw body wave bundle is still going strong 2 years later. Wash and go every week and it looks brand new every time. Worth every penny.','Blessing O., Birmingham',5],
-        ['The HD lace frontal is unreal. My stylist couldn't believe it wasn't my natural hairline. Ordered on WhatsApp and received it in 2 days.','Jade K., Manchester',5],
+        ['The HD lace frontal is unreal. My stylist could not believe it was not my natural hairline. Ordered on WhatsApp and received it in 2 days.','Jade K., Manchester',5],
       ];
       foreach($tests as $i => $t): ?>
         <div class="tcard reveal d<?php echo $i+1; ?>">
