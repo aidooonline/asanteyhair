@@ -87,18 +87,18 @@
     const items = $$('.gallery-item');
     if (!items.length) return;
 
-    // Create lightbox DOM
+    // Create lightbox DOM with correct class names
     const lb = document.createElement('div');
-    lb.className = 'ah-lightbox';
+    lb.className = 'lightbox';
     lb.setAttribute('role', 'dialog');
     lb.setAttribute('aria-modal', 'true');
     lb.setAttribute('aria-label', 'Image viewer');
     lb.innerHTML = `
-      <div class="ah-lightbox__inner">
-        <button class="ah-lightbox__close" aria-label="Close">&times;</button>
-        <button class="ah-lightbox__nav ah-lightbox__prev" aria-label="Previous">&#8249;</button>
-        <img class="ah-lightbox__img" src="" alt="" loading="lazy">
-        <button class="ah-lightbox__nav ah-lightbox__next" aria-label="Next">&#8250;</button>
+      <div class="lightbox__inner">
+        <button class="lightbox__close" aria-label="Close">&times;</button>
+        <button class="lightbox__nav lightbox__prev" aria-label="Previous">&#8249;</button>
+        <img class="lightbox__img" src="" alt="" loading="lazy">
+        <button class="lightbox__nav lightbox__next" aria-label="Next">&#8250;</button>
       </div>
     `;
     document.body.appendChild(lb);
@@ -156,14 +156,14 @@
      AJAX FORMS
      ============================================================ */
   function initForms() {
-    $$('.ah-form, form[data-action]').forEach(form => {
+    $$('form[data-action]').forEach(form => {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const action      = form.dataset.action;
         const submitBtn   = form.querySelector('[type="submit"]');
-        const successMsg  = form.querySelector('.ah-form-msg--success');
-        const errorMsg    = form.querySelector('.ah-form-msg--error');
+        const successMsg  = form.querySelector('.form-msg--success, .ah-form-msg--success');
+        const errorMsg    = form.querySelector('.form-msg--error, .ah-form-msg--error');
 
         if (!action || !window.ahData) return;
 
@@ -271,10 +271,10 @@
       trigger.addEventListener('click', () => {
         const item    = trigger.closest('.accordion__item');
         const isOpen  = item.classList.contains('accordion__item--open');
-        const content = item.querySelector('.ah-accordion__content');
+        const content = item.querySelector('.accordion__body');
 
         // Close siblings
-        $$('.ah-accordion__item--open').forEach(openItem => {
+        $$('.accordion__item--open').forEach(openItem => {
           openItem.classList.remove('accordion__item--open');
           openItem.querySelector('.accordion__trigger').setAttribute('aria-expanded', 'false');
         });
