@@ -93,7 +93,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
         'title'   => 'Cambodian Raw Hair',
         'from'    => '£60',
         'tag'     => 'Unprocessed. Uncoloured. Unapologetically Premium.',
-        'image'   => AH_URI.'/assets/images/hero-main.jpg',
+        'image'   => AH_URI.'/assets/images/raw-body-wave.jpg',
         'url'     => home_url('/raw-hair/'),
       ],
       [
@@ -101,7 +101,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
         'title'   => 'Virgin Hair Bundles',
         'from'    => '£50',
         'tag'     => 'Pure Quality. Lasting Beauty. 3–5 Year Lifespan.',
-        'image'   => AH_URI.'/assets/images/hero-about.jpg',
+        'image'   => AH_URI.'/assets/images/virgin-body-wave.png',
         'url'     => home_url('/virgin-hair/'),
       ],
       [
@@ -109,7 +109,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
         'title'   => 'Closures & Frontals',
         'from'    => '£49',
         'tag'     => 'Invisible HD Lace. The Perfect Finish.',
-        'image'   => AH_URI.'/assets/images/hero-shop.jpg',
+        'image'   => AH_URI.'/assets/images/closures-frontals-pricelist.jpg',
         'url'     => home_url('/closures-frontals/'),
       ],
     ];
@@ -219,7 +219,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 <!-- ============================================================ SPLIT — BRAND STORY -->
 <div class="split split--dark">
   <div class="split__media">
-    <img src="<?php echo esc_url(AH_URI.'/assets/images/hero-gallery.jpg'); ?>"
+    <img src="<?php echo esc_url(AH_URI.'/assets/images/client-result-1.jpg'); ?>"
          alt="Asantey Hair &amp; Beauty — Real client results"
          loading="lazy" width="800" height="1000">
   </div>
