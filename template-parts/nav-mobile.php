@@ -5,7 +5,7 @@
       <ul class="mnav__sub">
         <li><a href="<?php echo esc_url(home_url('/raw-hair/')); ?>">Raw Hair</a></li>
         <li><a href="<?php echo esc_url(home_url('/virgin-hair/')); ?>">Virgin Hair</a></li>
-        <li><a href="<?php echo esc_url(home_url('/closures-frontals/')); ?>">Closures &amp; Frontals</a></li>
+        <li><a href="<?php echo esc_url(home_url('/closures-frontals/')); ?>">HD Lace Closures &amp; Frontals</a></li>
       </ul>
     </li>
     <li><a href="<?php echo esc_url(home_url('/salon-services/')); ?>">Salon Services</a></li>
