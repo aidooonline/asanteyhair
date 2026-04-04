@@ -1,0 +1,229 @@
+<?php
+/**
+ * Template Name: Closures & Frontals
+ * Asantey Hair & Beauty
+ */
+get_header();
+
+echo ah_schema_breadcrumb([
+  ['name' => 'Home',                'url' => home_url('/')],
+  ['name' => 'Shop',                'url' => home_url('/shop/')],
+  ['name' => 'Closures & Frontals', 'url' => get_permalink()],
+]);
+
+$faqs = [
+  ['question' => 'What is HD lace?',
+   'answer'   => 'HD (High Definition) lace is an ultra-thin, transparent Swiss lace that virtually disappears against the skin. Unlike regular lace closures, HD lace doesn\'t need to be bleached to match your scalp — it naturally adapts to your skin tone for a completely invisible hairline.'],
+  ['question' => 'What is the difference between a closure and a frontal?',
+   'answer'   => 'A closure covers a smaller area — typically 4x4, 5x5, or 6x6 inches — at the crown or parting area. A frontal covers the full hairline ear-to-ear, measuring 13x4 or 13x6 inches. Frontals offer more styling versatility; closures are easier to install and maintain.'],
+  ['question' => 'Which closure size should I choose?',
+   'answer'   => 'The 4x4 closure is the most popular for a centre or side parting. The 5x5 and 6x6 are ideal for a wider parting or a more natural-looking install. The 2x6 is best for a deep centre part. All our closures come in HD lace for an invisible finish.'],
+  ['question' => 'How many bundles do I need with my closure?',
+   'answer'   => 'For 12"–18", 2 bundles are typically sufficient. For 20"–24", 2–3 bundles. For 26"–30", 3 bundles are recommended for a full, voluminous look. With a frontal (which covers more area), you may need one fewer bundle than with a closure.'],
+  ['question' => 'What textures are available for closures and frontals?',
+   'answer'   => 'Our HD lace closures and frontals are available in: Straight, Kinky Straight, Yaki Straight, Deep Wave, Body Wave, Loose Wave, Water Wave, and Burmese Curls.'],
+];
+
+echo ah_schema_faq($faqs);
+?>
+
+<div class="ah-header-offset"></div>
+
+<section class="ah-page-hero">
+  <div class="ah-page-hero__bg">
+    <img src="<?php echo esc_url(AH_URI.'/assets/images/closures-frontals-pricelist.jpg'); ?>"
+         alt="" aria-hidden="true" loading="eager" width="1280" height="500">
+  </div>
+  <div class="ah-page-hero__content">
+    <span class="ah-page-hero__label">The Perfect Finish</span>
+    <h1 class="ah-page-hero__title">HD Lace Closures<br>&amp; Frontals</h1>
+    <p class="ah-page-hero__subtitle">Invisible lace that melts into every skin tone. The final touch that makes every install flawless.</p>
+  </div>
+</section>
+
+<?php ah_breadcrumb(); ?>
+
+<!-- What is HD Lace -->
+<section class="ah-split ah-section--sm">
+  <div class="ah-split__image">
+    <img src="<?php echo esc_url(AH_URI.'/assets/images/hd-lace-sizes.png'); ?>"
+         alt="HD lace closure and frontal sizes guide"
+         loading="lazy" width="800" height="800">
+  </div>
+  <div class="ah-split__content ah-reveal">
+    <span class="ah-subheading">Why HD Lace?</span>
+    <h2 class="ah-heading-md" style="margin:var(--ah-space-4) 0;">The Invisible Lace Standard</h2>
+    <span class="ah-accent-line"></span>
+    <p class="ah-body-lg">
+      HD lace is the most advanced lace technology available in the hair industry.
+      Ultra-thin Swiss lace that adapts to your skin tone without bleaching —
+      so your hairline looks undetectable from every angle.
+    </p>
+    <p class="ah-body">
+      Regular lace often requires tinting or bleaching to match the scalp. HD lace doesn&rsquo;t.
+      It virtually disappears, creating the illusion that the hair is growing directly
+      from your scalp. The result is an install so natural, even your stylist
+      will do a double-take.
+    </p>
+    <ul style="margin:var(--ah-space-5) 0;list-style:none;display:flex;flex-direction:column;gap:var(--ah-space-3);">
+      <?php
+      $benefits = ['Ultra-thin Swiss lace — zero bulge','Matches every skin tone naturally','No bleaching required','Available in 6 sizes — closures and frontals','All textures available'];
+      foreach($benefits as $b):?>
+        <li style="display:flex;align-items:center;gap:var(--ah-space-3);font-size:var(--ah-text-sm);color:var(--ah-grey-700);">
+          <?php echo ah_svg('check','');?><span><?php echo esc_html($b);?></span>
+        </li>
+      <?php endforeach;?>
+    </ul>
+  </div>
+</section>
+
+<!-- Size Guide -->
+<section class="ah-section ah-section--cream" id="sizes">
+  <div class="ah-container">
+    <div class="ah-section-header--center ah-reveal">
+      <span class="ah-subheading">Choose Your Size</span>
+      <h2 class="ah-heading-lg">Available Sizes &amp; Textures</h2>
+      <span class="ah-accent-line ah-accent-line--center"></span>
+    </div>
+
+    <div class="ah-grid ah-grid--2" style="gap:var(--ah-space-8);">
+      <!-- Closures -->
+      <div class="ah-reveal">
+        <h3 class="ah-heading-sm" style="margin-bottom:var(--ah-space-4);">HD Lace Closures</h3>
+        <?php
+        $closure_sizes = [
+          '2x6'  => '2x6 Closure — Deep Centre Part',
+          '4x4'  => '4x4 Closure — Most Popular',
+          '5x5'  => '5x5 Closure — Wider Parting',
+          '6x6'  => '6x6 Closure — Maximum Coverage',
+        ];
+        foreach($closure_sizes as $type => $label):
+          $rows = ah_get_pricing($type);
+          $from = min(array_map('floatval', array_values($rows)));
+          ?>
+          <div style="border:1px solid var(--ah-grey-200);padding:var(--ah-space-4) var(--ah-space-5);margin-bottom:var(--ah-space-3);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <strong style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);"><?php echo esc_html($label);?></strong>
+              <div style="font-size:var(--ah-text-xs);color:var(--ah-grey-500);margin-top:2px;">12"–22" &middot; All textures available</div>
+            </div>
+            <div style="font-family:var(--ah-font-display);font-size:var(--ah-text-2xl);font-weight:600;">from &pound;<?php echo esc_html($from);?></div>
+          </div>
+        <?php endforeach;?>
+      </div>
+      <!-- Frontals -->
+      <div class="ah-reveal ah-reveal--delay-2">
+        <h3 class="ah-heading-sm" style="margin-bottom:var(--ah-space-4);">HD Lace Frontals</h3>
+        <?php
+        $frontal_sizes = [
+          '13x4' => '13x4 Frontal — Ear to Ear',
+          '13x6' => '13x6 Frontal — Deeper Part',
+        ];
+        foreach($frontal_sizes as $type => $label):
+          $rows = ah_get_pricing($type);
+          $from = min(array_map('floatval', array_values($rows)));
+          ?>
+          <div style="border:1px solid var(--ah-grey-200);padding:var(--ah-space-4) var(--ah-space-5);margin-bottom:var(--ah-space-3);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <strong style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);"><?php echo esc_html($label);?></strong>
+              <div style="font-size:var(--ah-text-xs);color:var(--ah-grey-500);margin-top:2px;">12"–22" &middot; All textures available</div>
+            </div>
+            <div style="font-family:var(--ah-font-display);font-size:var(--ah-text-2xl);font-weight:600;">from &pound;<?php echo esc_html($from);?></div>
+          </div>
+        <?php endforeach;?>
+
+        <div style="background:var(--ah-cream);padding:var(--ah-space-5);margin-top:var(--ah-space-4);">
+          <h4 style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);margin-bottom:var(--ah-space-2);">Textures Available</h4>
+          <p style="font-size:var(--ah-text-sm);color:var(--ah-grey-700);">
+            Straight &middot; Kinky Straight &middot; Yaki Straight &middot; Deep Wave &middot;
+            Body Wave &middot; Loose Wave &middot; Water Wave &middot; Burmese Curls
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full Pricing Tables -->
+<section class="ah-section" id="pricing">
+  <div class="ah-container">
+    <div class="ah-section-header--center ah-reveal">
+      <span class="ah-subheading">Full Pricing</span>
+      <h2 class="ah-heading-lg">Closures &amp; Frontals — Price Lists</h2>
+      <span class="ah-accent-line ah-accent-line--center"></span>
+    </div>
+    <div class="ah-pricing-grid ah-reveal">
+      <?php ah_pricing_table('2x6',  '2x6 HD Lace Closure',  '12"–22" available'); ?>
+      <?php ah_pricing_table('4x4',  '4x4 HD Lace Closure',  '12"–22" available'); ?>
+      <?php ah_pricing_table('5x5',  '5x5 HD Lace Closure',  '12"–22" available'); ?>
+      <?php ah_pricing_table('6x6',  '6x6 HD Lace Closure',  '12"–22" available'); ?>
+      <?php ah_pricing_table('13x4', '13x4 HD Lace Frontal', '12"–22" available'); ?>
+      <?php ah_pricing_table('13x6', '13x6 HD Lace Frontal', '12"–22" available'); ?>
+    </div>
+  </div>
+</section>
+
+<!-- How Many Bundles Guide -->
+<section class="ah-section ah-section--cream">
+  <div class="ah-container ah-container--sm ah-reveal">
+    <div class="ah-section-header--center">
+      <span class="ah-subheading">Bundle Guide</span>
+      <h2 class="ah-heading-lg">How Many Bundles Do I Need?</h2>
+      <span class="ah-accent-line ah-accent-line--center"></span>
+    </div>
+    <div class="ah-prose">
+      <table>
+        <thead><tr><th>Length</th><th>With Closure</th><th>With Frontal</th></tr></thead>
+        <tbody>
+          <tr><td>12"–18"</td><td>2 Bundles</td><td>1–2 Bundles</td></tr>
+          <tr><td>20"–24"</td><td>2–3 Bundles</td><td>2 Bundles</td></tr>
+          <tr><td>26"–30"</td><td>3 Bundles</td><td>2–3 Bundles</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:var(--ah-text-sm);color:var(--ah-grey-500);font-style:italic;">
+        Bundle counts are approximate and may vary based on desired fullness, head size, and install method.
+        Not sure? WhatsApp us — we'll help you choose the perfect combination.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="ah-section" id="faq">
+  <div class="ah-container ah-container--sm">
+    <div class="ah-section-header--center ah-reveal">
+      <span class="ah-subheading">Common Questions</span>
+      <h2 class="ah-heading-lg">HD Lace FAQ</h2>
+      <span class="ah-accent-line ah-accent-line--center"></span>
+    </div>
+    <div class="ah-accordion ah-reveal">
+      <?php foreach($faqs as $faq): ?>
+        <div class="ah-accordion__item">
+          <button class="ah-accordion__trigger" type="button" aria-expanded="false">
+            <span class="ah-accordion__question"><?php echo esc_html($faq['question']); ?></span>
+            <span class="ah-accordion__icon"><?php echo ah_svg('plus'); ?></span>
+          </button>
+          <div class="ah-accordion__content">
+            <p class="ah-accordion__answer"><?php echo esc_html($faq['answer']); ?></p>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<div class="ah-cta-band">
+  <div class="ah-container"><div class="ah-reveal">
+    <span class="ah-cta-band__label">Ready for Your Perfect Hairline?</span>
+    <h2 class="ah-cta-band__heading">Order Your HD Lace Today</h2>
+    <p class="ah-cta-band__body">Tell us your closure size, texture, and length — we'll send your invoice within hours.</p>
+    <div class="ah-btn-group" style="justify-content:center;">
+      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order an HD Lace Closure or Frontal.')); ?>"
+         class="ah-btn ah-btn--whatsapp ah-btn--lg" target="_blank" rel="noopener noreferrer">
+        <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
+      </a>
+      <a href="<?php echo esc_url(home_url('/order/')); ?>" class="ah-btn ah-btn--outline-white ah-btn--lg">Use Order Form</a>
+    </div>
+  </div></div>
+</div>
+
+<?php get_footer(); ?>
