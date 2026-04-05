@@ -880,11 +880,11 @@ select.form-control{
 .contact-socials a:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .contact-socials svg{width:17px;height:17px}
 .meta-box-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:12px 0}
-.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-block:2rem}
-.do-dont__col{padding:1.5rem;border-top:2px solid}
-.do-dont__col--do{border-color:#4ade80;background:rgba(74,222,128,.05)}
-.do-dont__col--dont{border-color:#f87171;background:rgba(248,113,113,.05)}
-.do-dont__heading{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem}
+.do-dont,.ah-do-dont{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-block:2rem}
+.do-dont__col,.ah-do-dont__col{padding:1.5rem;border-top:2px solid}
+.do-dont__col--do,.ah-do-dont__col--do{border-color:#4ade80;background:rgba(74,222,128,.05)}
+.do-dont__col--dont,.ah-do-dont__col--dont{border-color:#f87171;background:rgba(248,113,113,.05)}
+.do-dont__heading,.ah-do-dont__heading{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem}
 .do-dont__col--do .do-dont__heading{color:#4ade80}
 .do-dont__col--dont .do-dont__heading{color:#f87171}
 .do-dont li{list-style:none;padding-left:1.5rem;position:relative;font-size:.875rem;color:rgba(255,255,255,.55);margin-bottom:.5rem;line-height:1.6}
@@ -1040,3 +1040,101 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 
 /* Breadcrumb on inner pages */
 .page-hero + .bc { border-bottom:1px solid #e8e8e8 }
+
+/* ── INNER PAGES — all .s sections white by default ───────── */
+.page-template-default .s,
+.page-template-page-templates-page-shop-php .s,
+.page-template-page-templates-page-raw-hair-php .s,
+.page-template-page-templates-page-virgin-hair-php .s,
+.page-template-page-templates-page-closures-php .s,
+.page-template-page-templates-page-gallery-php .s,
+.page-template-page-templates-page-about-php .s,
+.page-template-page-templates-page-contact-php .s,
+.page-template-page-templates-page-faq-php .s,
+.page-template-page-templates-page-salon-php .s,
+.page-template-page-templates-page-order-php .s,
+.page-template-page-templates-page-care-guide-php .s,
+.page-template-page-templates-page-shipping-php .s,
+.page-template-page-templates-page-privacy-php .s,
+.page-template-page-templates-page-terms-php .s {
+  background:#ffffff;color:#111111}
+
+/* Keep grey sections grey */
+.page-template-default .s[style*="background:#f8f8f8"],
+[class*="page-template"] .s[style*="background:#f8f8f8"] {
+  background:#f8f8f8!important;color:#111111}
+
+/* Inner page .s headings/text black */
+[class*="page-template"] .s h1,
+[class*="page-template"] .s h2,
+[class*="page-template"] .s h3,
+[class*="page-template"] .s h4 { color:#000000 }
+[class*="page-template"] .s .t-label { color:#888888 }
+[class*="page-template"] .s .t-body,
+[class*="page-template"] .s .t-body--lg { color:#444444 }
+[class*="page-template"] .s .rule { background:#000000;opacity:.2 }
+[class*="page-template"] .s .feat-card { border-top-color:#e0e0e0 }
+[class*="page-template"] .s .feat-card:hover { border-top-color:#000000 }
+[class*="page-template"] .s .feat-card__icon { color:#000000 }
+[class*="page-template"] .s .feat-card__title { color:#000000 }
+[class*="page-template"] .s .feat-card__body { color:#555555 }
+[class*="page-template"] .s .tcard { border-color:#e0e0e0 }
+[class*="page-template"] .s .tcard:hover { border-color:#000000 }
+[class*="page-template"] .s .tcard__quote { color:#000000 }
+[class*="page-template"] .s .tcard__stars { color:#000000 }
+[class*="page-template"] .s .tcard__author { color:#888888 }
+[class*="page-template"] .s .acc { border-top-color:#e0e0e0 }
+[class*="page-template"] .s .acc__item { border-bottom-color:#e0e0e0 }
+[class*="page-template"] .s .acc__q { color:#000000 }
+[class*="page-template"] .s .acc__icon { border-color:#cccccc }
+[class*="page-template"] .s .acc__ans { color:#555555 }
+[class*="page-template"] .s .filter-bar { border-bottom-color:#e0e0e0 }
+[class*="page-template"] .s .filter-btn { color:#888888 }
+[class*="page-template"] .s .filter-btn.active,
+[class*="page-template"] .s .filter-btn:hover { color:#000000;border-bottom-color:#000000 }
+[class*="page-template"] .s .tx-item__name { color:#000000 }
+[class*="page-template"] .s .tx-item .t-body { color:#555555 }
+[class*="page-template"] .s .product-card { background:#f8f8f8 }
+[class*="page-template"] .s .product-card__cat { color:#888888 }
+[class*="page-template"] .s .product-card__title { color:#000000 }
+[class*="page-template"] .s .product-card__desc { color:#666666 }
+[class*="page-template"] .s .contact-item__icon { border-color:#e0e0e0;color:#000000 }
+[class*="page-template"] .s .contact-item__label { color:#888888 }
+[class*="page-template"] .s .contact-item__val { color:#111111 }
+[class*="page-template"] .s .price-table caption { color:#000000 }
+[class*="page-template"] .s .price-table th { background:#000000;color:#ffffff }
+[class*="page-template"] .s .price-table td { border-bottom-color:#e8e8e8;color:#111111 }
+[class*="page-template"] .s .price-table tbody tr:nth-child(even) td { background:#f8f8f8 }
+[class*="page-template"] .s .prose h2,
+[class*="page-template"] .s .prose h3 { color:#000000 }
+[class*="page-template"] .s .prose p,
+[class*="page-template"] .s .prose li { color:#444444 }
+[class*="page-template"] .s .prose td { color:#111111 }
+[class*="page-template"] .s .prose td { border-bottom-color:#e0e0e0 }
+[class*="page-template"] .s .step::before { color:#000000 }
+[class*="page-template"] .s .step__title { color:#000000 }
+[class*="page-template"] .s .step__body { color:#555555 }
+[class*="page-template"] .s .step { border-right-color:#e0e0e0 }
+[class*="page-template"] .s .sh .t-label { color:#888888 }
+
+/* Page hero — taller, more impact */
+.page-hero {
+  min-height:420px;
+  padding-top:calc(var(--hh) + clamp(3.5rem,7vw,6rem));
+  padding-bottom:clamp(3rem,5vw,4rem);
+  display:flex;flex-direction:column;justify-content:flex-end}
+
+/* Split section on white pages */
+[class*="page-template"] .split__body { background:#ffffff }
+[class*="page-template"] .split__body h2,
+[class*="page-template"] .split__body h3 { color:#000000 }
+[class*="page-template"] .split__body .t-label { color:#888888 }
+[class*="page-template"] .split__body .t-body,
+[class*="page-template"] .split__body .t-body--lg { color:#444444 }
+[class*="page-template"] .split__body .rule { background:#000000;opacity:.2 }
+[class*="page-template"] .split__body .btn--bk { background:#000000;color:#ffffff;border-color:#000000 }
+[class*="page-template"] .split__body .btn--ob { color:#000000;border-color:#000000 }
+[class*="page-template"] .split__body .btn--ob:hover { background:#000000;color:#ffffff }
+
+/* Marquee strip on white pages */
+[class*="page-template"] .marquee-strip--dark { background:#000000 }

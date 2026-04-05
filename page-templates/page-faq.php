@@ -76,7 +76,6 @@ echo ah_schema_faq($schema_faqs);
 echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'FAQ','url'=>get_permalink()]]);
 ?>
 
-<div class="header-offset"></div>
 <section class="page-hero">
   <div class="page-hero__content">
     <span class="t-label">Got Questions?</span>
@@ -86,20 +85,20 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'FAQ',
 </section>
 <?php ah_breadcrumb(); ?>
 
-<section class="section">
+<section class="s">
   <div class="wrap wrap--narrow">
     <?php foreach($all_faqs as $category => $faqs): ?>
       <div style="margin-bottom:4rem;" class="reveal">
         <span class="t-label"><?php echo esc_html($category); ?></span>
-        <h2 class="t-h4" style="margin:var(--gap3) 0 2rem;"><?php echo esc_html($category); ?></h2>
+        <h2 class="t-h4" style="margin:0.75rem 0 2rem;"><?php echo esc_html($category); ?></h2>
         <div class="accordion">
           <?php foreach($faqs as $faq): ?>
             <div class="accordion__item">
-              <button class="accordion__trigger" type="button" aria-expanded="false">
-                <span class="accordion__q"><?php echo esc_html($faq[0]); ?></span>
-                <span class="accordion__icon"><?php echo ah_svg('plus'); ?></span>
+              <button class="acc__trigger" type="button" aria-expanded="false">
+                <span class="acc__q"><?php echo esc_html($faq[0]); ?></span>
+                <span class="acc__icon"><?php echo ah_svg('plus'); ?></span>
               </button>
-              <div class="accordion__body"><p class="accordion__ans"><?php echo esc_html($faq[1]); ?></p></div>
+              <div class="acc__body"><p class="acc__ans"><?php echo esc_html($faq[1]); ?></p></div>
             </div>
           <?php endforeach; ?>
         </div>
@@ -107,7 +106,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'FAQ',
     <?php endforeach; ?>
 
     <div class="reveal" style="background:#f8f8f8;padding:2.5rem;text-align:center;">
-      <h3 class="t-h4" style="margin-bottom:var(--gap3);">Still Have Questions?</h3>
+      <h3 class="t-h4" style="margin-bottom:0.75rem;">Still Have Questions?</h3>
       <p class="t-body" style="margin-bottom:1.5rem;">Our team is available on WhatsApp to help you choose the right product, answer care questions, or assist with your order.</p>
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I have a question about Asantey Hair & Beauty.')); ?>"
          class="btn btn--wa" target="_blank" rel="noopener noreferrer">

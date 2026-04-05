@@ -17,8 +17,6 @@ $hours   = get_theme_mod('ah_contact_hours',   'Mon–Sat: 9am–7pm');
 $map_url = get_theme_mod('ah_contact_map',     '');
 ?>
 
-<div class="header-offset"></div>
-
 <section class="page-hero">
   <div class="page-hero__content">
     <span class="t-label">We&rsquo;re Here to Help</span>
@@ -29,7 +27,7 @@ $map_url = get_theme_mod('ah_contact_map',     '');
 
 <?php ah_breadcrumb(); ?>
 
-<section class="section">
+<section class="s">
   <div class="wrap">
     <div class="grid-2" style="gap:4rem;align-items:start;">
 
@@ -169,13 +167,13 @@ $map_url = get_theme_mod('ah_contact_map',     '');
   <!-- Map placeholder — add Google Maps embed URL in Customizer → Contact Details → Google Maps Embed URL -->
   <div style="background:#f8f8f8;height:300px;display:flex;align-items:center;justify-content:center;">
     <div style="text-align:center;color:var(--g9);">
-      <p style="font-size:var(--ah-text-sm);">Add Google Maps Embed URL in Customizer &rarr; Contact Details</p>
+      <p style="font-size:0.875rem;">Add Google Maps Embed URL in Customizer &rarr; Contact Details</p>
     </div>
   </div>
 <?php endif; ?>
 
 <!-- Order via WhatsApp Alt -->
-<div class="section section--grey" style="padding:4rem 1.5rem;">
+<div class="s" style="background:#f8f8f8;" style="padding:4rem 1.5rem;">
   <div class="wrap" style="text-align:center;">
     <div class="reveal">
       <h3 class="t-h3" style="margin-bottom:1rem;">Prefer to Order Directly?</h3>
@@ -183,12 +181,12 @@ $map_url = get_theme_mod('ah_contact_map',     '');
         WhatsApp us with your product, texture, length, and quantity — and we&rsquo;ll
         guide you through every step of the process.
       </p>
-      <div class="btn-group" style="justify-content:center;">
-        <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to place an order.')); ?>"
+      <div class="btns" style="justify-content:center;">
+        <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to place an order.')); ?>"
            class="btn btn--wa" target="_blank" rel="noopener noreferrer">
           <?php echo ah_svg('whatsapp'); ?> WhatsApp Order
         </a>
-        <a href="<?php echo esc_url(home_url('/order/')); ?>" class="btn btn--outline">
+        <a href="<?php echo esc_url(home_url('/order/')); ?>" class="btn btn--ob">
           Use Order Form
         </a>
       </div>

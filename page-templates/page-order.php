@@ -7,7 +7,6 @@ get_header();
 echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order Enquiry','url'=>get_permalink()]]);
 ?>
 
-<div class="header-offset"></div>
 <section class="page-hero">
   <div class="page-hero__content">
     <span class="t-label">Place Your Order</span>
@@ -17,7 +16,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
 </section>
 <?php ah_breadcrumb(); ?>
 
-<section class="section">
+<section class="s">
   <div class="wrap">
     <div class="grid-2" style="gap:4rem;align-items:start;">
 
@@ -42,9 +41,9 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
         </div>
 
         <div style="margin-top:2.5rem;padding:1.5rem;background:#f8f8f8;border-left:3px solid var(--gold);">
-          <h4 style="font-family:var(--ah-font-display);font-size:var(--ah-text-2xl);margin-bottom:var(--gap2);">Prefer WhatsApp?</h4>
+          <h4 style="font-family:var(--serif);font-size:1.5rem;margin-bottom:0.5rem;">Prefer WhatsApp?</h4>
           <p class="t-body" style="margin-bottom:1.25rem;">If you&rsquo;d rather order directly and get an instant response, WhatsApp is always the fastest route.</p>
-          <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to place an order.')); ?>"
+          <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to place an order.')); ?>"
              class="btn btn--wa" target="_blank" rel="noopener noreferrer">
             <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
           </a>
@@ -68,7 +67,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
 </section>
 
 <!-- Product Quick Links -->
-<section class="section section--grey">
+<section class="s" style="background:#f8f8f8;">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Browse Before You Order</span>
@@ -88,10 +87,10 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
             <img src="<?php echo esc_url(AH_URI.'/assets/images/'.$p[4]); ?>" alt="<?php echo esc_attr($p[0]); ?>" loading="lazy" width="600" height="450" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div style="padding:1.5rem;">
-            <h3 style="font-family:var(--ah-font-display);font-size:var(--ah-text-2xl);margin-bottom:var(--gap2);"><?php echo esc_html($p[0]); ?></h3>
-            <p style="font-size:var(--ah-text-sm);color:var(--g5);margin-bottom:1rem;"><?php echo esc_html($p[1]); ?></p>
-            <p style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);font-weight:600;margin-bottom:1rem;">from &pound;<?php echo esc_html($p[2]); ?></p>
-            <a href="<?php echo esc_url($p[3]); ?>" class="btn btn--outline btn--sm">View Collection <?php echo ah_svg('arrow-right'); ?></a>
+            <h3 style="font-family:var(--serif);font-size:1.5rem;margin-bottom:0.5rem;"><?php echo esc_html($p[0]); ?></h3>
+            <p style="font-size:0.875rem;color:var(--g5);margin-bottom:1rem;"><?php echo esc_html($p[1]); ?></p>
+            <p style="font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:1rem;">from &pound;<?php echo esc_html($p[2]); ?></p>
+            <a href="<?php echo esc_url($p[3]); ?>" class="btn btn--ob btn--sm">View Collection <?php echo ah_svg('arrow-right'); ?></a>
           </div>
         </div>
       <?php endforeach; ?>

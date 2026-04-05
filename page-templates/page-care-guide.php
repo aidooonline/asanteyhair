@@ -26,8 +26,6 @@ $faqs = [
 echo ah_schema_faq($faqs);
 ?>
 
-<div class="header-offset"></div>
-
 <section class="page-hero">
   <div class="page-hero__bg">
     <img src="<?php echo esc_url(AH_URI.'/assets/images/raw-loose-deep.jpg'); ?>" alt="" aria-hidden="true" loading="eager" width="1280" height="500">
@@ -41,7 +39,7 @@ echo ah_schema_faq($faqs);
 
 <?php ah_breadcrumb(); ?>
 
-<section class="section">
+<section class="s">
   <div class="wrap wrap--narrow">
 
     <!-- TOC -->
@@ -123,8 +121,8 @@ echo ah_schema_faq($faqs);
     <div id="dos-donts" class="reveal" style="margin-bottom:4rem;">
       <h3 class="t-h4" style="margin-bottom:1.5rem;">Quick Reference: Do&rsquo;s &amp; Don&rsquo;ts</h3>
       <div class="do-dont">
-        <div class="ah-do-dont__col ah-do-dont__col--do">
-          <div class="ah-do-dont__heading">Do</div>
+        <div class="do-dont__col do-dont__col--do">
+          <div class="do-dont__heading">Do</div>
           <ul>
             <li>Use sulphate-free shampoo and conditioner</li>
             <li>Deep condition after every wash</li>
@@ -135,8 +133,8 @@ echo ah_schema_faq($faqs);
             <li>Use lightweight oils on the ends regularly</li>
           </ul>
         </div>
-        <div class="ah-do-dont__col ah-do-dont__col--dont">
-          <div class="ah-do-dont__heading">Don&rsquo;t</div>
+        <div class="do-dont__col do-dont__col--dont">
+          <div class="do-dont__heading">Don&rsquo;t</div>
           <ul>
             <li>Use sulphate or alcohol-based products</li>
             <li>Apply heat without a protectant</li>
@@ -156,11 +154,11 @@ echo ah_schema_faq($faqs);
       <div class="accordion">
         <?php foreach($faqs as $faq): ?>
           <div class="accordion__item">
-            <button class="accordion__trigger" type="button" aria-expanded="false">
-              <span class="accordion__q"><?php echo esc_html($faq['question']); ?></span>
-              <span class="accordion__icon"><?php echo ah_svg('plus'); ?></span>
+            <button class="acc__trigger" type="button" aria-expanded="false">
+              <span class="acc__q"><?php echo esc_html($faq['question']); ?></span>
+              <span class="acc__icon"><?php echo ah_svg('plus'); ?></span>
             </button>
-            <div class="accordion__body"><p class="accordion__ans"><?php echo esc_html($faq['answer']); ?></p></div>
+            <div class="acc__body"><p class="acc__ans"><?php echo esc_html($faq['answer']); ?></p></div>
           </div>
         <?php endforeach; ?>
       </div>
@@ -169,13 +167,13 @@ echo ah_schema_faq($faqs);
   </div>
 </section>
 
-<div class="cta-band">
+<div class="cta-band dark">
   <div class="wrap"><div class="reveal">
     <span class="t-label t-label--white">Ready to Invest in Quality?</span>
     <h2 class="t-h1">Shop the Asantey Collection</h2>
     <p class="t-body">Hair worth caring for. Browse our Raw Hair, Virgin Hair, and HD Lace collections — all in stock and ready to ship.</p>
-    <div class="btn-group" style="justify-content:center;">
-      <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--black">Shop Now <?php echo ah_svg('arrow-right'); ?></a>
+    <div class="btns" style="justify-content:center;">
+      <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--bk">Shop Now <?php echo ah_svg('arrow-right'); ?></a>
       <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="btn btn--outline-white">View FAQ</a>
     </div>
   </div></div>

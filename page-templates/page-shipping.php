@@ -6,7 +6,6 @@
 get_header();
 echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Shipping &amp; Returns','url'=>get_permalink()]]);
 ?>
-<div class="header-offset"></div>
 <section class="page-hero"><div class="page-hero__content"><span class="t-label">Policies</span><h1 class="t-h1">Shipping &amp; Returns</h1><p >Everything you need to know about delivery and our returns process.</p></div></section>
 <?php ah_breadcrumb(); ?>
 

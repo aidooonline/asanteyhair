@@ -8,7 +8,6 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Priva
 $business = get_theme_mod('ah_contact_name','Asantey Hair & Beauty');
 $email    = get_theme_mod('ah_contact_email','');
 ?>
-<div class="header-offset"></div>
 <section class="page-hero"><div class="page-hero__content"><span class="t-label">Legal</span><h1 class="t-h1">Privacy Policy</h1></div></section>
 <?php ah_breadcrumb(); ?>
 

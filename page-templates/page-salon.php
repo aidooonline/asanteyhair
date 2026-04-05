@@ -13,8 +13,6 @@ echo ah_schema_breadcrumb([
 $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 ?>
 
-<div class="header-offset"></div>
-
 <section class="page-hero">
   <div class="page-hero__bg">
     <img src="<?php echo esc_url(AH_URI.'/assets/images/client-result-1.jpg'); ?>"
@@ -26,13 +24,13 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
     <p >
       Expert hair and beauty services in Nottingham. Book your appointment online in minutes.
     </p>
-    <div class="btn-group" style="margin-top:2rem;">
+    <div class="btns" style="margin-top:2rem;">
       <a href="<?php echo esc_url($booking_url); ?>"
-         class="btn btn--black"
+         class="btn btn--bk"
          target="_blank" rel="noopener noreferrer">
         Book Appointment <?php echo ah_svg('arrow-right'); ?>
       </a>
-      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to book an appointment at AHB Salon.')); ?>"
+      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to book an appointment at AHB Salon.')); ?>"
          class="btn btn--outline-white"
          target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Book via WhatsApp
@@ -44,8 +42,8 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 <?php ah_breadcrumb(); ?>
 
 <!-- Location strip -->
-<div class="trust-bar">
-  <div class="trust-bar__inner">
+<div class="marquee-strip marquee-strip--dark">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2rem;">
     <?php
     $info = [
       ['location','358 Radford Road, Nottingham NG7 5GQ'],
@@ -54,15 +52,15 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       ['sparkle', 'Walk-ins Welcome'],
     ];
     foreach($info as $i => $item):
-      echo '<span class="trust-bar__item">'.ah_svg($item[0]).esc_html($item[1]).'</span>';
-      if($i < count($info)-1) echo '<span class="trust-bar__divider"></span>';
+      echo '<span class="marquee-item">'.ah_svg($item[0]).esc_html($item[1]).'</span>';
+      if($i < count($info)-1) echo '<span ></span>';
     endforeach;
     ?>
   </div>
 </div>
 
 <!-- Hair Services -->
-<section class="section" id="hair-services" aria-labelledby="hair-heading">
+<section class="s" id="hair-services" aria-labelledby="hair-heading">
   <div class="wrap">
 
     <div class="sh sh--c reveal">
@@ -110,9 +108,9 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       ];
       foreach($hair_services as $i => $s): ?>
         <div class="feat-card reveal ah-reveal--delay-<?php echo ($i%3)+1; ?>">
-          <div class="feature-card__icon"><?php echo ah_svg($s['icon']); ?></div>
-          <h3 class="feature-card__title"><?php echo esc_html($s['title']); ?></h3>
-          <p class="feature-card__body"><?php echo esc_html($s['body']); ?></p>
+          <div class="feat-card__icon"><?php echo ah_svg($s['icon']); ?></div>
+          <h3 class="feat-card__title"><?php echo esc_html($s['title']); ?></h3>
+          <p class="feat-card__body"><?php echo esc_html($s['body']); ?></p>
         </div>
       <?php endforeach; ?>
     </div>
@@ -121,7 +119,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 </section>
 
 <!-- Beauty Services -->
-<section class="section section--grey" id="beauty-services" aria-labelledby="beauty-heading">
+<section class="s" style="background:#f8f8f8;" id="beauty-services" aria-labelledby="beauty-heading">
   <div class="wrap">
 
     <div class="sh sh--c reveal">
@@ -155,9 +153,9 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       ];
       foreach($beauty_services as $i => $s): ?>
         <div class="feat-card reveal ah-reveal--delay-<?php echo $i+1; ?>">
-          <div class="feature-card__icon"><?php echo ah_svg($s['icon']); ?></div>
-          <h3 class="feature-card__title"><?php echo esc_html($s['title']); ?></h3>
-          <p class="feature-card__body"><?php echo esc_html($s['body']); ?></p>
+          <div class="feat-card__icon"><?php echo ah_svg($s['icon']); ?></div>
+          <h3 class="feat-card__title"><?php echo esc_html($s['title']); ?></h3>
+          <p class="feat-card__body"><?php echo esc_html($s['body']); ?></p>
         </div>
       <?php endforeach; ?>
     </div>
@@ -166,7 +164,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 </section>
 
 <!-- Booking + Location -->
-<section class="split section--sm" id="visit-us">
+<section class="split" id="visit-us">
   <div class="split__media">
     <img src="<?php echo esc_url(AH_URI.'/assets/images/client-result-3.jpg'); ?>"
          alt="AHB Salon — Nottingham hair and beauty salon"
@@ -207,14 +205,14 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       </div>
     </div>
 
-    <div class="btn-group">
+    <div class="btns">
       <a href="<?php echo esc_url($booking_url); ?>"
-         class="btn btn--black"
+         class="btn btn--bk"
          target="_blank" rel="noopener noreferrer">
         Book Appointment <?php echo ah_svg('arrow-right'); ?>
       </a>
       <a href="https://maps.google.com/?q=358+Radford+Road+Nottingham+NG7+5GQ"
-         class="btn btn--outline"
+         class="btn btn--ob"
          target="_blank" rel="noopener noreferrer">
         Get Directions
       </a>
@@ -223,7 +221,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 </section>
 
 <!-- Testimonials -->
-<section class="section section--grey" aria-labelledby="reviews-heading">
+<section class="s" style="background:#f8f8f8;" aria-labelledby="reviews-heading">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Client Love</span>
@@ -241,8 +239,8 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       foreach($reviews as $i => $r): ?>
         <div class="ah-testimonial ah-reveal ah-reveal--delay-<?php echo $i+1; ?>">
           <?php echo ah_stars($r[2]); ?>
-          <p class="testimonial__quote">&ldquo;<?php echo esc_html($r[0]); ?>&rdquo;</p>
-          <span class="testimonial__author">&mdash; <?php echo esc_html($r[1]); ?></span>
+          <p class="tcard__quote">&ldquo;<?php echo esc_html($r[0]); ?>&rdquo;</p>
+          <span class="tcard__author">&mdash; <?php echo esc_html($r[1]); ?></span>
         </div>
       <?php endforeach; ?>
     </div>
@@ -250,20 +248,20 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 </section>
 
 <!-- Final CTA -->
-<div class="cta-band">
+<div class="cta-band dark">
   <div class="wrap"><div class="reveal">
     <span class="t-label t-label--white">Ready to Book?</span>
     <h2 class="t-h1">Book Your Appointment Today</h2>
     <p class="t-body">
       Online booking is open 24/7. Choose your service, pick your time, and we&rsquo;ll take care of the rest.
     </p>
-    <div class="btn-group" style="justify-content:center;">
+    <div class="btns" style="justify-content:center;">
       <a href="<?php echo esc_url($booking_url); ?>"
-         class="btn btn--black"
+         class="btn btn--bk"
          target="_blank" rel="noopener noreferrer">
         Book Online Now <?php echo ah_svg('arrow-right'); ?>
       </a>
-      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to book a salon appointment.')); ?>"
+      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to book a salon appointment.')); ?>"
          class="btn btn--wa"
          target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Book via WhatsApp

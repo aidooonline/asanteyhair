@@ -9,7 +9,6 @@ $business = get_theme_mod('ah_contact_name','Asantey Hair & Beauty');
 $email    = get_theme_mod('ah_contact_email','');
 $url      = home_url('/');
 ?>
-<div class="header-offset"></div>
 <section class="page-hero"><div class="page-hero__content"><span class="t-label">Legal</span><h1 class="t-h1">Terms &amp; Conditions</h1></div></section>
 <?php ah_breadcrumb(); ?>
 

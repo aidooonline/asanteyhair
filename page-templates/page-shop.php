@@ -11,8 +11,6 @@ echo ah_schema_breadcrumb([
 ]);
 ?>
 
-<div class="header-offset"></div>
-
 <section class="page-hero">
   <div class="page-hero__bg">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-straight.jpg' ); ?>"
@@ -29,7 +27,7 @@ echo ah_schema_breadcrumb([
 
 <?php ah_breadcrumb(); ?>
 
-<section class="section">
+<section class="s">
   <div class="wrap">
 
     <!-- Filter Bar -->
@@ -81,7 +79,7 @@ echo ah_schema_breadcrumb([
               <p class="product-card__price">from &pound;<?php echo esc_html($price); ?> <span>per bundle</span></p>
               <div class="product-card__actions">
                 <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'m interested in: ' . $title)); ?>"
-                   class="btn btn--black btn--sm" target="_blank" rel="noopener noreferrer">
+                   class="btn btn--bk btn--sm" target="_blank" rel="noopener noreferrer">
                   <?php echo ah_svg('whatsapp'); ?> Order Now
                 </a>
               </div>
@@ -97,8 +95,8 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Quality Callout -->
-<div class="section section--grey">
-  <div class="ah-container ah-reveal" style="text-align:center;max-width:800px;">
+<div class="s" style="background:#f8f8f8;">
+  <div class="wrap reveal" style="text-align:center;max-width:800px;">
     <span class="t-label">The Asantey Guarantee</span>
     <h2 class="t-h3" style="margin:1rem 0;">
       100% Human. 100% Cuticle-Aligned. Zero Compromise.
@@ -109,12 +107,12 @@ echo ah_schema_breadcrumb([
       The science behind minimal shedding, maximum lifespan, and hair that looks
       just as good in year three as it did on day one.
     </p>
-    <div class="btn-group" style="justify-content:center;margin-top:2rem;">
+    <div class="btns" style="justify-content:center;margin-top:2rem;">
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I need help choosing the right hair for me.')); ?>"
-         class="btn btn--black" target="_blank" rel="noopener noreferrer">
+         class="btn btn--bk" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Need Help Choosing?
       </a>
-      <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="btn btn--outline">
+      <a href="<?php echo esc_url(home_url('/faq/')); ?>" class="btn btn--ob">
         View FAQ
       </a>
     </div>

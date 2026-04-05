@@ -19,15 +19,13 @@ $raw_faqs = [
   ['question' => 'How long does raw hair last?',
    'answer'   => 'With proper care — regular washing, conditioning, minimal heat, and gentle handling — Asantey Cambodian raw hair typically lasts 3–5 years. Many of our clients still have their bundles in excellent condition after 4 years.'],
   ['question' => 'How many bundles do I need?',
-   'answer'   => 'For a full sew-in, most clients need 2–3 bundles. If you\'re using a closure or frontal, 2 bundles is usually sufficient for 12"–18". For 20" and above, 3 bundles is recommended for a fuller look.'],
+   'answer'   => 'For a full sew-in, most clients need 2–3 bundles. If you are using a closure or frontal, 2 bundles is usually sufficient for 12"–18". For 20" and above, 3 bundles is recommended for a fuller look.'],
   ['question' => 'Do all textures come in the same lengths?',
    'answer'   => 'Yes. All raw hair textures — body wave, deep wave, straight, kinky straight, loose wave, loose deep, waver wave, and Burmese curls — are available from 10" to 30" at the same pricing per length.'],
 ];
 
 echo ah_schema_faq( $raw_faqs );
 ?>
-
-<div class="header-offset"></div>
 
 <section class="page-hero">
   <div class="page-hero__bg">
@@ -46,7 +44,7 @@ echo ah_schema_faq( $raw_faqs );
 <?php ah_breadcrumb(); ?>
 
 <!-- What is Raw Hair -->
-<section class="split section--sm" id="what-is-raw-hair">
+<section class="split" id="what-is-raw-hair">
   <div class="split__media">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-kinky-straight.jpg' ); ?>"
          alt="Cambodian raw kinky straight hair — unprocessed single-donor"
@@ -72,12 +70,12 @@ echo ah_schema_faq( $raw_faqs );
       When we say it lasts 3–5 years, that is not a marketing line. It is what our
       clients actually experience.
     </p>
-    <div class="btn-group" style="margin-top:1.5rem;">
-      <a href="#pricing" class="btn btn--black">
+    <div class="btns" style="margin-top:1.5rem;">
+      <a href="#pricing" class="btn btn--bk">
         View Pricing <?php echo ah_svg('arrow-right'); ?>
       </a>
-      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order Cambodian Raw Hair.')); ?>"
-         class="btn btn--outline" target="_blank" rel="noopener noreferrer">
+      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order Cambodian Raw Hair.')); ?>"
+         class="btn btn--ob" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
       </a>
     </div>
@@ -85,8 +83,8 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- Trust bar -->
-<div class="trust-bar">
-  <div class="trust-bar__inner">
+<div class="marquee-strip marquee-strip--dark">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2rem;">
     <?php
     $trust = [
       ['sparkle','Single Donor'],
@@ -96,15 +94,15 @@ echo ah_schema_faq( $raw_faqs );
       ['heart','Minimal Shedding'],
     ];
     foreach($trust as $i => $t):
-      echo '<span class="trust-bar__item">' . ah_svg($t[0]) . esc_html($t[1]) . '</span>';
-      if($i < count($trust)-1) echo '<span class="trust-bar__divider"></span>';
+      echo '<span class="marquee-item">' . ah_svg($t[0]) . esc_html($t[1]) . '</span>';
+      if($i < count($trust)-1) echo '<span ></span>';
     endforeach;
     ?>
   </div>
 </div>
 
 <!-- Texture Grid -->
-<section class="section" id="textures" aria-labelledby="textures-heading">
+<section class="s" id="textures" aria-labelledby="textures-heading">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Available Textures</span>
@@ -137,7 +135,7 @@ echo ah_schema_faq( $raw_faqs );
           </div>
           <h3 class="texture-item__name"><?php echo esc_html($name); ?></h3>
           <p class="texture-item__from">from &pound;<?php echo esc_html($raw_from); ?></p>
-          <p class="t-body" style="margin-top:var(--gap2);"><?php echo esc_html($desc); ?></p>
+          <p class="t-body" style="margin-top:0.5rem;"><?php echo esc_html($desc); ?></p>
         </div>
       <?php endforeach; ?>
     </div>
@@ -145,7 +143,7 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- Full Pricing Table -->
-<section class="section section--grey" id="pricing" aria-labelledby="pricing-heading">
+<section class="s" style="background:#f8f8f8;" id="pricing" aria-labelledby="pricing-heading">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Transparent Pricing</span>
@@ -160,7 +158,7 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- Care Teaser -->
-<section class="split split--rev section--sm">
+<section class="split split--rev">
   <div class="split__media">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-loose-wave.jpg' ); ?>"
          alt="Caring for your Cambodian raw hair extensions"
@@ -176,29 +174,29 @@ echo ah_schema_faq( $raw_faqs );
       storage are the four pillars of long-lasting raw hair.
     </p>
     <a href="<?php echo esc_url(home_url('/hair-care-guide/')); ?>"
-       class="btn btn--outline" style="margin-top:1.5rem;">
+       class="btn btn--ob" style="margin-top:1.5rem;">
       Read the Hair Care Guide <?php echo ah_svg('arrow-right'); ?>
     </a>
   </div>
 </section>
 
 <!-- FAQ Accordion -->
-<section class="section" id="faq" aria-labelledby="faq-heading">
+<section class="s" id="faq" aria-labelledby="faq-heading">
   <div class="wrap wrap--narrow">
     <div class="sh sh--c reveal">
       <span class="t-label">Common Questions</span>
       <h2 id="faq-heading" class="t-h2">Raw Hair FAQ</h2>
       <span class="rule rule--center"></span>
     </div>
-    <div class="ah-accordion ah-reveal">
+    <div class="acc reveal">
       <?php foreach ( $raw_faqs as $faq ) : ?>
         <div class="accordion__item">
-          <button class="accordion__trigger" type="button" aria-expanded="false">
-            <span class="accordion__q"><?php echo esc_html($faq['question']); ?></span>
-            <span class="accordion__icon" aria-hidden="true"><?php echo ah_svg('plus'); ?></span>
+          <button class="acc__trigger" type="button" aria-expanded="false">
+            <span class="acc__q"><?php echo esc_html($faq['question']); ?></span>
+            <span class="acc__icon" aria-hidden="true"><?php echo ah_svg('plus'); ?></span>
           </button>
-          <div class="accordion__body">
-            <p class="accordion__ans"><?php echo esc_html($faq['answer']); ?></p>
+          <div class="acc__body">
+            <p class="acc__ans"><?php echo esc_html($faq['answer']); ?></p>
           </div>
         </div>
       <?php endforeach; ?>
@@ -207,7 +205,7 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- CTA -->
-<div class="cta-band">
+<div class="cta-band dark">
   <div class="wrap">
     <div class="reveal">
       <span class="t-label t-label--white">Ready to Order?</span>
@@ -216,8 +214,8 @@ echo ah_schema_faq( $raw_faqs );
         WhatsApp us with your texture, length, and quantity — and we&rsquo;ll confirm
         availability and send you an invoice within hours.
       </p>
-      <div class="btn-group" style="justify-content:center;">
-        <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order Cambodian Raw Hair bundles.')); ?>"
+      <div class="btns" style="justify-content:center;">
+        <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order Cambodian Raw Hair bundles.')); ?>"
            class="btn btn--wa" target="_blank" rel="noopener noreferrer">
           <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
         </a>

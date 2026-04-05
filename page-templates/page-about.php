@@ -31,7 +31,7 @@ echo ah_schema_breadcrumb([
 <?php ah_breadcrumb(); ?>
 
 <!-- Brand Story -->
-<section class="split section--sm" id="our-story" aria-labelledby="story-heading">
+<section class="split" id="our-story" aria-labelledby="story-heading">
   <div class="split__media">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-body-wave.jpg' ); ?>"
          alt="Asantey Hair &amp; Beauty — premium Cambodian hair bundles"
@@ -64,7 +64,7 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Our Values -->
-<section class="section section--grey" aria-labelledby="values-heading">
+<section class="s" style="background:#f8f8f8;" aria-labelledby="values-heading">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">What We Stand For</span>
@@ -75,14 +75,14 @@ echo ah_schema_breadcrumb([
       <?php
       $values = [
         ['gem',     'Authenticity',   'Every product is exactly what we say it is. No blends, no shortcuts, no compromise. Raw is raw. Virgin is virgin.'],
-        ['shield',  'Quality First',  'Our standards are non-negotiable. If a bundle doesn\'t meet the Asantey mark, it doesn\'t leave our hands.'],
-        ['heart',   'Client First',   'Your satisfaction is not a KPI — it\'s the reason we do this. We\'re here to guide, advise, and make your hair journey as smooth as our extensions.'],
+        ['shield',  'Quality First',  'Our standards are non-negotiable. If a bundle does not meet the Asantey mark, it does not leave our hands.'],
+        ['heart',   'Client First',   'Your satisfaction is not a KPI — it is the reason we do this. We\'re here to guide, advise, and make your hair journey as smooth as our extensions.'],
       ];
       foreach ( $values as $i => $v ) : ?>
         <div class="feat-card reveal ah-reveal--delay-<?php echo $i + 1; ?>">
-          <div class="feature-card__icon"><?php echo ah_svg($v[0]); ?></div>
-          <h3 class="feature-card__title"><?php echo esc_html($v[1]); ?></h3>
-          <p class="feature-card__body"><?php echo esc_html($v[2]); ?></p>
+          <div class="feat-card__icon"><?php echo ah_svg($v[0]); ?></div>
+          <h3 class="feat-card__title"><?php echo esc_html($v[1]); ?></h3>
+          <p class="feat-card__body"><?php echo esc_html($v[2]); ?></p>
         </div>
       <?php endforeach; ?>
     </div>
@@ -90,7 +90,7 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Why Cambodian Hair — SEO Content -->
-<section class="split split--rev section--sm" id="cambodian-hair" aria-labelledby="cambodian-heading">
+<section class="split split--rev" id="cambodian-hair" aria-labelledby="cambodian-heading">
   <div class="split__media">
     <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-deep-wave.jpg' ); ?>"
          alt="Cambodian raw hair extensions — deep wave texture"
@@ -120,10 +120,10 @@ echo ah_schema_breadcrumb([
       what quality hair does.
     </p>
     <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:1.5rem;">
-      <a href="<?php echo esc_url(home_url('/raw-hair/')); ?>" class="btn btn--black">
+      <a href="<?php echo esc_url(home_url('/raw-hair/')); ?>" class="btn btn--bk">
         Shop Raw Hair <?php echo ah_svg('arrow-right'); ?>
       </a>
-      <a href="<?php echo esc_url(home_url('/virgin-hair/')); ?>" class="btn btn--outline">
+      <a href="<?php echo esc_url(home_url('/virgin-hair/')); ?>" class="btn btn--ob">
         Shop Virgin Hair
       </a>
     </div>
@@ -131,8 +131,8 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Stats Strip -->
-<div class="trust-bar" style="padding:2.5rem 1.5rem;">
-  <div class="trust-bar__inner" style="gap:4rem;">
+<div class="marquee-strip marquee-strip--dark" style="padding:2.5rem 1.5rem;">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2rem;" style="gap:4rem;">
     <?php
     $stats = [
       ['10+',      'Hair Textures Available'],
@@ -143,10 +143,10 @@ echo ah_schema_breadcrumb([
     ];
     foreach ( $stats as $stat ) : ?>
       <div style="text-align:center;">
-        <div style="font-family:var(--ah-font-display);font-size:var(--ah-text-4xl);font-weight:300;color:var(--gold);line-height:1;">
+        <div style="font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--gold);line-height:1;">
           <?php echo esc_html($stat[0]); ?>
         </div>
-        <div style="font-size:var(--ah-text-xs);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:var(--gap2);">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:0.5rem;">
           <?php echo esc_html($stat[1]); ?>
         </div>
       </div>
@@ -155,7 +155,7 @@ echo ah_schema_breadcrumb([
 </div>
 
 <!-- Our Promise CTA -->
-<div class="cta-band">
+<div class="cta-band dark">
   <div class="wrap">
     <div class="reveal">
       <span class="t-label t-label--white">The Asantey Promise</span>
@@ -166,8 +166,8 @@ echo ah_schema_breadcrumb([
         Held to the Asantey standard — or we make it right.
         Your satisfaction is not optional. It&rsquo;s guaranteed.
       </p>
-      <div class="btn-group" style="justify-content:center;">
-        <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--black">
+      <div class="btns" style="justify-content:center;">
+        <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--bk">
           Explore Our Collections <?php echo ah_svg('arrow-right'); ?>
         </a>
         <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn--outline-white">
