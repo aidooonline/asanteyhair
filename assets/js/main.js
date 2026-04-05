@@ -248,6 +248,35 @@ function initAnchors(){
 /* ── MARQUEE PAUSE ON HOVER (already in CSS) ────────────────── */
 
 /* ── INIT ────────────────────────────────────────────────────── */
+
+function initHeroSlider(){
+  var slider = document.querySelector('#hero-slider');
+  if(!slider) return;
+  var slides = Array.from(slider.querySelectorAll('.hs-slide'));
+  var dots   = Array.from(slider.querySelectorAll('.hs-dot'));
+  var prev   = slider.querySelector('.hs-prev');
+  var next   = slider.querySelector('.hs-next');
+  var cur = 0, timer = null;
+  if(slides[0]) slides[0].classList.add('hs-slide--active');
+  if(slides.length <= 1) return;
+  function goTo(idx){
+    slides[cur].classList.remove('hs-slide--active');
+    if(dots[cur]) dots[cur].classList.remove('hs-dot--active');
+    cur = (idx + slides.length) % slides.length;
+    slides[cur].classList.add('hs-slide--active');
+    if(dots[cur]) dots[cur].classList.add('hs-dot--active');
+    var vid = slides[cur].querySelector('video');
+    if(vid){ vid.currentTime=0; vid.play().catch(function(){}); }
+  }
+  function start(){ clearInterval(timer); timer = setInterval(function(){ goTo(cur+1); }, 7000); }
+  dots.forEach(function(d,i){ d.addEventListener('click',function(){ goTo(i); start(); }); });
+  if(prev) prev.addEventListener('click',function(){ goTo(cur-1); start(); });
+  if(next) next.addEventListener('click',function(){ goTo(cur+1); start(); });
+  slider.addEventListener('mouseenter',function(){ clearInterval(timer); });
+  slider.addEventListener('mouseleave', start);
+  start();
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
   initHeroSlider();
   initHeader();
