@@ -365,11 +365,11 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 .split--white .rule{background:var(--ink);opacity:.2}
 
 /* ─── CATEGORY EDITORIAL CARDS ─────────────────────────────── */
-.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-height:560px}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:0 var(--gap);max-width:var(--max);margin-inline:auto}
 
 .cat-card{
   position:relative;overflow:hidden;
-  height:520px;background:var(--ink);display:block}
+  height:440px;border-radius:2px;background:var(--ink);display:block}
 .cat-card img{
   width:100%;height:100%;
   object-fit:cover;object-position:center center;
