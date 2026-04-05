@@ -74,13 +74,38 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 
     <div class="grid-3" style="gap:1.5rem;">
       <?php
+      // Images: Unsplash free licence — load directly from CDN on live server
       $hair_services = [
-        ['image'=>'client-result-1.jpg','title'=>'Braids','body'=>'From knotless box braids to jumbo braids — protective styles that are clean, neat, and built to last.'],
-        ['image'=>'client-result-2.jpg','title'=>'Cornrows','body'=>'Classic and intricate cornrow styles including straight backs, curved designs, and feed-in techniques.'],
-        ['image'=>'client-result-3.jpg','title'=>'Hair Treatments','body'=>'Deep conditioning, protein treatments, and scalp care to restore moisture and promote healthy growth.'],
-        ['image'=>'client-result-4.jpg','title'=>'Sew-In Installs','body'=>'Professional sew-in installation for bundles and closures/frontals. Flawless and long-lasting.'],
-        ['image'=>'client-result-5.jpg','title'=>'Closure & Frontal Installs','body'=>'Expert HD lace closure and frontal installation. Natural hairline, seamless blend, undetectable finish.'],
-        ['image'=>'client-result-6.jpg','title'=>'Natural Hair Care','body'=>'Wash, condition, detangle, and style for natural hair textures. Built to maintain length and health.'],
+        [
+          'image' => 'https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Braids',
+          'body'  => 'From knotless box braids to jumbo braids — protective styles that are clean, neat, and built to last. Book online for a consultation.',
+        ],
+        [
+          'image' => 'https://images.unsplash.com/photo-1626371580629-c4a367a7c1e0?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Cornrows',
+          'body'  => 'Classic and intricate cornrow styles including straight backs, curved designs, and feed-in techniques. Natural or with extensions.',
+        ],
+        [
+          'image' => 'https://images.unsplash.com/photo-1519421230655-29d406a80b48?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Hair Treatments',
+          'body'  => 'Deep conditioning, protein treatments, and scalp care designed to restore moisture, reduce breakage, and promote healthy hair growth.',
+        ],
+        [
+          'image' => 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Sew-In Installs',
+          'body'  => 'Professional sew-in installation for bundles and closures/frontals. Achieve a flawless, long-lasting install every time.',
+        ],
+        [
+          'image' => 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Closure & Frontal Installs',
+          'body'  => 'Expert HD lace closure and frontal installation. Natural hairline, seamless blend, undetectable finish.',
+        ],
+        [
+          'image' => 'https://images.unsplash.com/photo-1605980776566-0486c3ac7617?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Natural Hair Care',
+          'body'  => 'Wash, condition, detangle, and style services for natural hair textures. Designed to maintain length and promote healthy growth.',
+        ],
       ];
       foreach($hair_services as $i => $s): ?>
         <div class="service-card reveal d<?php echo ($i%3)+1; ?>">
@@ -117,9 +142,21 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
     <div class="grid-3" style="gap:1.5rem;">
       <?php
       $beauty_services = [
-        ['image'=>'client-result-5.jpg','title'=>'Lash Extensions','body'=>'Classic, hybrid, and volume lash sets. Long-lasting, lightweight, and beautifully finished.'],
-        ['image'=>'client-result-6.jpg','title'=>'Eyebrow Waxing','body'=>'Precise eyebrow shaping for a clean, defined arch that frames your face perfectly.'],
-        ['image'=>'client-result-7.jpg','title'=>'Eyebrow Threading','body'=>'Traditional threading for precise brow shaping. Ideal for sensitive skin or fine brow hair.'],
+        [
+          'image' => 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Lash Extensions',
+          'body'  => 'Classic, hybrid, and volume lash sets that enhance your natural eye shape. Long-lasting, lightweight, and beautifully finished.',
+        ],
+        [
+          'image' => 'https://images.unsplash.com/photo-1560869713-7d0a29430803?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Eyebrow Waxing',
+          'body'  => 'Precise eyebrow shaping using wax for a clean, defined arch that frames your face perfectly.',
+        ],
+        [
+          'image' => 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&auto=format&fit=crop&crop=top',
+          'title' => 'Eyebrow Threading',
+          'body'  => 'Traditional threading technique for precise, pain-managed brow shaping. Ideal for sensitive skin or fine brow hair.',
+        ],
       ];
       foreach($beauty_services as $i => $s): ?>
         <div class="service-card reveal d<?php echo $i+1; ?>">
