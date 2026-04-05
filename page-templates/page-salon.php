@@ -110,7 +110,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       foreach($hair_services as $i => $s): ?>
         <div class="service-card reveal d<?php echo ($i%3)+1; ?>">
           <div class="service-card__img">
-            <img src="<?php echo esc_url(AH_URI.'/assets/images/'.$s['image']); ?>"
+            <img src="<?php echo esc_url($s['image']); ?>"
                  alt="<?php echo esc_attr($s['title']); ?> at AHB Salon Nottingham"
                  loading="lazy" width="600" height="400">
           </div>
@@ -161,7 +161,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       foreach($beauty_services as $i => $s): ?>
         <div class="service-card reveal d<?php echo $i+1; ?>">
           <div class="service-card__img">
-            <img src="<?php echo esc_url(AH_URI.'/assets/images/'.$s['image']); ?>"
+            <img src="<?php echo esc_url($s['image']); ?>"
                  alt="<?php echo esc_attr($s['title']); ?> at AHB Salon Nottingham"
                  loading="lazy" width="600" height="400">
           </div>

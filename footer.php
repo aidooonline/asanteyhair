@@ -104,7 +104,7 @@
             <span class="contact-item__val"><?php echo esc_html($hours); ?></span>
           </div>
         </div>
-        <a href="https://asanteyhair.as.me/"
+        <a href="<?php echo esc_url( get_theme_mod( 'ah_booking_url', 'https://asanteyhair.as.me/' ) ); ?>"
            class="btn btn--ow btn--sm" target="_blank" rel="noopener noreferrer"
            style="margin-top:.75rem;">
           Book Appointment <?php echo ah_svg('arrow-right'); ?>

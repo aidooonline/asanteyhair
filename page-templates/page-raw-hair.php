@@ -102,7 +102,7 @@ echo ah_schema_faq( $raw_faqs );
 </div>
 
 <!-- Texture Grid -->
-<section class="s" id="textures" aria-labelledby="textures-heading">
+<section class="s s--white" id="textures" aria-labelledby="textures-heading">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Available Textures</span>
@@ -181,7 +181,7 @@ echo ah_schema_faq( $raw_faqs );
 </section>
 
 <!-- FAQ Accordion -->
-<section class="s" id="faq" aria-labelledby="faq-heading">
+<section class="s s--white" id="faq" aria-labelledby="faq-heading">
   <div class="wrap wrap--narrow">
     <div class="sh sh--c reveal">
       <span class="t-label">Common Questions</span>

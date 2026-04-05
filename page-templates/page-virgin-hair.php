@@ -82,7 +82,7 @@ echo ah_schema_faq($faqs);
   </div>
 </div>
 
-<section class="s" id="textures">
+<section class="s s--white" id="textures">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Available Textures</span>
@@ -132,7 +132,7 @@ echo ah_schema_faq($faqs);
   </div>
 </section>
 
-<section class="s" id="faq">
+<section class="s s--white" id="faq">
   <div class="wrap wrap--narrow">
     <div class="sh sh--c reveal">
       <span class="t-label">Common Questions</span>

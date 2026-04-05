@@ -147,7 +147,7 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- Full Pricing Tables -->
-<section class="s" id="pricing">
+<section class="s s--white" id="pricing">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Full Pricing</span>
@@ -191,7 +191,7 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- FAQ -->
-<section class="s" id="faq">
+<section class="s s--white" id="faq">
   <div class="wrap wrap--narrow">
     <div class="sh sh--c reveal">
       <span class="t-label">Common Questions</span>

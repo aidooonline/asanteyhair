@@ -17,7 +17,7 @@
   </ul>
   <div class="mnav__foot">
     <div class="mnav__btns">
-      <a href="https://asanteyhair.as.me/"
+      <a href="<?php echo esc_url( get_theme_mod( 'ah_booking_url', 'https://asanteyhair.as.me/' ) ); ?>"
          class="btn btn--ow btn--sm" target="_blank" rel="noopener noreferrer">
         Book Appointment
       </a>

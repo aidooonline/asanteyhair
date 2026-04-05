@@ -379,7 +379,7 @@ $cta_btn2  = get_theme_mod('ah_cta_btn2',  'WhatsApp Order');
             <a href="<?php echo esc_url(ah_whatsapp_url()); ?>" class="btn btn--ow" target="_blank" rel="noopener noreferrer">
                 <?php echo ah_svg('whatsapp'); ?> <?php echo esc_html($cta_btn2); ?>
             </a>
-            <a href="https://asanteyhair.as.me/" class="btn btn--ow" target="_blank" rel="noopener noreferrer">
+            <a href="<?php echo esc_url( get_theme_mod( 'ah_booking_url', 'https://asanteyhair.as.me/' ) ); ?>" class="btn btn--ow" target="_blank" rel="noopener noreferrer">
                 Book Appointment
             </a>
         </div>

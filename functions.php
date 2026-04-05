@@ -281,6 +281,13 @@ add_action( 'wp_head', function () {
     }
 }, 1 );
 
+/* Favicon (fallback if none set in Customizer) */
+add_action( 'wp_head', function () {
+    if ( ! has_site_icon() ) {
+        echo '<link rel="icon" href="' . esc_url( AH_ASSETS . '/images/favicon.svg' ) . '" type="image/svg+xml">' . "\n";
+    }
+}, 2 );
+
 /* ============================================================
    BODY CLASSES
    ============================================================ */

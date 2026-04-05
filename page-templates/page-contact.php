@@ -113,12 +113,6 @@ $map_url = get_theme_mod('ah_contact_map',     '');
         <!-- Social links -->
         <div style="margin-top:2rem;">
           <span class="t-label" style="display:block;margin-bottom:1rem;">Follow Us</span>
-          <style>
-          .ah-contact-socials { display:flex; gap:1rem; }
-          .ah-contact-socials a { width:40px;height:40px;background:#f8f8f8;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .2s ease,color .2s ease;}
-          .ah-contact-socials a:hover { background:var(--gold);color:#ffffff;}
-          .ah-contact-socials svg { width:18px;height:18px;}
-          </style>
           <div class="contact-socials">
             <?php
             $socials = ['instagram','facebook','tiktok','youtube'];

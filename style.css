@@ -886,6 +886,8 @@ select.form-control{
 .contact-socials a{width:40px;height:40px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all var(--t)}
 .contact-socials a:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 .contact-socials svg{width:17px;height:17px}
+.s--white .contact-socials a,.s--off .contact-socials a{background:#f8f8f8;border-color:transparent;color:var(--ink)}
+.s--white .contact-socials a:hover,.s--off .contact-socials a:hover{background:var(--gold);color:#fff}
 .meta-box-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:12px 0}
 .do-dont,.ah-do-dont{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-block:2rem}
 .do-dont__col,.ah-do-dont__col{padding:1.5rem;border-top:2px solid}
