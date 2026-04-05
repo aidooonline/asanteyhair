@@ -240,13 +240,11 @@ ah_newsletter_form() // AJAX newsletter signup HTML
 
 ## 7. KNOWN BUGS & ISSUES (as of April 2026)
 
-### HIGH PRIORITY — Visual bugs currently on site
+### HIGH PRIORITY -- Visual bugs currently on site
 
-**1. Salon page — service cards showing old icon layout (not images)**
-- Status: Code is correct in repo (Unsplash URLs in template)
-- Problem: Unsplash blocks hotlinking from other domains — images won't load via `<img src="https://images.unsplash.com/...">`
-- Fix needed: Download images to server, update paths to local `/assets/images/`
-- How to fix on server:
+**1. Salon page -- service card images** -- PARTIALLY FIXED
+- Code paths now correctly reference `AH_URI.'/assets/images/braids.jpg'` etc. (double-path bug fixed)
+- Images still need to be downloaded to the server:
   ```bash
   cd /home/asannmly/public_html/wp-content/themes/asanteyhair/assets/images
   curl -Lo braids.jpg "https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?w=600"
@@ -259,61 +257,42 @@ ah_newsletter_form() // AJAX newsletter signup HTML
   curl -Lo eyebrow-wax.jpg "https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?w=600"
   curl -Lo eyebrow-thread.jpg "https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?w=600"
   ```
-  Then update `page-templates/page-salon.php` to change the image paths from Unsplash URLs to:
-  `AH_URI.'/assets/images/braids.jpg'` etc.
 
-**2. Dark sections on some inner pages**
-- `page-raw-hair.php` — has 2 plain `.s` sections (texture grid, FAQ) — renders dark with white text
-- `page-virgin-hair.php` — same issue, 2 plain `.s` sections
-- `page-closures.php` — has 2 plain `.s` sections
-- `page-about.php` — split sections render correctly but no `.s--white` wrapper
-- `page-salon.php` — hair services section is plain `.s` (dark) — services section intentionally dark per design, but check with client
-- Fix: Change `class="s"` to `class="s s--white"` on any content section that should be white
+**2. Dark sections on inner pages** -- FIXED (commit 280076f)
+- raw-hair, virgin-hair, closures: all content sections changed to `.s.s--white`
 
-**3. Hero images — all pages**
-- All page heroes use product shots as backgrounds (raw-straight.jpg, raw-body-wave.jpg etc)
-- These are square product images being used as full-width hero backgrounds — looks poor
-- Fix: Download proper landscape hero images and upload via Customizer, OR
-  download from Pexels/Unsplash on the server and reference in templates
+**3. Hero images -- all pages** -- OPEN (server-side task)
+- All page heroes still use square product images as landscape backgrounds
+- Fix: Download proper landscape hero images from Pexels on the server
 
-**4. No favicon**
-- No favicon uploaded to WordPress
-- Fix: Upload a favicon via WP Admin → Appearance → Customize → Site Identity
+**4. Favicon** -- FIXED (commit 280076f)
+- SVG favicon added (`assets/images/favicon.svg`) with wp_head fallback
+- Client can override via WP Admin Site Identity
 
 ### MEDIUM PRIORITY
 
-**5. Contact page — no Google Maps**
-- The map shows a placeholder "Add Google Maps Embed URL in Customizer"
-- Fix: Client needs to add Google Maps embed URL in Customizer → Contact Details → Google Maps Embed URL
+**5. Contact page -- no Google Maps** -- OPEN (client task)
+- Fix: Client needs to add Google Maps embed URL in Customizer
 
-**6. Gallery overlay missing class**
-- `page-gallery.php` line 16: `<span >Client Result` — span has no class
-- Fix: Change to `<span class="gallery-item__label">Client Result`
+**6. Gallery overlay missing class** -- FIXED (was already correct in codebase)
 
-**7. Contact page — inline `<style>` tag**
-- `page-contact.php` has an inline `<style>` block for `.ah-contact-socials`
-- This is now using `.contact-socials` class in the HTML but inline style targets `.ah-contact-socials`
-- Fix: Remove the inline `<style>` block and move rules to `style.css`
+**7. Contact page inline style** -- FIXED (commit 280076f)
+- Inline `<style>` removed; `.s--white .contact-socials` overrides added to style.css
 
-**8. Salon page — contact items in split section**
-- Some contact items may still render SVGs without `.contact-item__icon` wrapper
-- Was fixed in last commit but verify on live site
+**8. Salon page -- contact item icon wrappers** -- FIXED (was already correct)
 
 ### LOW PRIORITY
 
-**9. Product cards on shop/homepage use fallback data**
-- No `hair_product` CPT posts have been created in WordPress
-- All product cards show static fallback data from PHP arrays
-- Fix: Go to WP Admin → Hair Products → Add New, create products with ACF fields
+**9. Product cards use fallback data** -- OPEN (client task)
+- No `hair_product` CPT posts created yet
+- Fix: Create products in WP Admin with ACF fields
 
-**10. Booking URL hardcoded**
-- Some templates use hardcoded `https://asanteyhair.as.me/` 
-- Should come from Customizer setting `ah_booking_url`
-- Fix: Replace hardcoded URL with `get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/')`
+**10. Booking URL hardcoded** -- FIXED (commit 280076f)
+- footer.php, front-page.php, nav-mobile.php all now use `get_theme_mod('ah_booking_url')`
 
-**11. Newsletter form has no backend**
-- The newsletter AJAX handler in `inc/forms.php` sends data but has no email service integration
-- Fix: Connect to Mailchimp API or similar in the `ah_handle_newsletter` function
+**11. Newsletter form has no backend** -- OPEN
+- AJAX handler exists but no email service integration
+- Fix: Connect to Mailchimp API or similar
 
 ---
 
@@ -321,25 +300,29 @@ ah_newsletter_form() // AJAX newsletter signup HTML
 
 ### Content (client's responsibility)
 - [ ] Upload real hero images for each page via Customizer
-- [ ] Add Google Maps embed URL in Customizer → Contact Details
-- [ ] Upload favicon via WP Admin → Appearance → Customize → Site Identity
-- [ ] Set up a WordPress nav menu via WP Admin → Appearance → Menus
-- [ ] Create hair_product CPT posts via WP Admin → Hair Products
-- [ ] Fill in Customizer → Contact Details (phone, email, address, hours)
-- [ ] Fill in Customizer → Social Media (Instagram, Facebook, TikTok, YouTube URLs)
+- [ ] Add Google Maps embed URL in Customizer
+- [ ] Set up a WordPress nav menu via WP Admin
+- [ ] Create hair_product CPT posts via WP Admin
+- [ ] Fill in Customizer Contact Details and Social Media URLs
 - [ ] Connect newsletter form to Mailchimp or email service
 
+### Server-side (SSH required)
+- [ ] Download salon service images (curl commands in section 7, issue #1)
+- [ ] Download proper landscape hero images from Pexels
+- [ ] Deploy: `cd /home/asannmly/public_html/wp-content/themes/asanteyhair && git pull origin main`
+
 ### Code (developer's responsibility)
-- [ ] Download salon service images to server and update paths in page-salon.php
-- [ ] Fix dark `.s` sections on raw-hair, virgin-hair, closures pages → add `s--white`
-- [ ] Fix gallery overlay span class
-- [ ] Fix contact page inline style block
-- [ ] Replace any remaining hardcoded booking URLs with Customizer setting
-- [ ] Add responsive fixes for texture-grid on mobile (currently 2-col at 768px)
-- [ ] Test and fix accordion on raw-hair and virgin-hair pages
-- [ ] Add lazy loading + proper srcset for hero images
+- [x] Fix dark `.s` sections on raw-hair, virgin-hair, closures pages
+- [x] Fix salon page double-path img src bug
+- [x] Fix gallery overlay span class
+- [x] Fix contact page inline style block
+- [x] Replace hardcoded booking URLs with Customizer setting
+- [x] Add responsive fixes for texture-grid (4-col > 3-col > 2-col)
+- [x] Add SVG favicon with wp_head fallback
+- [x] Verify accordion works on raw-hair and virgin-hair pages
+- [ ] Add lazy loading + proper srcset for hero images (blocked on proper hero images)
 - [ ] Implement newsletter form backend (Mailchimp integration)
-- [ ] Test on mobile thoroughly — especially hero slider touch, lightbox, mobile nav
+- [ ] Test on mobile thoroughly
 
 ---
 
@@ -426,7 +409,7 @@ php -l page-templates/page-salon.php && echo "OK"
 ```
 github.com/aidooonline/asanteyhair
 Branch: main
-Latest commit: 0a06546
+Latest commit: 280076f
 Git user: Aidoo Stephen <aidooonline@gmail.com>
 ```
 
