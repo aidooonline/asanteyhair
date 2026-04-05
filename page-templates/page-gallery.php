@@ -5,7 +5,7 @@
 <?php ah_breadcrumb(); ?>
 <section class="section">
   <div class="wrap">
-    <div class="section-head section-head--center reveal" style="margin-bottom:var(--gap12);">
+    <div class="sh sh--c reveal" style="margin-bottom:3rem;">
       <span class="t-label">Client Gallery</span>
       <h2 class="t-h2">See It to Believe It</h2>
       <span class="rule rule--center"></span>
@@ -16,8 +16,8 @@
         <div class="gallery-item"><img src="<?php echo esc_url(AH_URI.'/assets/images/client-result-'.$i.'.jpg'); ?>" alt="Asantey Hair &amp; Beauty client result <?php echo $i; ?>" loading="lazy" width="600" height="800"><div class="gallery-item__ov"><span >Client Result <?php echo $i; ?></span></div></div>
       <?php endfor; ?>
     </div>
-    <div style="text-align:center;margin-top:var(--gap16);" class="reveal">
-      <p class="t-body--lg" style="margin-bottom:var(--gap6);">Tag us on Instagram to be featured in our gallery.</p>
+    <div style="text-align:center;margin-top:4rem;" class="reveal">
+      <p class="t-body--lg" style="margin-bottom:1.5rem;">Tag us on Instagram to be featured in our gallery.</p>
       <?php if(get_theme_mod('ah_social_instagram')): ?>
         <a href="<?php echo esc_url(get_theme_mod('ah_social_instagram')); ?>" class="btn btn--black" target="_blank" rel="noopener noreferrer"><?php echo ah_svg('instagram'); ?> Follow on Instagram</a>
       <?php endif; ?>

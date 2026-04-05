@@ -31,14 +31,14 @@ $map_url = get_theme_mod('ah_contact_map',     '');
 
 <section class="section">
   <div class="wrap">
-    <div class="grid-2" style="gap:var(--gap16);align-items:start;">
+    <div class="grid-2" style="gap:4rem;align-items:start;">
 
       <!-- Contact Info -->
       <div class="reveal">
         <span class="t-label">Contact Details</span>
-        <h2 class="t-h3" style="margin:var(--gap4) 0;">Reach Us Directly</h2>
+        <h2 class="t-h3" style="margin:1rem 0;">Reach Us Directly</h2>
         <span class="rule"></span>
-        <p class="t-body" style="margin-bottom:var(--gap8);">
+        <p class="t-body" style="margin-bottom:2rem;">
           The fastest way to reach us is WhatsApp — we typically respond within a few hours.
           For order enquiries, please use our <a href="<?php echo esc_url(home_url('/order/')); ?>" style="color:var(--gold);text-decoration:underline;">Order Enquiry form</a>
           for a structured response.
@@ -107,18 +107,18 @@ $map_url = get_theme_mod('ah_contact_map',     '');
         <!-- WhatsApp CTA -->
         <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I have an enquiry for Asantey Hair & Beauty.')); ?>"
            class="btn btn--wa"
-           style="margin-top:var(--gap8);"
+           style="margin-top:2rem;"
            target="_blank" rel="noopener noreferrer">
           <?php echo ah_svg('whatsapp'); ?> Start a WhatsApp Chat
         </a>
 
         <!-- Social links -->
-        <div style="margin-top:var(--gap8);">
-          <span class="t-label" style="display:block;margin-bottom:var(--gap4);">Follow Us</span>
+        <div style="margin-top:2rem;">
+          <span class="t-label" style="display:block;margin-bottom:1rem;">Follow Us</span>
           <style>
-          .ah-contact-socials { display:flex; gap:var(--gap4); }
-          .ah-contact-socials a { width:40px;height:40px;background:var(--off);display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background var(--ah-transition-fast),color var(--ah-transition-fast);}
-          .ah-contact-socials a:hover { background:var(--gold);color:var(--ah-pure-white);}
+          .ah-contact-socials { display:flex; gap:1rem; }
+          .ah-contact-socials a { width:40px;height:40px;background:#f8f8f8;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .2s ease,color .2s ease;}
+          .ah-contact-socials a:hover { background:var(--gold);color:#ffffff;}
           .ah-contact-socials svg { width:18px;height:18px;}
           </style>
           <div class="contact-socials">
@@ -140,9 +140,9 @@ $map_url = get_theme_mod('ah_contact_map',     '');
       <!-- Contact Form -->
       <div class="reveal d2">
         <span class="t-label">Send Us a Message</span>
-        <h2 class="t-h3" style="margin:var(--gap4) 0;">Send a Message</h2>
+        <h2 class="t-h3" style="margin:1rem 0;">Send a Message</h2>
         <span class="rule"></span>
-        <p class="t-body" style="margin-bottom:var(--gap8);">
+        <p class="t-body" style="margin-bottom:2rem;">
           Fill in the form below and we&rsquo;ll get back to you within 24 hours.
           For urgent enquiries, please use WhatsApp.
         </p>
@@ -167,7 +167,7 @@ $map_url = get_theme_mod('ah_contact_map',     '');
   </div>
 <?php else: ?>
   <!-- Map placeholder — add Google Maps embed URL in Customizer → Contact Details → Google Maps Embed URL -->
-  <div style="background:var(--off);height:300px;display:flex;align-items:center;justify-content:center;">
+  <div style="background:#f8f8f8;height:300px;display:flex;align-items:center;justify-content:center;">
     <div style="text-align:center;color:var(--g9);">
       <p style="font-size:var(--ah-text-sm);">Add Google Maps Embed URL in Customizer &rarr; Contact Details</p>
     </div>
@@ -175,11 +175,11 @@ $map_url = get_theme_mod('ah_contact_map',     '');
 <?php endif; ?>
 
 <!-- Order via WhatsApp Alt -->
-<div class="section section--grey" style="padding:var(--gap16) var(--gap6);">
+<div class="section section--grey" style="padding:4rem 1.5rem;">
   <div class="wrap" style="text-align:center;">
     <div class="reveal">
-      <h3 class="t-h3" style="margin-bottom:var(--gap4);">Prefer to Order Directly?</h3>
-      <p class="t-body--lg" style="max-width:600px;margin:0 auto var(--gap8);">
+      <h3 class="t-h3" style="margin-bottom:1rem;">Prefer to Order Directly?</h3>
+      <p class="t-body--lg" style="max-width:600px;margin:0 auto 2rem;">
         WhatsApp us with your product, texture, length, and quantity — and we&rsquo;ll
         guide you through every step of the process.
       </p>

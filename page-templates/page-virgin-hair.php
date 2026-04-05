@@ -49,7 +49,7 @@ echo ah_schema_faq($faqs);
   </div>
   <div class="split__body reveal">
     <span class="t-label">Pure. Natural. Versatile.</span>
-    <h2 class="t-h3" style="margin:var(--gap4) 0;">What is Virgin Hair?</h2>
+    <h2 class="t-h3" style="margin:1rem 0;">What is Virgin Hair?</h2>
     <span class="rule"></span>
     <p class="t-body--lg">
       Our Cambodian virgin hair is 100% human, single-donor, and free from any
@@ -62,7 +62,7 @@ echo ah_schema_faq($faqs);
       Whether you wear it straight, curled, or in its natural wave pattern,
       Asantey virgin hair adapts to your style — not the other way around.
     </p>
-    <div class="btn-group" style="margin-top:var(--gap6);">
+    <div class="btn-group" style="margin-top:1.5rem;">
       <a href="#pricing" class="btn btn--black">View Pricing <?php echo ah_svg('arrow-right'); ?></a>
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I\'d like to order Cambodian Virgin Hair.')); ?>"
          class="btn btn--outline" target="_blank" rel="noopener noreferrer">
@@ -86,7 +86,7 @@ echo ah_schema_faq($faqs);
 
 <section class="section" id="textures">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Available Textures</span>
       <h2 class="t-h2">Choose Your Texture</h2>
       <span class="rule rule--center"></span>
@@ -123,7 +123,7 @@ echo ah_schema_faq($faqs);
 
 <section class="section section--grey" id="pricing">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Transparent Pricing</span>
       <h2 class="t-h2">Virgin Hair Price Per Bundle</h2>
       <span class="rule rule--center"></span>
@@ -136,7 +136,7 @@ echo ah_schema_faq($faqs);
 
 <section class="section" id="faq">
   <div class="wrap wrap--narrow">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Common Questions</span>
       <h2 class="t-h2">Virgin Hair FAQ</h2>
       <span class="rule rule--center"></span>

@@ -26,7 +26,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
     <p >
       Expert hair and beauty services in Nottingham. Book your appointment online in minutes.
     </p>
-    <div class="btn-group" style="margin-top:var(--gap8);">
+    <div class="btn-group" style="margin-top:2rem;">
       <a href="<?php echo esc_url($booking_url); ?>"
          class="btn btn--black"
          target="_blank" rel="noopener noreferrer">
@@ -65,7 +65,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 <section class="section" id="hair-services" aria-labelledby="hair-heading">
   <div class="wrap">
 
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Hair Services</span>
       <h2 id="hair-heading" class="t-h2">Expert Hair Services</h2>
       <span class="rule rule--center"></span>
@@ -124,7 +124,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 <section class="section section--grey" id="beauty-services" aria-labelledby="beauty-heading">
   <div class="wrap">
 
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Beauty Services</span>
       <h2 id="beauty-heading" class="t-h2">Complete Beauty Services</h2>
       <span class="rule rule--center"></span>
@@ -174,12 +174,12 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
   </div>
   <div class="split__body reveal">
     <span class="t-label">Visit Us</span>
-    <h2 class="t-h3" style="margin:var(--gap4) 0;">
+    <h2 class="t-h3" style="margin:1rem 0;">
       AHB Salon, Nottingham
     </h2>
     <span class="rule"></span>
 
-    <div class="contact-list" style="margin:var(--gap8) 0;">
+    <div class="contact-list" style="margin:2rem 0;">
       <div class="contact-item">
         <?php echo ah_svg('location'); ?>
         <div>
@@ -225,7 +225,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 <!-- Testimonials -->
 <section class="section section--grey" aria-labelledby="reviews-heading">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Client Love</span>
       <h2 id="reviews-heading" class="t-h2">What Our Clients Say</h2>
       <span class="rule rule--center"></span>

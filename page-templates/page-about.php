@@ -39,7 +39,7 @@ echo ah_schema_breadcrumb([
   </div>
   <div class="split__body reveal">
     <span class="t-label">Why We Exist</span>
-    <h2 id="story-heading" class="t-h3" style="margin:var(--gap4) 0;">
+    <h2 id="story-heading" class="t-h3" style="margin:1rem 0;">
       Founded on a Single Obsession: Quality
     </h2>
     <span class="rule"></span>
@@ -66,7 +66,7 @@ echo ah_schema_breadcrumb([
 <!-- Our Values -->
 <section class="section section--grey" aria-labelledby="values-heading">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">What We Stand For</span>
       <h2 id="values-heading" class="t-h2">Our Values</h2>
       <span class="rule rule--center"></span>
@@ -98,7 +98,7 @@ echo ah_schema_breadcrumb([
   </div>
   <div class="split__body reveal">
     <span class="t-label">The Science of Quality</span>
-    <h2 id="cambodian-heading" class="t-h3" style="margin:var(--gap4) 0;">
+    <h2 id="cambodian-heading" class="t-h3" style="margin:1rem 0;">
       Why Cambodian Hair?
     </h2>
     <span class="rule"></span>
@@ -119,7 +119,7 @@ echo ah_schema_breadcrumb([
       Cambodian hair holds up. That&rsquo;s not a marketing promise. It&rsquo;s simply
       what quality hair does.
     </p>
-    <div style="display:flex;gap:var(--gap5);flex-wrap:wrap;margin-top:var(--gap6);">
+    <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:1.5rem;">
       <a href="<?php echo esc_url(home_url('/raw-hair/')); ?>" class="btn btn--black">
         Shop Raw Hair <?php echo ah_svg('arrow-right'); ?>
       </a>
@@ -131,8 +131,8 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Stats Strip -->
-<div class="trust-bar" style="padding:var(--gap10) var(--gap6);">
-  <div class="trust-bar__inner" style="gap:var(--gap16);">
+<div class="trust-bar" style="padding:2.5rem 1.5rem;">
+  <div class="trust-bar__inner" style="gap:4rem;">
     <?php
     $stats = [
       ['10+',      'Hair Textures Available'],

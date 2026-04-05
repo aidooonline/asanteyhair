@@ -54,7 +54,7 @@ echo ah_schema_faq( $raw_faqs );
   </div>
   <div class="split__body reveal">
     <span class="t-label">What Makes It Different</span>
-    <h2 class="t-h3" style="margin:var(--gap4) 0;">What is Raw Hair?</h2>
+    <h2 class="t-h3" style="margin:1rem 0;">What is Raw Hair?</h2>
     <span class="rule"></span>
     <p class="t-body--lg">
       Raw hair is the purest form of hair extension. Collected from a single Cambodian donor,
@@ -72,7 +72,7 @@ echo ah_schema_faq( $raw_faqs );
       When we say it lasts 3–5 years, that is not a marketing line. It is what our
       clients actually experience.
     </p>
-    <div class="btn-group" style="margin-top:var(--gap6);">
+    <div class="btn-group" style="margin-top:1.5rem;">
       <a href="#pricing" class="btn btn--black">
         View Pricing <?php echo ah_svg('arrow-right'); ?>
       </a>
@@ -106,7 +106,7 @@ echo ah_schema_faq( $raw_faqs );
 <!-- Texture Grid -->
 <section class="section" id="textures" aria-labelledby="textures-heading">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Available Textures</span>
       <h2 id="textures-heading" class="t-h2">8 Textures. One Standard.</h2>
       <span class="rule rule--center"></span>
@@ -147,7 +147,7 @@ echo ah_schema_faq( $raw_faqs );
 <!-- Full Pricing Table -->
 <section class="section section--grey" id="pricing" aria-labelledby="pricing-heading">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Transparent Pricing</span>
       <h2 id="pricing-heading" class="t-h2">Raw Hair Price Per Bundle</h2>
       <span class="rule rule--center"></span>
@@ -168,7 +168,7 @@ echo ah_schema_faq( $raw_faqs );
   </div>
   <div class="split__body reveal">
     <span class="t-label">Protect Your Investment</span>
-    <h2 class="t-h3" style="margin:var(--gap4) 0;">How to Make It Last 5 Years</h2>
+    <h2 class="t-h3" style="margin:1rem 0;">How to Make It Last 5 Years</h2>
     <span class="rule"></span>
     <p class="t-body">
       Raw hair is durable by nature, but the right care routine makes all the difference
@@ -176,7 +176,7 @@ echo ah_schema_faq( $raw_faqs );
       storage are the four pillars of long-lasting raw hair.
     </p>
     <a href="<?php echo esc_url(home_url('/hair-care-guide/')); ?>"
-       class="btn btn--outline" style="margin-top:var(--gap6);">
+       class="btn btn--outline" style="margin-top:1.5rem;">
       Read the Hair Care Guide <?php echo ah_svg('arrow-right'); ?>
     </a>
   </div>
@@ -185,7 +185,7 @@ echo ah_schema_faq( $raw_faqs );
 <!-- FAQ Accordion -->
 <section class="section" id="faq" aria-labelledby="faq-heading">
   <div class="wrap wrap--narrow">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Common Questions</span>
       <h2 id="faq-heading" class="t-h2">Raw Hair FAQ</h2>
       <span class="rule rule--center"></span>

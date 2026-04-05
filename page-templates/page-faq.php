@@ -89,9 +89,9 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'FAQ',
 <section class="section">
   <div class="wrap wrap--narrow">
     <?php foreach($all_faqs as $category => $faqs): ?>
-      <div style="margin-bottom:var(--gap16);" class="reveal">
+      <div style="margin-bottom:4rem;" class="reveal">
         <span class="t-label"><?php echo esc_html($category); ?></span>
-        <h2 class="t-h4" style="margin:var(--gap3) 0 var(--gap8);"><?php echo esc_html($category); ?></h2>
+        <h2 class="t-h4" style="margin:var(--gap3) 0 2rem;"><?php echo esc_html($category); ?></h2>
         <div class="accordion">
           <?php foreach($faqs as $faq): ?>
             <div class="accordion__item">
@@ -106,9 +106,9 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'FAQ',
       </div>
     <?php endforeach; ?>
 
-    <div class="reveal" style="background:var(--off);padding:var(--gap10);text-align:center;">
+    <div class="reveal" style="background:#f8f8f8;padding:2.5rem;text-align:center;">
       <h3 class="t-h4" style="margin-bottom:var(--gap3);">Still Have Questions?</h3>
-      <p class="t-body" style="margin-bottom:var(--gap6);">Our team is available on WhatsApp to help you choose the right product, answer care questions, or assist with your order.</p>
+      <p class="t-body" style="margin-bottom:1.5rem;">Our team is available on WhatsApp to help you choose the right product, answer care questions, or assist with your order.</p>
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I have a question about Asantey Hair & Beauty.')); ?>"
          class="btn btn--wa" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Chat with Us on WhatsApp

@@ -100,7 +100,7 @@ echo ah_schema_breadcrumb([
 <div class="section section--grey">
   <div class="ah-container ah-reveal" style="text-align:center;max-width:800px;">
     <span class="t-label">The Asantey Guarantee</span>
-    <h2 class="t-h3" style="margin:var(--gap4) 0;">
+    <h2 class="t-h3" style="margin:1rem 0;">
       100% Human. 100% Cuticle-Aligned. Zero Compromise.
     </h2>
     <p class="t-body--lg">
@@ -109,7 +109,7 @@ echo ah_schema_breadcrumb([
       The science behind minimal shedding, maximum lifespan, and hair that looks
       just as good in year three as it did on day one.
     </p>
-    <div class="btn-group" style="justify-content:center;margin-top:var(--gap8);">
+    <div class="btn-group" style="justify-content:center;margin-top:2rem;">
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I need help choosing the right hair for me.')); ?>"
          class="btn btn--black" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Need Help Choosing?

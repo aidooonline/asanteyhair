@@ -293,17 +293,18 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
   background:linear-gradient(to bottom,transparent,rgba(255,255,255,.3))}
 
 /* ─── PAGE HERO (inner pages) ─────────────────────────────── */
-.phero{
+.phero,
+.page-hero{
   padding-top:calc(var(--hh) + clamp(3rem,6vw,5rem));
   padding-bottom:clamp(3rem,6vw,5rem);
   padding-inline:var(--gap);
   background:var(--ink);position:relative;overflow:hidden}
-.phero__bg{position:absolute;inset:0}
-.phero__bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.18}
-.phero__inner{position:relative;z-index:1;max-width:var(--max);margin-inline:auto}
-.phero .t-label{display:block;margin-bottom:1.125rem}
-.phero h1{color:var(--paper);max-width:16ch}
-.phero p{color:rgba(255,255,255,.5);max-width:500px;margin-top:1.5rem;
+.phero__bg,.page-hero__bg{position:absolute;inset:0}
+.phero__bg img,.page-hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center center;opacity:.35}
+.phero__inner,.page-hero__content{position:relative;z-index:1;max-width:var(--max);margin-inline:auto}
+.phero .t-label,.page-hero .t-label{display:block;margin-bottom:1.125rem}
+.phero h1,.page-hero h1{color:var(--paper);max-width:16ch}
+.phero p,.page-hero p{color:rgba(255,255,255,.55);max-width:540px;margin-top:1.5rem;
   font-size:1.05rem;line-height:1.8}
 
 /* ─── BREADCRUMB ───────────────────────────────────────────── */
@@ -1009,3 +1010,33 @@ select.form-control{
   writing-mode:vertical-rl;font-size:.55rem;
   letter-spacing:.28em;text-transform:uppercase;
   color:rgba(255,255,255,.25);z-index:10}
+
+/* ── INNER PAGE SECTIONS ─────────────────────────────────── */
+/* All inner page content sections default to white */
+.page-hero + * { }
+.page-content { background:#ffffff;color:#111111;padding-block:clamp(4rem,7vw,7rem) }
+.page-content h1,.page-content h2,.page-content h3 { color:#000000 }
+.page-content .t-label { color:#888888 }
+.page-content .t-body,.page-content .t-body--lg { color:#444444 }
+
+/* Inner page sections that are .s default to dark - override for white pages */
+.page-templates-page-shop .s,
+.page-templates-page-about .s,
+.page-templates-page-faq .s,
+.page-templates-page-contact .s,
+.page-templates-page-order .s,
+.page-templates-page-gallery .s { background:#ffffff }
+
+/* Force white sections on inner pages */
+body.page-template-page-templates-page-shop .s,
+body.page-template-page-templates-page-about .s:not(.s--black),
+body.page-template-page-templates-page-faq .s,
+body.page-template-page-templates-page-contact .s,
+body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#111111 }
+
+/* Page hero image height - taller for impact */
+.page-hero { min-height:380px;display:flex;flex-direction:column;justify-content:flex-end }
+.page-hero__content { padding-bottom:clamp(2.5rem,5vw,4rem) }
+
+/* Breadcrumb on inner pages */
+.page-hero + .bc { border-bottom:1px solid #e8e8e8 }

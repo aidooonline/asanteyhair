@@ -52,7 +52,7 @@ echo ah_schema_faq($faqs);
   </div>
   <div class="split__body reveal">
     <span class="t-label">Why HD Lace?</span>
-    <h2 class="t-h3" style="margin:var(--gap4) 0;">The Invisible Lace Standard</h2>
+    <h2 class="t-h3" style="margin:1rem 0;">The Invisible Lace Standard</h2>
     <span class="rule"></span>
     <p class="t-body--lg">
       HD lace is the most advanced lace technology available in the hair industry.
@@ -65,7 +65,7 @@ echo ah_schema_faq($faqs);
       from your scalp. The result is an install so natural, even your stylist
       will do a double-take.
     </p>
-    <ul style="margin:var(--gap5) 0;list-style:none;display:flex;flex-direction:column;gap:var(--gap3);">
+    <ul style="margin:1.25rem 0;list-style:none;display:flex;flex-direction:column;gap:var(--gap3);">
       <?php
       $benefits = ['Ultra-thin Swiss lace — zero bulge','Matches every skin tone naturally','No bleaching required','Available in 6 sizes — closures and frontals','All textures available'];
       foreach($benefits as $b):?>
@@ -85,16 +85,16 @@ echo ah_schema_faq($faqs);
 <!-- Size Guide -->
 <section class="section section--grey" id="sizes">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Choose Your Size</span>
       <h2 class="t-h2">Available Sizes &amp; Textures</h2>
       <span class="rule rule--center"></span>
     </div>
 
-    <div class="grid-2" style="gap:var(--gap8);">
+    <div class="grid-2" style="gap:2rem;">
       <!-- Closures -->
       <div class="reveal">
-        <h3 class="t-h4" style="margin-bottom:var(--gap4);">HD Lace Closures</h3>
+        <h3 class="t-h4" style="margin-bottom:1rem;">HD Lace Closures</h3>
         <?php
         $closure_sizes = [
           '2x6'  => '2x6 Closure — Deep Centre Part',
@@ -106,7 +106,7 @@ echo ah_schema_faq($faqs);
           $rows = ah_get_pricing($type);
           $from = min(array_map('floatval', array_values($rows)));
           ?>
-          <div style="border:1px solid #e0e0e0;padding:var(--gap4) var(--gap5);margin-bottom:var(--gap3);display:flex;justify-content:space-between;align-items:center;">
+          <div style="border:1px solid #e0e0e0;padding:1rem 1.25rem;margin-bottom:var(--gap3);display:flex;justify-content:space-between;align-items:center;">
             <div>
               <strong style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);"><?php echo esc_html($label);?></strong>
               <div style="font-size:var(--ah-text-xs);color:var(--g9);margin-top:2px;">12"–22" &middot; All textures available</div>
@@ -117,7 +117,7 @@ echo ah_schema_faq($faqs);
       </div>
       <!-- Frontals -->
       <div class="reveal d2">
-        <h3 class="t-h4" style="margin-bottom:var(--gap4);">HD Lace Frontals</h3>
+        <h3 class="t-h4" style="margin-bottom:1rem;">HD Lace Frontals</h3>
         <?php
         $frontal_sizes = [
           '13x4' => '13x4 Frontal — Ear to Ear',
@@ -127,7 +127,7 @@ echo ah_schema_faq($faqs);
           $rows = ah_get_pricing($type);
           $from = min(array_map('floatval', array_values($rows)));
           ?>
-          <div style="border:1px solid #e0e0e0;padding:var(--gap4) var(--gap5);margin-bottom:var(--gap3);display:flex;justify-content:space-between;align-items:center;">
+          <div style="border:1px solid #e0e0e0;padding:1rem 1.25rem;margin-bottom:var(--gap3);display:flex;justify-content:space-between;align-items:center;">
             <div>
               <strong style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);"><?php echo esc_html($label);?></strong>
               <div style="font-size:var(--ah-text-xs);color:var(--g9);margin-top:2px;">12"–22" &middot; All textures available</div>
@@ -136,7 +136,7 @@ echo ah_schema_faq($faqs);
           </div>
         <?php endforeach;?>
 
-        <div style="background:var(--off);padding:var(--gap5);margin-top:var(--gap4);">
+        <div style="background:#f8f8f8;padding:1.25rem;margin-top:1rem;">
           <h4 style="font-family:var(--ah-font-display);font-size:var(--ah-text-xl);margin-bottom:var(--gap2);">Textures Available</h4>
           <p style="font-size:var(--ah-text-sm);color:var(--g5);">
             Straight &middot; Kinky Straight &middot; Yaki Straight &middot; Deep Wave &middot;
@@ -151,7 +151,7 @@ echo ah_schema_faq($faqs);
 <!-- Full Pricing Tables -->
 <section class="section" id="pricing">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Full Pricing</span>
       <h2 class="t-h2">Closures &amp; Frontals — Price Lists</h2>
       <span class="rule rule--center"></span>
@@ -170,7 +170,7 @@ echo ah_schema_faq($faqs);
 <!-- How Many Bundles Guide -->
 <section class="section section--grey">
   <div class="wrap wrap--narrow reveal">
-    <div class="section-head section-head--center">
+    <div class="sh sh--c">
       <span class="t-label">Bundle Guide</span>
       <h2 class="t-h2">How Many Bundles Do I Need?</h2>
       <span class="rule rule--center"></span>
@@ -195,7 +195,7 @@ echo ah_schema_faq($faqs);
 <!-- FAQ -->
 <section class="section" id="faq">
   <div class="wrap wrap--narrow">
-    <div class="section-head section-head--center reveal">
+    <div class="sh sh--c reveal">
       <span class="t-label">Common Questions</span>
       <h2 class="t-h2">HD Lace FAQ</h2>
       <span class="rule rule--center"></span>
