@@ -72,45 +72,27 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       </p>
     </div>
 
-    <div class="grid-3">
+    <div class="grid-3" style="gap:1.5rem;">
       <?php
       $hair_services = [
-        [
-          'icon'  => 'sparkle',
-          'title' => 'Braids',
-          'body'  => 'From knotless box braids to jumbo braids — protective styles that are clean, neat, and built to last. Book online for a consultation.',
-        ],
-        [
-          'icon'  => 'sparkle',
-          'title' => 'Cornrows',
-          'body'  => 'Classic and intricate cornrow styles including straight backs, curved designs, and feed-in techniques. Natural or with extensions.',
-        ],
-        [
-          'icon'  => 'heart',
-          'title' => 'Hair Treatments',
-          'body'  => 'Deep conditioning, protein treatments, and scalp care designed to restore moisture, reduce breakage, and promote healthy hair growth.',
-        ],
-        [
-          'icon'  => 'gem',
-          'title' => 'Sew-In Installs',
-          'body'  => 'Professional sew-in installation for bundles and closures/frontals. Achieve a flawless, long-lasting install every time.',
-        ],
-        [
-          'icon'  => 'gem',
-          'title' => 'Closure & Frontal Installs',
-          'body'  => 'Expert HD lace closure and frontal installation. Natural hairline, seamless blend, undetectable finish.',
-        ],
-        [
-          'icon'  => 'sparkle',
-          'title' => 'Natural Hair Care',
-          'body'  => 'Wash, condition, detangle, and style services for natural hair textures. Designed to maintain length and promote healthy growth.',
-        ],
+        ['image'=>'client-result-1.jpg','title'=>'Braids','body'=>'From knotless box braids to jumbo braids — protective styles that are clean, neat, and built to last.'],
+        ['image'=>'client-result-2.jpg','title'=>'Cornrows','body'=>'Classic and intricate cornrow styles including straight backs, curved designs, and feed-in techniques.'],
+        ['image'=>'client-result-3.jpg','title'=>'Hair Treatments','body'=>'Deep conditioning, protein treatments, and scalp care to restore moisture and promote healthy growth.'],
+        ['image'=>'client-result-4.jpg','title'=>'Sew-In Installs','body'=>'Professional sew-in installation for bundles and closures/frontals. Flawless and long-lasting.'],
+        ['image'=>'client-result-5.jpg','title'=>'Closure & Frontal Installs','body'=>'Expert HD lace closure and frontal installation. Natural hairline, seamless blend, undetectable finish.'],
+        ['image'=>'client-result-6.jpg','title'=>'Natural Hair Care','body'=>'Wash, condition, detangle, and style for natural hair textures. Built to maintain length and health.'],
       ];
       foreach($hair_services as $i => $s): ?>
-        <div class="feat-card reveal ah-reveal--delay-<?php echo ($i%3)+1; ?>">
-          <div class="feat-card__icon"><?php echo ah_svg($s['icon']); ?></div>
-          <h3 class="feat-card__title"><?php echo esc_html($s['title']); ?></h3>
-          <p class="feat-card__body"><?php echo esc_html($s['body']); ?></p>
+        <div class="service-card reveal d<?php echo ($i%3)+1; ?>">
+          <div class="service-card__img">
+            <img src="<?php echo esc_url(AH_URI.'/assets/images/'.$s['image']); ?>"
+                 alt="<?php echo esc_attr($s['title']); ?> at AHB Salon Nottingham"
+                 loading="lazy" width="600" height="400">
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
+            <p class="service-card__desc"><?php echo esc_html($s['body']); ?></p>
+          </div>
         </div>
       <?php endforeach; ?>
     </div>
@@ -132,30 +114,24 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       </p>
     </div>
 
-    <div class="grid-3">
+    <div class="grid-3" style="gap:1.5rem;">
       <?php
       $beauty_services = [
-        [
-          'icon'  => 'heart',
-          'title' => 'Lash Extensions',
-          'body'  => 'Classic, hybrid, and volume lash sets that enhance your natural eye shape. Long-lasting, lightweight, and beautifully finished.',
-        ],
-        [
-          'icon'  => 'sparkle',
-          'title' => 'Eyebrow Waxing',
-          'body'  => 'Precise eyebrow shaping using wax for a clean, defined arch that frames your face perfectly.',
-        ],
-        [
-          'icon'  => 'gem',
-          'title' => 'Eyebrow Threading',
-          'body'  => 'Traditional threading technique for precise, pain-managed brow shaping. Ideal for sensitive skin or fine brow hair.',
-        ],
+        ['image'=>'client-result-5.jpg','title'=>'Lash Extensions','body'=>'Classic, hybrid, and volume lash sets. Long-lasting, lightweight, and beautifully finished.'],
+        ['image'=>'client-result-6.jpg','title'=>'Eyebrow Waxing','body'=>'Precise eyebrow shaping for a clean, defined arch that frames your face perfectly.'],
+        ['image'=>'client-result-7.jpg','title'=>'Eyebrow Threading','body'=>'Traditional threading for precise brow shaping. Ideal for sensitive skin or fine brow hair.'],
       ];
       foreach($beauty_services as $i => $s): ?>
-        <div class="feat-card reveal ah-reveal--delay-<?php echo $i+1; ?>">
-          <div class="feat-card__icon"><?php echo ah_svg($s['icon']); ?></div>
-          <h3 class="feat-card__title"><?php echo esc_html($s['title']); ?></h3>
-          <p class="feat-card__body"><?php echo esc_html($s['body']); ?></p>
+        <div class="service-card reveal d<?php echo $i+1; ?>">
+          <div class="service-card__img">
+            <img src="<?php echo esc_url(AH_URI.'/assets/images/'.$s['image']); ?>"
+                 alt="<?php echo esc_attr($s['title']); ?> at AHB Salon Nottingham"
+                 loading="lazy" width="600" height="400">
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
+            <p class="service-card__desc"><?php echo esc_html($s['body']); ?></p>
+          </div>
         </div>
       <?php endforeach; ?>
     </div>
@@ -179,7 +155,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 
     <div class="contact-list" style="margin:2rem 0;">
       <div class="contact-item">
-        <?php echo ah_svg('location'); ?>
+        <div class="contact-item__icon"><?php echo ah_svg('location'); ?></div>
         <div>
           <span class="contact-item__label">Address</span>
           <span class="contact-item__val">
@@ -188,7 +164,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
         </div>
       </div>
       <div class="contact-item">
-        <?php echo ah_svg('phone'); ?>
+        <div class="contact-item__icon"><?php echo ah_svg('phone'); ?></div>
         <div>
           <span class="contact-item__label">Phone / WhatsApp</span>
           <span class="contact-item__val">
@@ -197,7 +173,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
         </div>
       </div>
       <div class="contact-item">
-        <?php echo ah_svg('clock'); ?>
+        <div class="contact-item__icon"><?php echo ah_svg('clock'); ?></div>
         <div>
           <span class="contact-item__label">Opening Hours</span>
           <span class="contact-item__val">Mon–Sat: 9am–7pm</span>
