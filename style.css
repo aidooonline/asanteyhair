@@ -1089,3 +1089,69 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .s--off .price-table td{color:var(--ink);border-bottom-color:#e0e0e0}
 .s--off .prose h2,.s--off .prose h3{color:var(--ink)}
 .s--off .prose p,.s--off .prose li{color:var(--g5)}
+
+/* ── CLASS ALIASES — old names still used in templates ───── */
+/* Accordion */
+.accordion { border-top: 1px solid rgba(255,255,255,.08) }
+.s--white .accordion { border-top-color: #e8e8e8 }
+.s--off .accordion { border-top-color: #e0e0e0 }
+.accordion__item { border-bottom: 1px solid rgba(255,255,255,.08) }
+.s--white .accordion__item,.s--off .accordion__item { border-bottom-color: #e8e8e8 }
+.accordion__trigger { width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.375rem 0;background:none;border:none;cursor:pointer;text-align:left;gap:1rem }
+.accordion__q { font-family:var(--serif);font-size:1.2rem;font-weight:500;color:var(--paper);line-height:1.3 }
+.s--white .accordion__q,.s--off .accordion__q { color:var(--ink) }
+.accordion__icon { width:20px;height:20px;flex-shrink:0;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:all var(--t) }
+.accordion__icon svg { width:11px;height:11px }
+.accordion__item--open .accordion__icon { background:var(--paper);border-color:var(--paper);color:var(--ink);transform:rotate(45deg) }
+.s--white .accordion__item--open .accordion__icon,.s--off .accordion__item--open .accordion__icon { background:var(--ink);border-color:var(--ink);color:var(--paper) }
+.accordion__body { overflow:hidden;max-height:0;transition:max-height .42s var(--e) }
+.accordion__item--open .accordion__body { max-height:800px }
+.accordion__ans { padding-bottom:1.5rem;font-size:.925rem;color:rgba(255,255,255,.5);line-height:1.85 }
+.s--white .accordion__ans,.s--off .accordion__ans { color:var(--g5) }
+
+/* Texture grid aliases */
+.texture-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:2px }
+.texture-item__img { width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--mid) }
+.texture-item__img img { width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform var(--ts) }
+.texture-item__img:hover img { transform:scale(1.05) }
+.texture-item__name { font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--paper);margin-top:.875rem }
+.s--white .texture-item__name,.s--off .texture-item__name { color:var(--ink) }
+.texture-item__from { font-size:.78rem;color:var(--gold);font-weight:600;margin-top:.2rem }
+
+/* Button aliases */
+.btn--outline-white { background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.5) }
+.btn--outline-white:hover { background:var(--paper);color:var(--ink) }
+.btn--outline { background:transparent;color:var(--ink);border:1px solid var(--ink) }
+.btn--outline:hover { background:var(--ink);color:var(--paper) }
+.btn--black { background:var(--ink);color:var(--paper);border:1px solid var(--ink) }
+.btn--black:hover { background:transparent;color:var(--ink) }
+.btn-group { display:flex;flex-wrap:wrap;align-items:center;gap:.875rem }
+
+/* Label white variant */
+.t-label--white { font-family:var(--sans);font-size:.63rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4) }
+
+/* Header offset */
+.header-offset { height:var(--hh);display:block }
+
+/* Old ah- reveal classes */
+.ah-reveal { opacity:0;transform:translateY(20px);transition:opacity .65s var(--e),transform .65s var(--e) }
+.ah-reveal.visible { opacity:1;transform:translateY(0) }
+
+/* Trust bar (still in some templates) */
+.trust-bar { background:var(--ink);padding:1rem var(--gap) }
+.trust-bar__inner { max-width:var(--max);margin-inline:auto;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2rem }
+.trust-bar__item { display:flex;align-items:center;gap:.5rem;font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);white-space:nowrap }
+.trust-bar__item svg { width:13px;height:13px;flex-shrink:0;color:rgba(255,255,255,.6) }
+.trust-bar__divider { width:1px;height:16px;background:rgba(255,255,255,.1) }
+
+/* SVG icon sizing — fix oversized icons */
+.feat-card__icon svg,
+.contact-item__icon svg,
+.btn svg,
+.marquee-item svg,
+.trust-bar__item svg { width:16px;height:16px }
+.feat-card__icon { width:20px;height:20px;margin-bottom:1.25rem }
+
+/* Split section alias */
+.split--reverse .split__media { order:2 }
+.split--reverse .split__body { order:1 }

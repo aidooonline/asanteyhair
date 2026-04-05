@@ -169,7 +169,7 @@ function initForms(){
 
 /* ── SCROLL REVEAL ───────────────────────────────────────────── */
 function initReveal(){
-  const els = $$('.reveal');
+  const els = $$('.reveal, .ah-reveal');
   if(!els.length) return;
   if('IntersectionObserver' in window){
     const io = new IntersectionObserver(entries=>{
@@ -214,7 +214,7 @@ function initFilter(){
 
 /* ── ACCORDION ───────────────────────────────────────────────── */
 function initAccordion(){
-  $$('.acc__trigger').forEach(trigger=>{
+  $$('.acc__trigger, .accordion__trigger').forEach(trigger=>{
     trigger.setAttribute('aria-expanded','false');
     trigger.addEventListener('click',()=>{
       const item   = trigger.closest('.accordion__item');
