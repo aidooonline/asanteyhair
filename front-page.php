@@ -228,7 +228,7 @@ $prod_label = get_theme_mod('ah_prod_label', 'Featured Products');
 $prod_title = get_theme_mod('ah_prod_title', 'Shop the Collection');
 ?>
 <section class="s" aria-labelledby="prod-heading">
-    <div class="wrap">
+    <div class="wrap" style="max-width:var(--max);padding-inline:clamp(1rem,3vw,2.5rem);">
         <div class="sh reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
             <div>
                 <span class="t-label" style="display:block;margin-bottom:1rem;"><?php echo esc_html($prod_label); ?></span>
