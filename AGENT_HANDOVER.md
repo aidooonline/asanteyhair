@@ -244,18 +244,23 @@ ah_newsletter_form() // AJAX newsletter signup HTML
 
 **1. Salon page -- service card images** -- PARTIALLY FIXED
 - Code paths now correctly reference `AH_URI.'/assets/images/braids.jpg'` etc. (double-path bug fixed)
-- Images still need to be downloaded to the server:
+- IMPORTANT: All images MUST feature Black women/models -- this is a Black hair and beauty brand
+- Images still need to be downloaded to the server. Find appropriate photos on Pexels:
+  - braids.jpg: Search "black woman box braids" -- e.g. pexels.com/search/black%20woman%20box%20braids/
+  - cornrows.jpg: Search "black woman cornrows" -- confirmed ID 5672900 (Samson Okeniyi, Lagos)
+  - hair-treatment.jpg: Search "black woman hair salon treatment"
+  - sew-in.jpg: Search "black woman sew in weave hair"
+  - closure.jpg: Search "black woman lace closure frontal hair"
+  - natural-hair.jpg: Search "black woman natural curly hair beauty"
+  - lash-extensions.jpg: Search "black woman eyelash extensions beauty"
+  - eyebrow-wax.jpg: Search "black woman eyebrow beauty close up"
+  - eyebrow-thread.jpg: Search "black woman eyebrow threading"
+- Download format (replace {ID} with the Pexels photo ID you choose):
   ```bash
   cd /home/asannmly/public_html/wp-content/themes/asanteyhair/assets/images
-  curl -Lo braids.jpg "https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?w=600"
-  curl -Lo cornrows.jpg "https://images.pexels.com/photos/5069612/pexels-photo-5069612.jpeg?w=600"
-  curl -Lo hair-treatment.jpg "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?w=600"
-  curl -Lo sew-in.jpg "https://images.pexels.com/photos/3992874/pexels-photo-3992874.jpeg?w=600"
-  curl -Lo closure.jpg "https://images.pexels.com/photos/7755651/pexels-photo-7755651.jpeg?w=600"
-  curl -Lo natural-hair.jpg "https://images.pexels.com/photos/3754010/pexels-photo-3754010.jpeg?w=600"
-  curl -Lo lash-extensions.jpg "https://images.pexels.com/photos/3764013/pexels-photo-3764013.jpeg?w=600"
-  curl -Lo eyebrow-wax.jpg "https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?w=600"
-  curl -Lo eyebrow-thread.jpg "https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?w=600"
+  curl -Lo braids.jpg "https://images.pexels.com/photos/{ID}/pexels-photo-{ID}.jpeg?w=600"
+  curl -Lo cornrows.jpg "https://images.pexels.com/photos/5672900/pexels-photo-5672900.jpeg?w=600"
+  # ... repeat for each image with your chosen Pexels photo ID
   ```
 
 **2. Dark sections on inner pages** -- FIXED (commit 280076f)
