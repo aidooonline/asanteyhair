@@ -119,7 +119,7 @@ echo ah_schema_faq($faqs);
   </div>
 </section>
 
-<section class="s" style="background:#f8f8f8;" id="pricing">
+<section class="s s--off" id="pricing">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Transparent Pricing</span>

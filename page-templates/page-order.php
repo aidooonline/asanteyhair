@@ -16,7 +16,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
 </section>
 <?php ah_breadcrumb(); ?>
 
-<section class="s">
+<section class="s s--white">
   <div class="wrap">
     <div class="grid-2" style="gap:4rem;align-items:start;">
 
@@ -67,7 +67,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
 </section>
 
 <!-- Product Quick Links -->
-<section class="s" style="background:#f8f8f8;">
+<section class="s s--off">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Browse Before You Order</span>

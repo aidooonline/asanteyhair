@@ -39,7 +39,7 @@ echo ah_schema_faq($faqs);
 
 <?php ah_breadcrumb(); ?>
 
-<section class="s">
+<section class="s s--white">
   <div class="wrap wrap--narrow">
 
     <!-- TOC -->

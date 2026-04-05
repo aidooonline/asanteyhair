@@ -81,7 +81,7 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- Size Guide -->
-<section class="s" style="background:#f8f8f8;" id="sizes">
+<section class="s s--off" id="sizes">
   <div class="wrap">
     <div class="sh sh--c reveal">
       <span class="t-label">Choose Your Size</span>
@@ -166,7 +166,7 @@ echo ah_schema_faq($faqs);
 </section>
 
 <!-- How Many Bundles Guide -->
-<section class="s" style="background:#f8f8f8;">
+<section class="s s--off">
   <div class="wrap wrap--narrow reveal">
     <div class="sh sh--c">
       <span class="t-label">Bundle Guide</span>

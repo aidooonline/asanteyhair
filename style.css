@@ -1042,3 +1042,50 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .page-hero + .bc { border-bottom:1px solid #e8e8e8 }
 
 
+
+/* ── s--white extra component overrides ─────────────────── */
+.s--white .price-table caption{color:var(--ink)}
+.s--white .price-table th{background:var(--ink);color:var(--paper)}
+.s--white .price-table td{border-bottom-color:#e8e8e8;color:var(--ink)}
+.s--white .price-table tbody tr:nth-child(even) td{background:var(--g50)}
+.s--white .price-table tbody tr:hover td{background:#ebebeb}
+.s--white .filter-bar{border-bottom-color:#e0e0e0}
+.s--white .filter-btn{color:var(--g9)}
+.s--white .filter-btn.active,.s--white .filter-btn:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.s--white .tx-item__name{color:var(--ink)}
+.s--white .tx-item .t-body{color:var(--g5)}
+.s--white .tx-item__from{color:var(--gold)}
+.s--white .product-card{background:#f0f0f0}
+.s--white .product-card__cat{color:var(--g9)}
+.s--white .product-card__title{color:var(--ink)}
+.s--white .product-card__desc{color:var(--g5)}
+.s--white .step::before{color:var(--ink)}
+.s--white .step__title{color:var(--ink)}
+.s--white .step__body{color:var(--g5)}
+.s--white .step{border-right-color:#e0e0e0}
+.s--white .rule{background:var(--ink);opacity:.2}
+.s--white .prose h2,.s--white .prose h3{color:var(--ink)}
+.s--white .prose p,.s--white .prose li{color:var(--g5)}
+.s--white .prose td{border-bottom-color:#e0e0e0;color:var(--ink)}
+.s--white .prose th{background:var(--ink);color:var(--paper)}
+.s--white .prose blockquote{border-left-color:var(--ink);color:var(--ink)}
+.s--white .contact-item__icon{border-color:#e0e0e0;color:var(--ink)}
+.s--white .contact-item__label{color:var(--g9)}
+.s--white .contact-item__val{color:var(--ink)}
+.s--white .sh .t-label{color:var(--g5)}
+.s--white .btn--ob{color:var(--ink);border-color:var(--ink)}
+.s--white .btn--ob:hover{background:var(--ink);color:var(--paper)}
+.s--off .feat-card{border-top-color:#e0e0e0}
+.s--off .feat-card__title{color:var(--ink)}
+.s--off .feat-card__body{color:var(--g5)}
+.s--off .tcard{border-color:#e0e0e0}
+.s--off .tcard__quote{color:var(--ink)}
+.s--off .tcard__author{color:var(--g9)}
+.s--off h2,.s--off h3,.s--off h4{color:var(--ink)}
+.s--off .t-label{color:var(--g5)}
+.s--off .t-body,.s--off .t-body--lg{color:var(--g5)}
+.s--off .rule{background:var(--ink);opacity:.2}
+.s--off .price-table th{background:var(--ink);color:var(--paper)}
+.s--off .price-table td{color:var(--ink);border-bottom-color:#e0e0e0}
+.s--off .prose h2,.s--off .prose h3{color:var(--ink)}
+.s--off .prose p,.s--off .prose li{color:var(--g5)}

@@ -27,7 +27,7 @@ $map_url = get_theme_mod('ah_contact_map',     '');
 
 <?php ah_breadcrumb(); ?>
 
-<section class="s">
+<section class="s s--white">
   <div class="wrap">
     <div class="grid-2" style="gap:4rem;align-items:start;">
 
@@ -173,7 +173,7 @@ $map_url = get_theme_mod('ah_contact_map',     '');
 <?php endif; ?>
 
 <!-- Order via WhatsApp Alt -->
-<div class="s" style="background:#f8f8f8;" style="padding:4rem 1.5rem;">
+<div class="s s--off" style="padding:4rem 1.5rem;">
   <div class="wrap" style="text-align:center;">
     <div class="reveal">
       <h3 class="t-h3" style="margin-bottom:1rem;">Prefer to Order Directly?</h3>

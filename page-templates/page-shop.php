@@ -27,7 +27,7 @@ echo ah_schema_breadcrumb([
 
 <?php ah_breadcrumb(); ?>
 
-<section class="s">
+<section class="s s--white">
   <div class="wrap">
 
     <!-- Filter Bar -->
@@ -95,7 +95,7 @@ echo ah_schema_breadcrumb([
 </section>
 
 <!-- Quality Callout -->
-<div class="s" style="background:#f8f8f8;">
+<div class="s s--off">
   <div class="wrap reveal" style="text-align:center;max-width:800px;">
     <span class="t-label">The Asantey Guarantee</span>
     <h2 class="t-h3" style="margin:1rem 0;">

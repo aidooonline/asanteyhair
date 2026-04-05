@@ -2,7 +2,7 @@
 <section class="page-hero"><div class="page-hero__bg"><img src="<?php echo esc_url(AH_URI.'/assets/images/client-result-1.jpg'); ?>" alt="" aria-hidden="true" loading="eager" width="1280" height="500"></div>
 <div class="page-hero__content"><span class="t-label">Client Results</span><h1 class="t-h1">Real Women.<br>Real Results.</h1><p >Every photo is a genuine Asantey client. No filters. No stock images. Just quality you can see.</p></div></section>
 <?php ah_breadcrumb(); ?>
-<section class="s">
+<section class="s s--white">
   <div class="wrap">
     <div class="sh sh--c reveal" style="margin-bottom:3rem;">
       <span class="t-label">Client Gallery</span>

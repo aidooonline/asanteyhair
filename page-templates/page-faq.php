@@ -85,7 +85,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'FAQ',
 </section>
 <?php ah_breadcrumb(); ?>
 
-<section class="s">
+<section class="s s--white">
   <div class="wrap wrap--narrow">
     <?php foreach($all_faqs as $category => $faqs): ?>
       <div style="margin-bottom:4rem;" class="reveal">
