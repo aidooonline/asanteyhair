@@ -22,8 +22,8 @@ Text Domain: asantey-theme
   --sans:  "Jost", "Helvetica Neue", Arial, sans-serif;
 
   --hh:  88px;
-  --max: 1380px;
-  --gap: clamp(1.5rem, 4vw, 4rem);
+  --max: 1600px;
+  --gap: clamp(1rem, 2vw, 2rem);
   --e:   cubic-bezier(.22,.1,.25,1);
   --t:   .22s var(--e);
   --ts:  .6s var(--e);
@@ -72,7 +72,7 @@ svg{display:block;flex-shrink:0}
 
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap)}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 
 /* ─── TYPOGRAPHY ──────────────────────────────────────────── */
 h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
