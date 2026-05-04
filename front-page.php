@@ -137,19 +137,18 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 <div class="marquee-strip marquee-strip--dark">
     <div class="marquee-track">
         <?php
-        $items = [
-            ['sparkle','Premium Cambodian Hair'],['gem','HD Lace Specialists'],
-            ['shield','3–5 Year Lifespan'],['check','Minimal Shedding'],
-            ['location','UK Based · Nottingham'],['heart','Single Donor'],
-            ['sparkle','Cuticle Aligned'],['truck','Fast UK Dispatch'],
-            ['sparkle','Premium Cambodian Hair'],['gem','HD Lace Specialists'],
-            ['shield','3–5 Year Lifespan'],['check','Minimal Shedding'],
-            ['location','UK Based · Nottingham'],['heart','Single Donor'],
-            ['sparkle','Cuticle Aligned'],['truck','Fast UK Dispatch'],
-        ];
-        foreach($items as $item)
-            echo '<span class="marquee-item">'.ah_svg($item[0]).esc_html($item[1]).'</span>';
+        $marquee_raw = get_theme_mod( 'ah_marquee_items', "sparkle|Premium Cambodian Hair\ngem|HD Lace Specialists\nshield|3-5 Year Lifespan\ncheck|Minimal Shedding\nlocation|UK Based - Nottingham\nheart|Single Donor\nsparkle|Cuticle Aligned\ntruck|Fast UK Dispatch" );
+        $marquee_lines = array_filter( array_map( 'trim', explode( "\n", $marquee_raw ) ) );
+        // Double items for infinite scroll effect
+        $all_items = array_merge( $marquee_lines, $marquee_lines );
+        foreach ( $all_items as $line ) :
+            $parts = explode( '|', $line, 2 );
+            $icon  = trim( $parts[0] ?? 'sparkle' );
+            $label = trim( $parts[1] ?? '' );
+            if ( ! $label ) continue;
         ?>
+            <span class="marquee-item"><?php echo ah_svg( $icon ); ?><?php echo esc_html( $label ); ?></span>
+        <?php endforeach; ?>
     </div>
 </div>
 
@@ -158,6 +157,12 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 $cats_label = get_theme_mod('ah_cats_label', 'Our Collections');
 $cats_title = get_theme_mod('ah_cats_title', 'The Asantey Standard');
 $cats_desc  = get_theme_mod('ah_cats_desc',  'Every bundle, closure, and frontal is cuticle-aligned, single-donor, and held to exacting quality standards before it reaches your door.');
+
+$cat_defaults = [
+    1 => ['label'=>'Raw Hair','title'=>'Cambodian Raw Hair','from'=>'60','tag'=>'Unprocessed. Uncoloured. Unapologetically Premium.','url'=>'/raw-hair/','img'=>'raw-body-wave.jpg'],
+    2 => ['label'=>'Virgin Hair','title'=>'Virgin Hair Bundles','from'=>'50','tag'=>'Pure Quality. Lasting Beauty. 3-5 Year Lifespan.','url'=>'/virgin-hair/','img'=>'virgin-body-wave.png'],
+    3 => ['label'=>'HD Lace','title'=>'Closures & Frontals','from'=>'49','tag'=>'Invisible HD Lace. The Perfect Finish.','url'=>'/closures-frontals/','img'=>'closures-frontals-pricelist.jpg'],
+];
 ?>
 <section class="s s--sm" style="padding-inline:0;background:var(--ink);" aria-labelledby="cat-heading">
     <div class="wrap" style="margin-bottom:3rem;">
@@ -168,21 +173,22 @@ $cats_desc  = get_theme_mod('ah_cats_desc',  'Every bundle, closure, and frontal
         </div>
     </div>
     <div class="cat-grid">
-        <?php
-        $cats = [
-            ['label'=>'Raw Hair','title'=>'Cambodian Raw Hair','from'=>'£60','tag'=>'Unprocessed. Uncoloured. Unapologetically Premium.','image'=>AH_URI.'/assets/images/raw-body-wave.jpg','url'=>home_url('/raw-hair/')],
-            ['label'=>'Virgin Hair','title'=>'Virgin Hair Bundles','from'=>'£50','tag'=>'Pure Quality. Lasting Beauty. 3–5 Year Lifespan.','image'=>AH_URI.'/assets/images/virgin-body-wave.png','url'=>home_url('/virgin-hair/')],
-            ['label'=>'HD Lace','title'=>'Closures & Frontals','from'=>'£49','tag'=>'Invisible HD Lace. The Perfect Finish.','image'=>AH_URI.'/assets/images/closures-frontals-pricelist.jpg','url'=>home_url('/closures-frontals/')],
-        ];
-        foreach($cats as $i=>$cat): ?>
-            <a href="<?php echo esc_url($cat['url']); ?>" class="cat-card reveal d<?php echo $i+1; ?>">
-                <img src="<?php echo esc_url($cat['image']); ?>" alt="<?php echo esc_attr($cat['title']); ?>"
-                     loading="<?php echo $i===0?'eager':'lazy'; ?>" width="640" height="853">
+        <?php foreach($cat_defaults as $i => $d):
+            $title = get_theme_mod("ah_cat{$i}_title", $d['title']);
+            $tag   = get_theme_mod("ah_cat{$i}_tag",   $d['tag']);
+            $from  = get_theme_mod("ah_cat{$i}_from",  $d['from']);
+            $image = get_theme_mod("ah_cat{$i}_image") ?: AH_URI.'/assets/images/'.$d['img'];
+            $url   = get_theme_mod("ah_cat{$i}_url",   $d['url']);
+            $url   = ( strpos($url, 'http') === 0 ) ? $url : home_url($url);
+        ?>
+            <a href="<?php echo esc_url($url); ?>" class="cat-card reveal d<?php echo $i; ?>">
+                <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>"
+                     loading="<?php echo $i===1?'eager':'lazy'; ?>" width="640" height="853">
                 <div class="cat-card__ov"></div>
                 <div class="cat-card__body">
-                    <span class="cat-card__label">from <?php echo esc_html($cat['from']); ?></span>
-                    <h3 class="cat-card__title"><?php echo esc_html($cat['title']); ?></h3>
-                    <p class="cat-card__from"><?php echo esc_html($cat['tag']); ?></p>
+                    <span class="cat-card__label">from &pound;<?php echo esc_html($from); ?></span>
+                    <h3 class="cat-card__title"><?php echo esc_html($title); ?></h3>
+                    <p class="cat-card__from"><?php echo esc_html($tag); ?></p>
                     <span class="cat-card__link">Explore <?php echo ah_svg('arrow-right'); ?></span>
                 </div>
             </a>
@@ -194,6 +200,15 @@ $cats_desc  = get_theme_mod('ah_cats_desc',  'Every bundle, closure, and frontal
 <?php
 $why_label = get_theme_mod('ah_why_label', 'Why Asantey');
 $why_title = get_theme_mod('ah_why_title', 'Hair That Speaks for Itself');
+
+$feat_defaults = [
+    1 => ['icon'=>'gem',     'title'=>'Cambodian Origin',    'body'=>'Single-donor Cambodian hair, ethically sourced, never chemically processed. Full cuticle alignment for unmatched softness.'],
+    2 => ['icon'=>'shield',  'title'=>'3-5 Year Lifespan',   'body'=>'Not a claim - it is what our clients experience. Invest once, wear for years. The results speak for themselves.'],
+    3 => ['icon'=>'sparkle', 'title'=>'10+ Textures',        'body'=>'Body wave to Burmese curls. Straight to deep wave. Every texture in 10"-30" lengths. Wear it your way.'],
+    4 => ['icon'=>'check',   'title'=>'Minimal Shedding',    'body'=>'Double weft, double drawn. Cuticle-aligned root to tip. The science behind hair that stays full.'],
+    5 => ['icon'=>'heart',   'title'=>'HD Lace Specialists', 'body'=>'Our HD closures and frontals melt into every skin tone. No bleaching, no tinting. Completely undetectable.'],
+    6 => ['icon'=>'truck',   'title'=>'UK Based, Nottingham','body'=>'Salon-based in Nottingham. Orders dispatched 2-3 business days. No import fees. No waiting.'],
+];
 ?>
 <section class="s s--white" aria-labelledby="why-heading">
     <div class="wrap">
@@ -202,20 +217,16 @@ $why_title = get_theme_mod('ah_why_title', 'Hair That Speaks for Itself');
             <h2 id="why-heading" class="t-h2"><?php echo esc_html($why_title); ?></h2>
         </div>
         <div class="grid-3">
-            <?php
-            $feats = [
-                ['gem','Cambodian Origin','Single-donor Cambodian hair, ethically sourced, never chemically processed. Full cuticle alignment for unmatched softness.'],
-                ['shield','3–5 Year Lifespan','Not a claim — it is what our clients experience. Invest once, wear for years. The results speak for themselves.'],
-                ['sparkle','10+ Textures','Body wave to Burmese curls. Straight to deep wave. Every texture in 10"–30" lengths. Wear it your way.'],
-                ['check','Minimal Shedding','Double weft, double drawn. Cuticle-aligned root to tip. The science behind hair that stays full.'],
-                ['heart','HD Lace Specialists','Our HD closures and frontals melt into every skin tone. No bleaching, no tinting. Completely undetectable.'],
-                ['truck','UK Based, Nottingham','Salon-based in Nottingham. Orders dispatched 2–3 business days. No import fees. No waiting.'],
-            ];
-            foreach($feats as $i=>$f): ?>
-                <div class="feat-card reveal d<?php echo ($i%3)+1; ?>">
-                    <div class="feat-card__icon"><?php echo ah_svg($f[0]); ?></div>
-                    <h3 class="feat-card__title"><?php echo esc_html($f[1]); ?></h3>
-                    <p class="feat-card__body"><?php echo esc_html($f[2]); ?></p>
+            <?php foreach($feat_defaults as $i => $d):
+                $icon  = get_theme_mod("ah_feat{$i}_icon",  $d['icon']);
+                $title = get_theme_mod("ah_feat{$i}_title", $d['title']);
+                $body  = get_theme_mod("ah_feat{$i}_body",  $d['body']);
+                if ( ! $title ) continue;
+            ?>
+                <div class="feat-card reveal d<?php echo (($i-1)%3)+1; ?>">
+                    <div class="feat-card__icon"><?php echo ah_svg($icon); ?></div>
+                    <h3 class="feat-card__title"><?php echo esc_html($title); ?></h3>
+                    <p class="feat-card__body"><?php echo esc_html($body); ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -300,10 +311,12 @@ $gal_title = get_theme_mod('ah_gal_title', 'See It to Believe It');
             <h2 id="results-heading" class="t-h2"><?php echo esc_html($gal_title); ?></h2>
         </div>
         <div class="gallery reveal">
-            <?php for($i=1;$i<=6;$i++): ?>
+            <?php for($i=1;$i<=6;$i++):
+                $img = get_theme_mod("ah_gal_image_{$i}") ?: AH_URI.'/assets/images/client-result-'.$i.'.jpg';
+            ?>
                 <div class="gallery-item">
-                    <img src="<?php echo esc_url(AH_URI.'/assets/images/client-result-'.$i.'.jpg'); ?>"
-                         alt="Asantey Hair and Beauty — Client result <?php echo $i; ?>"
+                    <img src="<?php echo esc_url($img); ?>"
+                         alt="Asantey Hair and Beauty - Client result <?php echo $i; ?>"
                          loading="lazy" width="480" height="640">
                     <div class="gallery-item__ov"><span class="gallery-item__icon"><?php echo ah_svg('zoom'); ?></span></div>
                 </div>
@@ -369,7 +382,7 @@ $cta_btn2  = get_theme_mod('ah_cta_btn2',  'WhatsApp Order');
 ?>
 <div class="cta-band dark">
     <div class="wrap wrap--narrow reveal">
-        <span class="t-label">Ready to Elevate Your Look?</span>
+        <span class="t-label"><?php echo esc_html( get_theme_mod( 'ah_cta_label', 'Ready to Elevate Your Look?' ) ); ?></span>
         <h2><?php echo esc_html($cta_title); ?></h2>
         <p><?php echo esc_html($cta_body); ?></p>
         <div class="btns" style="justify-content:center;">
