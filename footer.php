@@ -46,28 +46,40 @@
 
     <div>
       <span class="t-label">Explore</span>
-      <ul class="foot-links" style="margin-top:.25rem;">
-        <?php
-        $links = ['Shop All'=>'/shop/','About Us'=>'/about/','Gallery'=>'/gallery/',
-                  'Hair Care Guide'=>'/hair-care-guide/','FAQ'=>'/faq/',
-                  'Order Enquiry'=>'/order/','Contact'=>'/contact/'];
-        foreach($links as $l=>$u):
-          echo '<li><a href="'.esc_url(home_url($u)).'">'.esc_html($l).'</a></li>';
-        endforeach; ?>
-      </ul>
+      <?php wp_nav_menu([
+        'theme_location' => 'footer',
+        'container'      => false,
+        'menu_class'     => 'foot-links',
+        'depth'          => 1,
+        'fallback_cb'    => function() {
+          echo '<ul class="foot-links">';
+          $links = ['Shop All'=>'/shop/','About Us'=>'/about/','Gallery'=>'/gallery/',
+                    'Hair Care Guide'=>'/hair-care-guide/','FAQ'=>'/faq/',
+                    'Order Enquiry'=>'/order/','Contact'=>'/contact/'];
+          foreach($links as $l=>$u)
+            echo '<li><a href="'.esc_url(home_url($u)).'">'.esc_html($l).'</a></li>';
+          echo '</ul>';
+        },
+      ]); ?>
     </div>
 
     <div>
       <span class="t-label">Products</span>
-      <ul class="foot-links" style="margin-top:.25rem;">
-        <?php
-        $pl = ['Cambodian Raw Hair'=>'/raw-hair/','Virgin Hair Bundles'=>'/virgin-hair/',
-               'HD Lace Closures'=>'/closures-frontals/','HD Lace Frontals'=>'/closures-frontals/',
-               'Salon Services'=>'/salon-services/','Shipping &amp; Returns'=>'/shipping-returns/'];
-        foreach($pl as $l=>$u):
-          echo '<li><a href="'.esc_url(home_url($u)).'">'.$l.'</a></li>';
-        endforeach; ?>
-      </ul>
+      <?php wp_nav_menu([
+        'theme_location' => 'products',
+        'container'      => false,
+        'menu_class'     => 'foot-links',
+        'depth'          => 1,
+        'fallback_cb'    => function() {
+          echo '<ul class="foot-links">';
+          $pl = ['Cambodian Raw Hair'=>'/raw-hair/','Virgin Hair Bundles'=>'/virgin-hair/',
+                 'HD Lace Closures'=>'/closures-frontals/','HD Lace Frontals'=>'/closures-frontals/',
+                 'Salon Services'=>'/salon-services/','Shipping &amp; Returns'=>'/shipping-returns/'];
+          foreach($pl as $l=>$u)
+            echo '<li><a href="'.esc_url(home_url($u)).'">'.$l.'</a></li>';
+          echo '</ul>';
+        },
+      ]); ?>
     </div>
 
     <div class="foot__contact">

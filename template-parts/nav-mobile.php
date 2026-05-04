@@ -1,20 +1,24 @@
 <nav class="mnav" id="mobile-nav" aria-label="Mobile navigation">
-  <ul class="mnav__list">
-    <li>
-      <a href="<?php echo esc_url(home_url('/shop/')); ?>">Shop</a>
-      <ul class="mnav__sub">
-        <li><a href="<?php echo esc_url(home_url('/raw-hair/')); ?>">Raw Hair</a></li>
-        <li><a href="<?php echo esc_url(home_url('/virgin-hair/')); ?>">Virgin Hair</a></li>
-        <li><a href="<?php echo esc_url(home_url('/closures-frontals/')); ?>">HD Lace Closures &amp; Frontals</a></li>
-      </ul>
-    </li>
-    <li><a href="<?php echo esc_url(home_url('/salon-services/')); ?>">Salon Services</a></li>
-    <li><a href="<?php echo esc_url(home_url('/gallery/')); ?>">Gallery</a></li>
-    <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
-    <li><a href="<?php echo esc_url(home_url('/hair-care-guide/')); ?>">Hair Care</a></li>
-    <li><a href="<?php echo esc_url(home_url('/faq/')); ?>">FAQ</a></li>
-    <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
-  </ul>
+  <?php wp_nav_menu([
+    'theme_location' => 'primary',
+    'container'      => false,
+    'menu_class'     => 'mnav__list',
+    'fallback_cb'    => function() {
+      echo '<ul class="mnav__list">';
+      $links = [
+        'Shop'              => '/shop/',
+        'Salon Services'    => '/salon-services/',
+        'Gallery'           => '/gallery/',
+        'About'             => '/about/',
+        'Hair Care'         => '/hair-care-guide/',
+        'FAQ'               => '/faq/',
+        'Contact'           => '/contact/',
+      ];
+      foreach($links as $label => $url)
+        echo '<li><a href="'.esc_url(home_url($url)).'">'.esc_html($label).'</a></li>';
+      echo '</ul>';
+    },
+  ]); ?>
   <div class="mnav__foot">
     <div class="mnav__btns">
       <a href="<?php echo esc_url( get_theme_mod( 'ah_booking_url', 'https://asanteyhair.as.me/' ) ); ?>"
