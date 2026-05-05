@@ -85,22 +85,6 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
     ] );
 
     /* --------------------------------------------------------
-       SECTION: HERO
-       -------------------------------------------------------- */
-    $wp_customize->add_section( 'ah_hero', [
-        'title' => 'Hero Section',
-        'panel' => 'ah_panel',
-    ] );
-
-    $text(  'ah_hero_label',    'Label (above title)',       'ah_hero', 'Premium Cambodian Hair Extensions' );
-    $text(  'ah_hero_title',    'Main Title',                'ah_hero', 'Luxury Hair. Real Results.' );
-    $text(  'ah_hero_subtitle', 'Subtitle',                  'ah_hero', 'Cambodian Raw & Virgin Hair Extensions — crafted for women who demand quality that lasts 3-5 years.' );
-    $text(  'ah_hero_cta1_text','CTA Button 1 Text',         'ah_hero', 'Shop Collections' );
-    $url(   'ah_hero_cta1_url', 'CTA Button 1 URL',          'ah_hero', '/shop/' );
-    $text(  'ah_hero_cta2_text','CTA Button 2 Text',         'ah_hero', 'Order via WhatsApp' );
-    $image( 'ah_hero_image',    'Hero Background Image',     'ah_hero' );
-
-    /* --------------------------------------------------------
        SECTION: CONTACT DETAILS
        -------------------------------------------------------- */
     $wp_customize->add_section( 'ah_contact', [
@@ -405,9 +389,9 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
        SECTION: HERO SLIDES (up to 3 slides)
        -------------------------------------------------------- */
     $wp_customize->add_section( 'ah_hero_slides', [
-        'title' => 'Hero Slides',
+        'title' => 'Hero Section',
         'panel' => 'ah_panel',
-        'description' => 'Set up to 3 hero slides. Each slide can be an image or a video (YouTube URL or direct MP4 URL).',
+        'description' => 'Edit the hero at the top of the homepage. Set up to 3 slides, each can be an image or a video (YouTube URL or direct MP4 URL).',
     ] );
 
     for ( $i = 1; $i <= 3; $i++ ) :
