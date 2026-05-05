@@ -15,14 +15,20 @@ $slides = [];
 for ( $i = 1; $i <= 3; $i++ ) {
     $type = get_theme_mod( "ah_slide{$i}_type", $i === 1 ? 'image' : '' );
     if ( ! $type ) continue;
+    // Video: uploaded file takes priority over URL
+    $video_upload = get_theme_mod( "ah_slide{$i}_video_upload", '' );
+    $video_url    = get_theme_mod( "ah_slide{$i}_video",        '' );
+    $video        = $video_upload ?: $video_url;
     $slides[] = [
         'type'     => $type,
         'image'    => get_theme_mod( "ah_slide{$i}_image",    $i === 1 ? 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=88&auto=format&fit=crop' : '' ),
-        'video'    => get_theme_mod( "ah_slide{$i}_video",    '' ),
+        'video'    => $video,
+        'muted'    => get_theme_mod( "ah_slide{$i}_muted",    'muted' ),
+        'duration' => intval( get_theme_mod( "ah_slide{$i}_duration", '6' ) ) ?: 6,
         'label'    => get_theme_mod( "ah_slide{$i}_label",    $i === 1 ? 'Premium Cambodian Hair Extensions' : '' ),
         'title'    => get_theme_mod( "ah_slide{$i}_title",    $i === 1 ? 'Luxury Hair.' : '' ),
         'italic'   => get_theme_mod( "ah_slide{$i}_italic",   $i === 1 ? 'Real Results.' : '' ),
-        'sub'      => get_theme_mod( "ah_slide{$i}_sub",      $i === 1 ? 'Premium Cambodian Raw and Virgin Hair Extensions — crafted for women who demand quality that lasts 3–5 years.' : '' ),
+        'sub'      => get_theme_mod( "ah_slide{$i}_sub",      $i === 1 ? 'Premium Cambodian Raw and Virgin Hair Extensions -- crafted for women who demand quality that lasts 3-5 years.' : '' ),
         'cta1'     => get_theme_mod( "ah_slide{$i}_cta1",     $i === 1 ? 'Shop Collections' : '' ),
         'cta1_url' => get_theme_mod( "ah_slide{$i}_cta1_url", $i === 1 ? home_url('/shop/') : '' ),
         'cta2'     => get_theme_mod( "ah_slide{$i}_cta2",     $i === 1 ? 'Order on WhatsApp' : '' ),
@@ -33,10 +39,12 @@ if ( empty($slides) ) {
         'type'     => 'image',
         'image'    => 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=88&auto=format&fit=crop',
         'video'    => '',
+        'muted'    => 'muted',
+        'duration' => 6,
         'label'    => 'Premium Cambodian Hair Extensions',
         'title'    => 'Luxury Hair.',
         'italic'   => 'Real Results.',
-        'sub'      => 'Premium Cambodian Raw and Virgin Hair Extensions — crafted for women who demand quality that lasts 3–5 years.',
+        'sub'      => 'Premium Cambodian Raw and Virgin Hair Extensions -- crafted for women who demand quality that lasts 3-5 years.',
         'cta1'     => 'Shop Collections',
         'cta1_url' => home_url('/shop/'),
         'cta2'     => 'Order on WhatsApp',
@@ -52,27 +60,32 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 <section class="hero-slider" aria-label="Hero" id="hero-slider">
 
     <?php foreach ( $slides as $idx => $slide ) :
-        $is_video = $slide['type'] === 'video' && $slide['video'];
+        $is_video   = $slide['type'] === 'video' && $slide['video'];
         $is_youtube = $is_video && ( strpos($slide['video'], 'youtube') !== false || strpos($slide['video'], 'youtu.be') !== false );
-        $is_mp4    = $is_video && ! $is_youtube;
+        $is_mp4     = $is_video && ! $is_youtube;
+        $muted      = $slide['muted'] === 'muted';
     ?>
     <div class="hs-slide<?php echo $idx === 0 ? ' hs-slide--active' : ''; ?>"
-         data-index="<?php echo $idx; ?>">
+         data-index="<?php echo $idx; ?>"
+         data-type="<?php echo $is_video ? 'video' : 'image'; ?>"
+         data-duration="<?php echo esc_attr($slide['duration']); ?>"
+         data-muted="<?php echo $muted ? 'true' : 'false'; ?>">
 
         <!-- Background: image or video -->
         <div class="hs-slide__bg">
             <?php if ( $is_youtube ) :
-                // Extract YouTube ID
                 preg_match('/(?:v=|\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $slide['video'], $yt);
                 $yt_id = $yt[1] ?? '';
                 ?>
-                <iframe class="hs-slide__video"
-                    src="https://www.youtube.com/embed/<?php echo esc_attr($yt_id); ?>?autoplay=1&mute=1&loop=1&playlist=<?php echo esc_attr($yt_id); ?>&controls=0&showinfo=0&modestbranding=1&rel=0&enablejsapi=1"
+                <iframe class="hs-slide__video hs-yt"
+                    id="hs-yt-<?php echo $idx; ?>"
+                    src="https://www.youtube.com/embed/<?php echo esc_attr($yt_id); ?>?autoplay=<?php echo $idx === 0 ? '1' : '0'; ?>&mute=<?php echo $muted ? '1' : '0'; ?>&loop=1&playlist=<?php echo esc_attr($yt_id); ?>&controls=0&showinfo=0&modestbranding=1&rel=0&enablejsapi=1"
                     allow="autoplay; encrypted-media" allowfullscreen
-                    loading="lazy" frameborder="0">
+                    loading="<?php echo $idx === 0 ? 'eager' : 'lazy'; ?>" frameborder="0">
                 </iframe>
             <?php elseif ( $is_mp4 ) : ?>
-                <video class="hs-slide__video" autoplay muted loop playsinline preload="auto">
+                <video class="hs-slide__video hs-mp4"
+                       autoplay <?php echo $muted ? 'muted' : ''; ?> loop playsinline preload="auto">
                     <source src="<?php echo esc_url($slide['video']); ?>" type="video/mp4">
                 </video>
             <?php elseif ( $slide['image'] ) : ?>
@@ -116,6 +129,12 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
     </div>
     <?php endforeach; ?>
 
+    <!-- Mute toggle (shown only when a video slide is active) -->
+    <button class="hs-mute" id="hs-mute" aria-label="Toggle sound" style="display:none;">
+        <svg class="hs-mute__on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <svg class="hs-mute__off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    </button>
+
     <!-- Slider navigation dots (only if multiple slides) -->
     <?php if ( $slide_count > 1 ) : ?>
         <div class="hs-dots" aria-label="Slide navigation">
@@ -128,6 +147,9 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
         <button class="hs-prev" aria-label="Previous slide">&#8249;</button>
         <button class="hs-next" aria-label="Next slide">&#8250;</button>
     <?php endif; ?>
+
+    <!-- Progress bar -->
+    <div class="hs-progress"><div class="hs-progress__bar" id="hs-progress-bar"></div></div>
 
     <div class="hs-scroll" aria-hidden="true">Scroll</div>
 

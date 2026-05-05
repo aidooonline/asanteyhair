@@ -400,20 +400,48 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
             'sanitize_callback' => 'sanitize_text_field',
         ] );
         $wp_customize->add_control( "ah_slide{$i}_type", [
-            'label'   => "Slide {$i} — Type",
+            'label'   => "Slide {$i} -- Type",
             'section' => 'ah_hero_slides',
             'type'    => 'select',
             'choices' => [ '' => 'Disabled', 'image' => 'Image', 'video' => 'Video (YouTube/MP4)' ],
         ] );
-        $image( "ah_slide{$i}_image", "Slide {$i} — Image", 'ah_hero_slides' );
-        $url(   "ah_slide{$i}_video", "Slide {$i} — Video URL (YouTube embed or .mp4)", 'ah_hero_slides', '' );
-        $text(  "ah_slide{$i}_label",    "Slide {$i} — Label",    'ah_hero_slides', $i === 1 ? 'Premium Cambodian Hair Extensions' : '' );
-        $text(  "ah_slide{$i}_title",    "Slide {$i} — Title",    'ah_hero_slides', $i === 1 ? 'Luxury Hair.' : '' );
-        $text(  "ah_slide{$i}_italic",   "Slide {$i} — Title (italic line)", 'ah_hero_slides', $i === 1 ? 'Real Results.' : '' );
-        $textarea( "ah_slide{$i}_sub",   "Slide {$i} — Subtitle", 'ah_hero_slides', $i === 1 ? 'Premium Cambodian Raw and Virgin Hair Extensions — crafted for women who demand quality that lasts 3-5 years.' : '' );
-        $text(  "ah_slide{$i}_cta1",     "Slide {$i} — CTA 1 Text", 'ah_hero_slides', $i === 1 ? 'Shop Collections' : '' );
-        $url(   "ah_slide{$i}_cta1_url", "Slide {$i} — CTA 1 URL",  'ah_hero_slides', $i === 1 ? '/shop/' : '' );
-        $text(  "ah_slide{$i}_cta2",     "Slide {$i} — CTA 2 Text", 'ah_hero_slides', $i === 1 ? 'Order on WhatsApp' : '' );
+        $image( "ah_slide{$i}_image", "Slide {$i} -- Image", 'ah_hero_slides' );
+
+        // Video: upload OR paste URL
+        $wp_customize->add_setting( "ah_slide{$i}_video_upload", [
+            'default'           => '',
+            'sanitize_callback' => 'esc_url_raw',
+            'transport'         => 'refresh',
+        ] );
+        $wp_customize->add_control( new WP_Customize_Upload_Control( $wp_customize, "ah_slide{$i}_video_upload", [
+            'label'      => "Slide {$i} -- Upload Video (MP4)",
+            'section'    => 'ah_hero_slides',
+            'mime_type'  => 'video',
+        ] ) );
+        $url( "ah_slide{$i}_video", "Slide {$i} -- OR Video URL (YouTube/MP4 link)", 'ah_hero_slides', '' );
+
+        // Mute toggle
+        $wp_customize->add_setting( "ah_slide{$i}_muted", [
+            'default'           => 'muted',
+            'sanitize_callback' => 'sanitize_text_field',
+        ] );
+        $wp_customize->add_control( "ah_slide{$i}_muted", [
+            'label'   => "Slide {$i} -- Video Sound",
+            'section' => 'ah_hero_slides',
+            'type'    => 'select',
+            'choices' => [ 'muted' => 'Start Muted', 'unmuted' => 'Start with Sound' ],
+        ] );
+
+        // Slide duration for images
+        $text( "ah_slide{$i}_duration", "Slide {$i} -- Duration (seconds, images only)", 'ah_hero_slides', '6' );
+
+        $text(  "ah_slide{$i}_label",    "Slide {$i} -- Label",    'ah_hero_slides', $i === 1 ? 'Premium Cambodian Hair Extensions' : '' );
+        $text(  "ah_slide{$i}_title",    "Slide {$i} -- Title",    'ah_hero_slides', $i === 1 ? 'Luxury Hair.' : '' );
+        $text(  "ah_slide{$i}_italic",   "Slide {$i} -- Title (italic line)", 'ah_hero_slides', $i === 1 ? 'Real Results.' : '' );
+        $textarea( "ah_slide{$i}_sub",   "Slide {$i} -- Subtitle", 'ah_hero_slides', $i === 1 ? 'Premium Cambodian Raw and Virgin Hair Extensions -- crafted for women who demand quality that lasts 3-5 years.' : '' );
+        $text(  "ah_slide{$i}_cta1",     "Slide {$i} -- CTA 1 Text", 'ah_hero_slides', $i === 1 ? 'Shop Collections' : '' );
+        $url(   "ah_slide{$i}_cta1_url", "Slide {$i} -- CTA 1 URL",  'ah_hero_slides', $i === 1 ? '/shop/' : '' );
+        $text(  "ah_slide{$i}_cta2",     "Slide {$i} -- CTA 2 Text", 'ah_hero_slides', $i === 1 ? 'Order on WhatsApp' : '' );
     endfor;
 
 } );

@@ -937,30 +937,52 @@ select.form-control{
   overflow:hidden;
   background:var(--ink)}
 
-/* Each slide - ALL stay position:absolute, only opacity changes */
+/* Each slide - crossfade with clip reveal */
 .hs-slide{
   position:absolute;inset:0;
   display:flex;align-items:flex-end;
-  opacity:0;
-  transition:opacity 1s ease;
-  pointer-events:none}
+  opacity:0;visibility:hidden;
+  transition:opacity 1.2s cubic-bezier(.4,0,.2,1),visibility 0s 1.2s;
+  pointer-events:none;z-index:0}
 .hs-slide--active{
-  opacity:1;
-  pointer-events:all;
-  z-index:1}
+  opacity:1;visibility:visible;
+  transition:opacity 1.2s cubic-bezier(.4,0,.2,1),visibility 0s 0s;
+  pointer-events:all;z-index:1}
+/* Previous slide stays briefly visible for crossfade */
+.hs-slide--leaving{
+  opacity:0;visibility:visible;z-index:1;
+  transition:opacity 1.2s cubic-bezier(.4,0,.2,1),visibility 0s 1.2s}
 
 /* Background */
 .hs-slide__bg{
   position:absolute;inset:0;overflow:hidden}
+
+/* Ken Burns zoom on images */
 .hs-slide__bg img{
   width:100%;height:100%;
   object-fit:cover;object-position:center center;
-  transition:transform 8s ease}
-.hs-slide--active .hs-slide__bg img{transform:scale(1.05)}
+  transform:scale(1);
+  animation:none}
+.hs-slide--active .hs-slide__bg img{
+  animation:kenBurns 8s ease-out forwards}
+@keyframes kenBurns{
+  0%{transform:scale(1)}
+  100%{transform:scale(1.08)}}
+
+/* Alternate direction for variety */
+.hs-slide:nth-child(2) .hs-slide__bg img{transform-origin:right center}
+.hs-slide:nth-child(3) .hs-slide__bg img{transform-origin:left top}
+
 .hs-slide__video{
   width:100%;height:100%;
   object-fit:cover;
   border:none}
+/* YouTube iframes need forced cover sizing */
+iframe.hs-slide__video{
+  width:100vw;height:56.25vw;
+  min-height:100%;min-width:177.78vh;
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%)}
 
 /* Overlay */
 .hs-slide__overlay{
@@ -971,7 +993,7 @@ select.form-control{
     rgba(0,0,0,.4) 45%,
     rgba(0,0,0,.1) 100%)}
 
-/* Content */
+/* Content with staggered entrance */
 .hs-slide__content{
   position:relative;z-index:2;width:100%;
   padding:0 var(--gap) clamp(4rem,8vw,7rem);
@@ -979,18 +1001,58 @@ select.form-control{
 .hs-slide__eyebrow{
   display:block;font-size:.6rem;font-weight:600;
   letter-spacing:.32em;text-transform:uppercase;
-  color:rgba(255,255,255,.4);margin-bottom:1.5rem}
+  color:rgba(255,255,255,.4);margin-bottom:1.5rem;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s .3s,transform .6s .3s}
+.hs-slide--active .hs-slide__eyebrow{opacity:1;transform:translateY(0)}
+
 .hs-slide__title{
   font-family:var(--serif);
   font-size:clamp(3rem,7vw,6.5rem);
   font-weight:300;line-height:.9;
   letter-spacing:-.04em;color:#ffffff;
-  margin-bottom:2rem;max-width:14ch}
+  margin-bottom:2rem;max-width:14ch;
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s .5s,transform .7s .5s cubic-bezier(.4,0,.2,1)}
+.hs-slide--active .hs-slide__title{opacity:1;transform:translateY(0)}
 .hs-slide__title em{font-style:italic;color:rgba(255,255,255,.5)}
+
 .hs-slide__sub{
   font-size:clamp(.875rem,1.5vw,1.05rem);
   color:rgba(255,255,255,.55);
-  max-width:440px;line-height:1.85;margin-bottom:2.5rem}
+  max-width:440px;line-height:1.85;margin-bottom:2.5rem;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s .7s,transform .6s .7s}
+.hs-slide--active .hs-slide__sub{opacity:1;transform:translateY(0)}
+
+.hs-slide .btns{
+  opacity:0;transform:translateY(15px);
+  transition:opacity .5s .9s,transform .5s .9s}
+.hs-slide--active .btns{opacity:1;transform:translateY(0)}
+
+/* Progress bar */
+.hs-progress{
+  position:absolute;bottom:0;left:0;right:0;
+  height:3px;background:rgba(255,255,255,.1);z-index:12}
+.hs-progress__bar{
+  height:100%;width:0;background:rgba(255,255,255,.5);
+  transition:none}
+.hs-progress__bar--running{
+  transition:width linear}
+
+/* Mute button */
+.hs-mute{
+  position:absolute;bottom:2rem;left:var(--gap);z-index:12;
+  background:rgba(0,0,0,.4);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s}
+.hs-mute:hover{background:rgba(255,255,255,.2)}
+.hs-mute[data-state="unmuted"] .hs-mute__off{display:none}
+.hs-mute[data-state="unmuted"] .hs-mute__on{display:block}
+.hs-mute[data-state="muted"] .hs-mute__on{display:none}
+.hs-mute[data-state="muted"] .hs-mute__off{display:block}
 
 /* Navigation dots */
 .hs-dots{
@@ -1022,6 +1084,12 @@ select.form-control{
   writing-mode:vertical-rl;font-size:.55rem;
   letter-spacing:.28em;text-transform:uppercase;
   color:rgba(255,255,255,.25);z-index:10}
+
+/* Hide arrows on mobile, keep dots + mute */
+@media(max-width:768px){
+  .hs-prev,.hs-next{display:none}
+  .hs-mute{bottom:4rem}
+}
 
 /* ── INNER PAGE SECTIONS ─────────────────────────────────── */
 /* All inner page content sections default to white */
