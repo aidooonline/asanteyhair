@@ -221,7 +221,8 @@ function initAccordion(){
       const isOpen = item.classList.contains('accordion__item--open');
       $$('.accordion__item--open').forEach(el=>{
         el.classList.remove('accordion__item--open');
-        el.querySelector('.acc__trigger').setAttribute('aria-expanded','false');
+        const t = el.querySelector('.acc__trigger, .accordion__trigger');
+        if(t) t.setAttribute('aria-expanded','false');
       });
       if(!isOpen){
         item.classList.add('accordion__item--open');

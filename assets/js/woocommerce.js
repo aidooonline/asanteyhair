@@ -50,6 +50,7 @@ function bindMiniCartRemove(){
       var productId = btn.dataset.product_id;
       var cartKey   = btn.dataset.cart_item_key;
       if(!cartKey) return;
+      if(typeof wc_cart_params === 'undefined') return;
       $.ajax({
         type: 'POST',
         url: wc_cart_params.wc_ajax_url.replace('%%endpoint%%','remove_from_cart'),

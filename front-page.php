@@ -130,7 +130,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
     <?php endforeach; ?>
 
     <!-- Mute toggle (shown only when a video slide is active) -->
-    <button class="hs-mute" id="hs-mute" aria-label="Toggle sound" style="display:none;">
+    <button class="hs-mute" id="hs-mute" aria-label="Toggle sound" data-state="muted" style="display:none;">
         <svg class="hs-mute__on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
         <svg class="hs-mute__off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
     </button>
@@ -189,9 +189,9 @@ $cat_defaults = [
 <section class="s s--sm" style="padding-inline:0;background:var(--ink);" aria-labelledby="cat-heading">
     <div class="wrap" style="margin-bottom:3rem;">
         <div class="sh sh--c reveal">
-            <span class="t-label"><?php echo esc_html($cats_label); ?></span>
-            <h2 id="cat-heading" class="t-h2"><?php echo esc_html($cats_title); ?></h2>
-            <?php if($cats_desc): ?><p class="t-body" style="margin-top:1rem;"><?php echo esc_html($cats_desc); ?></p><?php endif; ?>
+            <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $cats_label, ENT_QUOTES ) ); ?></span>
+            <h2 id="cat-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $cats_title, ENT_QUOTES ) ); ?></h2>
+            <?php if($cats_desc): ?><p class="t-body" style="margin-top:1rem;"><?php echo esc_html( wp_specialchars_decode( $cats_desc, ENT_QUOTES ) ); ?></p><?php endif; ?>
         </div>
     </div>
     <div class="cat-grid">
@@ -208,9 +208,9 @@ $cat_defaults = [
                      loading="<?php echo $i===1?'eager':'lazy'; ?>" width="640" height="853">
                 <div class="cat-card__ov"></div>
                 <div class="cat-card__body">
-                    <span class="cat-card__label">from &pound;<?php echo esc_html($from); ?></span>
-                    <h3 class="cat-card__title"><?php echo esc_html($title); ?></h3>
-                    <p class="cat-card__from"><?php echo esc_html($tag); ?></p>
+                    <span class="cat-card__label">from &pound;<?php echo esc_html( wp_specialchars_decode( $from, ENT_QUOTES ) ); ?></span>
+                    <h3 class="cat-card__title"><?php echo esc_html( wp_specialchars_decode( $title, ENT_QUOTES ) ); ?></h3>
+                    <p class="cat-card__from"><?php echo esc_html( wp_specialchars_decode( $tag, ENT_QUOTES ) ); ?></p>
                     <span class="cat-card__link">Explore <?php echo ah_svg('arrow-right'); ?></span>
                 </div>
             </a>
@@ -235,8 +235,8 @@ $feat_defaults = [
 <section class="s s--white" aria-labelledby="why-heading">
     <div class="wrap">
         <div class="sh sh--c reveal">
-            <span class="t-label"><?php echo esc_html($why_label); ?></span>
-            <h2 id="why-heading" class="t-h2"><?php echo esc_html($why_title); ?></h2>
+            <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $why_label, ENT_QUOTES ) ); ?></span>
+            <h2 id="why-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $why_title, ENT_QUOTES ) ); ?></h2>
         </div>
         <div class="grid-3">
             <?php foreach($feat_defaults as $i => $d):
@@ -247,8 +247,8 @@ $feat_defaults = [
             ?>
                 <div class="feat-card reveal d<?php echo (($i-1)%3)+1; ?>">
                     <div class="feat-card__icon"><?php echo ah_svg($icon); ?></div>
-                    <h3 class="feat-card__title"><?php echo esc_html($title); ?></h3>
-                    <p class="feat-card__body"><?php echo esc_html($body); ?></p>
+                    <h3 class="feat-card__title"><?php echo esc_html( wp_specialchars_decode( $title, ENT_QUOTES ) ); ?></h3>
+                    <p class="feat-card__body"><?php echo esc_html( wp_specialchars_decode( $body, ENT_QUOTES ) ); ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -264,8 +264,8 @@ $prod_title = get_theme_mod('ah_prod_title', 'Shop the Collection');
     <div class="wrap" style="max-width:var(--max);padding-inline:clamp(1rem,3vw,2.5rem);">
         <div class="sh reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
             <div>
-                <span class="t-label" style="display:block;margin-bottom:1rem;"><?php echo esc_html($prod_label); ?></span>
-                <h2 id="prod-heading" class="t-h2"><?php echo esc_html($prod_title); ?></h2>
+                <span class="t-label" style="display:block;margin-bottom:1rem;"><?php echo esc_html( wp_specialchars_decode( $prod_label, ENT_QUOTES ) ); ?></span>
+                <h2 id="prod-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $prod_title, ENT_QUOTES ) ); ?></h2>
             </div>
             <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--ow btn--sm">View All <?php echo ah_svg('arrow-right'); ?></a>
         </div>
@@ -285,9 +285,9 @@ $prod_title = get_theme_mod('ah_prod_title', 'Shop the Collection');
                         <div class="product-card__img"><img src="<?php echo esc_url(AH_URI.'/assets/images/'.$img); ?>" alt="<?php echo esc_attr($t); ?>" loading="lazy" width="600" height="800"><span class="product-card__badge"><?php echo esc_html(ucwords(str_replace('-',' ',$c))); ?></span></div>
                         <div class="product-card__body">
                             <span class="product-card__cat"><?php echo esc_html(ucwords(str_replace('-',' ',$c))); ?></span>
-                            <h3 class="product-card__title"><?php echo esc_html($t); ?></h3>
-                            <p class="product-card__desc"><?php echo esc_html($d); ?></p>
-                            <div class="product-card__price">from &pound;<?php echo esc_html($p); ?> <small>per bundle</small></div>
+                            <h3 class="product-card__title"><?php echo esc_html( wp_specialchars_decode( $t, ENT_QUOTES ) ); ?></h3>
+                            <p class="product-card__desc"><?php echo esc_html( wp_specialchars_decode( $d, ENT_QUOTES ) ); ?></p>
+                            <div class="product-card__price">from &pound;<?php echo esc_html( wp_specialchars_decode( $p, ENT_QUOTES ) ); ?> <small>per bundle</small></div>
                             <div class="product-card__actions"><a href="<?php echo esc_url(ah_whatsapp_url('Hello! I am interested in: '.$t)); ?>" class="btn btn--w btn--sm" target="_blank" rel="noopener noreferrer"><?php echo ah_svg('whatsapp'); ?> Order</a></div>
                         </div>
                     </article>
@@ -310,11 +310,11 @@ $story_image  = get_theme_mod('ah_story_image') ?: AH_URI.'/assets/images/client
         <img src="<?php echo esc_url($story_image); ?>" alt="<?php echo esc_attr($story_title); ?>" loading="lazy" width="800" height="1000">
     </div>
     <div class="split__body split--dark reveal">
-        <span class="t-label"><?php echo esc_html($story_label); ?></span>
-        <h2 class="t-h2" style="color:var(--paper);margin-top:1.125rem;"><?php echo esc_html($story_title); ?></h2>
+        <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $story_label, ENT_QUOTES ) ); ?></span>
+        <h2 class="t-h2" style="color:var(--paper);margin-top:1.125rem;"><?php echo esc_html( wp_specialchars_decode( $story_title, ENT_QUOTES ) ); ?></h2>
         <div class="rule rule--gold" style="margin-top:1.5rem;"></div>
-        <?php if($story_body1): ?><p class="t-body--lg" style="margin-top:1.5rem;"><?php echo esc_html($story_body1); ?></p><?php endif; ?>
-        <?php if($story_body2): ?><p class="t-body" style="margin-top:1rem;"><?php echo esc_html($story_body2); ?></p><?php endif; ?>
+        <?php if($story_body1): ?><p class="t-body--lg" style="margin-top:1.5rem;"><?php echo esc_html( wp_specialchars_decode( $story_body1, ENT_QUOTES ) ); ?></p><?php endif; ?>
+        <?php if($story_body2): ?><p class="t-body" style="margin-top:1rem;"><?php echo esc_html( wp_specialchars_decode( $story_body2, ENT_QUOTES ) ); ?></p><?php endif; ?>
         <div class="btns" style="margin-top:2.5rem;">
             <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn--ow">Our Story <?php echo ah_svg('arrow-right'); ?></a>
         </div>
@@ -329,8 +329,8 @@ $gal_title = get_theme_mod('ah_gal_title', 'See It to Believe It');
 <section class="s" aria-labelledby="results-heading">
     <div class="wrap">
         <div class="sh sh--c reveal">
-            <span class="t-label"><?php echo esc_html($gal_label); ?></span>
-            <h2 id="results-heading" class="t-h2"><?php echo esc_html($gal_title); ?></h2>
+            <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $gal_label, ENT_QUOTES ) ); ?></span>
+            <h2 id="results-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $gal_title, ENT_QUOTES ) ); ?></h2>
         </div>
         <div class="gallery reveal">
             <?php for($i=1;$i<=6;$i++):
@@ -379,8 +379,8 @@ $tests = [
 <section class="s" aria-labelledby="test-heading">
     <div class="wrap">
         <div class="sh sh--c reveal">
-            <span class="t-label"><?php echo esc_html($test_label); ?></span>
-            <h2 id="test-heading" class="t-h2"><?php echo esc_html($test_title); ?></h2>
+            <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $test_label, ENT_QUOTES ) ); ?></span>
+            <h2 id="test-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $test_title, ENT_QUOTES ) ); ?></h2>
         </div>
         <div class="grid-3">
             <?php foreach($tests as $i=>$t): ?>
@@ -405,14 +405,14 @@ $cta_btn2  = get_theme_mod('ah_cta_btn2',  'WhatsApp Order');
 <div class="cta-band dark">
     <div class="wrap wrap--narrow reveal">
         <span class="t-label"><?php echo esc_html( get_theme_mod( 'ah_cta_label', 'Ready to Elevate Your Look?' ) ); ?></span>
-        <h2><?php echo esc_html($cta_title); ?></h2>
-        <p><?php echo esc_html($cta_body); ?></p>
+        <h2><?php echo esc_html( wp_specialchars_decode( $cta_title, ENT_QUOTES ) ); ?></h2>
+        <p><?php echo esc_html( wp_specialchars_decode( $cta_body, ENT_QUOTES ) ); ?></p>
         <div class="btns" style="justify-content:center;">
             <a href="<?php echo esc_url($cta_btn1u); ?>" class="btn btn--w">
-                <?php echo esc_html($cta_btn1); ?> <?php echo ah_svg('arrow-right'); ?>
+                <?php echo esc_html( wp_specialchars_decode( $cta_btn1, ENT_QUOTES ) ); ?> <?php echo ah_svg('arrow-right'); ?>
             </a>
             <a href="<?php echo esc_url(ah_whatsapp_url()); ?>" class="btn btn--ow" target="_blank" rel="noopener noreferrer">
-                <?php echo ah_svg('whatsapp'); ?> <?php echo esc_html($cta_btn2); ?>
+                <?php echo ah_svg('whatsapp'); ?> <?php echo esc_html( wp_specialchars_decode( $cta_btn2, ENT_QUOTES ) ); ?>
             </a>
             <a href="<?php echo esc_url( get_theme_mod( 'ah_booking_url', 'https://asanteyhair.as.me/' ) ); ?>" class="btn btn--ow" target="_blank" rel="noopener noreferrer">
                 Book Appointment

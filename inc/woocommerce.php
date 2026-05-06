@@ -178,7 +178,7 @@ add_filter( 'woocommerce_add_to_cart_fragments', function ( $fragments ) {
     $fragments['#ah-mini-cart-body'] = '<div class="ah-mini-cart__body" id="ah-mini-cart-body">' . ob_get_clean() . '</div>';
 
     // Cart count bubble
-    $count = WC()->cart->get_cart_contents_count();
+    $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
     $fragments['.ah-cart-count'] = '<span class="ah-cart-count' . ( $count ? ' has-items' : '' ) . '">' . $count . '</span>';
 
     return $fragments;

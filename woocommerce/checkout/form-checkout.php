@@ -17,7 +17,10 @@ get_header(); ?>
 <section class="s s--white wc-main woocommerce-checkout">
     <div class="wrap wc-wrap" style="max-width:1100px;margin-inline:auto;">
         <?php woocommerce_output_all_notices(); ?>
-        <?php do_action( 'woocommerce_before_checkout_form', $checkout ); ?>
+        <?php
+        $checkout = WC()->checkout();
+        do_action( 'woocommerce_before_checkout_form', $checkout );
+        ?>
         <?php woocommerce_checkout_form(); ?>
         <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
     </div>

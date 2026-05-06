@@ -950,7 +950,7 @@ select.form-control{
   pointer-events:all;z-index:1}
 /* Previous slide stays briefly visible for crossfade */
 .hs-slide--leaving{
-  opacity:0;visibility:visible;z-index:1;
+  opacity:0;visibility:visible;z-index:0;
   transition:opacity 1.2s cubic-bezier(.4,0,.2,1),visibility 0s 1.2s}
 
 /* Background */

@@ -10,19 +10,23 @@ get_header();
 <!-- Page Hero -->
 <div class="page-hero page-hero--shop">
     <?php
-    $img = get_template_directory_uri() . '/assets/images/hero-shop.jpg';
+    $hero_file = file_exists( get_template_directory() . '/assets/images/hero-shop.jpg' )
+        ? get_template_directory_uri() . '/assets/images/hero-shop.jpg'
+        : get_template_directory_uri() . '/assets/images/hero-product.jpg';
     ?>
-    <img src="<?php echo esc_url($img); ?>" alt="Shop Asantey Hair Collections" class="page-hero__img" loading="eager">
+    <img src="<?php echo esc_url( $hero_file ); ?>" alt="Shop Asantey Hair Collections" class="page-hero__img" loading="eager">
     <div class="page-hero__overlay"></div>
     <div class="page-hero__content wrap">
         <?php if ( is_product_category() ) :
-            $cat = get_queried_object();
-            echo '<h1 class="page-hero__title t-h1">' . esc_html($cat->name) . '</h1>';
-            if ($cat->description) echo '<p class="page-hero__sub">' . esc_html($cat->description) . '</p>';
-        else : ?>
+            $cat = get_queried_object(); ?>
+            <h1 class="page-hero__title t-h1"><?php echo esc_html( $cat->name ); ?></h1>
+            <?php if ( $cat->description ) : ?>
+                <p class="page-hero__sub"><?php echo esc_html( $cat->description ); ?></p>
+            <?php endif; ?>
+        <?php else : ?>
             <span class="t-label" style="color:rgba(255,255,255,.5);display:block;margin-bottom:1rem;">Collections</span>
             <h1 class="page-hero__title t-h1">Shop All Hair</h1>
-            <p class="page-hero__sub">Cambodian Raw Hair · Virgin Hair · HD Lace Closures & Frontals</p>
+            <p class="page-hero__sub">Cambodian Raw Hair &middot; Virgin Hair &middot; HD Lace Closures &amp; Frontals</p>
         <?php endif; ?>
     </div>
 </div>
