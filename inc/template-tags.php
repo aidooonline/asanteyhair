@@ -6,6 +6,15 @@
 defined( 'ABSPATH' ) || exit;
 
 /* ============================================================
+   TEXT HELPER — prevents double-encoding of Customizer values
+   WordPress sanitize_text_field encodes &, esc_html encodes again.
+   This decodes first, then re-encodes once.
+   ============================================================ */
+function ah_text( string $val ): string {
+    return esc_html( wp_specialchars_decode( $val, ENT_QUOTES ) );
+}
+
+/* ============================================================
    SVG ICONS
    ============================================================ */
 function ah_svg( string $icon, string $class = '' ): string {

@@ -102,14 +102,14 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
         <!-- Content -->
         <div class="hs-slide__content">
             <?php if ( $slide['label'] ) : ?>
-                <span class="hs-slide__eyebrow"><?php echo esc_html($slide['label']); ?></span>
+                <span class="hs-slide__eyebrow"><?php echo esc_html( wp_specialchars_decode( $slide['label'] ) ); ?></span>
             <?php endif; ?>
             <h1 class="hs-slide__title">
-                <?php if ( $slide['title'] ) echo esc_html($slide['title']); ?>
-                <?php if ( $slide['italic'] ) : ?><br><em><?php echo esc_html($slide['italic']); ?></em><?php endif; ?>
+                <?php if ( $slide['title'] ) echo esc_html( wp_specialchars_decode( $slide['title'] ) ); ?>
+                <?php if ( $slide['italic'] ) : ?><br><em><?php echo esc_html( wp_specialchars_decode( $slide['italic'] ) ); ?></em><?php endif; ?>
             </h1>
             <?php if ( $slide['sub'] ) : ?>
-                <p class="hs-slide__sub"><?php echo esc_html($slide['sub']); ?></p>
+                <p class="hs-slide__sub"><?php echo esc_html( wp_specialchars_decode( $slide['sub'] ) ); ?></p>
             <?php endif; ?>
             <div class="btns">
                 <?php if ( $slide['cta1'] ) : ?>

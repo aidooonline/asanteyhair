@@ -56,6 +56,18 @@
 
     <!-- 3. Actions — right side -->
     <div class="hdr__actions">
+      <?php if ( class_exists( 'WooCommerce' ) ) : ?>
+      <button class="ah-cart-icon" id="ah-cart-icon" aria-label="Open cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="ah-cart-count<?php echo WC()->cart && WC()->cart->get_cart_contents_count() ? ' has-items' : ''; ?>">
+          <?php echo class_exists('WooCommerce') && WC()->cart ? WC()->cart->get_cart_contents_count() : '0'; ?>
+        </span>
+      </button>
+      <?php endif; ?>
       <a href="<?php echo esc_url(ah_whatsapp_url( 'Hello! I would like to order with Asantey Hair and Beauty.' )); ?>"
          class="hdr-order-btn"
          target="_blank" rel="noopener noreferrer">
