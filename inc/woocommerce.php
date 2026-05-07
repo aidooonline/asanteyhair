@@ -71,46 +71,11 @@ add_action( 'woocommerce_after_main_content', function () {
 } );
 
 /* ============================================================
-   4. SHOP LOOP — product card tweaks
+   4. SHOP LOOP — column count and per-page only
+   (card markup is handled directly in woocommerce/archive-product.php)
    ============================================================ */
-// Remove default title + price from loop (we re-add in custom markup)
-remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
-remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-
-// Add category above title
-add_action( 'woocommerce_shop_loop_item_title', function () {
-    global $product;
-    $cats = wc_get_product_category_list( $product->get_id(), ', ' );
-    if ( $cats ) echo '<span class="wc-card__cat">' . strip_tags( $cats ) . '</span>';
-    echo '<h3 class="wc-card__title">' . esc_html( get_the_title() ) . '</h3>';
-}, 10 );
-
-// Re-add price after title
-add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-
-// Product loop columns
-add_filter( 'loop_shop_columns', fn() => 3 );
-
-// Products per page
+add_filter( 'loop_shop_columns',  fn() => 3 );
 add_filter( 'loop_shop_per_page', fn() => 12 );
-
-// Wrap loop item in our card class
-add_action( 'woocommerce_before_shop_loop_item', function () {
-    echo '<div class="wc-card">';
-}, 5 );
-add_action( 'woocommerce_after_shop_loop_item', function () {
-    echo '</div>';
-}, 20 );
-
-// Add badge (sale / new)
-add_action( 'woocommerce_before_shop_loop_item_title', function () {
-    global $product;
-    if ( $product->is_on_sale() ) {
-        echo '<span class="wc-badge wc-badge--sale">Sale</span>';
-    } elseif ( $product->is_featured() ) {
-        echo '<span class="wc-badge wc-badge--new">Featured</span>';
-    }
-}, 5 );
 
 /* ============================================================
    5. SINGLE PRODUCT TWEAKS
