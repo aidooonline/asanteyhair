@@ -81,7 +81,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'ah-main-css',
         AH_ASSETS . '/css/main.css',
         [],
-        AH_VERSION
+        filemtime( AH_DIR . '/assets/css/main.css' )
     );
 
     // Theme stylesheet (design system)
@@ -89,7 +89,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'ah-theme',
         get_stylesheet_uri(),
         [ 'ah-main-css' ],
-        AH_VERSION
+        filemtime( AH_DIR . '/style.css' )
     );
 
     // Main JS
@@ -97,7 +97,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'ah-main-js',
         AH_ASSETS . '/js/main.js',
         [],
-        AH_VERSION,
+        filemtime( AH_DIR . '/assets/js/main.js' ),
         true
     );
 
