@@ -216,6 +216,7 @@ $wa_url = $wa_num ? 'https://wa.me/' . preg_replace('/[^0-9]/','', $wa_num) . '?
                             class="wcp-atc-btn"
                             id="wcp-atc-btn"
                             disabled
+                            data-requires-variation="true"
                             aria-label="Add to bag">
                         Add to Bag
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39A2 2 0 009.07 16h9.86a2 2 0 001.96-1.61L23 6H6"/></svg>
@@ -223,7 +224,6 @@ $wa_url = $wa_num ? 'https://wa.me/' . preg_replace('/[^0-9]/','', $wa_num) . '?
                 </div>
 
                 <!-- WC required hidden fields -->
-                <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>">
                 <?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
 
                 <!-- Variation data for JS -->

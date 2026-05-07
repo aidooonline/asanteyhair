@@ -1255,7 +1255,7 @@ ul.products li.product {
    ================================================================ */
 
 /* ── SHOP HERO ─────────────────────────────────────────────── */
-.wcs-hero{position:relative;height:52vh;min-height:340px;display:flex;align-items:flex-end;overflow:hidden;background:var(--dim)}
+.wcs-hero{position:relative;height:52vh;min-height:340px;display:flex;align-items:flex-end;overflow:hidden;background:var(--dim);padding-top:var(--hh)}
 .wcs-hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
 .wcs-hero__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.35) 60%,rgba(0,0,0,.1) 100%)}
 .wcs-hero__body{position:relative;z-index:2;padding-bottom:clamp(2.5rem,5vw,4rem)}
@@ -1328,7 +1328,7 @@ ul.wcs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;list-style:
    ================================================================ */
 
 /* ── TWO-COLUMN LAYOUT ─────────────────────────────────────── */
-.wcp-page{display:grid;grid-template-columns:1fr 1fr;min-height:90vh;background:var(--dim)}
+.wcp-page{display:grid;grid-template-columns:1fr 1fr;min-height:90vh;background:var(--dim);margin-top:var(--hh)}
 @media(max-width:860px){.wcp-page{grid-template-columns:1fr}}
 
 /* ── GALLERY (LEFT) ────────────────────────────────────────── */
@@ -1393,7 +1393,7 @@ ul.wcs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;list-style:
 .wcp-pill-opt:hover{border-color:var(--ink);color:var(--ink)}
 .wcp-pill-opt[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .wcp-pill-opt.wcp-unavail{opacity:.3;cursor:not-allowed;text-decoration:line-through}
-.wcp-hidden-select{position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none}
+.wcp-hidden-select{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;tab-index:-1}
 
 /* Variable price display */
 .wcp-var-price{font-family:var(--sans);font-size:1.9rem;font-weight:500;color:var(--gold);margin-bottom:1.25rem;min-height:2.5rem}

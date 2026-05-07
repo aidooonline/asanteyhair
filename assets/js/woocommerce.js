@@ -244,10 +244,17 @@ function initPillVariations(){
     return variations.find(function(v){
       if(!v.variation_is_active || !v.variation_is_visible) return false;
       for(var attr in v.attributes){
-        var vVal    = v.attributes[attr];
-        var chosen_ = chosen[attr] || '';
-        // empty attribute means "any"
-        if(vVal && vVal !== '' && vVal !== chosen_) return false;
+        var vVal = (v.attributes[attr] || '').toLowerCase().trim();
+        // Variation attr key might be "attribute_pa_length" or "attribute_length"
+        // Our chosen key is "attribute_" + sanitize_title(attr_name)
+        var chosenVal = (chosen[attr] || '').toLowerCase().trim();
+        // Also try without pa_ prefix
+        if(!chosenVal){
+          var altKey = attr.replace('attribute_pa_','attribute_');
+          chosenVal = (chosen[altKey] || '').toLowerCase().trim();
+        }
+        // Empty vVal means "any" -- skip check
+        if(vVal && vVal !== '' && vVal !== chosenVal) return false;
       }
       return true;
     }) || null;
@@ -275,8 +282,12 @@ function initPillVariations(){
       var matches = variations.some(function(v){
         if(!v.variation_is_active||!v.variation_is_visible) return false;
         for(var a in v.attributes){
-          var vv = v.attributes[a];
-          var tv = test[a]||'';
+          var vv = (v.attributes[a]||'').toLowerCase().trim();
+          var tv = (test[a]||'').toLowerCase().trim();
+          if(!tv){
+            var altA = a.replace('attribute_pa_','attribute_');
+            tv = (test[altA]||'').toLowerCase().trim();
+          }
           if(vv&&vv!==''&&vv!==tv) return false;
         }
         return true;

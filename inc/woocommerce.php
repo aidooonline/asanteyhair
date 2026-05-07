@@ -63,10 +63,14 @@ remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wr
 remove_action( 'woocommerce_after_main_content',  'woocommerce_output_content_wrapper_end', 10 );
 remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 
+// Wrapper for cart / checkout / my account (these use WC default rendering)
+// Archive and single product have fully custom templates so no wrapper needed there
 add_action( 'woocommerce_before_main_content', function () {
+    if ( is_shop() || is_product_category() || is_product() ) return;
     echo '<section class="s s--white wc-main"><div class="wrap wc-wrap">';
 } );
 add_action( 'woocommerce_after_main_content', function () {
+    if ( is_shop() || is_product_category() || is_product() ) return;
     echo '</div></section>';
 } );
 
@@ -202,21 +206,10 @@ add_filter( 'woocommerce_breadcrumb_defaults', function ( $defaults ) {
 } );
 
 /* ============================================================
-   10. PRODUCT CATEGORY PAGE — use our page hero
+/* ============================================================
+   10. PRODUCT CATEGORY PAGE
+   Hero is handled directly in woocommerce/archive-product.php
    ============================================================ */
-add_action( 'woocommerce_before_main_content', function () {
-    if ( ! is_product_category() ) return;
-    $cat  = get_queried_object();
-    $thumb_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
-    $img  = $thumb_id ? wp_get_attachment_image_url( $thumb_id, 'ah-wide' ) : '';
-    echo '<div class="page-hero' . ( $img ? '' : ' page-hero--no-img' ) . '">';
-    if ( $img ) echo '<img src="' . esc_url( $img ) . '" alt="' . esc_attr( $cat->name ) . '" class="page-hero__img">';
-    echo '<div class="page-hero__overlay"></div>';
-    echo '<div class="page-hero__content wrap">';
-    echo '<h1 class="page-hero__title t-h1">' . esc_html( $cat->name ) . '</h1>';
-    if ( $cat->description ) echo '<p class="page-hero__sub">' . esc_html( $cat->description ) . '</p>';
-    echo '</div></div>';
-}, 5 );
 
 /* ============================================================
    11. AJAX — ADD TO CART RESPONSE
