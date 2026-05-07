@@ -361,7 +361,7 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
     $text( 'ah_gal_label',  'Gallery Label',  'ah_gallery_home', 'Real Women. Real Results.' );
     $text( 'ah_gal_title',  'Gallery Title',  'ah_gallery_home', 'See It to Believe It' );
 
-    for ( $i = 1; $i <= 6; $i++ ) {
+    for ( $i = 1; $i <= 12; $i++ ) {
         $image( "ah_gal_image_{$i}", "Gallery Image {$i}", 'ah_gallery_home' );
     }
 

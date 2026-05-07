@@ -1274,3 +1274,7 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .wc-img-lb__inner{position:relative;max-width:90vw;max-height:90vh}
 .wc-img-lb__inner img{max-width:90vw;max-height:85vh;object-fit:contain;display:block}
 .wc-img-lb__close{position:absolute;top:-2rem;right:0;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+
+/* ── GALLERY ADMIN TIP (logged-in editors only) ────── */
+.gallery-admin-tip{background:#fffbe6;border:1px solid #f0c040;padding:1rem 1.25rem;font-family:var(--sans);font-size:.8rem;color:#555;margin-top:2.5rem;border-radius:2px}
+.gallery-admin-tip a{color:var(--ink);font-weight:600}
