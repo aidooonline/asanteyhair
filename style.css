@@ -31,7 +31,7 @@ Text Domain: asantey-theme
 
 /* ─── RESET ───────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{font-size:18px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--sans);background:var(--dim);color:var(--paper);
   -webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.7}
 img,video{max-width:100%;height:auto;display:block}
@@ -103,8 +103,8 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
   font-family:var(--sans);font-size:.6rem;font-weight:600;
   letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 
-.t-body   {font-size:1rem;line-height:1.85;color:rgba(255,255,255,.6)}
-.t-body--lg{font-size:1.1rem;line-height:1.85;color:rgba(255,255,255,.6)}
+.t-body   {font-size:1.05rem;line-height:1.9;color:rgba(255,255,255,.6)}
+.t-body--lg{font-size:1.2rem;line-height:1.9;color:rgba(255,255,255,.6)}
 
 .rule{display:block;width:36px;height:1px;background:var(--paper);margin-block:1.75rem;opacity:.25}
 .rule--gold{background:var(--gold);opacity:1;width:28px}
@@ -531,7 +531,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
   font-family:var(--serif);font-size:1.5rem;font-weight:500;
   color:var(--paper);margin-bottom:.625rem}
 .s--white .feat-card__title{color:var(--ink)}
-.feat-card__body{font-size:.875rem;color:rgba(255,255,255,.45);line-height:1.8}
+.feat-card__body{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.85}
 .s--white .feat-card__body{color:var(--g5)}
 
 /* ─── TESTIMONIALS ───────────────────────────────────────────── */
@@ -584,7 +584,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 .acc__body{overflow:hidden;max-height:0;transition:max-height .42s var(--e)}
 .accordion__item--open .acc__body{max-height:600px}
 .acc__ans{
-  padding-bottom:1.5rem;font-size:.925rem;
+  padding-bottom:1.5rem;font-size:1rem;
   color:rgba(255,255,255,.5);line-height:1.85}
 .s--white .acc__ans{color:var(--g5)}
 
@@ -703,7 +703,7 @@ select.form-control{
   text-transform:uppercase;color:rgba(255,255,255,.3);
   display:block;margin-bottom:.25rem}
 .s--white .contact-item__label{color:var(--g9)}
-.contact-item__val{font-size:.95rem;color:rgba(255,255,255,.7)}
+.contact-item__val{font-size:1.05rem;color:rgba(255,255,255,.7)}
 .s--white .contact-item__val{color:var(--ink)}
 .contact-item__val a:hover{opacity:.6}
 
@@ -748,7 +748,7 @@ select.form-control{
   margin-top:3rem;margin-bottom:.75rem;padding-top:2rem;
   border-top:1px solid rgba(255,255,255,.08);color:var(--paper)}
 .legal h2:first-child{border-top:none;margin-top:0;padding-top:0}
-.legal p,.legal li{color:rgba(255,255,255,.55);line-height:1.85;font-size:.95rem}
+.legal p,.legal li{color:rgba(255,255,255,.55);line-height:1.9;font-size:1.05rem}
 .legal ul{list-style:disc;padding-left:1.5rem;margin-bottom:1rem}
 .legal li{margin-bottom:.35rem}
 .legal .date{font-size:.75rem;color:rgba(255,255,255,.25);margin-bottom:2.5rem}
@@ -1186,7 +1186,7 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .s--white .accordion__item--open .accordion__icon,.s--off .accordion__item--open .accordion__icon { background:var(--ink);border-color:var(--ink);color:var(--paper) }
 .accordion__body { overflow:hidden;max-height:0;transition:max-height .42s var(--e) }
 .accordion__item--open .accordion__body { max-height:800px }
-.accordion__ans { padding-bottom:1.5rem;font-size:.925rem;color:rgba(255,255,255,.5);line-height:1.85 }
+.accordion__ans { padding-bottom:1.5rem;font-size:1rem;color:rgba(255,255,255,.5);line-height:1.9 }
 .s--white .accordion__ans,.s--off .accordion__ans { color:var(--g5) }
 
 /* Texture grid aliases */
@@ -1245,7 +1245,7 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .service-card__body{padding:1.25rem 1.5rem}
 .service-card__title{font-family:var(--serif);font-size:1.25rem;font-weight:500;color:var(--paper);margin-bottom:.5rem}
 .s--white .service-card__title,.s--off .service-card__title{color:var(--ink)}
-.service-card__desc{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.7}
+.service-card__desc{font-size:.95rem;color:rgba(255,255,255,.5);line-height:1.8}
 .s--white .service-card__desc,.s--off .service-card__desc{color:var(--g5)}
 
 /* ── QTY BUTTONS ──────────────────────────────────────────── */
