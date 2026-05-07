@@ -1,13 +1,6 @@
 <?php
 /**
  * Template Name: Gallery
- *
- * HOW TO UPDATE THE GALLERY:
- * 1. WP Admin > Pages > Gallery > Edit
- * 2. In the "Gallery Images" meta box, click "+ Add / Select Images"
- * 3. Pick any images from the Media Library (select multiple at once)
- * 4. Drag thumbnails to reorder them
- * 5. Click Update — done. No code needed.
  */
 defined( 'ABSPATH' ) || exit;
 get_header();
@@ -17,15 +10,14 @@ echo ah_schema_breadcrumb([
     ['name' => 'Gallery', 'url' => get_permalink()],
 ]);
 
-/* ── Build image list from meta box ──────────────────────────
+/* ── Build image list ────────────────────────────────────────
  * Priority:
- * 1. _ah_gallery_ids meta (set via the Gallery Images meta box)
+ * 1. _ah_gallery_ids meta (set via the Gallery Images meta box in WP Admin)
  * 2. Customizer slots ah_gal_image_1..12
- * 3. Hard-coded fallback files from assets/images/
+ * No hardcoded fallback.
  */
 $gallery_items = [];
 
-// 1. Meta box IDs (comma-separated attachment IDs)
 $meta_ids = get_post_meta( get_the_ID(), '_ah_gallery_ids', true );
 if ( $meta_ids ) {
     foreach ( array_filter( array_map( 'absint', explode( ',', $meta_ids ) ) ) as $att_id ) {
@@ -40,26 +32,11 @@ if ( $meta_ids ) {
     }
 }
 
-// 2. Customizer slots
 if ( empty( $gallery_items ) ) {
     for ( $ci = 1; $ci <= 12; $ci++ ) {
         $url = get_theme_mod( "ah_gal_image_{$ci}", '' );
         if ( $url ) {
             $gallery_items[] = [ 'url' => $url, 'full' => $url, 'alt' => 'Client result ' . $ci ];
-        }
-    }
-}
-
-// 3. Hard-coded fallback
-if ( empty( $gallery_items ) ) {
-    for ( $fi = 1; $fi <= 7; $fi++ ) {
-        $path = get_template_directory() . '/assets/images/client-result-' . $fi . '.jpg';
-        if ( file_exists( $path ) ) {
-            $gallery_items[] = [
-                'url'  => get_template_directory_uri() . '/assets/images/client-result-' . $fi . '.jpg',
-                'full' => get_template_directory_uri() . '/assets/images/client-result-' . $fi . '.jpg',
-                'alt'  => 'Asantey Hair & Beauty client result ' . $fi,
-            ];
         }
     }
 }
@@ -92,17 +69,6 @@ if ( empty( $gallery_items ) ) {
             </p>
         </div>
 
-        <!-- Admin tip — only visible when logged in as editor -->
-        <?php if ( current_user_can('edit_pages') ) : ?>
-        <div class="gallery-admin-tip">
-            <strong>To update this gallery:</strong>
-            <a href="<?php echo esc_url( get_edit_post_link( get_the_ID() ) ); ?>">
-                Edit this page
-            </a>
-            and use the <strong>Gallery Images</strong> meta box to add, remove or reorder photos from your Media Library.
-        </div>
-        <?php endif; ?>
-
         <?php if ( ! empty( $gallery_items ) ) : ?>
         <div class="gallery gallery--masonry reveal">
             <?php foreach ( $gallery_items as $idx => $item ) : ?>
@@ -118,13 +84,6 @@ if ( empty( $gallery_items ) ) {
             </div>
             <?php endforeach; ?>
         </div>
-        <?php else : ?>
-        <p style="text-align:center;color:var(--g5);padding:4rem 0;">
-            No gallery images yet.
-            <?php if ( current_user_can('edit_pages') ) : ?>
-            <a href="<?php echo esc_url( get_edit_post_link( get_the_ID() ) ); ?>">Add images now.</a>
-            <?php endif; ?>
-        </p>
         <?php endif; ?>
 
         <div style="text-align:center;margin-top:4rem;" class="reveal">
