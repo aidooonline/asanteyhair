@@ -3,77 +3,68 @@
  * Template Name: Gallery
  *
  * HOW TO UPDATE THE GALLERY:
- * 1. Go to WP Admin > Pages > Gallery > Edit
- * 2. In the page editor, add a Gallery block (Gutenberg) or use Insert > Add Media (Classic)
- * 3. Upload or select your images, insert as a gallery
- * 4. Click Update
- *
- * FALLBACK: If no images are added in the editor, the page shows
- * images attached to this page (uploaded via the page's Featured Image
- * or Media Library while editing this page).
- *
- * FURTHER FALLBACK: Shows the default client-result images from the theme folder.
+ * 1. WP Admin > Pages > Gallery > Edit
+ * 2. In the "Gallery Images" meta box, click "+ Add / Select Images"
+ * 3. Pick any images from the Media Library (select multiple at once)
+ * 4. Drag thumbnails to reorder them
+ * 5. Click Update — done. No code needed.
  */
 defined( 'ABSPATH' ) || exit;
 get_header();
 
 echo ah_schema_breadcrumb([
-    ['name'=>'Home',    'url'=>home_url('/')],
-    ['name'=>'Gallery', 'url'=>get_permalink()],
+    ['name' => 'Home',    'url' => home_url('/')],
+    ['name' => 'Gallery', 'url' => get_permalink()],
 ]);
 
-/* ── Gather gallery images ───────────────────────────────────
- * Priority order:
- * 1. Images attached to this page via WP Media (page attachments)
- * 2. Customizer gallery slots (ah_gal_image_1 ... ah_gal_image_12)
+/* ── Build image list from meta box ──────────────────────────
+ * Priority:
+ * 1. _ah_gallery_ids meta (set via the Gallery Images meta box)
+ * 2. Customizer slots ah_gal_image_1..12
  * 3. Hard-coded fallback files from assets/images/
  */
+$gallery_items = [];
 
-// 1. Page attachment images (uploaded when editing this page)
-$page_images = get_attached_media( 'image', get_the_ID() );
+// 1. Meta box IDs (comma-separated attachment IDs)
+$meta_ids = get_post_meta( get_the_ID(), '_ah_gallery_ids', true );
+if ( $meta_ids ) {
+    foreach ( array_filter( array_map( 'absint', explode( ',', $meta_ids ) ) ) as $att_id ) {
+        $src = wp_get_attachment_image_url( $att_id, 'large' );
+        if ( ! $src ) continue;
+        $gallery_items[] = [
+            'url'  => $src,
+            'full' => wp_get_attachment_image_url( $att_id, 'full' ),
+            'alt'  => get_post_meta( $att_id, '_wp_attachment_image_alt', true )
+                      ?: get_the_title( $att_id ),
+        ];
+    }
+}
 
-// 2. Customizer slots (up to 12)
-$customizer_images = [];
-for ( $ci = 1; $ci <= 12; $ci++ ) {
-    $val = get_theme_mod( "ah_gal_image_{$ci}", '' );
-    if ( $val ) $customizer_images[] = [ 'url' => $val, 'alt' => 'Asantey Hair & Beauty client result ' . $ci ];
+// 2. Customizer slots
+if ( empty( $gallery_items ) ) {
+    for ( $ci = 1; $ci <= 12; $ci++ ) {
+        $url = get_theme_mod( "ah_gal_image_{$ci}", '' );
+        if ( $url ) {
+            $gallery_items[] = [ 'url' => $url, 'full' => $url, 'alt' => 'Client result ' . $ci ];
+        }
+    }
 }
 
 // 3. Hard-coded fallback
-$fallback_images = [];
-for ( $fi = 1; $fi <= 7; $fi++ ) {
-    $path = get_template_directory() . '/assets/images/client-result-' . $fi . '.jpg';
-    if ( file_exists( $path ) ) {
-        $fallback_images[] = [
-            'url' => get_template_directory_uri() . '/assets/images/client-result-' . $fi . '.jpg',
-            'alt' => 'Asantey Hair & Beauty client result ' . $fi,
-        ];
-    }
-}
-
-// Build final image list
-$gallery_items = [];
-
-if ( ! empty( $page_images ) ) {
-    foreach ( $page_images as $att ) {
-        $gallery_items[] = [
-            'url' => wp_get_attachment_image_url( $att->ID, 'large' ),
-            'full'=> wp_get_attachment_image_url( $att->ID, 'full' ),
-            'alt' => get_post_meta( $att->ID, '_wp_attachment_image_alt', true ) ?: get_the_title( $att->ID ),
-        ];
-    }
-} elseif ( ! empty( $customizer_images ) ) {
-    foreach ( $customizer_images as $img ) {
-        $gallery_items[] = [ 'url' => $img['url'], 'full' => $img['url'], 'alt' => $img['alt'] ];
-    }
-} else {
-    foreach ( $fallback_images as $img ) {
-        $gallery_items[] = [ 'url' => $img['url'], 'full' => $img['url'], 'alt' => $img['alt'] ];
+if ( empty( $gallery_items ) ) {
+    for ( $fi = 1; $fi <= 7; $fi++ ) {
+        $path = get_template_directory() . '/assets/images/client-result-' . $fi . '.jpg';
+        if ( file_exists( $path ) ) {
+            $gallery_items[] = [
+                'url'  => get_template_directory_uri() . '/assets/images/client-result-' . $fi . '.jpg',
+                'full' => get_template_directory_uri() . '/assets/images/client-result-' . $fi . '.jpg',
+                'alt'  => 'Asantey Hair & Beauty client result ' . $fi,
+            ];
+        }
     }
 }
 ?>
 
-<!-- ── HERO ──────────────────────────────────────────────── -->
 <section class="page-hero">
     <div class="page-hero__bg">
         <img src="<?php echo esc_url( AH_URI . '/assets/images/hero-gallery.jpg' ); ?>"
@@ -88,7 +79,6 @@ if ( ! empty( $page_images ) ) {
 
 <?php ah_breadcrumb(); ?>
 
-<!-- ── GALLERY ────────────────────────────────────────────── -->
 <section class="s s--white">
     <div class="wrap">
 
@@ -102,12 +92,23 @@ if ( ! empty( $page_images ) ) {
             </p>
         </div>
 
+        <!-- Admin tip — only visible when logged in as editor -->
+        <?php if ( current_user_can('edit_pages') ) : ?>
+        <div class="gallery-admin-tip">
+            <strong>To update this gallery:</strong>
+            <a href="<?php echo esc_url( get_edit_post_link( get_the_ID() ) ); ?>">
+                Edit this page
+            </a>
+            and use the <strong>Gallery Images</strong> meta box to add, remove or reorder photos from your Media Library.
+        </div>
+        <?php endif; ?>
+
         <?php if ( ! empty( $gallery_items ) ) : ?>
         <div class="gallery gallery--masonry reveal">
             <?php foreach ( $gallery_items as $idx => $item ) : ?>
             <div class="gallery-item">
                 <img src="<?php echo esc_url( $item['url'] ); ?>"
-                     data-full="<?php echo esc_url( $item['full'] ?? $item['url'] ); ?>"
+                     data-full="<?php echo esc_url( $item['full'] ); ?>"
                      alt="<?php echo esc_attr( $item['alt'] ); ?>"
                      loading="<?php echo $idx < 4 ? 'eager' : 'lazy'; ?>"
                      width="600" height="800">
@@ -118,18 +119,12 @@ if ( ! empty( $page_images ) ) {
             <?php endforeach; ?>
         </div>
         <?php else : ?>
-        <div style="text-align:center;padding:4rem 0;color:var(--g5);">
-            <p>No gallery images yet. <a href="<?php echo esc_url( admin_url('post.php?post='.get_the_ID().'&action=edit') ); ?>">Add images in the page editor.</a></p>
-        </div>
-        <?php endif; ?>
-
-        <!-- How to update notice (visible to admins only) -->
-        <?php if ( current_user_can('edit_pages') ) : ?>
-        <div class="gallery-admin-tip">
-            <strong>To update this gallery:</strong>
-            Go to <a href="<?php echo esc_url( admin_url('post.php?post='.get_the_ID().'&action=edit') ); ?>">WP Admin &rsaquo; Pages &rsaquo; Gallery &rsaquo; Edit</a>,
-            then upload your images using the <strong>Add Media</strong> button or a <strong>Gallery block</strong>, and click Update.
-        </div>
+        <p style="text-align:center;color:var(--g5);padding:4rem 0;">
+            No gallery images yet.
+            <?php if ( current_user_can('edit_pages') ) : ?>
+            <a href="<?php echo esc_url( get_edit_post_link( get_the_ID() ) ); ?>">Add images now.</a>
+            <?php endif; ?>
+        </p>
         <?php endif; ?>
 
         <div style="text-align:center;margin-top:4rem;" class="reveal">
@@ -145,7 +140,6 @@ if ( ! empty( $page_images ) ) {
     </div>
 </section>
 
-<!-- ── CTA ───────────────────────────────────────────────── -->
 <div class="cta-band dark">
     <div class="wrap"><div class="reveal">
         <span class="t-label t-label--white">Ready for Your Transformation?</span>

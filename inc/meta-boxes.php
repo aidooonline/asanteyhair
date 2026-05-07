@@ -95,3 +95,151 @@ add_action( 'save_post_hair_product', function ( int $post_id ): void {
         }
     }
 } );
+
+/* ============================================================
+   GALLERY PAGE — IMAGE PICKER META BOX
+   Stores a comma-separated list of attachment IDs in
+   post meta key: _ah_gallery_ids
+   ============================================================ */
+add_action( 'add_meta_boxes', function () {
+    // Only show on pages that use the Gallery template
+    add_meta_box(
+        'ah_gallery_images',
+        '📷 Gallery Images — Select from Media Library',
+        'ah_gallery_meta_box_cb',
+        'page',
+        'normal',
+        'high'
+    );
+} );
+
+function ah_gallery_meta_box_cb( WP_Post $post ): void {
+    // Only render on the Gallery page template
+    $template = get_post_meta( $post->ID, '_wp_page_template', true );
+    if ( $template !== 'page-templates/page-gallery.php' ) {
+        echo '<p style="color:#888;font-size:13px;">This meta box only applies to pages using the <strong>Gallery</strong> template.</p>';
+        return;
+    }
+
+    wp_nonce_field( 'ah_gallery_save', 'ah_gallery_nonce' );
+    $saved_ids = get_post_meta( $post->ID, '_ah_gallery_ids', true );
+    $ids_array = $saved_ids ? array_filter( explode( ',', $saved_ids ) ) : [];
+    ?>
+    <style>
+    #ah-gallery-wrap { margin: 8px 0; }
+    #ah-gallery-preview { display: flex; flex-wrap: wrap; gap: 8px; min-height: 80px; padding: 10px; border: 2px dashed #ddd; background: #fafafa; margin-bottom: 12px; }
+    #ah-gallery-preview .ah-gal-thumb { position: relative; width: 90px; height: 90px; cursor: grab; }
+    #ah-gallery-preview .ah-gal-thumb img { width: 90px; height: 90px; object-fit: cover; display: block; border: 2px solid transparent; }
+    #ah-gallery-preview .ah-gal-thumb:hover img { border-color: #2271b1; }
+    #ah-gallery-preview .ah-gal-remove { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; background: #cc1818; color: #fff; border: none; border-radius: 50%; font-size: 13px; line-height: 20px; text-align: center; cursor: pointer; padding: 0; }
+    #ah-gallery-preview .ah-gal-thumb.sortable-placeholder { background: #e0e0e0; border: 2px dashed #aaa; }
+    #ah-add-gallery-imgs { margin-top: 4px; }
+    .ah-gal-hint { font-size: 12px; color: #888; margin-top: 6px; }
+    </style>
+
+    <div id="ah-gallery-wrap">
+        <p style="margin-bottom:8px;font-size:13px;"><strong>Current gallery images:</strong> Drag to reorder. Click &times; to remove.</p>
+        <div id="ah-gallery-preview">
+            <?php foreach ( $ids_array as $att_id ) :
+                $att_id = (int) trim( $att_id );
+                if ( ! $att_id ) continue;
+                $thumb = wp_get_attachment_image_url( $att_id, 'thumbnail' );
+                if ( ! $thumb ) continue;
+            ?>
+            <div class="ah-gal-thumb" data-id="<?php echo $att_id; ?>">
+                <img src="<?php echo esc_url( $thumb ); ?>" alt="">
+                <button type="button" class="ah-gal-remove" aria-label="Remove">&times;</button>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <button type="button" class="button button-primary" id="ah-add-gallery-imgs">
+            + Add / Select Images
+        </button>
+        <p class="ah-gal-hint">Select multiple images at once from the Media Library. Drag thumbnails above to reorder.</p>
+        <input type="hidden" name="ah_gallery_ids" id="ah-gallery-ids-input"
+               value="<?php echo esc_attr( $saved_ids ); ?>">
+    </div>
+
+    <script>
+    jQuery(function($){
+        // Make thumbs sortable for reordering
+        if($.fn.sortable){
+            $('#ah-gallery-preview').sortable({
+                items: '.ah-gal-thumb',
+                placeholder: 'ah-gal-thumb sortable-placeholder',
+                tolerance: 'pointer',
+                update: function(){ syncIds(); }
+            });
+        }
+
+        // Remove image
+        $('#ah-gallery-preview').on('click', '.ah-gal-remove', function(){
+            $(this).closest('.ah-gal-thumb').remove();
+            syncIds();
+        });
+
+        // Open media library
+        $('#ah-add-gallery-imgs').on('click', function(e){
+            e.preventDefault();
+            var frame = wp.media({
+                title: 'Select Gallery Images',
+                button: { text: 'Add to Gallery' },
+                multiple: true,
+                library: { type: 'image' }
+            });
+
+            // Pre-select already chosen images
+            frame.on('open', function(){
+                var selection = frame.state().get('selection');
+                var existing = $('#ah-gallery-ids-input').val().split(',').filter(Boolean);
+                existing.forEach(function(id){
+                    var attachment = wp.media.attachment(parseInt(id));
+                    attachment.fetch();
+                    selection.add(attachment);
+                });
+            });
+
+            frame.on('select', function(){
+                var attachments = frame.state().get('selection').toJSON();
+                // Clear existing and rebuild
+                $('#ah-gallery-preview').empty();
+                attachments.forEach(function(att){
+                    var thumb = att.sizes && att.sizes.thumbnail ? att.sizes.thumbnail.url : att.url;
+                    $('#ah-gallery-preview').append(
+                        '<div class="ah-gal-thumb" data-id="'+att.id+'">'
+                        + '<img src="'+thumb+'" alt="">'
+                        + '<button type="button" class="ah-gal-remove" aria-label="Remove">&times;</button>'
+                        + '</div>'
+                    );
+                });
+                syncIds();
+            });
+
+            frame.open();
+        });
+
+        function syncIds(){
+            var ids = [];
+            $('#ah-gallery-preview .ah-gal-thumb').each(function(){
+                ids.push($(this).data('id'));
+            });
+            $('#ah-gallery-ids-input').val(ids.join(','));
+        }
+    });
+    </script>
+    <?php
+}
+
+add_action( 'save_post_page', function ( int $post_id ): void {
+    if ( ! isset( $_POST['ah_gallery_nonce'] ) ) return;
+    if ( ! wp_verify_nonce( $_POST['ah_gallery_nonce'], 'ah_gallery_save' ) ) return;
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+
+    if ( isset( $_POST['ah_gallery_ids'] ) ) {
+        // Sanitize: only allow comma-separated integers
+        $raw  = sanitize_text_field( $_POST['ah_gallery_ids'] );
+        $ids  = array_filter( array_map( 'absint', explode( ',', $raw ) ) );
+        update_post_meta( $post_id, '_ah_gallery_ids', implode( ',', $ids ) );
+    }
+} );
