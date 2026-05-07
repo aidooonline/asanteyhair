@@ -216,3 +216,269 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 })(jQuery);
+
+/* ================================================================
+   SINGLE PRODUCT — PILL VARIATION SELECTORS + GALLERY + TABS
+   ================================================================ */
+(function(){
+'use strict';
+
+/* ── PILL VARIATION SELECTOR ─────────────────────────────── */
+function initPillVariations(){
+  var form = document.getElementById('wcp-var-form');
+  if(!form) return;
+
+  var variations      = (typeof wcpVariations !== 'undefined') ? wcpVariations : [];
+  var productId       = (typeof wcpProductId  !== 'undefined') ? wcpProductId  : 0;
+  var atcBtn          = document.getElementById('wcp-atc-btn');
+  var varIdInput      = document.getElementById('wcp-variation-id');
+  var varPriceDisplay = document.getElementById('wcp-var-price');
+  var chosen          = {}; // { attr_name: value }
+
+  /* Build a map: attrName -> selected value */
+  function getChosen(){ return chosen; }
+
+  /* Find matching variation given current selections */
+  function findVariation(){
+    if(!variations.length) return null;
+    return variations.find(function(v){
+      if(!v.variation_is_active || !v.variation_is_visible) return false;
+      for(var attr in v.attributes){
+        var vVal    = v.attributes[attr];
+        var chosen_ = chosen[attr] || '';
+        // empty attribute means "any"
+        if(vVal && vVal !== '' && vVal !== chosen_) return false;
+      }
+      return true;
+    }) || null;
+  }
+
+  /* Check if all attributes selected */
+  function allChosen(){
+    var pills = form.querySelectorAll('.wcp-attr');
+    for(var i=0;i<pills.length;i++){
+      var attr = pills[i].dataset.attr;
+      if(!chosen[attr]) return false;
+    }
+    return true;
+  }
+
+  /* Update availability on pills based on current selections */
+  function updateAvailability(){
+    var allPills = form.querySelectorAll('.wcp-pill-opt');
+    allPills.forEach(function(p){
+      var attr  = p.dataset.attr;
+      var val   = p.dataset.value;
+      // Temporarily set this value and check if any variation matches
+      var test  = Object.assign({}, chosen);
+      test[attr] = val;
+      var matches = variations.some(function(v){
+        if(!v.variation_is_active||!v.variation_is_visible) return false;
+        for(var a in v.attributes){
+          var vv = v.attributes[a];
+          var tv = test[a]||'';
+          if(vv&&vv!==''&&vv!==tv) return false;
+        }
+        return true;
+      });
+      p.classList.toggle('wcp-unavail', !matches);
+    });
+  }
+
+  /* Handle pill click */
+  form.addEventListener('click', function(e){
+    var btn = e.target.closest('.wcp-pill-opt');
+    if(!btn || btn.classList.contains('wcp-unavail')) return;
+
+    var attr = btn.dataset.attr;
+    var val  = btn.dataset.value;
+
+    // Toggle: clicking active pill deselects it
+    if(chosen[attr] === val){
+      delete chosen[attr];
+      btn.setAttribute('aria-pressed','false');
+    } else {
+      chosen[attr] = val;
+      // Deactivate siblings
+      form.querySelectorAll('.wcp-pill-opt[data-attr="'+attr+'"]').forEach(function(p){
+        p.setAttribute('aria-pressed','false');
+      });
+      btn.setAttribute('aria-pressed','true');
+    }
+
+    // Update hidden select
+    var select = form.querySelector('select[name="'+attr+'"]');
+    if(select) select.value = chosen[attr] || '';
+
+    // Update label showing chosen value
+    var chosenSpan = document.getElementById('chosen-' + attr.replace('attribute_',''));
+    if(chosenSpan) chosenSpan.textContent = chosen[attr] ? '— ' + chosen[attr] : '';
+
+    // Update availability
+    updateAvailability();
+
+    // Find variation + update price + enable ATC
+    var match = allChosen() ? findVariation() : null;
+
+    if(match){
+      varIdInput.value = match.variation_id;
+      if(varPriceDisplay) varPriceDisplay.innerHTML = match.price_html || '';
+      if(atcBtn){
+        atcBtn.disabled = !match.is_purchasable || match.max_qty === 0;
+        atcBtn.value    = match.variation_id;
+      }
+    } else {
+      varIdInput.value = 0;
+      if(varPriceDisplay) varPriceDisplay.innerHTML = '';
+      if(atcBtn) atcBtn.disabled = true;
+    }
+  });
+
+  // Initial availability update
+  updateAvailability();
+}
+
+/* ── THUMBNAIL SWITCHER ──────────────────────────────────── */
+function initGallery(){
+  var thumbs  = document.querySelectorAll('.wcp-thumb');
+  var mainImg = document.getElementById('wcp-main-img');
+  if(!thumbs.length || !mainImg) return;
+
+  thumbs.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      thumbs.forEach(function(t){ t.classList.remove('wcp-thumb--on'); });
+      btn.classList.add('wcp-thumb--on');
+      mainImg.style.opacity = '0';
+      mainImg.style.transition = 'opacity .22s';
+      setTimeout(function(){
+        mainImg.src = btn.dataset.full;
+        mainImg.onload = function(){ mainImg.style.opacity = '1'; };
+        // If already cached (onload may not fire)
+        if(mainImg.complete) mainImg.style.opacity = '1';
+      }, 200);
+    });
+  });
+}
+
+/* ── LIGHTBOX ────────────────────────────────────────────── */
+function initLightbox(){
+  var lb       = document.getElementById('wcp-lb');
+  var lbImg    = document.getElementById('wcp-lb-img');
+  var lbClose  = document.getElementById('wcp-lb-close');
+  var zoomBtn  = document.getElementById('wcp-zoom');
+  var mainWrap = document.getElementById('wcp-main');
+  var mainImg  = document.getElementById('wcp-main-img');
+  if(!lb) return;
+
+  function open(){
+    if(!mainImg) return;
+    lbImg.src = mainImg.src;
+    lb.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    if(lbClose) setTimeout(function(){ lbClose.focus(); }, 50);
+  }
+  function close(){
+    lb.setAttribute('hidden','');
+    document.body.style.overflow = '';
+  }
+
+  if(zoomBtn) zoomBtn.addEventListener('click', open);
+  if(mainWrap) mainWrap.addEventListener('click', function(e){
+    if(zoomBtn && (e.target===zoomBtn||zoomBtn.contains(e.target))) return;
+    open();
+  });
+  if(lbClose) lbClose.addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape' && lb && !lb.hasAttribute('hidden')) close();
+  });
+}
+
+/* ── TABS ────────────────────────────────────────────────── */
+function initTabs(){
+  var tabs   = document.querySelectorAll('.wcp-tab');
+  var panels = document.querySelectorAll('.wcp-panel');
+  if(!tabs.length) return;
+
+  function openTab(id){
+    tabs.forEach(function(t){
+      t.classList.remove('wcp-tab--on');
+      t.setAttribute('aria-selected','false');
+    });
+    panels.forEach(function(p){
+      p.classList.remove('wcp-panel--on');
+      p.setAttribute('hidden','');
+    });
+    var activeTab   = document.querySelector('.wcp-tab[data-tab="'+id+'"]');
+    var activePanel = document.getElementById('wcp-panel-'+id);
+    if(activeTab){ activeTab.classList.add('wcp-tab--on'); activeTab.setAttribute('aria-selected','true'); }
+    if(activePanel){ activePanel.classList.add('wcp-panel--on'); activePanel.removeAttribute('hidden'); }
+  }
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){ openTab(tab.dataset.tab); });
+  });
+
+  // Rating link opens reviews tab
+  var rLink = document.querySelector('.wcp-rcount[data-opentab]');
+  if(rLink){
+    rLink.addEventListener('click', function(e){
+      e.preventDefault();
+      openTab('reviews');
+      var ts = document.getElementById('wcp-tabs');
+      if(ts) window.scrollTo({ top: ts.offsetTop - 100, behavior:'smooth' });
+    });
+  }
+}
+
+/* ── QTY STEPPER ─────────────────────────────────────────── */
+function initQtyStepper(){
+  var form = document.getElementById('wcp-var-form') || document.querySelector('.wcp-form-wrap form');
+  if(!form) return;
+  form.addEventListener('click', function(e){
+    var btn = e.target.closest('.wcp-qty-btn');
+    if(!btn) return;
+    var input = form.querySelector('.wcp-qty-input') || form.querySelector('input.qty');
+    if(!input) return;
+    var val = parseInt(input.value,10)||1;
+    var min = parseInt(input.min||'1',10);
+    var max = parseInt(input.max||'99',10);
+    if(btn.classList.contains('wcp-qty-minus') && val > min) input.value = val - 1;
+    if(btn.classList.contains('wcp-qty-plus') && val < max) input.value = val + 1;
+  });
+}
+
+/* ── MOBILE STICKY ATC ───────────────────────────────────── */
+function initStickyAtc(){
+  var formWrap = document.querySelector('.wcp-form-wrap');
+  if(!formWrap || window.innerWidth > 860) return;
+  var titleEl = document.querySelector('.wcp-title');
+  var sticky  = document.createElement('div');
+  sticky.className = 'wcp-sticky';
+  sticky.innerHTML = '<span class="wcp-sticky__name">'+(titleEl?titleEl.textContent.trim():'')+'</span>'
+                   + '<button class="wcp-sticky__btn" type="button">Add to Bag</button>';
+  document.body.appendChild(sticky);
+
+  sticky.querySelector('.wcp-sticky__btn').addEventListener('click', function(){
+    var atcBtn = document.getElementById('wcp-atc-btn') || document.querySelector('.single_add_to_cart_button');
+    if(atcBtn) atcBtn.click();
+  });
+
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      sticky.classList.toggle('on', !entries[0].isIntersecting);
+    },{threshold:0}).observe(formWrap);
+  }
+}
+
+/* ── INIT ────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', function(){
+  initPillVariations();
+  initGallery();
+  initLightbox();
+  initTabs();
+  initQtyStepper();
+  initStickyAtc();
+});
+
+})();
