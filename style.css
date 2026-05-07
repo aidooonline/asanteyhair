@@ -534,6 +534,15 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 .feat-card__body{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.85}
 .s--white .feat-card__body{color:var(--g5)}
 
+/* Slim variant — Why Asantey section */
+.s--slim{padding-top:2.5rem!important;padding-bottom:2.5rem!important}
+.s--slim .sh{margin-bottom:1.5rem}
+.feat-card--slim{padding:1.25rem 0}
+.feat-card--slim .feat-card__icon{margin-bottom:.75rem}
+.feat-card--slim .feat-card__title{font-size:1.1rem;margin-bottom:.35rem}
+.feat-card--slim .feat-card__body{font-size:.85rem;line-height:1.7}
+.why-grid{gap:1.5rem}
+
 /* ─── TESTIMONIALS ───────────────────────────────────────────── */
 .tcard{
   padding:2.5rem;

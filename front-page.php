@@ -232,20 +232,24 @@ $feat_defaults = [
     6 => ['icon'=>'truck',   'title'=>'UK Based, Nottingham','body'=>'Salon-based in Nottingham. Orders dispatched 2-3 business days. No import fees. No waiting.'],
 ];
 ?>
-<section class="s s--white" aria-labelledby="why-heading">
+<section class="s s--white s--slim" aria-labelledby="why-heading">
     <div class="wrap">
         <div class="sh sh--c reveal">
             <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $why_label, ENT_QUOTES ) ); ?></span>
             <h2 id="why-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $why_title, ENT_QUOTES ) ); ?></h2>
         </div>
-        <div class="grid-3">
-            <?php foreach($feat_defaults as $i => $d):
+        <div class="grid-3 why-grid">
+            <?php
+            $shown = 0;
+            foreach($feat_defaults as $i => $d):
+                if ( $shown >= 3 ) break;
                 $icon  = get_theme_mod("ah_feat{$i}_icon",  $d['icon']);
                 $title = get_theme_mod("ah_feat{$i}_title", $d['title']);
                 $body  = get_theme_mod("ah_feat{$i}_body",  $d['body']);
                 if ( ! $title ) continue;
+                $shown++;
             ?>
-                <div class="feat-card reveal d<?php echo (($i-1)%3)+1; ?>">
+                <div class="feat-card feat-card--slim reveal d<?php echo $shown; ?>">
                     <div class="feat-card__icon"><?php echo ah_svg($icon); ?></div>
                     <h3 class="feat-card__title"><?php echo esc_html( wp_specialchars_decode( $title, ENT_QUOTES ) ); ?></h3>
                     <p class="feat-card__body"><?php echo esc_html( wp_specialchars_decode( $body, ENT_QUOTES ) ); ?></p>
