@@ -307,20 +307,18 @@ $story_label  = get_theme_mod('ah_story_label', 'Our Story');
 $story_title  = get_theme_mod('ah_story_title', 'The Asantey Standard');
 $story_body1  = ah_opt('story_body1', 'Founded on the belief that every woman deserves hair she is genuinely proud of. We source our Cambodian hair directly — single donor, cuticle-aligned, never chemically altered.');
 $story_body2  = ah_opt('story_body2', 'What you receive is exactly as nature intended: just better selected, better prepared, and built to last 3-5 years with the right care.');
-$story_image  = get_theme_mod('ah_story_image') ?: AH_URI.'/assets/images/client-result-1.jpg';
 ?>
-<div class="split split--dark">
-    <div class="split__media">
-        <img src="<?php echo esc_url($story_image); ?>" alt="<?php echo esc_attr($story_title); ?>" loading="lazy" width="800" height="1000">
-    </div>
-    <div class="split__body split--dark reveal">
-        <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $story_label, ENT_QUOTES ) ); ?></span>
-        <h2 class="t-h2" style="color:var(--paper);margin-top:1.125rem;"><?php echo esc_html( wp_specialchars_decode( $story_title, ENT_QUOTES ) ); ?></h2>
-        <div class="rule rule--gold" style="margin-top:1.5rem;"></div>
-        <?php if($story_body1): ?><p class="t-body--lg" style="margin-top:1.5rem;"><?php echo esc_html( wp_specialchars_decode( $story_body1, ENT_QUOTES ) ); ?></p><?php endif; ?>
-        <?php if($story_body2): ?><p class="t-body" style="margin-top:1rem;"><?php echo esc_html( wp_specialchars_decode( $story_body2, ENT_QUOTES ) ); ?></p><?php endif; ?>
-        <div class="btns" style="margin-top:2.5rem;">
-            <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn--ow">Our Story <?php echo ah_svg('arrow-right'); ?></a>
+<div class="s s--mid">
+    <div class="wrap">
+        <div class="split__body reveal" style="max-width:680px;margin:0 auto;text-align:center;">
+            <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $story_label, ENT_QUOTES ) ); ?></span>
+            <h2 class="t-h2" style="color:var(--paper);margin-top:1.125rem;"><?php echo esc_html( wp_specialchars_decode( $story_title, ENT_QUOTES ) ); ?></h2>
+            <div class="rule rule--gold" style="margin-top:1.5rem;"></div>
+            <?php if($story_body1): ?><p class="t-body--lg" style="margin-top:1.5rem;"><?php echo esc_html( wp_specialchars_decode( $story_body1, ENT_QUOTES ) ); ?></p><?php endif; ?>
+            <?php if($story_body2): ?><p class="t-body" style="margin-top:1rem;"><?php echo esc_html( wp_specialchars_decode( $story_body2, ENT_QUOTES ) ); ?></p><?php endif; ?>
+            <div class="btns" style="margin-top:2.5rem;justify-content:center;">
+                <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn--ow">Our Story <?php echo ah_svg('arrow-right'); ?></a>
+            </div>
         </div>
     </div>
 </div>

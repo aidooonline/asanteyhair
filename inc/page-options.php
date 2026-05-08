@@ -349,7 +349,6 @@ function ahp_cb_home_why(): void {
 function ahp_cb_home_story(): void {
     echo '<div class="ahp-box">';
     _ahp_section('Brand Story Section', 'ahp-cols-2');
-    _ahp_img('story_image','Story Section Image');
     _ahp_text('story_label','Label','Our Story');
     _ahp_text('story_title','Title','The Asantey Standard');
     _ahp_textarea('story_body1','Paragraph 1','Founded on the belief that every woman deserves hair she is genuinely proud of.');
