@@ -29,7 +29,7 @@ echo ah_schema_faq( $raw_faqs );
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-body-wave.jpg' ); ?>"
+    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-body-wave.jpg', '', '', 'eager' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
   <div class="page-hero__content">
@@ -117,19 +117,22 @@ echo ah_schema_faq( $raw_faqs );
         ['raw-body-wave.jpg',      'Body Wave',     'Natural bounce and movement. The most versatile raw texture.'],
         ['raw-burmese-curls.jpg',  'Burmese Curls', 'Tight, springy curls with incredible definition and volume.'],
         ['raw-deep-wave.jpg',      'Deep Wave',     'Deep S-wave pattern. Holds curl beautifully, wash after wash.'],
-        ['raw-kinky-straight.jpg', 'Kinky Straight','Silky with a natural kink. Blends seamlessly with relaxed or natural hair.'],
-        ['raw-loose-deep.jpg',     'Loose Deep',    'Relaxed deep wave. Full, bouncy, and effortlessly glamorous.'],
-        ['raw-loose-wave.jpg',     'Loose Wave',    'Soft, flowing wave. The bestselling texture in our Raw collection.'],
-        ['raw-straight.jpg',       'Straight',      'Ultra-sleek and pin-straight. Curls and holds a wave when styled.'],
-        ['raw-waver-wave.jpg',     'Waver Wave',    'Between a loose wave and a body wave. Unique and full of movement.'],
+        ['raw-body-wave.jpg',     'raw-body-wave',     'Body Wave',     'Natural S-wave. Our most popular raw texture — versatile, full, and effortlessly glamorous.'],
+        ['raw-kinky-straight.jpg','raw-kinky-straight','Kinky Straight', 'Silky with a natural kink. Blends seamlessly with relaxed or natural hair.'],
+        ['raw-loose-deep.jpg',    'raw-loose-deep',    'Loose Deep',    'Relaxed deep wave. Full, bouncy, and effortlessly glamorous.'],
+        ['raw-loose-wave.jpg',    'raw-loose-wave',    'Loose Wave',    'Soft, flowing wave. The bestselling texture in our Raw collection.'],
+        ['raw-straight.jpg',      'raw-straight',      'Straight',      'Ultra-sleek and pin-straight. Curls and holds a wave when styled.'],
+        ['raw-waver-wave.jpg',    'raw-waver-wave',    'Waver Wave',    'Between a loose wave and a body wave. Unique and full of movement.'],
       ];
       $raw_from = array_values( ah_get_pricing('raw') )[0];
       foreach ( $textures as $i => $t ) :
-        [$img, $name, $desc] = $t;
+        [$img, $img_key, $name, $desc] = $t;
+        $opt_img = ah_opt_img( 'raw_tex_' . $img_key );
+        $img_src = $opt_img['url'] ?: AH_URI . '/assets/images/' . $img;
         ?>
         <div class="ah-texture-card ah-reveal ah-reveal--delay-<?php echo ($i % 4) + 1; ?>">
           <div class="texture-item__img">
-            <img src="<?php echo esc_url( AH_URI . '/assets/images/' . $img ); ?>"
+            <img src="<?php echo esc_url( $img_src ); ?>"
                  alt="Cambodian raw hair — <?php echo esc_attr($name); ?>"
                  loading="lazy" width="300" height="400">
           </div>

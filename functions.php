@@ -26,6 +26,9 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
     require_once AH_DIR . '/inc/acf-fields.php';
 }
 
+// Page options — edit every page from WP Admin (no plugin needed)
+require_once AH_DIR . '/inc/page-options.php';
+
 // WooCommerce integration — only if WooCommerce is active
 if ( class_exists( 'WooCommerce' ) ) {
     require_once AH_DIR . '/inc/woocommerce.php';

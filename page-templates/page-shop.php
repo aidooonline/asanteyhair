@@ -13,7 +13,7 @@ echo ah_schema_breadcrumb([
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-straight.jpg' ); ?>"
+    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-straight.jpg', '', '', 'eager' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
   <div class="page-hero__content">

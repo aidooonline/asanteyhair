@@ -27,7 +27,7 @@ echo ah_schema_faq($faqs);
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <img src="<?php echo esc_url( AH_URI . '/assets/images/virgin-body-wave.png' ); ?>"
+    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/virgin-body-wave.png', '', '', 'eager' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
   <div class="page-hero__content">
@@ -93,20 +93,23 @@ echo ah_schema_faq($faqs);
     <div class="texture-grid">
       <?php
       $textures = [
-        ['raw-body-wave.jpg','Body Wave','Natural wave with incredible movement and versatility.'],
-        ['raw-deep-wave.jpg','Deep Wave','Rich, defined S-wave. Stays curly even after washing.'],
-        ['raw-straight.jpg','Straight','Silky, sleek, and pin-straight. Holds a curl beautifully.'],
-        ['raw-kinky-straight.jpg','Kinky Straight','Blends seamlessly with natural and relaxed hair textures.'],
-        ['raw-loose-wave.jpg','Loose Wave','Soft and effortless. Our most popular virgin texture.'],
-        ['raw-burmese-curls.jpg','Burmese Curls','Tight, springy curls with amazing definition.'],
-        ['raw-loose-deep.jpg','Loose Deep','Relaxed deep wave. Full volume from root to tip.'],
-        ['raw-waver-wave.jpg','Waver Wave','Unique texture — between a loose and body wave.'],
+        ['raw-body-wave.jpg',     'body-wave',     'Body Wave',      'Natural wave with incredible movement and versatility.'],
+        ['raw-deep-wave.jpg',     'deep-wave',     'Deep Wave',      'Rich, defined S-wave. Stays curly even after washing.'],
+        ['raw-straight.jpg',      'straight',      'Straight',       'Silky, sleek, and pin-straight. Holds a curl beautifully.'],
+        ['raw-kinky-straight.jpg','kinky-straight','Kinky Straight', 'Blends seamlessly with natural and relaxed hair textures.'],
+        ['raw-loose-wave.jpg',    'loose-wave',    'Loose Wave',     'Soft and effortless. Our most popular virgin texture.'],
+        ['raw-burmese-curls.jpg', 'burmese-curls', 'Burmese Curls',  'Tight, springy curls with amazing definition.'],
+        ['raw-loose-deep.jpg',    'loose-deep',    'Loose Deep',     'Relaxed deep wave. Full volume from root to tip.'],
+        ['raw-waver-wave.jpg',    'waver-wave',    'Waver Wave',     'Unique texture — between a loose and body wave.'],
       ];
       $from = array_values(ah_get_pricing('virgin'))[0];
-      foreach($textures as $i=>$t):[$img,$name,$desc]=$t;?>
+      foreach($textures as $i=>$t):[$img,$img_key,$name,$desc]=$t;
+        $opt_img = ah_opt_img('vir_tex_'.$img_key);
+        $img_src = $opt_img['url'] ?: AH_URI.'/assets/images/'.$img;
+      ?>
         <div class="ah-texture-card ah-reveal ah-reveal--delay-<?php echo ($i%4)+1; ?>">
           <div class="texture-item__img">
-            <img src="<?php echo esc_url(AH_URI.'/assets/images/'.$img); ?>"
+            <img src="<?php echo esc_url($img_src); ?>"
                  alt="Cambodian virgin hair — <?php echo esc_attr($name); ?>"
                  loading="lazy" width="300" height="400">
           </div>

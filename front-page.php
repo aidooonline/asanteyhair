@@ -159,7 +159,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 <div class="marquee-strip marquee-strip--dark">
     <div class="marquee-track">
         <?php
-        $marquee_raw = get_theme_mod( 'ah_marquee_items', "sparkle|Premium Cambodian Hair\ngem|HD Lace Specialists\nshield|3-5 Year Lifespan\ncheck|Minimal Shedding\nlocation|UK Based - Nottingham\nheart|Single Donor\nsparkle|Cuticle Aligned\ntruck|Fast UK Dispatch" );
+        $marquee_raw = ah_opt('marquee_items', "sparkle|Premium Cambodian Hair\ngem|HD Lace Specialists\nshield|3-5 Year Lifespan\ncheck|Minimal Shedding\nlocation|UK Based - Nottingham\nheart|Single Donor\nsparkle|Cuticle Aligned\ntruck|Fast UK Dispatch" );
         $marquee_lines = array_filter( array_map( 'trim', explode( "\n", $marquee_raw ) ) );
         // Double items for infinite scroll effect
         $all_items = array_merge( $marquee_lines, $marquee_lines );
@@ -176,9 +176,9 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 
 <!-- ============================================================ CATEGORIES -->
 <?php
-$cats_label = get_theme_mod('ah_cats_label', 'Our Collections');
-$cats_title = get_theme_mod('ah_cats_title', 'The Asantey Standard');
-$cats_desc  = get_theme_mod('ah_cats_desc',  'Every bundle, closure, and frontal is cuticle-aligned, single-donor, and held to exacting quality standards before it reaches your door.');
+$cats_label = ah_opt('cats_label','Our Collections');
+$cats_title = ah_opt('cats_title','The Asantey Standard');
+$cats_desc  = ah_opt('cats_desc','Every bundle, closure, and frontal is cuticle-aligned, single-donor, and held to exacting quality standards before it reaches your door.');
 
 $cat_defaults = [
     1 => ['label'=>'Raw Hair','title'=>'Cambodian Raw Hair','from'=>'60','tag'=>'Unprocessed. Uncoloured. Unapologetically Premium.','url'=>'/raw-hair/','img'=>'raw-body-wave.jpg'],
@@ -220,8 +220,8 @@ $cat_defaults = [
 
 <!-- ============================================================ WHY ASANTEY -->
 <?php
-$why_label = get_theme_mod('ah_why_label', 'Why Asantey');
-$why_title = get_theme_mod('ah_why_title', 'Hair That Speaks for Itself');
+$why_label = ah_opt('why_label','Why Asantey');
+$why_title = ah_opt('why_title','Hair That Speaks for Itself');
 
 $feat_defaults = [
     1 => ['icon'=>'gem',     'title'=>'Cambodian Origin',    'body'=>'Single-donor Cambodian hair, ethically sourced, never chemically processed. Full cuticle alignment for unmatched softness.'],
@@ -261,8 +261,8 @@ $feat_defaults = [
 
 <!-- ============================================================ FEATURED PRODUCTS -->
 <?php
-$prod_label = get_theme_mod('ah_prod_label', 'Featured Products');
-$prod_title = get_theme_mod('ah_prod_title', 'Shop the Collection');
+$prod_label = ah_opt('prod_label','Featured Products');
+$prod_title = ah_opt('prod_title','Shop the Collection');
 ?>
 <section class="s" aria-labelledby="prod-heading">
     <div class="wrap" style="max-width:var(--max);padding-inline:clamp(1rem,3vw,2.5rem);">
@@ -305,8 +305,8 @@ $prod_title = get_theme_mod('ah_prod_title', 'Shop the Collection');
 <?php
 $story_label  = get_theme_mod('ah_story_label', 'Our Story');
 $story_title  = get_theme_mod('ah_story_title', 'The Asantey Standard');
-$story_body1  = get_theme_mod('ah_story_body1', 'Founded on the belief that every woman deserves hair she is genuinely proud of. We source our Cambodian hair directly — single donor, cuticle-aligned, never chemically altered.');
-$story_body2  = get_theme_mod('ah_story_body2', 'What you receive is exactly as nature intended: just better selected, better prepared, and built to last 3-5 years with the right care.');
+$story_body1  = ah_opt('story_body1', 'Founded on the belief that every woman deserves hair she is genuinely proud of. We source our Cambodian hair directly — single donor, cuticle-aligned, never chemically altered.');
+$story_body2  = ah_opt('story_body2', 'What you receive is exactly as nature intended: just better selected, better prepared, and built to last 3-5 years with the right care.');
 $story_image  = get_theme_mod('ah_story_image') ?: AH_URI.'/assets/images/client-result-1.jpg';
 ?>
 <div class="split split--dark">
@@ -327,8 +327,8 @@ $story_image  = get_theme_mod('ah_story_image') ?: AH_URI.'/assets/images/client
 
 <!-- ============================================================ CLIENT RESULTS -->
 <?php
-$gal_label = get_theme_mod('ah_gal_label', 'Real Women. Real Results.');
-$gal_title = get_theme_mod('ah_gal_title', 'See It to Believe It');
+$gal_label = ah_opt('gal_label','Real Women. Real Results.');
+$gal_title = ah_opt('gal_title','See It to Believe It');
 ?>
 <section class="s" aria-labelledby="results-heading">
     <div class="wrap">
@@ -372,7 +372,7 @@ $gal_title = get_theme_mod('ah_gal_title', 'See It to Believe It');
 
 <!-- ============================================================ TESTIMONIALS -->
 <?php
-$test_label = get_theme_mod('ah_test_label', 'Client Love');
+$test_label = ah_opt('test_label','Client Love');
 $test_title = get_theme_mod('ah_test_title', 'What Our Clients Say');
 $tests = [
     [get_theme_mod('ah_test1_quote','I have been buying hair for over 10 years and Asantey is hands down the best quality I have ever experienced. No shedding, silky soft, and took colour perfectly.'), get_theme_mod('ah_test1_author','Naomi A., London'), 5],
@@ -400,15 +400,15 @@ $tests = [
 
 <!-- ============================================================ CTA BAND -->
 <?php
-$cta_title = get_theme_mod('ah_cta_title', 'Your Best Hair Starts Here');
-$cta_body  = get_theme_mod('ah_cta_body',  'Browse our full collection or order directly on WhatsApp. We guide you through every step.');
-$cta_btn1  = get_theme_mod('ah_cta_btn1',  'Shop Collections');
-$cta_btn1u = get_theme_mod('ah_cta_btn1_url', home_url('/shop/'));
-$cta_btn2  = get_theme_mod('ah_cta_btn2',  'WhatsApp Order');
+$cta_title = ah_opt('cta_title', 'Your Best Hair Starts Here');
+$cta_body  = ah_opt('cta_body',  'Browse our full collection or order directly on WhatsApp. We guide you through every step.');
+$cta_btn1  = ah_opt('cta_btn1',  'Shop Collections');
+$cta_btn1u = ah_opt('cta_btn1_url', home_url('/shop/'));
+$cta_btn2  = ah_opt('cta_btn2',  'WhatsApp Order');
 ?>
 <div class="cta-band dark">
     <div class="wrap wrap--narrow reveal">
-        <span class="t-label"><?php echo esc_html( get_theme_mod( 'ah_cta_label', 'Ready to Elevate Your Look?' ) ); ?></span>
+        <span class="t-label"><?php echo esc_html( ah_opt('cta_label','Ready to Elevate Your Look?') ); ?></span>
         <h2><?php echo esc_html( wp_specialchars_decode( $cta_title, ENT_QUOTES ) ); ?></h2>
         <p><?php echo esc_html( wp_specialchars_decode( $cta_body, ENT_QUOTES ) ); ?></p>
         <div class="btns" style="justify-content:center;">

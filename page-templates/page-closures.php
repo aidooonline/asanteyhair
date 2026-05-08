@@ -29,7 +29,7 @@ echo ah_schema_faq($faqs);
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <img src="<?php echo esc_url(AH_URI.'/assets/images/closures-frontals-pricelist.jpg'); ?>"
+    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/closures-frontals-pricelist.jpg', '', '', 'eager' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
   <div class="page-hero__content">
@@ -44,7 +44,11 @@ echo ah_schema_faq($faqs);
 <!-- What is HD Lace -->
 <section class="split">
   <div class="split__media">
-    <img src="<?php echo esc_url(AH_URI.'/assets/images/hd-lace-sizes.png'); ?>"
+    <?php
+    $cls_guide = ah_opt_img('cls_size_guide');
+    $cls_guide_src = $cls_guide['url'] ?: AH_URI.'/assets/images/hd-lace-sizes.png';
+    ?>
+    <img src="<?php echo esc_url($cls_guide_src); ?>"
          alt="HD lace closure and frontal sizes guide"
          loading="lazy" width="800" height="800">
   </div>

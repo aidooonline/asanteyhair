@@ -15,7 +15,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <img src="<?php echo esc_url(AH_URI.'/assets/images/client-result-1.jpg'); ?>"
+    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/client-result-1.jpg', '', '', 'eager' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
   <div class="page-hero__content">
@@ -77,32 +77,32 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       // Images: Unsplash free licence — load directly from CDN on live server
       $hair_services = [
         [
-          'image' => AH_URI.'/assets/images/braids.jpg',
+          'image_key' => 'svc_braids_image',       'image_fallback' => 'braids.jpg',
           'title' => 'Braids',
           'body'  => 'From knotless box braids to jumbo braids — protective styles that are clean, neat, and built to last. Book online for a consultation.',
         ],
         [
-          'image' => AH_URI.'/assets/images/cornrows.jpg',
+          'image_key' => 'svc_cornrows_image',     'image_fallback' => 'cornrows.jpg',
           'title' => 'Cornrows',
           'body'  => 'Classic and intricate cornrow styles including straight backs, curved designs, and feed-in techniques. Natural or with extensions.',
         ],
         [
-          'image' => AH_URI.'/assets/images/hair-treatment.jpg',
+          'image_key' => 'svc_hair-treatment_image', 'image_fallback' => 'hair-treatment.jpg',
           'title' => 'Hair Treatments',
           'body'  => 'Deep conditioning, protein treatments, and scalp care designed to restore moisture, reduce breakage, and promote healthy hair growth.',
         ],
         [
-          'image' => AH_URI.'/assets/images/sew-in.jpg',
+          'image_key' => 'svc_sew-in_image',       'image_fallback' => 'sew-in.jpg',
           'title' => 'Sew-In Installs',
           'body'  => 'Professional sew-in installation for bundles and closures/frontals. Achieve a flawless, long-lasting install every time.',
         ],
         [
-          'image' => AH_URI.'/assets/images/closure.jpg',
+          'image_key' => 'svc_closure_image',      'image_fallback' => 'closure.jpg',
           'title' => 'Closure & Frontal Installs',
           'body'  => 'Expert HD lace closure and frontal installation. Natural hairline, seamless blend, undetectable finish.',
         ],
         [
-          'image' => AH_URI.'/assets/images/natural-hair.jpg',
+          'image_key' => 'svc_natural-hair_image', 'image_fallback' => 'natural-hair.jpg',
           'title' => 'Natural Hair Care',
           'body'  => 'Wash, condition, detangle, and style services for natural hair textures. Designed to maintain length and promote healthy growth.',
         ],
@@ -110,9 +110,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       foreach($hair_services as $i => $s): ?>
         <div class="service-card reveal d<?php echo ($i%3)+1; ?>">
           <div class="service-card__img">
-            <img src="<?php echo esc_url($s['image']); ?>"
-                 alt="<?php echo esc_attr($s['title']); ?> at AHB Salon Nottingham"
-                 loading="lazy" width="600" height="400">
+            <?php ah_opt_img_tag( $s['image_key'] ?? '', AH_URI.'/assets/images/'.($s['image_fallback']??''), $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
           </div>
           <div class="service-card__body">
             <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
@@ -143,17 +141,17 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       <?php
       $beauty_services = [
         [
-          'image' => AH_URI.'/assets/images/lash-extensions.jpg',
+          'image_key' => 'svc_lash-extensions_image','image_fallback' => 'lash-extensions.jpg',
           'title' => 'Lash Extensions',
           'body'  => 'Classic, hybrid, and volume lash sets that enhance your natural eye shape. Long-lasting, lightweight, and beautifully finished.',
         ],
         [
-          'image' => AH_URI.'/assets/images/eyebrow-wax.jpg',
+          'image_key' => 'svc_eyebrow-wax_image',  'image_fallback' => 'eyebrow-wax.jpg',
           'title' => 'Eyebrow Waxing',
           'body'  => 'Precise eyebrow shaping using wax for a clean, defined arch that frames your face perfectly.',
         ],
         [
-          'image' => AH_URI.'/assets/images/eyebrow-thread.jpg',
+          'image_key' => 'svc_eyebrow-thread_image','image_fallback' => 'eyebrow-thread.jpg',
           'title' => 'Eyebrow Threading',
           'body'  => 'Traditional threading technique for precise, pain-managed brow shaping. Ideal for sensitive skin or fine brow hair.',
         ],
@@ -161,9 +159,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       foreach($beauty_services as $i => $s): ?>
         <div class="service-card reveal d<?php echo $i+1; ?>">
           <div class="service-card__img">
-            <img src="<?php echo esc_url($s['image']); ?>"
-                 alt="<?php echo esc_attr($s['title']); ?> at AHB Salon Nottingham"
-                 loading="lazy" width="600" height="400">
+            <?php ah_opt_img_tag( $s['image_key'] ?? '', AH_URI.'/assets/images/'.($s['image_fallback']??''), $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
           </div>
           <div class="service-card__body">
             <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
@@ -179,7 +175,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 <!-- Booking + Location -->
 <section class="split" id="visit-us">
   <div class="split__media">
-    <img src="<?php echo esc_url(AH_URI.'/assets/images/client-result-3.jpg'); ?>"
+    <img src="<?php echo esc_url(ah_opt_img('salon_split_img2')['url'] ?: AH_URI.'/assets/images/client-result-3.jpg'); ?>"
          alt="AHB Salon — Nottingham hair and beauty salon"
          loading="lazy" width="800" height="1000">
   </div>
