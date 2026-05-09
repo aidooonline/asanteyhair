@@ -44,8 +44,7 @@ if ( empty( $gallery_items ) ) {
 
 <section class="page-hero">
     <div class="page-hero__bg">
-        <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/hero-gallery.jpg', '', '', 'eager' ); ?>"
-             alt="" aria-hidden="true" loading="eager" width="1280" height="500">
+        <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/hero-gallery.jpg', '', '', 'eager' ); ?>
     </div>
     <div class="page-hero__content">
         <span class="t-label">Client Results</span>

@@ -15,8 +15,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/client-result-1.jpg', '', '', 'eager' ); ?>"
-         alt="" aria-hidden="true" loading="eager" width="1280" height="500">
+    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/client-result-1.jpg', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">Nottingham Salon</span>

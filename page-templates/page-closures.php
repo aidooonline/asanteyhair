@@ -29,8 +29,7 @@ echo ah_schema_faq($faqs);
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/closures-frontals-pricelist.jpg', '', '', 'eager' ); ?>"
-         alt="" aria-hidden="true" loading="eager" width="1280" height="500">
+    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/closures-frontals-pricelist.jpg', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">The Perfect Finish</span>

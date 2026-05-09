@@ -27,8 +27,7 @@ echo ah_schema_faq($faqs);
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', ah_opt_img('vir_intro_image')['url'] ?: AH_URI.'/assets/images/virgin-body-wave.png', '', '', 'eager' ); ?>"
-         alt="" aria-hidden="true" loading="eager" width="1280" height="500">
+    <?php ah_opt_img_tag( 'hero_image', ah_opt_img('vir_intro_image')['url'] ?: AH_URI.'/assets/images/virgin-body-wave.png', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">Cambodian Hair Collection</span>

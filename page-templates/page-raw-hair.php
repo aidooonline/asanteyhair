@@ -29,8 +29,7 @@ echo ah_schema_faq( $raw_faqs );
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-body-wave.jpg', '', '', 'eager' ); ?>"
-         alt="" aria-hidden="true" loading="eager" width="1280" height="500">
+    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-body-wave.jpg', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">Cambodian Hair Collection</span>

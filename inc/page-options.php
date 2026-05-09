@@ -43,7 +43,7 @@ function ah_opt_img_tag(string $key, string $fallback, string $alt = '', string 
     $a   = $img['alt'] ?: $alt;
     echo '<img src="' . esc_url($src) . '" alt="' . esc_attr($a) . '"'
        . ($class ? ' class="' . esc_attr($class) . '"' : '')
-       . ' loading="' . esc_attr($loading) . '" width="1280" height="640">';
+       . ' loading="' . esc_attr($loading) . '">';
 }
 
 function ah_opt_repeater(string $key): array {
