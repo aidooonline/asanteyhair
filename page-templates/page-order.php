@@ -77,14 +77,32 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
     <div class="grid-3">
       <?php
       $products = [
-        ['Cambodian Raw Hair','Unprocessed. Single-donor. 10+ textures, 10"–30".','60',home_url('/raw-hair/'),'raw-straight.jpg'],
-        ['Cambodian Virgin Hair','Pure quality. Minimal shedding. 3–5 year lifespan.','50',home_url('/virgin-hair/'),'raw-body-wave.jpg'],
-        ['HD Lace Closures & Frontals','Invisible HD lace. 6 sizes. All textures available.','49',home_url('/closures-frontals/'),'hd-lace-sizes.png'],
+        [
+            ah_opt('order_prod1_title','Cambodian Raw Hair'),
+            ah_opt('order_prod1_desc','Unprocessed. Single-donor. 10+ textures, 10"-30".'),
+            ah_opt('order_prod1_price','60'),
+            ah_opt('order_prod1_url',home_url('/raw-hair/')),
+            ah_opt_img('order_img1')['url'] ?: AH_URI.'/assets/images/raw-straight.jpg',
+        ],
+        [
+            ah_opt('order_prod2_title','Cambodian Virgin Hair'),
+            ah_opt('order_prod2_desc','Pure quality. Minimal shedding. 3–5 year lifespan.'),
+            ah_opt('order_prod2_price','50'),
+            ah_opt('order_prod2_url',home_url('/virgin-hair/')),
+            ah_opt_img('order_img2')['url'] ?: AH_URI.'/assets/images/raw-body-wave.jpg',
+        ],
+        [
+            ah_opt('order_prod3_title','HD Lace Closures & Frontals'),
+            ah_opt('order_prod3_desc','Invisible HD lace. 6 sizes. All textures available.'),
+            ah_opt('order_prod3_price','49'),
+            ah_opt('order_prod3_url',home_url('/closures-frontals/')),
+            ah_opt_img('order_img3')['url'] ?: AH_URI.'/assets/images/hd-lace-sizes.png',
+        ],
       ];
       foreach($products as $i=>$p): ?>
         <div class="ah-reveal ah-reveal--delay-<?php echo $i+1; ?>" style="background:#ffffff;overflow:hidden;">
           <div style="aspect-ratio:4/3;overflow:hidden;">
-            <img src="<?php echo esc_url(AH_URI.'/assets/images/'.$p[4]); ?>" alt="<?php echo esc_attr($p[0]); ?>" loading="lazy" width="600" height="450" style="width:100%;height:100%;object-fit:cover;">
+            <img src="<?php echo esc_url($p[4]); ?>" alt="<?php echo esc_attr($p[0]); ?>" loading="lazy" width="600" height="450" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div style="padding:1.5rem;">
             <h3 style="font-family:var(--serif);font-size:1.5rem;margin-bottom:0.5rem;"><?php echo esc_html($p[0]); ?></h3>

@@ -10,11 +10,11 @@ echo ah_schema_breadcrumb([
   ['name' => 'Contact', 'url' => get_permalink()],
 ]);
 
-$phone   = get_theme_mod('ah_contact_phone',   '');
-$email   = get_theme_mod('ah_contact_email',   '');
-$address = get_theme_mod('ah_contact_address', '');
-$hours   = get_theme_mod('ah_contact_hours',   'Mon–Sat: 9am–7pm');
-$map_url = get_theme_mod('ah_contact_map',     '');
+$phone   = ah_opt('phone','07827 129797');
+$email   = ah_opt('email','');
+$address = ah_opt('address','358 Radford Road, Nottingham NG7 5GQ');
+$hours   = ah_opt('hours','Mon–Sat: 9am–7pm');
+$map_url = ah_opt('map_embed','');
 ?>
 
 <section class="page-hero">
@@ -68,14 +68,14 @@ $map_url = get_theme_mod('ah_contact_map',     '');
             </div>
           <?php endif; ?>
 
-          <?php if(get_theme_mod('ah_whatsapp_number')): ?>
+          <?php if(ah_opt('wa', get_theme_mod('ah_whatsapp_number',''))): ?>
             <div class="contact-item">
               <div class="contact-item__icon" style="background:#e8f8ef;"><?php echo ah_svg('whatsapp'); ?></div>
               <div>
                 <span class="contact-item__label">WhatsApp (Preferred)</span>
                 <span class="contact-item__val">
                   <a href="<?php echo esc_url(ah_whatsapp_url()); ?>" target="_blank" rel="noopener noreferrer">
-                    <?php echo esc_html(get_theme_mod('ah_whatsapp_number')); ?>
+                    <?php echo esc_html(ah_opt('wa', get_theme_mod('ah_whatsapp_number',''))); ?>
                   </a>
                 </span>
               </div>
@@ -117,7 +117,7 @@ $map_url = get_theme_mod('ah_contact_map',     '');
             <?php
             $socials = ['instagram','facebook','tiktok','youtube'];
             foreach($socials as $s):
-              $url = get_theme_mod('ah_social_'.$s,'');
+              $url = ah_opt('soc_'.$s, get_theme_mod('ah_social_'.$s,''));
               if($url): ?>
                 <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr(ucfirst($s)); ?>">
                   <?php echo ah_svg($s); ?>

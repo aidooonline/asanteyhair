@@ -33,7 +33,8 @@ echo ah_schema_breadcrumb([
 <!-- Brand Story -->
 <section class="split" id="our-story" aria-labelledby="story-heading">
   <div class="split__media">
-    <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-body-wave.jpg' ); ?>"
+    <?php $about_img1=ah_opt_img('about_img1'); ?>
+    <img src="<?php echo esc_url($about_img1['url'] ?: AH_URI.'/assets/images/raw-body-wave.jpg'); ?>"
          alt="Asantey Hair &amp; Beauty — premium Cambodian hair bundles"
          loading="lazy" width="800" height="1000">
   </div>
@@ -92,7 +93,8 @@ echo ah_schema_breadcrumb([
 <!-- Why Cambodian Hair — SEO Content -->
 <section class="split split--rev" id="cambodian-hair" aria-labelledby="cambodian-heading">
   <div class="split__media">
-    <img src="<?php echo esc_url( AH_URI . '/assets/images/raw-deep-wave.jpg' ); ?>"
+    <?php $about_img2=ah_opt_img('about_img2'); ?>
+    <img src="<?php echo esc_url($about_img2['url'] ?: AH_URI.'/assets/images/raw-deep-wave.jpg'); ?>"
          alt="Cambodian raw hair extensions — deep wave texture"
          loading="lazy" width="800" height="1000">
   </div>

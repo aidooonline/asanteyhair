@@ -64,6 +64,16 @@ $all_faqs = [
   ],
 ];
 
+// Merge page-options FAQ items into first category
+$page_faqs = ah_opt_repeater('faq');
+if (!empty($page_faqs)) {
+    $po_items = array_map(fn($r) => [$r['q']??'', $r['a']??''], array_filter($page_faqs, fn($r)=>!empty($r['q'])));
+    if (!empty($po_items)) {
+        $first_key = array_key_first($all_faqs);
+        array_splice($all_faqs[$first_key], 0, 0, $po_items);
+    }
+}
+
 // Flatten for schema
 $schema_faqs = [];
 foreach($all_faqs as $faqs) {

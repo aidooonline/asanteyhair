@@ -77,32 +77,38 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       // Images: Unsplash free licence — load directly from CDN on live server
       $hair_services = [
         [
-          'image_key' => 'svc_braids_image',       'image_fallback' => 'braids.jpg',
+          'image_key' => 'svc_braids_image',
+          'svc_key' => 'braids', 'image_fallback' => 'braids.jpg',
           'title' => 'Braids',
           'body'  => 'From knotless box braids to jumbo braids — protective styles that are clean, neat, and built to last. Book online for a consultation.',
         ],
         [
-          'image_key' => 'svc_cornrows_image',     'image_fallback' => 'cornrows.jpg',
+          'image_key' => 'svc_cornrows_image',
+          'svc_key' => 'cornrows', 'image_fallback' => 'cornrows.jpg',
           'title' => 'Cornrows',
           'body'  => 'Classic and intricate cornrow styles including straight backs, curved designs, and feed-in techniques. Natural or with extensions.',
         ],
         [
-          'image_key' => 'svc_hair-treatment_image', 'image_fallback' => 'hair-treatment.jpg',
+          'image_key' => 'svc_hair-treatment_image',
+          'svc_key' => 'hair-treatment', 'image_fallback' => 'hair-treatment.jpg',
           'title' => 'Hair Treatments',
           'body'  => 'Deep conditioning, protein treatments, and scalp care designed to restore moisture, reduce breakage, and promote healthy hair growth.',
         ],
         [
-          'image_key' => 'svc_sew-in_image',       'image_fallback' => 'sew-in.jpg',
+          'image_key' => 'svc_sew-in_image',
+          'svc_key' => 'sew-in', 'image_fallback' => 'sew-in.jpg',
           'title' => 'Sew-In Installs',
           'body'  => 'Professional sew-in installation for bundles and closures/frontals. Achieve a flawless, long-lasting install every time.',
         ],
         [
-          'image_key' => 'svc_closure_image',      'image_fallback' => 'closure.jpg',
+          'image_key' => 'svc_closure_image',
+          'svc_key' => 'closure', 'image_fallback' => 'closure.jpg',
           'title' => 'Closure & Frontal Installs',
           'body'  => 'Expert HD lace closure and frontal installation. Natural hairline, seamless blend, undetectable finish.',
         ],
         [
-          'image_key' => 'svc_natural-hair_image', 'image_fallback' => 'natural-hair.jpg',
+          'image_key' => 'svc_natural-hair_image',
+          'svc_key' => 'natural-hair', 'image_fallback' => 'natural-hair.jpg',
           'title' => 'Natural Hair Care',
           'body'  => 'Wash, condition, detangle, and style services for natural hair textures. Designed to maintain length and promote healthy growth.',
         ],
@@ -141,17 +147,20 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       <?php
       $beauty_services = [
         [
-          'image_key' => 'svc_lash-extensions_image','image_fallback' => 'lash-extensions.jpg',
+          'image_key' => 'svc_lash-extensions_image',
+          'svc_key' => 'lash-extensions', 'image_fallback' => 'lash-extensions.jpg',
           'title' => 'Lash Extensions',
           'body'  => 'Classic, hybrid, and volume lash sets that enhance your natural eye shape. Long-lasting, lightweight, and beautifully finished.',
         ],
         [
-          'image_key' => 'svc_eyebrow-wax_image',  'image_fallback' => 'eyebrow-wax.jpg',
+          'image_key' => 'svc_eyebrow-wax_image',
+          'svc_key' => 'eyebrow-wax', 'image_fallback' => 'eyebrow-wax.jpg',
           'title' => 'Eyebrow Waxing',
           'body'  => 'Precise eyebrow shaping using wax for a clean, defined arch that frames your face perfectly.',
         ],
         [
-          'image_key' => 'svc_eyebrow-thread_image','image_fallback' => 'eyebrow-thread.jpg',
+          'image_key' => 'svc_eyebrow-thread_image',
+          'svc_key' => 'eyebrow-thread', 'image_fallback' => 'eyebrow-thread.jpg',
           'title' => 'Eyebrow Threading',
           'body'  => 'Traditional threading technique for precise, pain-managed brow shaping. Ideal for sensitive skin or fine brow hair.',
         ],

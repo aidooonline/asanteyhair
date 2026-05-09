@@ -199,7 +199,7 @@ $cat_defaults = [
             $title = get_theme_mod("ah_cat{$i}_title", $d['title']);
             $tag   = get_theme_mod("ah_cat{$i}_tag",   $d['tag']);
             $from  = get_theme_mod("ah_cat{$i}_from",  $d['from']);
-            $image = get_theme_mod("ah_cat{$i}_image") ?: AH_URI.'/assets/images/'.$d['img'];
+            $image = ah_opt_img("cat{$i}_image")['url'] ?: AH_URI.'/assets/images/'.$d['img'];
             $url   = get_theme_mod("ah_cat{$i}_url",   $d['url']);
             $url   = ( strpos($url, 'http') === 0 ) ? $url : home_url($url);
         ?>
@@ -279,14 +279,16 @@ $prod_title = ah_opt('prod_title','Shop the Collection');
             if($products): foreach($products as $p) ah_product_card($p); wp_reset_postdata();
             else:
                 $fb=[
-                    ['Cambodian Raw Hair — Body Wave','raw-hair','60','raw-body-wave.jpg','Unprocessed single-donor. 10"–30".'],
-                    ['Cambodian Raw Hair — Deep Wave','raw-hair','60','raw-deep-wave.jpg','Natural S-wave. Never treated. 10"–30".'],
-                    ['Virgin Hair — Body Wave','virgin-hair','50','raw-loose-wave.jpg','Pure quality. 3–5 year lifespan.'],
-                    ['HD Lace Closure — 4x4','closures-frontals','51','hd-lace-sizes.png','Invisible HD lace. All textures.'],
+                    ['Cambodian Raw Hair — Body Wave','raw-hair','60','feat_prod1_image','raw-body-wave.jpg','Unprocessed single-donor. 10"–30".'],
+                    ['Cambodian Raw Hair — Deep Wave','raw-hair','60','feat_prod2_image','raw-deep-wave.jpg','Natural S-wave. Never treated. 10"–30".'],
+                    ['Virgin Hair — Body Wave','virgin-hair','50','feat_prod3_image','raw-loose-wave.jpg','Pure quality. 3–5 year lifespan.'],
+                    ['HD Lace Closure — 4x4','closures-frontals','51','feat_prod4_image','hd-lace-sizes.png','Invisible HD lace. All textures.'],
                 ];
-                foreach($fb as $f): [$t,$c,$p,$img,$d]=$f; ?>
+                foreach($fb as $f): [$t,$c,$p,$opt_key,$fallback_img,$d]=$f;
+                    $_fi=ah_opt_img($opt_key); $_src=$_fi['url'] ?: AH_URI.'/assets/images/'.$fallback_img;
+                ?>
                     <article class="product-card" data-category="<?php echo esc_attr($c); ?>">
-                        <div class="product-card__img"><img src="<?php echo esc_url(AH_URI.'/assets/images/'.$img); ?>" alt="<?php echo esc_attr($t); ?>" loading="lazy" width="600" height="800"><span class="product-card__badge"><?php echo esc_html(ucwords(str_replace('-',' ',$c))); ?></span></div>
+                        <div class="product-card__img"><img src="<?php echo esc_url($_src); ?>" alt="<?php echo esc_attr($t); ?>" loading="lazy" width="600" height="800"><span class="product-card__badge"><?php echo esc_html(ucwords(str_replace('-',' ',$c))); ?></span></div>
                         <div class="product-card__body">
                             <span class="product-card__cat"><?php echo esc_html(ucwords(str_replace('-',' ',$c))); ?></span>
                             <h3 class="product-card__title"><?php echo esc_html( wp_specialchars_decode( $t, ENT_QUOTES ) ); ?></h3>
@@ -336,7 +338,7 @@ $gal_title = ah_opt('gal_title','See It to Believe It');
         </div>
         <div class="gallery reveal">
             <?php for($i=1;$i<=6;$i++):
-                $img = get_theme_mod("ah_gal_image_{$i}") ?: AH_URI.'/assets/images/client-result-'.$i.'.jpg';
+                $img = ah_opt_img("gal_image_{$i}")['url'] ?: AH_URI.'/assets/images/client-result-'.$i.'.jpg';
             ?>
                 <div class="gallery-item">
                     <img src="<?php echo esc_url($img); ?>"

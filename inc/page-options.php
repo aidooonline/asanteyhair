@@ -1,606 +1,944 @@
 <?php
 /**
- * Asantey Hair & Beauty — Page Options System
- * Adds editable meta boxes to every page in WP Admin.
- * Every image, every text field, every section is editable here.
- * No plugin required.
+ * Asantey Hair & Beauty — Page Options (WYSIWYG Admin Panels)
+ * ============================================================
+ * One file. Every page. Every section. Every field editable.
+ *
+ * USAGE IN TEMPLATES:
+ *   ah_opt('key','fallback')          — get text/textarea value
+ *   ah_opt_img('key')                 — get image array [id,url,full,alt]
+ *   ah_opt_img_tag('key','fallback')  — print <img> tag
+ *   ah_opt_repeater('key')            — get array of repeater rows
  */
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 /* ============================================================
-   HELPER FUNCTIONS — use in templates
+   TEMPLATE HELPERS
    ============================================================ */
-
-/** Get any text/textarea field for the current page */
-function ah_opt( string $key, string $fallback = '' ): string {
-    return get_post_meta( get_the_ID(), '_ahp_' . $key, true ) ?: $fallback;
+function ah_opt(string $key, string $fallback = ''): string {
+    static $cache = [];
+    $pid = get_the_ID();
+    $ck  = $pid . '_' . $key;
+    if (!isset($cache[$ck])) {
+        $v = get_post_meta($pid, '_ahp_' . $key, true);
+        $cache[$ck] = ($v !== '' && $v !== false) ? $v : $fallback;
+    }
+    return $cache[$ck];
 }
 
-/** Get an image array for the current page. Returns ['id','url','full','alt'] or [] */
-function ah_opt_img( string $key ): array {
-    $id = absint( get_post_meta( get_the_ID(), '_ahp_img_' . $key, true ) );
-    if ( ! $id ) return [];
+function ah_opt_img(string $key): array {
+    $id = absint(get_post_meta(get_the_ID(), '_ahp_img_' . $key, true));
+    if (!$id) return [];
     return [
-        'id'  => $id,
-        'url' => wp_get_attachment_image_url( $id, 'large' )  ?: '',
-        'full'=> wp_get_attachment_image_url( $id, 'full' )   ?: '',
-        'alt' => get_post_meta( $id, '_wp_attachment_image_alt', true ) ?: '',
+        'id'   => $id,
+        'url'  => wp_get_attachment_image_url($id, 'large') ?: '',
+        'full' => wp_get_attachment_image_url($id, 'full')  ?: '',
+        'alt'  => get_post_meta($id, '_wp_attachment_image_alt', true) ?: '',
     ];
 }
 
-/** Print an <img> tag from a page option image, with a fallback src */
-function ah_opt_img_tag( string $key, string $fallback_src, string $alt = '', string $class = '', string $loading = 'lazy' ): void {
-    $img = ah_opt_img( $key );
-    $src = $img['url'] ?: $fallback_src;
+function ah_opt_img_tag(string $key, string $fallback, string $alt = '', string $class = '', string $loading = 'lazy'): void {
+    $img = ah_opt_img($key);
+    $src = $img['url'] ?: $fallback;
     $a   = $img['alt'] ?: $alt;
     echo '<img src="' . esc_url($src) . '" alt="' . esc_attr($a) . '"'
-       . ( $class   ? ' class="' . esc_attr($class) . '"' : '' )
+       . ($class ? ' class="' . esc_attr($class) . '"' : '')
        . ' loading="' . esc_attr($loading) . '" width="1280" height="640">';
 }
 
+function ah_opt_repeater(string $key): array {
+    $v = get_post_meta(get_the_ID(), '_ahp_rep_' . $key, true);
+    return is_array($v) ? $v : [];
+}
+
 /* ============================================================
-   ADMIN STYLES + MEDIA JS — loaded once
+   ADMIN ASSETS
    ============================================================ */
-add_action( 'admin_enqueue_scripts', function ( $hook ) {
-    if ( ! in_array( $hook, ['post.php','post-new.php'] ) ) return;
+add_action('admin_enqueue_scripts', function(string $hook): void {
+    if (!in_array($hook, ['post.php', 'post-new.php'])) return;
     wp_enqueue_media();
     ?>
     <style>
-    .ahp-box { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-    .ahp-section { border: 1px solid #e2e4e7; border-radius: 4px; margin-bottom: 16px; overflow: hidden; }
-    .ahp-section-head { background: #f6f7f7; padding: 10px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #50575e; border-bottom: 1px solid #e2e4e7; }
-    .ahp-section-body { padding: 16px; display: grid; gap: 14px; }
-    .ahp-cols-2 { grid-template-columns: 1fr 1fr; }
-    .ahp-cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-    .ahp-field { display: flex; flex-direction: column; gap: 5px; }
-    .ahp-field label { font-size: 12px; font-weight: 600; color: #1d2327; }
-    .ahp-field .ahp-hint { font-size: 11px; color: #8c8f94; font-style: italic; }
-    .ahp-field input[type=text], .ahp-field input[type=url], .ahp-field input[type=number], .ahp-field textarea, .ahp-field select { width: 100%; padding: 6px 10px; border: 1px solid #8c8f94; border-radius: 3px; font-size: 13px; color: #2c3338; background: #fff; box-sizing: border-box; }
-    .ahp-field textarea { min-height: 72px; resize: vertical; line-height: 1.5; }
-    .ahp-field input[type=number] { width: 110px; }
-    /* Image picker */
-    .ahp-img-row { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-    .ahp-img-thumb { width: 96px; height: 96px; object-fit: cover; border: 1px solid #e2e4e7; border-radius: 3px; background: #f0f0f1; display: block; }
-    .ahp-img-thumb.empty { opacity: .3; }
-    .ahp-img-actions { display: flex; flex-direction: column; gap: 6px; padding-top: 4px; }
-    .ahp-img-actions .button { font-size: 12px; padding: 4px 10px; height: auto; line-height: 1.6; }
-    /* Repeat items */
-    .ahp-repeat-item { background: #f9f9f9; border: 1px solid #e2e4e7; border-radius: 3px; padding: 14px; margin-bottom: 8px; position: relative; }
-    .ahp-repeat-item:last-child { margin-bottom: 0; }
-    .ahp-del-btn { position: absolute; top: 8px; right: 8px; background: none; border: 1px solid #c3c4c7; color: #8c8f94; border-radius: 3px; padding: 2px 8px; font-size: 11px; cursor: pointer; line-height: 1.6; }
-    .ahp-del-btn:hover { background: #cc1818; color: #fff; border-color: #cc1818; }
-    .ahp-add-btn { margin-top: 10px; }
+    /* ── Layout ── */
+    .ahp { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1d2327; }
+    .ahp-section { border:1px solid #e2e4e7;border-radius:4px;margin-bottom:14px;overflow:hidden; }
+    .ahp-section-head { background:#f6f7f7;padding:9px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#50575e;border-bottom:1px solid #e2e4e7;display:flex;align-items:center;gap:6px; }
+    .ahp-body { padding:14px;display:grid;gap:12px; }
+    .ahp-col2 { grid-template-columns:1fr 1fr; }
+    .ahp-col3 { grid-template-columns:1fr 1fr 1fr; }
+    .ahp-col4 { grid-template-columns:1fr 1fr 1fr 1fr; }
+    .ahp-full { grid-column:1/-1; }
+    /* ── Fields ── */
+    .ahp-field { display:flex;flex-direction:column;gap:4px; }
+    .ahp-field label { font-size:12px;font-weight:600;color:#1d2327; }
+    .ahp-field input[type=text],
+    .ahp-field input[type=url],
+    .ahp-field input[type=number],
+    .ahp-field select,
+    .ahp-field textarea { width:100%;padding:6px 9px;border:1px solid #8c8f94;border-radius:3px;font-size:13px;color:#2c3338;background:#fff;box-sizing:border-box; }
+    .ahp-field textarea { min-height:72px;resize:vertical;line-height:1.55; }
+    .ahp-field input[type=number] { width:110px; }
+    .ahp-hint { font-size:11px;color:#8c8f94;line-height:1.4; }
+    /* ── Image picker ── */
+    .ahp-img-row { display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap; }
+    .ahp-img-preview { width:88px;height:88px;object-fit:cover;border:1px solid #e2e4e7;border-radius:3px;background:#f0f0f1;display:block;flex-shrink:0; }
+    .ahp-img-preview.ahp-empty { opacity:.25; }
+    .ahp-img-btns { display:flex;flex-direction:column;gap:5px;padding-top:2px; }
+    .ahp-img-btns .button { font-size:12px;padding:4px 10px;height:auto;line-height:1.5; }
+    /* ── Repeater ── */
+    .ahp-rep-item { background:#fff;border:1px solid #e2e4e7;border-radius:3px;padding:12px;margin-bottom:8px;position:relative; }
+    .ahp-rep-del { position:absolute;top:7px;right:7px;background:none;border:1px solid #c3c4c7;color:#8c8f94;border-radius:3px;padding:2px 8px;font-size:11px;cursor:pointer;line-height:1.6; }
+    .ahp-rep-del:hover { background:#cc1818;color:#fff;border-color:#cc1818; }
+    .ahp-rep-add { margin-top:8px;font-size:12px; }
     </style>
     <script>
     /* Image picker */
-    window.ahpPickImg = function(previewId, inputId) {
-        var frame = wp.media({
-            title: 'Select Image', multiple: false,
-            button: { text: 'Use this image' },
-            library: { type: 'image' }
+    window.ahpPick = function(pId, iId) {
+        var f = wp.media({title:'Select Image',multiple:false,button:{text:'Use this image'},library:{type:'image'}});
+        f.on('select', function(){
+            var a = f.state().get('selection').first().toJSON();
+            var s = (a.sizes && a.sizes.medium) ? a.sizes.medium.url : a.url;
+            var p = document.getElementById(pId); if(p){p.src=s;p.classList.remove('ahp-empty');}
+            var i = document.getElementById(iId); if(i) i.value = a.id;
         });
-        frame.on('select', function() {
-            var att = frame.state().get('selection').first().toJSON();
-            var src = (att.sizes && att.sizes.medium) ? att.sizes.medium.url : att.url;
-            var prev = document.getElementById(previewId);
-            var inp  = document.getElementById(inputId);
-            if (prev) { prev.src = src; prev.classList.remove('empty'); }
-            if (inp)  inp.value = att.id;
-        });
-        frame.open();
+        f.open();
     };
-    window.ahpRemoveImg = function(previewId, inputId, placeholder) {
-        var prev = document.getElementById(previewId);
-        var inp  = document.getElementById(inputId);
-        if (prev) { prev.src = placeholder||''; prev.classList.add('empty'); }
-        if (inp)  inp.value = '';
+    window.ahpRemove = function(pId, iId) {
+        var p = document.getElementById(pId); if(p){p.src='';p.classList.add('ahp-empty');}
+        var i = document.getElementById(iId); if(i) i.value='';
     };
-    /* Repeat-item delete */
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('ahp-del-btn')) {
-            if (confirm('Remove this item?')) e.target.closest('.ahp-repeat-item').remove();
+    /* Repeater delete */
+    document.addEventListener('click', function(e){
+        if(e.target.classList.contains('ahp-rep-del')){
+            if(confirm('Remove this item?')) e.target.closest('.ahp-rep-item').remove();
         }
     });
     </script>
     <?php
-} );
+});
 
 /* ============================================================
    RENDER HELPERS
    ============================================================ */
-function _ahp_text( string $key, string $label, string $default = '', string $hint = '' ): void {
+function _f(string $key, string $label, string $def='', string $hint='', string $type='text'): void {
     global $post;
-    $v = get_post_meta( $post->ID, '_ahp_' . $key, true );
-    if ( $v === '' || $v === false ) $v = $default;
+    $v = get_post_meta($post->ID, '_ahp_'.$key, true);
+    if ($v===''||$v===false) $v=$def;
     echo '<div class="ahp-field">';
-    echo '<label>' . esc_html($label) . '</label>';
-    echo '<input type="text" name="ahp[' . esc_attr($key) . ']" value="' . esc_attr($v) . '">';
-    if ($hint) echo '<span class="ahp-hint">' . esc_html($hint) . '</span>';
+    echo '<label>'.esc_html($label).'</label>';
+    if ($type==='textarea') {
+        echo '<textarea name="ahp['.esc_attr($key).']">'.esc_textarea($v).'</textarea>';
+    } else {
+        echo '<input type="'.esc_attr($type).'" name="ahp['.esc_attr($key).']" value="'.esc_attr($v).'">';
+    }
+    if ($hint) echo '<span class="ahp-hint">'.esc_html($hint).'</span>';
     echo '</div>';
 }
+function _ft(string $key, string $label, string $def='', string $hint=''): void { _f($key,$label,$def,$hint,'textarea'); }
+function _fn(string $key, string $label, string $def=''): void { _f($key,$label,$def,'','number'); }
 
-function _ahp_textarea( string $key, string $label, string $default = '', string $hint = '' ): void {
+function _fi(string $key, string $label, string $hint=''): void {
     global $post;
-    $v = get_post_meta( $post->ID, '_ahp_' . $key, true );
-    if ( $v === '' || $v === false ) $v = $default;
+    $id  = absint(get_post_meta($post->ID, '_ahp_img_'.$key, true));
+    $src = $id ? wp_get_attachment_image_url($id,'medium') : '';
+    $pid = 'ahp_p_'.str_replace([' ','.','-'],'_',$key);
+    $iid = 'ahp_i_'.str_replace([' ','.','-'],'_',$key);
     echo '<div class="ahp-field">';
-    echo '<label>' . esc_html($label) . '</label>';
-    echo '<textarea name="ahp[' . esc_attr($key) . ']">' . esc_textarea($v) . '</textarea>';
-    if ($hint) echo '<span class="ahp-hint">' . esc_html($hint) . '</span>';
-    echo '</div>';
-}
-
-function _ahp_number( string $key, string $label, string $default = '' ): void {
-    global $post;
-    $v = get_post_meta( $post->ID, '_ahp_' . $key, true );
-    if ( $v === '' || $v === false ) $v = $default;
-    echo '<div class="ahp-field">';
-    echo '<label>' . esc_html($label) . '</label>';
-    echo '<input type="number" step="0.01" min="0" name="ahp[' . esc_attr($key) . ']" value="' . esc_attr($v) . '">';
-    echo '</div>';
-}
-
-function _ahp_img( string $key, string $label, string $hint = '' ): void {
-    global $post;
-    $id   = absint( get_post_meta( $post->ID, '_ahp_img_' . $key, true ) );
-    $src  = $id ? wp_get_attachment_image_url( $id, 'medium' ) : '';
-    $pid  = 'ahp_prev_' . $key;
-    $iid  = 'ahp_inp_'  . $key;
-    $ph   = admin_url('images/media-button.png');
-    echo '<div class="ahp-field">';
-    echo '<label>' . esc_html($label) . '</label>';
+    echo '<label>'.esc_html($label).'</label>';
     echo '<div class="ahp-img-row">';
-    echo '<img id="' . esc_attr($pid) . '" src="' . esc_url($src) . '" class="ahp-img-thumb' . ($src?'':' empty') . '" alt="' . esc_attr($label) . '">';
-    echo '<div class="ahp-img-actions">';
-    echo '<button type="button" class="button" onclick="ahpPickImg(\'' . esc_js($pid) . '\',\'' . esc_js($iid) . '\')">📁 Choose Image</button>';
-    if ($src) echo '<button type="button" class="button" onclick="ahpRemoveImg(\'' . esc_js($pid) . '\',\'' . esc_js($iid) . '\',\'' . esc_js($ph) . '\')">✕ Remove</button>';
-    echo '</div>';
-    echo '</div>';
-    echo '<input type="hidden" name="ahp_img[' . esc_attr($key) . ']" id="' . esc_attr($iid) . '" value="' . esc_attr($id) . '">';
-    if ($hint) echo '<span class="ahp-hint">' . esc_html($hint) . '</span>';
+    echo '<img id="'.esc_attr($pid).'" src="'.esc_url($src).'" class="ahp-img-preview'.($src?'':' ahp-empty').'" alt="">';
+    echo '<div class="ahp-img-btns">';
+    echo '<button type="button" class="button button-primary" onclick="ahpPick(\''.esc_js($pid).'\',\''.esc_js($iid).'\')">📁 Choose Image</button>';
+    if ($src) echo '<button type="button" class="button" onclick="ahpRemove(\''.esc_js($pid).'\',\''.esc_js($iid).'\')">✕ Remove</button>';
+    echo '</div></div>';
+    echo '<input type="hidden" name="ahp_img['.esc_attr($key).']" id="'.esc_attr($iid).'" value="'.esc_attr($id).'">';
+    if ($hint) echo '<span class="ahp-hint">'.esc_html($hint).'</span>';
     echo '</div>';
 }
 
-function _ahp_section( string $title, string ...$classes ): void {
-    $cls = implode(' ', array_merge(['ahp-section-body'], $classes));
-    echo '<div class="ahp-section"><div class="ahp-section-head">' . esc_html($title) . '</div>';
-    echo '<div class="' . esc_attr($cls) . '">';
+function _sec(string $title, string ...$cols): void {
+    $cls = implode(' ', array_map(fn($c)=>'ahp-'.$c, $cols));
+    echo '<div class="ahp-section"><div class="ahp-section-head">'.esc_html($title).'</div><div class="ahp-body'.($cls?' '.$cls:'').'">';
 }
-
-function _ahp_section_end(): void { echo '</div></div>'; }
+function _end(): void { echo '</div></div>'; }
+function _full(string $cb): void { echo '<div class="ahp-full">'; $cb(); echo '</div>'; }
 
 /* ============================================================
    SAVE
    ============================================================ */
-add_action( 'save_post_page', function ( int $post_id ) {
-    if ( ! isset($_POST['_ahp_nonce']) ) return;
-    if ( ! wp_verify_nonce($_POST['_ahp_nonce'], 'ahp_save_' . $post_id) ) return;
-    if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
-    if ( ! current_user_can('edit_post', $post_id) ) return;
+function _ahp_save(int $post_id): void {
+    if (!isset($_POST['_ahp_nonce'])) return;
+    if (!wp_verify_nonce($_POST['_ahp_nonce'], 'ahp_'.$post_id)) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
 
-    // Text / textarea fields
-    if ( ! empty($_POST['ahp']) && is_array($_POST['ahp']) ) {
-        foreach ( $_POST['ahp'] as $key => $val ) {
-            $key = sanitize_key( $key );
-            if ( is_array($val) ) {
-                update_post_meta( $post_id, '_ahp_' . $key, array_map('sanitize_textarea_field', $val) );
+    // Text fields
+    if (!empty($_POST['ahp']) && is_array($_POST['ahp'])) {
+        foreach ($_POST['ahp'] as $k => $v) {
+            $k = sanitize_key($k);
+            if (is_array($v)) {
+                update_post_meta($post_id, '_ahp_'.$k, array_map('sanitize_textarea_field', $v));
             } else {
-                update_post_meta( $post_id, '_ahp_' . $key, sanitize_textarea_field($val) );
+                update_post_meta($post_id, '_ahp_'.$k, sanitize_textarea_field($v));
             }
         }
     }
-
-    // Image attachment IDs
-    if ( ! empty($_POST['ahp_img']) && is_array($_POST['ahp_img']) ) {
-        foreach ( $_POST['ahp_img'] as $key => $val ) {
-            update_post_meta( $post_id, '_ahp_img_' . sanitize_key($key), absint($val) );
+    // Image IDs
+    if (!empty($_POST['ahp_img']) && is_array($_POST['ahp_img'])) {
+        foreach ($_POST['ahp_img'] as $k => $v) {
+            update_post_meta($post_id, '_ahp_img_'.sanitize_key($k), absint($v));
         }
     }
-}, 10 );
+    // Repeaters — stored under _ahp_rep_*
+    if (!empty($_POST['ahp_rep']) && is_array($_POST['ahp_rep'])) {
+        foreach ($_POST['ahp_rep'] as $rep_key => $rows) {
+            $clean = [];
+            if (is_array($rows)) {
+                foreach ($rows as $row) {
+                    if (is_array($row)) {
+                        $clean[] = array_map('sanitize_textarea_field', $row);
+                    }
+                }
+            }
+            update_post_meta($post_id, '_ahp_rep_'.sanitize_key($rep_key), $clean);
+        }
+    }
+}
+add_action('save_post_page',         '_ahp_save', 10);
+add_action('save_post_hair_product', '_ahp_save', 10);
+
+/* Nonce injected once */
+add_action('edit_form_after_title', function(): void {
+    global $post;
+    if (!$post) return;
+    wp_nonce_field('ahp_'.$post->ID, '_ahp_nonce');
+});
 
 /* ============================================================
    REGISTER META BOXES
    ============================================================ */
-add_action( 'add_meta_boxes_page', function ( WP_Post $post ) {
-    $template    = get_post_meta( $post->ID, '_wp_page_template', true );
-    $is_front    = (int) get_option('page_on_front') === $post->ID;
+add_action('add_meta_boxes', function(): void {
+    global $post;
+    if (!$post || $post->post_type === 'hair_product') return;
+    $tpl      = get_post_meta($post->ID, '_wp_page_template', true);
+    $is_front = (int)get_option('page_on_front') === $post->ID;
 
-    // Nonce box (invisible, at top)
-    add_meta_box( '_ahp_nonce_box', '', function( $p ) {
-        wp_nonce_field( 'ahp_save_' . $p->ID, '_ahp_nonce' );
-    }, 'page', 'normal', 'high' );
-
-    // ── HOMEPAGE ────────────────────────────────────────
-    if ( $is_front ) {
-        add_meta_box( 'ahp_home_hero',         '🎬 Hero Slides',                          'ahp_cb_home_hero',         'page', 'normal', 'high' );
-        add_meta_box( 'ahp_home_cats',         '🗂 Category Cards (Our Collections)',      'ahp_cb_home_cats',         'page', 'normal', 'high' );
-        add_meta_box( 'ahp_home_why',          '✅ Why Asantey Features',                  'ahp_cb_home_why',          'page', 'normal', 'high' );
-        add_meta_box( 'ahp_home_story',        '📖 Brand Story',                           'ahp_cb_home_story',        'page', 'normal', 'high' );
-        add_meta_box( 'ahp_home_gallery',      '🖼 Homepage Gallery Images',               'ahp_cb_home_gallery',      'page', 'normal', 'high' );
-        add_meta_box( 'ahp_home_testimonials', '💬 Testimonials',                          'ahp_cb_home_testimonials', 'page', 'normal', 'high' );
-        add_meta_box( 'ahp_home_cta',          '📣 CTA Band',                              'ahp_cb_home_cta',          'page', 'normal', 'high' );
-        add_meta_box( 'ahp_home_marquee',      '📰 Marquee Trust Strip',                   'ahp_cb_home_marquee',      'page', 'normal', 'high' );
+    // ── HOMEPAGE ──────────────────────────────────────────
+    if ($is_front) {
+        _reg('ahp_home_hero',    '🎬 Hero Slides (up to 3)',          'ahp_home_hero_cb');
+        _reg('ahp_home_cats',    '🗂 Category Cards',                  'ahp_home_cats_cb');
+        _reg('ahp_home_why',     '✅ Why Asantey',                     'ahp_home_why_cb');
+        _reg('ahp_home_prods',   '🛍 Featured Products (fallback)',    'ahp_home_prods_cb');
+        _reg('ahp_home_gallery', '🖼 Homepage Gallery',               'ahp_home_gallery_cb');
+        _reg('ahp_home_testi',   '💬 Testimonials',                   'ahp_home_testi_cb');
+        _reg('ahp_home_story',   '📖 Brand Story',                    'ahp_home_story_cb');
+        _reg('ahp_home_cta',     '📣 CTA Band',                       'ahp_home_cta_cb');
+        _reg('ahp_home_marq',    '📰 Marquee Strip',                  'ahp_home_marq_cb');
     }
 
-    // ── ALL INNER PAGES — shared hero ───────────────────
-    $inner_templates = [
-        'page-templates/page-raw-hair.php',
-        'page-templates/page-virgin-hair.php',
-        'page-templates/page-closures.php',
-        'page-templates/page-salon.php',
-        'page-templates/page-gallery.php',
-        'page-templates/page-about.php',
-        'page-templates/page-contact.php',
-        'page-templates/page-faq.php',
-        'page-templates/page-shop.php',
-        'page-templates/page-order.php',
-        'page-templates/page-care-guide.php',
-        'page-templates/page-shipping.php',
-        'page-templates/page-privacy.php',
-        'page-templates/page-terms.php',
+    // ── SHARED HERO (all inner pages) ─────────────────────
+    $inner = [
+        'page-templates/page-raw-hair.php','page-templates/page-virgin-hair.php',
+        'page-templates/page-closures.php','page-templates/page-salon.php',
+        'page-templates/page-gallery.php', 'page-templates/page-about.php',
+        'page-templates/page-contact.php', 'page-templates/page-faq.php',
+        'page-templates/page-shop.php',    'page-templates/page-order.php',
+        'page-templates/page-care-guide.php','page-templates/page-shipping.php',
+        'page-templates/page-privacy.php', 'page-templates/page-terms.php',
     ];
-    if ( in_array($template, $inner_templates) ) {
-        add_meta_box( 'ahp_page_hero', '🖼 Page Hero — Image, Title & Subtitle', 'ahp_cb_page_hero', 'page', 'normal', 'high' );
+    if (in_array($tpl, $inner)) {
+        _reg('ahp_page_hero', '🖼 Page Hero — Image, Title & Subtitle', 'ahp_page_hero_cb');
     }
 
-    // ── PAGE-SPECIFIC ────────────────────────────────────
-    switch ( $template ) {
+    // ── PAGE-SPECIFIC ──────────────────────────────────────
+    switch ($tpl) {
         case 'page-templates/page-raw-hair.php':
-            add_meta_box( 'ahp_raw_textures', '🎨 Raw Hair — Texture Grid Images',   'ahp_cb_raw_textures',  'page', 'normal', 'default' );
-            add_meta_box( 'ahp_raw_pricing',  '💷 Raw Hair — Pricing Table',         'ahp_cb_raw_pricing',   'page', 'normal', 'default' );
+            _reg('ahp_raw_intro',   '📝 Intro Section',             'ahp_raw_intro_cb');
+            _reg('ahp_raw_tex',     '🎨 Texture Grid',              'ahp_raw_tex_cb');
+            _reg('ahp_raw_pricing', '💷 Pricing Table',             'ahp_raw_pricing_cb');
+            _reg('ahp_raw_care',    '💆 Care Split Section',        'ahp_raw_care_cb');
+            _reg('ahp_raw_faq',     '❓ FAQ',                       'ahp_faq_cb');
             break;
         case 'page-templates/page-virgin-hair.php':
-            add_meta_box( 'ahp_vir_textures', '🎨 Virgin Hair — Texture Grid Images', 'ahp_cb_vir_textures', 'page', 'normal', 'default' );
-            add_meta_box( 'ahp_vir_pricing',  '💷 Virgin Hair — Pricing Table',       'ahp_cb_vir_pricing',  'page', 'normal', 'default' );
+            _reg('ahp_vir_intro',   '📝 Intro Section',             'ahp_vir_intro_cb');
+            _reg('ahp_vir_tex',     '🎨 Texture Grid',              'ahp_vir_tex_cb');
+            _reg('ahp_vir_pricing', '💷 Pricing Table',             'ahp_vir_pricing_cb');
+            _reg('ahp_vir_faq',     '❓ FAQ',                       'ahp_faq_cb');
             break;
         case 'page-templates/page-closures.php':
-            add_meta_box( 'ahp_cls_images',   '🎨 Closures — Guide Images',          'ahp_cb_cls_images',    'page', 'normal', 'default' );
+            _reg('ahp_cls_intro',   '📝 Intro Section',             'ahp_cls_intro_cb');
+            _reg('ahp_cls_sizes',   '📐 Sizes & Pricing',           'ahp_cls_sizes_cb');
+            _reg('ahp_cls_imgs',    '🖼 Guide Images',              'ahp_cls_imgs_cb');
+            _reg('ahp_cls_faq',     '❓ FAQ',                       'ahp_faq_cb');
             break;
         case 'page-templates/page-salon.php':
-            add_meta_box( 'ahp_salon_svcs',   '💇 Salon — Service Cards',            'ahp_cb_salon_svcs',    'page', 'normal', 'default' );
-            add_meta_box( 'ahp_salon_split',  '📸 Salon — Story Section Images',     'ahp_cb_salon_split',   'page', 'normal', 'default' );
+            _reg('ahp_salon_svcs',  '💇 Hair Service Cards',        'ahp_salon_svcs_cb');
+            _reg('ahp_salon_bsvc',  '💅 Beauty Service Cards',      'ahp_salon_bsvc_cb');
+            _reg('ahp_salon_split', '📸 Story Section',             'ahp_salon_split_cb');
+            _reg('ahp_salon_cta',   '📣 Booking CTA',               'ahp_salon_cta_cb');
             break;
         case 'page-templates/page-about.php':
-            add_meta_box( 'ahp_about',        '🏢 About — Content & Images',         'ahp_cb_about',         'page', 'normal', 'default' );
+            _reg('ahp_about_story', '📖 Our Story Section',         'ahp_about_story_cb');
+            _reg('ahp_about_stats', '📊 Stats Strip',               'ahp_about_stats_cb');
+            _reg('ahp_about_sec2',  '🖼 Second Section',            'ahp_about_sec2_cb');
+            _reg('ahp_about_vals',  '🏆 Values',                    'ahp_about_vals_cb');
             break;
         case 'page-templates/page-contact.php':
-            add_meta_box( 'ahp_contact',      '📞 Contact — Details & Map',          'ahp_cb_contact',       'page', 'normal', 'default' );
+            _reg('ahp_contact',     '📞 Contact Details & Map',     'ahp_contact_cb');
+            _reg('ahp_contact_soc', '📱 Social Media Links',        'ahp_contact_soc_cb');
             break;
         case 'page-templates/page-faq.php':
-            add_meta_box( 'ahp_faq',          '❓ FAQ — Questions & Answers',         'ahp_cb_faq',           'page', 'normal', 'default' );
+            _reg('ahp_faq_pg',      '❓ FAQ Items',                  'ahp_faq_cb');
+            break;
+        case 'page-templates/page-order.php':
+            _reg('ahp_order_intro', '📝 Page Intro',                'ahp_order_intro_cb');
+            _reg('ahp_order_prods', '🛍 Product Cards',             'ahp_order_prods_cb');
+            break;
+        case 'page-templates/page-care-guide.php':
+            _reg('ahp_care_intro',  '📝 Page Intro Text',           'ahp_care_intro_cb');
             break;
         case 'page-templates/page-shop.php':
-            add_meta_box( 'ahp_shop_intro',   '🛍 Shop — Intro Text',                'ahp_cb_shop_intro',    'page', 'normal', 'default' );
+            _reg('ahp_shop_intro',  '🛍 Shop Intro',                'ahp_shop_intro_cb');
+            break;
+        case 'page-templates/page-gallery.php':
+            _reg('ahp_gallery',     '🖼 Gallery Images',            'ahp_gallery_cb');
+            break;
+        case 'page-templates/page-shipping.php':
+        case 'page-templates/page-privacy.php':
+        case 'page-templates/page-terms.php':
+            _reg('ahp_legal',       '📄 Page Content',              'ahp_legal_cb');
             break;
     }
-} );
+});
+
+function _reg(string $id, string $title, string $cb): void {
+    add_meta_box($id, $title, $cb, 'page', 'normal', 'high');
+}
 
 /* ============================================================
-   BOX CALLBACKS
+   SPRINT 2 — HOMEPAGE CALLBACKS
    ============================================================ */
-
-/* ── HOMEPAGE: HERO ──────────────────────────────────────── */
-function ahp_cb_home_hero(): void {
-    echo '<div class="ahp-box">';
-    for ( $i = 1; $i <= 3; $i++ ) {
-        _ahp_section( "Slide {$i}", 'ahp-cols-2' );
-        _ahp_img( "slide{$i}_image", "Slide {$i} Background Image" );
-        _ahp_text( "slide{$i}_title",    "Main Title",        $i===1 ? 'Luxury Hair.'      : '' );
-        _ahp_text( "slide{$i}_italic",   "Italic Line",       $i===1 ? 'Real Results.'     : '' );
-        _ahp_textarea( "slide{$i}_sub",  "Subtitle",          $i===1 ? 'Premium Cambodian Raw and Virgin Hair Extensions.' : '' );
-        _ahp_text( "slide{$i}_label",    "Eyebrow Label",     $i===1 ? 'Premium Cambodian Hair Extensions' : '' );
-        _ahp_text( "slide{$i}_cta1",     "Button 1 Text",     $i===1 ? 'Shop Collections'  : '' );
-        _ahp_text( "slide{$i}_cta1_url", "Button 1 URL",      $i===1 ? '/shop/'             : '' );
-        _ahp_text( "slide{$i}_cta2",     "Button 2 Text",     $i===1 ? 'Order on WhatsApp'  : '' );
-        _ahp_section_end();
+function ahp_home_hero_cb(): void {
+    echo '<div class="ahp">';
+    for ($i=1; $i<=3; $i++) {
+        _sec("Slide {$i}", 'col2');
+        _fi("slide{$i}_image", "Background Image", "Recommended: 1920×1080px landscape photo");
+        _f("slide{$i}_label",    "Eyebrow Label",      $i===1?"Premium Cambodian Hair Extensions":"");
+        _f("slide{$i}_title",    "Main Title",         $i===1?"Luxury Hair.":"");
+        _f("slide{$i}_italic",   "Italic Second Line", $i===1?"Real Results.":"");
+        _ft("slide{$i}_sub",     "Subtitle",           $i===1?"Premium Cambodian Raw and Virgin Hair Extensions.":"");
+        _f("slide{$i}_cta1",     "Button 1 Text",      $i===1?"Shop Collections":"");
+        _f("slide{$i}_cta1_url", "Button 1 URL",       $i===1?"/shop/":"");
+        _f("slide{$i}_cta2",     "Button 2 Text",      $i===1?"Order on WhatsApp":"");
+        _end();
     }
     echo '</div>';
 }
 
-/* ── HOMEPAGE: CATEGORY CARDS ────────────────────────────── */
-function ahp_cb_home_cats(): void {
-    $d = [
-        1 => ['label'=>'Raw Hair',   'title'=>'Cambodian Raw Hair',  'tag'=>'Unprocessed. Uncoloured. Unapologetically Premium.', 'from'=>'60','url'=>'/raw-hair/'],
-        2 => ['label'=>'Virgin Hair','title'=>'Virgin Hair Bundles', 'tag'=>'Pure Quality. Lasting Beauty. 3-5 Year Lifespan.',   'from'=>'50','url'=>'/virgin-hair/'],
-        3 => ['label'=>'HD Lace',    'title'=>'Closures & Frontals', 'tag'=>'Invisible HD Lace. The Perfect Finish.',             'from'=>'49','url'=>'/closures-frontals/'],
+function ahp_home_cats_cb(): void {
+    $d=[1=>['Raw Hair','Cambodian Raw Hair','Unprocessed. Uncoloured. Unapologetically Premium.','60','/raw-hair/'],
+        2=>['Virgin Hair','Virgin Hair Bundles','Pure Quality. Lasting Beauty. 3-5 Year Lifespan.','50','/virgin-hair/'],
+        3=>['HD Lace','Closures & Frontals','Invisible HD Lace. The Perfect Finish.','49','/closures-frontals/']];
+    echo '<div class="ahp">';
+    _sec('Section Heading','col2');
+    _f('cats_label','Label','Our Collections'); _f('cats_title','Title','The Asantey Standard');
+    _ft('cats_desc','Description','Every bundle, closure, and frontal is cuticle-aligned, single-donor...');
+    _end();
+    foreach ($d as $i=>$c) {
+        _sec("Card {$i} — {$c[1]}",'col2');
+        _fi("cat{$i}_image","Card Image","Recommended portrait ratio 3:4");
+        _f("cat{$i}_label","Badge Label",$c[0]); _f("cat{$i}_title","Title",$c[1]);
+        _f("cat{$i}_tag","Tagline",$c[2]); _f("cat{$i}_from","From Price (number only)",$c[3]);
+        _f("cat{$i}_url","Link URL",$c[4]);
+        _end();
+    }
+    echo '</div>';
+}
+
+function ahp_home_why_cb(): void {
+    $d=[1=>['gem','Cambodian Origin','Single-donor Cambodian hair, ethically sourced, never chemically processed.'],
+        2=>['shield','3-5 Year Lifespan','Invest once, wear for years. The results speak for themselves.'],
+        3=>['sparkle','10+ Textures','Every texture in 10"-30" lengths. Wear it your way.']];
+    echo '<div class="ahp">';
+    _sec('Section Heading','col2');
+    _f('why_label','Label','Why Asantey'); _f('why_title','Title','Hair That Speaks for Itself');
+    _end();
+    foreach ($d as $i=>$c) {
+        _sec("Feature {$i}",'col2');
+        _f("feat{$i}_title","Title",$c[1]);
+        _f("feat{$i}_icon","Icon (gem/shield/sparkle/check/heart/truck/star)",$c[0]);
+        _ft("feat{$i}_body","Description",$c[2]);
+        _end();
+    }
+    echo '</div>';
+}
+
+function ahp_home_prods_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Section Heading','col2');
+    _f('prod_label','Label','Featured Products'); _f('prod_title','Title','Shop the Collection');
+    _end();
+    $d=[1=>['Raw Hair — Body Wave','raw-body-wave.jpg'],2=>['Raw Hair — Deep Wave','raw-deep-wave.jpg'],
+        3=>['Virgin Hair — Body Wave','raw-loose-wave.jpg'],4=>['HD Lace Closure','hd-lace-sizes.png']];
+    foreach ($d as $i=>$c) {
+        _sec("Product {$i} — {$c[0]}",'col2');
+        _fi("feat_prod{$i}_image","Product Image","Shown when no WooCommerce products exist");
+        _f("feat_prod{$i}_title","Title",$c[0]); _f("feat_prod{$i}_price","From Price (no £)","");
+        _ft("feat_prod{$i}_desc","Short Description","");
+        _end();
+    }
+    echo '</div>';
+}
+
+function ahp_home_gallery_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Section Heading','col2');
+    _f('gal_label','Label','Real Women. Real Results.'); _f('gal_title','Title','See It to Believe It');
+    _end();
+    _sec('Gallery Images (up to 6 shown on homepage)','col3');
+    for ($i=1;$i<=6;$i++) _fi("gal_image_{$i}","Image {$i}");
+    _end();
+    echo '</div>';
+}
+
+function ahp_home_testi_cb(): void {
+    $d=[1=>['I have been buying hair for over 10 years and Asantey is hands down the best.','Naomi A., London'],
+        2=>['My 28 inch raw body wave is still going strong 2 years later.','Blessing O., Birmingham'],
+        3=>['The HD lace frontal is unreal. My stylist could not believe it.','Jade K., Manchester']];
+    echo '<div class="ahp">';
+    _sec('Section Heading','col2');
+    _f('test_label','Label','Client Love'); _f('test_title','Title','What Our Clients Say');
+    _end();
+    foreach ($d as $i=>$c) {
+        _sec("Testimonial {$i}",'col2');
+        _ft("test{$i}_quote","Quote",$c[0]); _f("test{$i}_author","Author",$c[1]);
+        _end();
+    }
+    echo '</div>';
+}
+
+function ahp_home_story_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Brand Story','col2');
+    _f('story_label','Label','Our Story'); _f('story_title','Title','The Asantey Standard');
+    _ft('story_body1','Paragraph 1','Founded on the belief that every woman deserves hair she is genuinely proud of.');
+    _ft('story_body2','Paragraph 2','What you receive is exactly as nature intended: just better selected and built to last 3-5 years.');
+    _end();
+    echo '</div>';
+}
+
+function ahp_home_cta_cb(): void {
+    echo '<div class="ahp">';
+    _sec('CTA Band','col2');
+    _f('cta_label','Label','Ready to Elevate Your Look?'); _f('cta_title','Title','Your Best Hair Starts Here');
+    _ft('cta_body','Body','Browse our full collection or order directly on WhatsApp.');
+    _f('cta_btn1','Button 1 Text','Shop Collections'); _f('cta_btn1_url','Button 1 URL','/shop/');
+    _f('cta_btn2','Button 2 Text (WhatsApp)','WhatsApp Order');
+    _end();
+    echo '</div>';
+}
+
+function ahp_home_marq_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Scrolling Trust Strip');
+    _ft('marquee_items','One item per line — format: icon|Text',
+        "sparkle|Premium Cambodian Hair\ngem|HD Lace Specialists\nshield|3-5 Year Lifespan\ncheck|Minimal Shedding\nlocation|UK Based - Nottingham\nheart|Single Donor\nsparkle|Cuticle Aligned\ntruck|Fast UK Dispatch",
+        'Icons available: sparkle, gem, shield, check, location, heart, truck, star');
+    _end();
+    echo '</div>';
+}
+
+/* ============================================================
+   SHARED — PAGE HERO
+   ============================================================ */
+function ahp_page_hero_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Hero Section','col2');
+    _fi('hero_image','Background Image','Wide landscape photo — recommended 1920×700px');
+    _f('hero_label','Small Label (above title)','');
+    _f('hero_title','Hero Title','');
+    _f('hero_subtitle','Subtitle / Tagline','');
+    _end();
+    echo '</div>';
+}
+
+/* ============================================================
+   SPRINT 3 — RAW HAIR
+   ============================================================ */
+function ahp_raw_intro_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Intro Split Section','col2');
+    _fi('raw_intro_image','Section Image','The image shown beside the intro text');
+    _f('raw_intro_label','Label','What Makes It Different');
+    _f('raw_intro_title','Title','What is Raw Hair?');
+    _ft('raw_intro_p1','Paragraph 1','Raw hair is the purest form of hair extension. Collected from a single Cambodian donor, it has never been treated with chemicals, heat-processed at the factory, or blended with hair from other sources.');
+    _ft('raw_intro_p2','Paragraph 2','Because all cuticles run in the same direction — from root to tip — raw hair has virtually no friction between strands. That means no tangling, minimal shedding, and a natural shine.');
+    _ft('raw_intro_p3','Paragraph 3','Raw hair can be coloured, bleached, and heat-styled just like your natural hair. When we say it lasts 3–5 years, that is not a marketing line. It is what our clients actually experience.');
+    _end();
+    _sec('Textures Section Heading','col2');
+    _f('raw_tex_label','Label','Available Textures'); _f('raw_tex_title','Title','8 Textures. One Standard.');
+    _ft('raw_tex_desc','Description','Every texture available in all lengths, 10"–30", at the same price point.');
+    _end();
+    echo '</div>';
+}
+
+function ahp_raw_tex_cb(): void {
+    $textures=[
+        ['straight','Straight'],['body-wave','Body Wave'],['loose-wave','Loose Wave'],
+        ['deep-wave','Deep Wave'],['kinky-straight','Kinky Straight'],['loose-deep','Loose Deep Wave'],
+        ['burmese-curls','Burmese Curls'],['waver-wave','Water Wave'],
     ];
-    echo '<div class="ahp-box">';
-    _ahp_section( 'Section Heading', 'ahp-cols-2' );
-    _ahp_text('cats_label', 'Label',       'Our Collections');
-    _ahp_text('cats_title', 'Title',       'The Asantey Standard');
-    _ahp_textarea('cats_desc', 'Description', 'Every bundle, closure, and frontal is cuticle-aligned, single-donor, and held to exacting quality standards before it reaches your door.');
-    _ahp_section_end();
-    foreach ( $d as $i => $c ) {
-        _ahp_section( "Card {$i} — {$c['title']}", 'ahp-cols-2' );
-        _ahp_img( "cat{$i}_image", "Card {$i} Image" );
-        _ahp_text( "cat{$i}_label", "Badge Label",          $c['label'] );
-        _ahp_text( "cat{$i}_title", "Card Title",           $c['title'] );
-        _ahp_text( "cat{$i}_tag",   "Tagline",              $c['tag']   );
-        _ahp_text( "cat{$i}_from",  "From Price (no £)",    $c['from']  );
-        _ahp_text( "cat{$i}_url",   "Link URL",             $c['url']   );
-        _ahp_section_end();
+    echo '<div class="ahp">';
+    _sec('Texture Images & Names','col2');
+    echo '<p class="ahp-hint ahp-full" style="margin:0 0 4px;">Upload a photo for each texture. Name and description can also be edited.</p>';
+    foreach ($textures as [$key,$name]) {
+        _fi("raw_tex_{$key}","Image: {$name}");
     }
+    _end();
+    _sec('Texture Names & Descriptions (optional override)','col2');
+    foreach ($textures as [$key,$name]) {
+        _f("raw_tex_{$key}_name","Name",$name);
+        _ft("raw_tex_{$key}_desc","Description","");
+    }
+    _end();
     echo '</div>';
 }
 
-/* ── HOMEPAGE: WHY ───────────────────────────────────────── */
-function ahp_cb_home_why(): void {
-    $d = [
-        1 => ['icon'=>'gem',    'title'=>'Cambodian Origin',    'body'=>'Single-donor Cambodian hair, ethically sourced, never chemically processed.'],
-        2 => ['icon'=>'shield', 'title'=>'3-5 Year Lifespan',   'body'=>'Invest once, wear for years. The results speak for themselves.'],
-        3 => ['icon'=>'sparkle','title'=>'10+ Textures',         'body'=>'Every texture in 10"-30" lengths. Wear it your way.'],
+function ahp_raw_pricing_cb(): void {
+    $lengths=['10in'=>'60','12in'=>'63','14in'=>'69','16in'=>'75','18in'=>'80',
+              '20in'=>'88','22in'=>'95','24in'=>'100','26in'=>'105','28in'=>'110','30in'=>'120'];
+    echo '<div class="ahp">';
+    _sec('Pricing Section Heading','col2');
+    _f('raw_price_label','Label','Transparent Pricing');
+    _f('raw_price_title','Title','Raw Hair Price Per Bundle');
+    _ft('raw_price_desc','Description','All textures are priced equally by length. Prices are per bundle.');
+    _end();
+    _sec('Price Per Length (£)','col4');
+    foreach ($lengths as $len=>$def) _fn("raw_price_{$len}",str_replace('in','"',$len),$def);
+    _end();
+    echo '</div>';
+}
+
+function ahp_raw_care_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Care Split Section','col2');
+    _fi('raw_care_image','Section Image','Image shown beside the care tips');
+    _f('raw_care_label','Label','Hair Care'); _f('raw_care_title','Title','How to Make It Last 5 Years');
+    _ft('raw_care_body','Body Text','The secret to 3–5 year lifespan is simple maintenance. Wash weekly with a sulphate-free shampoo, deep condition monthly, and sleep on a satin pillowcase every night. Treat it like your own hair and it will outlast anything else on the market.');
+    _end();
+    echo '</div>';
+}
+
+/* ============================================================
+   SPRINT 4 — VIRGIN HAIR
+   ============================================================ */
+function ahp_vir_intro_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Intro Split Section','col2');
+    _fi('vir_intro_image','Section Image');
+    _f('vir_intro_label','Label','Pure. Natural. Versatile.');
+    _f('vir_intro_title','Title','What is Virgin Hair?');
+    _ft('vir_intro_p1','Paragraph 1','Virgin hair is premium single-donor Cambodian hair that has never been chemically processed. It is harvested from a healthy single donor, ensuring all cuticles run in the same direction for maximum smoothness and longevity.');
+    _ft('vir_intro_p2','Paragraph 2','Compared to raw hair, our virgin collection has a slightly more refined finish and higher lustre. Both share the same 3-5 year lifespan with proper care — virgin hair is the ideal starting point for women new to premium extensions.');
+    _end();
+    _sec('Textures Section Heading','col2');
+    _f('vir_tex_label','Label','Available Textures'); _f('vir_tex_title','Title','Choose Your Texture');
+    _ft('vir_tex_desc','Description','All textures available in 10"–30" at the same price per length.');
+    _end();
+    _sec('Pricing Section Heading','col2');
+    _f('vir_price_label','Label','Transparent Pricing'); _f('vir_price_title','Title','Virgin Hair Price Per Bundle');
+    _ft('vir_price_desc','Description','All textures priced equally by length. Per bundle pricing.');
+    _end();
+    echo '</div>';
+}
+
+function ahp_vir_tex_cb(): void {
+    $textures=[
+        ['straight','Straight'],['body-wave','Body Wave'],['loose-wave','Loose Wave'],
+        ['deep-wave','Deep Wave'],['kinky-straight','Kinky Straight'],['loose-deep','Loose Deep Wave'],
+        ['burmese-curls','Burmese Curls'],['waver-wave','Water Wave'],
     ];
-    echo '<div class="ahp-box">';
-    _ahp_section('Section Heading', 'ahp-cols-2');
-    _ahp_text('why_label','Section Label','Why Asantey');
-    _ahp_text('why_title','Section Title','Hair That Speaks for Itself');
-    _ahp_section_end();
-    foreach ( $d as $i => $c ) {
-        _ahp_section("Feature {$i}", 'ahp-cols-2');
-        _ahp_text("feat{$i}_title","Title",  $c['title']);
-        _ahp_text("feat{$i}_icon","Icon (gem/shield/sparkle/check/heart/truck/star)",$c['icon'],'');
-        _ahp_textarea("feat{$i}_body","Description",$c['body']);
-        _ahp_section_end();
+    echo '<div class="ahp">';
+    _sec('Texture Images','col2');
+    foreach ($textures as [$key,$name]) _fi("vir_tex_{$key}","Image: {$name}");
+    _end();
+    _sec('Texture Names & Descriptions','col2');
+    foreach ($textures as [$key,$name]) {
+        _f("vir_tex_{$key}_name","Name",$name);
+        _ft("vir_tex_{$key}_desc","Description","");
     }
+    _end();
     echo '</div>';
 }
 
-/* ── HOMEPAGE: STORY ─────────────────────────────────────── */
-function ahp_cb_home_story(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Brand Story Section', 'ahp-cols-2');
-    _ahp_text('story_label','Label','Our Story');
-    _ahp_text('story_title','Title','The Asantey Standard');
-    _ahp_textarea('story_body1','Paragraph 1','Founded on the belief that every woman deserves hair she is genuinely proud of.');
-    _ahp_textarea('story_body2','Paragraph 2','What you receive is exactly as nature intended: just better selected, better prepared, and built to last 3-5 years with the right care.');
-    _ahp_section_end();
+function ahp_vir_pricing_cb(): void {
+    $lengths=['10in'=>'50','12in'=>'53','14in'=>'59','16in'=>'65','18in'=>'70',
+              '20in'=>'78','22in'=>'85','24in'=>'90','26in'=>'95','28in'=>'100','30in'=>'110'];
+    echo '<div class="ahp">';
+    _sec('Price Per Length (£)','col4');
+    foreach ($lengths as $len=>$def) _fn("vir_price_{$len}",str_replace('in','"',$len),$def);
+    _end();
     echo '</div>';
 }
 
-/* ── HOMEPAGE: GALLERY ───────────────────────────────────── */
-function ahp_cb_home_gallery(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Homepage Gallery — Up to 6 images shown on the homepage', 'ahp-cols-3');
-    for ( $i = 1; $i <= 6; $i++ ) {
-        _ahp_img("gal_image_{$i}","Gallery Image {$i}");
+/* ============================================================
+   SPRINT 5 — CLOSURES & FRONTALS
+   ============================================================ */
+function ahp_cls_intro_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Intro Split Section','col2');
+    _fi('cls_intro_image','Section Image');
+    _f('cls_intro_label','Label','Why HD Lace?');
+    _f('cls_intro_title','Title','The Invisible Lace Standard');
+    _ft('cls_intro_p1','Paragraph 1','HD lace is the thinnest, most transparent lace available. When applied to the scalp, it becomes virtually invisible — creating a hairline that looks like your own natural hair.');
+    _ft('cls_intro_p2','Paragraph 2','No bleaching required. No heavy foundation. No obvious lace line. Our HD closures and frontals are pre-plucked with baby hairs, so the natural look is built in from day one.');
+    _end();
+    _sec('Sizes Section Heading','col2');
+    _f('cls_sizes_label','Label','Choose Your Size');
+    _f('cls_sizes_title','Title','Available Sizes & Textures');
+    _ft('cls_sizes_desc','Description','All sizes available in every texture. Match to your Asantey bundles for a flawless install.');
+    _end();
+    echo '</div>';
+}
+
+function ahp_cls_sizes_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Pricing Section Heading','col2');
+    _f('cls_price_label','Label','Full Pricing');
+    _f('cls_price_title','Title','Closures & Frontals — Price Lists');
+    _end();
+    _sec('Closure Prices','col3');
+    $cls=[['2x6','49','61','—','—','—','—'],['4x4','51','53','56','62','68','72'],
+          ['5x5','61','65','68','75','80','90'],['6x6','72','77','83','90','97','107']];
+    $lens=['12in','14in','16in','18in','20in','22in'];
+    foreach ($cls as [$size,&$prices]) {
+        _f("cls_price_{$size}_label","Size Label",$size.' Closure');
+        foreach ($lens as $k=>$len) _fn("cls_price_{$size}_{$len}",str_replace('in','"',$len),$prices[$k]);
     }
-    _ahp_section_end();
+    _end();
+    _sec('Frontal Prices','col3');
+    $frt=[['13x4','80','85','90','99','107','117'],['13x6','81','85','94','103','112','124']];
+    foreach ($frt as [$size,&$prices]) {
+        _f("frt_price_{$size}_label","Size Label",$size.' Frontal');
+        foreach ($lens as $k=>$len) _fn("frt_price_{$size}_{$len}",str_replace('in','"',$len),$prices[$k]);
+    }
+    _end();
     echo '</div>';
 }
 
-/* ── HOMEPAGE: TESTIMONIALS ──────────────────────────────── */
-function ahp_cb_home_testimonials(): void {
-    $d = [
-        1 => ['q'=>'I have been buying hair for over 10 years and Asantey is hands down the best quality I have ever experienced.','a'=>'Naomi A., London'],
-        2 => ['q'=>'My 28 inch raw body wave bundle is still going strong 2 years later. Worth every penny.','a'=>'Blessing O., Birmingham'],
-        3 => ['q'=>'The HD lace frontal is unreal. My stylist could not believe it was not my natural hairline.','a'=>'Jade K., Manchester'],
+function ahp_cls_imgs_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Page Images','col2');
+    _fi('cls_pricelist','Price List / Header Image','Shows as the main visual for closures');
+    _fi('cls_size_guide','HD Lace Size Guide Image','Diagram showing lace sizes');
+    _end();
+    echo '</div>';
+}
+
+/* ============================================================
+   SPRINT 6 — SALON SERVICES
+   ============================================================ */
+function ahp_salon_svcs_cb(): void {
+    $svcs=[
+        ['braids','Braids'],['cornrows','Cornrows'],['hair-treatment','Hair Treatment'],
+        ['sew-in','Sew-In'],['closure','Closure Install'],['natural-hair','Natural Hair'],
+        ['knotless-braids','Knotless Braids'],['goddess-braids','Goddess Braids'],
+        ['wig-install','Wig Install'],
     ];
-    echo '<div class="ahp-box">';
-    _ahp_section('Section Heading', 'ahp-cols-2');
-    _ahp_text('test_label','Label','Client Love');
-    _ahp_text('test_title','Title','What Our Clients Say');
-    _ahp_section_end();
-    foreach ( $d as $i => $c ) {
-        _ahp_section("Testimonial {$i}", 'ahp-cols-2');
-        _ahp_textarea("test{$i}_quote","Quote",$c['q']);
-        _ahp_text("test{$i}_author","Author",$c['a']);
-        _ahp_section_end();
+    echo '<div class="ahp">';
+    _sec('Hair Services Section Heading','col2');
+    _f('salon_hair_label','Label','Hair Services'); _f('salon_hair_title','Title','Expert Hair Services');
+    _ft('salon_hair_desc','Description','');
+    _end();
+    foreach ($svcs as [$key,$name]) {
+        _sec("Service: {$name}",'col2');
+        _fi("svc_{$key}_image","Image");
+        _f("svc_{$key}_title","Title",$name);
+        _f("svc_{$key}_price","Price (e.g. From £45)","");
+        _ft("svc_{$key}_desc","Short Description","");
+        _end();
     }
     echo '</div>';
 }
 
-/* ── HOMEPAGE: CTA ───────────────────────────────────────── */
-function ahp_cb_home_cta(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('CTA Band', 'ahp-cols-2');
-    _ahp_text('cta_label','Label','Ready to Elevate Your Look?');
-    _ahp_text('cta_title','Title','Your Best Hair Starts Here');
-    _ahp_textarea('cta_body','Body Text','Browse our full collection or order directly on WhatsApp.');
-    _ahp_text('cta_btn1','Button 1 Text','Shop Collections');
-    _ahp_text('cta_btn1_url','Button 1 URL','/shop/');
-    _ahp_text('cta_btn2','Button 2 Text (WhatsApp)','WhatsApp Order');
-    _ahp_section_end();
-    echo '</div>';
-}
-
-/* ── HOMEPAGE: MARQUEE ───────────────────────────────────── */
-function ahp_cb_home_marquee(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Scrolling Trust Strip');
-    _ahp_textarea('marquee_items','One item per line. Format: icon|Text',"sparkle|Premium Cambodian Hair\ngem|HD Lace Specialists\nshield|3-5 Year Lifespan\ncheck|Minimal Shedding\nlocation|UK Based - Nottingham\nheart|Single Donor\nsparkle|Cuticle Aligned\ntruck|Fast UK Dispatch",'Icons: sparkle, gem, shield, check, location, heart, truck, star');
-    _ahp_section_end();
-    echo '</div>';
-}
-
-/* ── SHARED: PAGE HERO ───────────────────────────────────── */
-function ahp_cb_page_hero(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Hero Section — appears at the top of this page', 'ahp-cols-2');
-    _ahp_img('hero_image','Hero Background Image','Upload a wide landscape photo (recommended: 1920×700px)');
-    _ahp_text('hero_label','Small Label (above title)','');
-    _ahp_text('hero_title','Hero Title','');
-    _ahp_text('hero_subtitle','Subtitle / Tagline','');
-    _ahp_section_end();
-    echo '</div>';
-}
-
-/* ── RAW HAIR: TEXTURE IMAGES ────────────────────────────── */
-function ahp_cb_raw_textures(): void {
-    $textures = ['straight'=>'Straight','body-wave'=>'Body Wave','loose-wave'=>'Loose Wave','deep-wave'=>'Deep Wave','kinky-straight'=>'Kinky Straight','loose-deep'=>'Loose Deep Wave','burmese-curls'=>'Burmese Curls','waver-wave'=>'Water Wave'];
-    echo '<div class="ahp-box">';
-    _ahp_section('Texture Grid Images — one image per texture', 'ahp-cols-3');
-    foreach ( $textures as $key => $label ) {
-        _ahp_img("raw_tex_{$key}", $label);
-    }
-    _ahp_section_end();
-    echo '</div>';
-}
-
-/* ── RAW HAIR: PRICING ───────────────────────────────────── */
-function ahp_cb_raw_pricing(): void {
-    $l = ['10in'=>'60','12in'=>'63','14in'=>'69','16in'=>'75','18in'=>'80','20in'=>'88','22in'=>'95','24in'=>'100','26in'=>'105','28in'=>'110','30in'=>'120'];
-    echo '<div class="ahp-box">';
-    _ahp_section('Price per length — shown in the pricing table on this page', 'ahp-cols-3');
-    foreach ( $l as $len => $def ) {
-        _ahp_number("raw_price_{$len}", str_replace('in','"',$len), $def);
-    }
-    _ahp_section_end();
-    echo '</div>';
-}
-
-/* ── VIRGIN HAIR: TEXTURE IMAGES ─────────────────────────── */
-function ahp_cb_vir_textures(): void {
-    $textures = ['straight'=>'Straight','body-wave'=>'Body Wave','loose-wave'=>'Loose Wave','deep-wave'=>'Deep Wave','kinky-straight'=>'Kinky Straight','loose-deep'=>'Loose Deep Wave','burmese-curls'=>'Burmese Curls','waver-wave'=>'Water Wave'];
-    echo '<div class="ahp-box">';
-    _ahp_section('Texture Grid Images — one image per texture', 'ahp-cols-3');
-    foreach ( $textures as $key => $label ) {
-        _ahp_img("vir_tex_{$key}", $label);
-    }
-    _ahp_section_end();
-    echo '</div>';
-}
-
-/* ── VIRGIN HAIR: PRICING ────────────────────────────────── */
-function ahp_cb_vir_pricing(): void {
-    $l = ['10in'=>'50','12in'=>'53','14in'=>'59','16in'=>'65','18in'=>'70','20in'=>'78','22in'=>'85','24in'=>'90','26in'=>'95','28in'=>'100','30in'=>'110'];
-    echo '<div class="ahp-box">';
-    _ahp_section('Price per length — shown in the pricing table on this page', 'ahp-cols-3');
-    foreach ( $l as $len => $def ) {
-        _ahp_number("vir_price_{$len}", str_replace('in','"',$len), $def);
-    }
-    _ahp_section_end();
-    echo '</div>';
-}
-
-/* ── CLOSURES: IMAGES ────────────────────────────────────── */
-function ahp_cb_cls_images(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Closures & Frontals Images', 'ahp-cols-2');
-    _ahp_img('cls_pricelist',  'Price List / Header Image');
-    _ahp_img('cls_size_guide', 'HD Lace Size Guide Image');
-    _ahp_section_end();
-    echo '</div>';
-}
-
-/* ── SALON: SERVICE CARDS ────────────────────────────────── */
-function ahp_cb_salon_svcs(): void {
-    $svcs = ['braids'=>'Braids','cornrows'=>'Cornrows','hair-treatment'=>'Hair Treatment','sew-in'=>'Sew-In','closure'=>'Closure Install','natural-hair'=>'Natural Hair','lash-extensions'=>'Lash Extensions','eyebrow-wax'=>'Eyebrow Waxing','eyebrow-thread'=>'Eyebrow Threading','knotless-braids'=>'Knotless Braids','goddess-braids'=>'Goddess Braids','wig-install'=>'Wig Install'];
-    echo '<div class="ahp-box">';
-    foreach ( $svcs as $key => $name ) {
-        _ahp_section("Service — {$name}", 'ahp-cols-2');
-        _ahp_img("svc_{$key}_image","Service Image");
-        _ahp_text("svc_{$key}_title","Title",$name);
-        _ahp_text("svc_{$key}_price","Price (e.g. From £45)",'');
-        _ahp_textarea("svc_{$key}_desc","Short Description",'');
-        _ahp_section_end();
+function ahp_salon_bsvc_cb(): void {
+    $svcs=[['lash-extensions','Lash Extensions'],['eyebrow-wax','Eyebrow Waxing'],['eyebrow-thread','Eyebrow Threading']];
+    echo '<div class="ahp">';
+    _sec('Beauty Services Section Heading','col2');
+    _f('salon_beauty_label','Label','Beauty Services'); _f('salon_beauty_title','Title','Complete Beauty Services');
+    _ft('salon_beauty_desc','Description','Finish your look from lash to brow.');
+    _end();
+    foreach ($svcs as [$key,$name]) {
+        _sec("Service: {$name}",'col2');
+        _fi("svc_{$key}_image","Image");
+        _f("svc_{$key}_title","Title",$name);
+        _f("svc_{$key}_price","Price","");
+        _ft("svc_{$key}_desc","Short Description","");
+        _end();
     }
     echo '</div>';
 }
 
-/* ── SALON: SPLIT SECTION IMAGES ────────────────────────── */
-function ahp_cb_salon_split(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Story / Split Section Images', 'ahp-cols-2');
-    _ahp_img('salon_split_img1','Left / Top Image');
-    _ahp_img('salon_split_img2','Right / Bottom Image');
-    _ahp_section_end();
+function ahp_salon_split_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Story / Split Section','col2');
+    _fi('salon_split_img1','Left Image');
+    _fi('salon_split_img2','Right Image');
+    _f('salon_split_label','Label','About Our Salon');
+    _f('salon_split_title','Title','');
+    _ft('salon_split_body','Body Text','');
+    _end();
     echo '</div>';
 }
 
-/* ── ABOUT ───────────────────────────────────────────────── */
-function ahp_cb_about(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Our Story Section', 'ahp-cols-2');
-    _ahp_img('about_image','Story Image');
-    _ahp_text('about_label','Label','Our Story');
-    _ahp_text('about_title','Title','');
-    _ahp_textarea('about_body1','Paragraph 1','');
-    _ahp_textarea('about_body2','Paragraph 2','');
-    _ahp_section_end();
+function ahp_salon_cta_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Booking CTA Section','col2');
+    _f('salon_cta_title','Title','Ready to Book?');
+    _ft('salon_cta_body','Body','');
+    _f('salon_cta_btn','Button Text','Book Now');
+    _f('salon_cta_url','Booking URL','https://asanteyhair.as.me/');
+    _end();
+    echo '</div>';
+}
 
-    _ahp_section('Values / Stats Strip', 'ahp-cols-2');
-    for ( $i = 1; $i <= 4; $i++ ) {
-        _ahp_text("stat{$i}_num",  "Stat {$i} Number (e.g. 500+)",'');
-        _ahp_text("stat{$i}_label","Stat {$i} Label (e.g. Happy Clients)",'');
+/* ============================================================
+   SPRINT 7 — ABOUT
+   ============================================================ */
+function ahp_about_story_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Our Story Section','col2');
+    _fi('about_img1','Story Image (left side)');
+    _f('about_label','Label','Our Story'); _f('about_title','Title','');
+    _ft('about_p1','Paragraph 1','');
+    _ft('about_p2','Paragraph 2','');
+    _f('about_btn','Button Text','Learn More'); _f('about_btn_url','Button URL','/shop/');
+    _end();
+    echo '</div>';
+}
+
+function ahp_about_stats_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Stats Strip (4 numbers)','col4');
+    for ($i=1;$i<=4;$i++) {
+        _f("stat{$i}_num","Stat {$i} Number",""); _f("stat{$i}_label","Stat {$i} Label","");
     }
-    _ahp_section_end();
+    _end();
     echo '</div>';
 }
 
-/* ── CONTACT ─────────────────────────────────────────────── */
-function ahp_cb_contact(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Contact Details', 'ahp-cols-2');
-    _ahp_text('phone',   'Phone Number',   '07827 129797');
-    _ahp_text('email',   'Email Address',  '');
-    _ahp_text('address', 'Address',        '358 Radford Road, Nottingham NG7 5GQ');
-    _ahp_text('hours',   'Opening Hours',  'Mon-Sat: 9am – 6pm');
-    _ahp_text('wa',      'WhatsApp Number (international format, no +)','447827129797');
-    _ahp_text('booking', 'Booking URL',    'https://asanteyhair.as.me/');
-    _ahp_section_end();
-
-    _ahp_section('Google Maps Embed');
-    _ahp_textarea('map_embed','Paste the src="" URL from Google Maps embed code','','Google Maps > Share > Embed a map > copy only the src URL (starts with https://www.google.com/maps/embed...)');
-    _ahp_section_end();
+function ahp_about_sec2_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Second Split Section','col2');
+    _fi('about_img2','Section Image (right side)');
+    _f('about2_label','Label',''); _f('about2_title','Title','');
+    _ft('about2_body','Body Text','');
+    _end();
     echo '</div>';
 }
 
-/* ── FAQ ─────────────────────────────────────────────────── */
-function ahp_cb_faq(): void {
+function ahp_about_vals_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Values Section Heading','col2');
+    _f('vals_label','Label','Our Values'); _f('vals_title','Title','');
+    _end();
+    for ($i=1;$i<=3;$i++) {
+        _sec("Value {$i}",'col2');
+        _f("val{$i}_icon","Icon",'gem'); _f("val{$i}_title","Title","");
+        _ft("val{$i}_body","Description","");
+        _end();
+    }
+    echo '</div>';
+}
+
+/* ============================================================
+   SPRINT 8a — CONTACT
+   ============================================================ */
+function ahp_contact_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Contact Details','col2');
+    _f('phone',  'Phone Number',  '07827 129797');
+    _f('email',  'Email Address', '');
+    _f('address','Address',       '358 Radford Road, Nottingham NG7 5GQ');
+    _f('hours',  'Opening Hours', 'Mon–Sat: 9am–7pm');
+    _f('wa',     'WhatsApp Number (no + or spaces)','447827129797');
+    _f('booking','Booking URL',   'https://asanteyhair.as.me/');
+    _end();
+    _sec('Google Maps Embed');
+    _ft('map_embed','Embed src URL','','From Google Maps → Share → Embed a map → copy only the src="..." value');
+    _end();
+    echo '</div>';
+}
+
+function ahp_contact_soc_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Social Media Links','col2');
+    _f('soc_instagram','Instagram URL',''); _f('soc_facebook','Facebook URL','');
+    _f('soc_tiktok','TikTok URL','');       _f('soc_youtube','YouTube URL','');
+    _end();
+    echo '</div>';
+}
+
+/* ============================================================
+   SPRINT 8b — FAQ (shared between raw/virgin/closures/faq page)
+   ============================================================ */
+function ahp_faq_cb(): void {
     global $post;
-    $items = get_post_meta( $post->ID, '_ahp_faq_items', true );
-    $items = is_array($items) ? $items : [['q'=>'','a'=>''],['q'=>'','a'=>''],['q'=>'','a'=>'']];
-    echo '<div class="ahp-box">';
-    _ahp_section('FAQ Items — add, edit or remove questions');
-    echo '</div>'; // close section body early, custom markup below
-
-    echo '<div style="padding:0 0 12px;">';
+    $items = get_post_meta($post->ID, '_ahp_rep_faq', true);
+    if (!is_array($items)) $items=[['q'=>'','a'=>''],['q'=>'','a'=>''],['q'=>'','a'=>'']];
+    echo '<div class="ahp">';
+    _sec('FAQ Items — add, edit or remove questions & answers');
     echo '<div id="ahp-faq-list">';
-    foreach ( $items as $i => $item ) {
-        $q = esc_attr($item['q'] ?? '');
-        $a = esc_textarea($item['a'] ?? '');
-        echo "<div class='ahp-repeat-item'><button type='button' class='ahp-del-btn'>✕ Remove</button>"
-           . "<div class='ahp-field'><label>Question</label><input type='text' name='ahp_faq_q[]' value='{$q}'></div>"
-           . "<div class='ahp-field'><label>Answer</label><textarea name='ahp_faq_a[]'>{$a}</textarea></div>"
+    foreach ($items as $row) {
+        $q = esc_attr($row['q']??'');
+        $a = esc_textarea($row['a']??'');
+        echo "<div class='ahp-rep-item'><button type='button' class='ahp-rep-del'>✕ Remove</button>"
+           . "<div class='ahp-field'><label>Question</label><input type='text' name='ahp_rep[faq][][q]' value='{$q}'></div>"
+           . "<div class='ahp-field'><label>Answer</label><textarea name='ahp_rep[faq][][a]'>{$a}</textarea></div>"
            . "</div>";
     }
     echo '</div>';
-    echo '<button type="button" class="button ahp-add-btn" id="ahp-add-faq">+ Add Question</button>';
-    echo '<script>document.getElementById("ahp-add-faq").addEventListener("click",function(){
-        var d=document.createElement("div"); d.className="ahp-repeat-item";
-        d.innerHTML="<button type=\'button\' class=\'ahp-del-btn\'>✕ Remove</button>"
-            +"<div class=\'ahp-field\'><label>Question</label><input type=\'text\' name=\'ahp_faq_q[]\'></div>"
-            +"<div class=\'ahp-field\'><label>Answer</label><textarea name=\'ahp_faq_a[]\'></textarea></div>";
-        document.getElementById("ahp-faq-list").appendChild(d);
-    });</script>';
-    echo '</div></div>';
-}
-
-/* Save FAQ specially */
-add_action( 'save_post_page', function ( int $post_id ) {
-    if ( ! isset($_POST['_ahp_nonce']) ) return;
-    if ( ! wp_verify_nonce($_POST['_ahp_nonce'], 'ahp_save_' . $post_id) ) return;
-    if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
-    if ( ! current_user_can('edit_post',$post_id) ) return;
-
-    if ( isset($_POST['ahp_faq_q']) ) {
-        $qs    = array_map('sanitize_textarea_field', (array)$_POST['ahp_faq_q']);
-        $as    = array_map('sanitize_textarea_field', (array)($_POST['ahp_faq_a'] ?? []));
-        $items = [];
-        foreach ( $qs as $i => $q ) {
-            if ( $q === '' && ($as[$i]??'') === '' ) continue;
-            $items[] = ['q'=>$q,'a'=>$as[$i]??''];
-        }
-        update_post_meta( $post_id, '_ahp_faq_items', $items );
-    }
-}, 20 );
-
-/* ── SHOP: INTRO ─────────────────────────────────────────── */
-function ahp_cb_shop_intro(): void {
-    echo '<div class="ahp-box">';
-    _ahp_section('Shop Page Intro', 'ahp-cols-2');
-    _ahp_text('shop_title','Shop Page Title','Shop All Hair');
-    _ahp_text('shop_subtitle','Subtitle','Cambodian Raw · Virgin Hair · HD Lace Closures & Frontals');
-    _ahp_section_end();
+    echo '<button type="button" class="button ahp-rep-add" id="ahp-faq-add">+ Add Question</button>';
+    echo '<script>document.getElementById("ahp-faq-add").addEventListener("click",function(){'
+        .'var d=document.createElement("div");d.className="ahp-rep-item";'
+        .'d.innerHTML="<button type=\'button\' class=\'ahp-rep-del\'>✕ Remove</button>"'
+        .'+"<div class=\'ahp-field\'><label>Question</label><input type=\'text\' name=\'ahp_rep[faq][][q]\'></div>"'
+        .'+"<div class=\'ahp-field\'><label>Answer</label><textarea name=\'ahp_rep[faq][][a]\'></textarea></div>";'
+        .'document.getElementById("ahp-faq-list").appendChild(d);'
+        .'});</script>';
+    _end();
     echo '</div>';
 }
+
+/* ============================================================
+   SPRINT 8c — ORDER PAGE
+   ============================================================ */
+function ahp_order_intro_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Page Intro','col2');
+    _f('order_intro_label','Label','Order Direct');
+    _f('order_intro_title','Title','Place Your Order');
+    _ft('order_intro_desc','Description','');
+    _end();
+    echo '</div>';
+}
+
+function ahp_order_prods_cb(): void {
+    $d=[1=>['Cambodian Raw Hair','60','/raw-hair/'],
+        2=>['Cambodian Virgin Hair','50','/virgin-hair/'],
+        3=>['HD Lace Closures & Frontals','49','/closures-frontals/']];
+    echo '<div class="ahp">';
+    _sec('Section Heading','col2');
+    _f('order_prods_label','Label','Our Collections'); _f('order_prods_title','Title','What Would You Like to Order?');
+    _end();
+    foreach ($d as $i=>$c) {
+        _sec("Product Card {$i}",'col2');
+        _fi("order_img{$i}","Image");
+        _f("order_prod{$i}_title","Title",$c[0]);
+        _ft("order_prod{$i}_desc","Short Description","");
+        _f("order_prod{$i}_price","From Price (no £)",$c[1]);
+        _f("order_prod{$i}_url","Link URL",$c[2]);
+        _end();
+    }
+    echo '</div>';
+}
+
+/* ============================================================
+   SPRINT 8d — CARE GUIDE
+   ============================================================ */
+function ahp_care_intro_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Page Intro','col2');
+    _f('care_label','Label','Education & Care'); _f('care_title','Title','The Complete Hair Care Guide');
+    _ft('care_desc','Intro paragraph','Everything you need to know to keep your Asantey hair looking perfect for 3–5 years.');
+    _end();
+    echo '<p class="ahp-hint" style="padding:0 14px 12px;">The full care guide content is edited using the main WordPress editor above (classic or block editor).</p>';
+    echo '</div>';
+}
+
+/* ============================================================
+   SPRINT 8e — SHOP
+   ============================================================ */
+function ahp_shop_intro_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Shop Page Intro','col2');
+    _f('shop_title','Page Title','Shop All Hair');
+    _ft('shop_subtitle','Subtitle','Cambodian Raw · Virgin Hair · HD Lace Closures & Frontals');
+    _end();
+    echo '</div>';
+}
+
+/* ============================================================
+   SPRINT 8f — GALLERY
+   ============================================================ */
+function ahp_gallery_cb(): void {
+    global $post;
+    $saved = get_post_meta($post->ID, '_ah_gallery_ids', true) ?: '';
+    $ids   = array_filter(array_map('absint', explode(',', $saved)));
+    echo '<div class="ahp">';
+    _sec('Gallery Images — select, upload, drag to reorder');
+    echo '<p class="ahp-hint" style="margin-bottom:10px;">Click <strong>+ Add Images</strong> to open the Media Library. Select multiple at once. Drag thumbnails to reorder them.</p>';
+    echo '<div id="ahp-gal-row" style="display:flex;flex-wrap:wrap;gap:8px;padding:10px;border:2px dashed #ddd;min-height:70px;background:#fafafa;margin-bottom:10px;">';
+    foreach ($ids as $id) {
+        $t = wp_get_attachment_image_url($id,'thumbnail'); if(!$t) continue;
+        echo "<div data-id='{$id}' style='position:relative;width:80px;height:80px;cursor:grab;'>"
+           . "<img src='".esc_url($t)."' style='width:80px;height:80px;object-fit:cover;display:block;'>"
+           . "<button type='button' onclick=\"this.parentNode.remove();ahpGalSync()\" style='position:absolute;top:-6px;right:-6px;width:20px;height:20px;background:#cc1818;color:#fff;border:none;border-radius:50%;font-size:13px;cursor:pointer;padding:0;line-height:20px;text-align:center;'>&times;</button>"
+           . "</div>";
+    }
+    echo '</div>';
+    echo '<button type="button" class="button button-primary" onclick="ahpGalPick()">+ Add Images</button>';
+    echo '<input type="hidden" name="ahp_gallery_ids_field" id="ahp-gal-ids" value="'.esc_attr($saved).'">';
+    echo '<script>
+    function ahpGalPick(){
+        var f=wp.media({title:"Add Gallery Images",button:{text:"Add to Gallery"},multiple:true,library:{type:"image"}});
+        f.on("select",function(){
+            var atts=f.state().get("selection").toJSON();
+            atts.forEach(function(a){
+                var t=(a.sizes&&a.sizes.thumbnail)?a.sizes.thumbnail.url:a.url;
+                var d=document.createElement("div");d.dataset.id=a.id;
+                d.style.cssText="position:relative;width:80px;height:80px;cursor:grab;";
+                d.innerHTML="<img src=\""+t+"\" style=\"width:80px;height:80px;object-fit:cover;display:block;\">"
+                    +"<button type=\"button\" onclick=\"this.parentNode.remove();ahpGalSync()\" style=\"position:absolute;top:-6px;right:-6px;width:20px;height:20px;background:#cc1818;color:#fff;border:none;border-radius:50%;font-size:13px;cursor:pointer;padding:0;line-height:20px;text-align:center;\">&times;</button>";
+                document.getElementById("ahp-gal-row").appendChild(d);
+            });
+            ahpGalSync();
+        });
+        f.open();
+    }
+    function ahpGalSync(){
+        var ids=[];
+        document.querySelectorAll("#ahp-gal-row [data-id]").forEach(function(el){ids.push(el.dataset.id);});
+        document.getElementById("ahp-gal-ids").value=ids.join(",");
+    }
+    </script>';
+    if (class_exists('jQuery')) { /* sortable via WP jQuery UI */ }
+    _end();
+    echo '</div>';
+}
+
+/* Save gallery IDs separately */
+add_action('save_post_page', function(int $pid): void {
+    if (!isset($_POST['_ahp_nonce'])) return;
+    if (!wp_verify_nonce($_POST['_ahp_nonce'],'ahp_'.$pid)) return;
+    if (defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post',$pid)) return;
+    if (isset($_POST['ahp_gallery_ids_field'])) {
+        $ids = implode(',',array_filter(array_map('absint',explode(',',$_POST['ahp_gallery_ids_field']))));
+        update_post_meta($pid,'_ah_gallery_ids',$ids);
+    }
+},15);
+
+/* ============================================================
+   SPRINT 8g — LEGAL PAGES (Shipping, Privacy, Terms)
+   ============================================================ */
+function ahp_legal_cb(): void {
+    echo '<div class="ahp">';
+    _sec('Page Details','col2');
+    _f('legal_business','Business Name','Asantey Hair & Beauty');
+    _f('legal_email','Contact Email','');
+    _end();
+    echo '<p class="ahp-hint" style="padding:0 14px 12px;">The full page content is edited using the main WordPress editor above. These fields supply the business name and email that appear in the policy text.</p>';
+    echo '</div>';
+}
+

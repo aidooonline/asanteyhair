@@ -27,7 +27,7 @@ echo ah_schema_faq($faqs);
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/virgin-body-wave.png', '', '', 'eager' ); ?>"
+    <?php ah_opt_img_tag( 'hero_image', ah_opt_img('vir_intro_image')['url'] ?: AH_URI.'/assets/images/virgin-body-wave.png', '', '', 'eager' ); ?>"
          alt="" aria-hidden="true" loading="eager" width="1280" height="500">
   </div>
   <div class="page-hero__content">
@@ -41,7 +41,7 @@ echo ah_schema_faq($faqs);
 
 <section class="split">
   <div class="split__media">
-    <img src="<?php echo esc_url( AH_URI . '/assets/images/virgin-body-wave.png' ); ?>"
+    <img src="<?php echo esc_url( ah_opt_img('vir_intro_image')['url'] ?: AH_URI.'/assets/images/virgin-body-wave.png' ); ?>"
          alt="Cambodian virgin hair body wave bundles"
          loading="lazy" width="800" height="1000">
   </div>
