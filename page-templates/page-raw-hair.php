@@ -11,20 +11,6 @@ echo ah_schema_breadcrumb([
   ['name' => 'Raw Hair', 'url' => get_permalink()],
 ]);
 
-$raw_faqs = [
-  ['question' => 'What is Cambodian raw hair?',
-   'answer'   => 'Cambodian raw hair is collected directly from a single donor and has never been chemically treated, coloured, or processed in any way. It retains its natural cuticle alignment, which is why it has virtually no tangling or shedding and can last 3–5 years with proper care.'],
-  ['question' => 'Can I colour or bleach raw hair?',
-   'answer'   => 'Yes. Because raw hair is 100% unprocessed, it responds to chemical treatments like colouring, bleaching, and perming just as your natural hair would. We recommend doing a strand test first and using a professional colourist.'],
-  ['question' => 'How long does raw hair last?',
-   'answer'   => 'With proper care — regular washing, conditioning, minimal heat, and gentle handling — Asantey Cambodian raw hair typically lasts 3–5 years. Many of our clients still have their bundles in excellent condition after 4 years.'],
-  ['question' => 'How many bundles do I need?',
-   'answer'   => 'For a full sew-in, most clients need 2–3 bundles. If you are using a closure or frontal, 2 bundles is usually sufficient for 12"–18". For 20" and above, 3 bundles is recommended for a fuller look.'],
-  ['question' => 'Do all textures come in the same lengths?',
-   'answer'   => 'Yes. All raw hair textures — body wave, deep wave, straight, kinky straight, loose wave, loose deep, waver wave, and Burmese curls — are available from 10" to 30" at the same pricing per length.'],
-];
-
-echo ah_schema_faq( $raw_faqs );
 ?>
 
 <section class="page-hero">
@@ -157,36 +143,6 @@ echo ah_schema_faq( $raw_faqs );
        class="btn btn--ob" style="margin-top:1.5rem;">
       Read the Hair Care Guide <?php echo ah_svg('arrow-right'); ?>
     </a>
-  </div>
-</section>
-
-<!-- FAQ Accordion -->
-<section class="s s--white" id="faq" aria-labelledby="faq-heading">
-  <div class="wrap wrap--narrow">
-    <div class="sh sh--c reveal">
-      <span class="t-label">Common Questions</span>
-      <h2 id="faq-heading" class="t-h2">Raw Hair FAQ</h2>
-      <span class="rule rule--center"></span>
-    </div>
-    <div class="acc reveal">
-      <?php
-      // Merge page-options FAQs (added via admin) with hardcoded defaults
-      $po_faqs = ah_opt_repeater('faq');
-      $display_faqs = !empty($po_faqs)
-          ? array_map(fn($r) => ['question'=>$r['q']??'','answer'=>$r['a']??''], array_filter($po_faqs, fn($r)=>!empty($r['q'])))
-          : $raw_faqs;
-      foreach ( $display_faqs as $faq ) : ?>
-        <div class="accordion__item">
-          <button class="acc__trigger" type="button" aria-expanded="false">
-            <span class="acc__q"><?php echo esc_html($faq['question']); ?></span>
-            <span class="acc__icon" aria-hidden="true"><?php echo ah_svg('plus'); ?></span>
-          </button>
-          <div class="acc__body">
-            <p class="acc__ans"><?php echo esc_html($faq['answer']); ?></p>
-          </div>
-        </div>
-      <?php endforeach; ?>
-    </div>
   </div>
 </section>
 

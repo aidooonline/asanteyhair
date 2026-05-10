@@ -1511,3 +1511,25 @@ ul.wcs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;list-style:
 .wcp-sticky.on{transform:translateY(0)}
 .wcp-sticky__name{font-family:var(--serif);font-size:1.05rem;color:var(--ink);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .wcp-sticky__btn{background:var(--ink);color:var(--paper);border:none;padding:.75rem 1.5rem;font-family:var(--sans);font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;flex-shrink:0;white-space:nowrap}
+
+/* ── BOOKING BUTTON ─────────────────────────────────────────── */
+.wcp-book-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    width: 100%;
+    padding: .9rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: background .2s;
+}
+.wcp-book-btn:hover { background: var(--g3); color: var(--paper); }
+.wcp-book-btn svg { stroke: var(--paper); flex-shrink: 0; }
