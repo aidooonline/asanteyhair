@@ -523,8 +523,9 @@ function ahp_raw_care_cb(): void {
     echo '<div class="ahp">';
     _sec('Care Split Section','col2');
     _fi('raw_care_image','Section Image','Image shown beside the care tips');
-    _f('raw_care_label','Label','Hair Care'); _f('raw_care_title','Title','How to Make It Last 5 Years');
-    _ft('raw_care_body','Body Text','The secret to 3–5 year lifespan is simple maintenance. Wash weekly with a sulphate-free shampoo, deep condition monthly, and sleep on a satin pillowcase every night. Treat it like your own hair and it will outlast anything else on the market.');
+    _f('raw_care_label','Label','Protect Your Investment');
+    _f('raw_care_title','Title','How to Make It Last 5 Years');
+    _ft('raw_care_body','Body Text','Raw hair is durable by nature, but the right care routine makes all the difference between 2 years and 5. Gentle washing, deep conditioning, minimal heat, and proper storage are the four pillars of long-lasting raw hair.');
     _end();
     echo '</div>';
 }

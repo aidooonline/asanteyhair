@@ -32,10 +32,10 @@ echo ah_schema_faq( $raw_faqs );
     <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-body-wave.jpg', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
-    <span class="t-label">Cambodian Hair Collection</span>
-    <h1 class="t-h1">Cambodian Raw<br>Hair Bundles</h1>
+    <span class="t-label"><?php echo esc_html(ah_opt('hero_label','Cambodian Hair Collection')); ?></span>
+    <h1 class="t-h1"><?php echo wp_kses(ah_opt('hero_title','Cambodian Raw<br>Hair Bundles'),['br'=>[]]); ?></h1>
     <p >
-      Unprocessed. Uncoloured. Unapologetically Premium. From &pound;60 per bundle.
+      <?php echo esc_html(ah_opt('hero_subtitle','Unprocessed. Uncoloured. Unapologetically Premium. From Â£60 per bundle.')); ?>
     </p>
   </div>
 </section>
@@ -50,8 +50,8 @@ echo ah_schema_faq( $raw_faqs );
          loading="lazy" width="800" height="1000">
   </div>
   <div class="split__body reveal">
-    <span class="t-label">What Makes It Different</span>
-    <h2 class="t-h3" style="margin:1rem 0;">What is Raw Hair?</h2>
+    <span class="t-label"><?php echo esc_html(ah_opt('raw_intro_label','What Makes It Different')); ?></span>
+    <h2 class="t-h3" style="margin:1rem 0;"><?php echo esc_html(ah_opt('raw_intro_title','What is Raw Hair?')); ?></h2>
     <span class="rule"></span>
     <p class="t-body--lg">
       Raw hair is the purest form of hair extension. Collected from a single Cambodian donor,
@@ -104,29 +104,30 @@ echo ah_schema_faq( $raw_faqs );
 <section class="s s--white" id="textures" aria-labelledby="textures-heading">
   <div class="wrap">
     <div class="sh sh--c reveal">
-      <span class="t-label">Available Textures</span>
-      <h2 id="textures-heading" class="t-h2">8 Textures. One Standard.</h2>
+      <span class="t-label"><?php echo esc_html(ah_opt('raw_tex_label','Available Textures')); ?></span>
+      <h2 id="textures-heading" class="t-h2"><?php echo esc_html(ah_opt('raw_tex_title','8 Textures. One Standard.')); ?></h2>
       <span class="rule rule--center"></span>
-      <p class="t-body--lg">Every texture available in all lengths, 10"–30", at the same price point.</p>
+      <p class="t-body--lg"><?php echo esc_html(ah_opt('raw_tex_desc','Every texture available in all lengths, 10"–30", at the same price point.')); ?></p>
     </div>
 
     <div class="texture-grid">
       <?php
+      // Each entry: [ fallback_img, opt_key (matches meta box), display_name, description ]
       $textures = [
-        ['raw-body-wave.jpg',      'Body Wave',     'Natural bounce and movement. The most versatile raw texture.'],
-        ['raw-burmese-curls.jpg',  'Burmese Curls', 'Tight, springy curls with incredible definition and volume.'],
-        ['raw-deep-wave.jpg',      'Deep Wave',     'Deep S-wave pattern. Holds curl beautifully, wash after wash.'],
-        ['raw-body-wave.jpg',     'raw-body-wave',     'Body Wave',     'Natural S-wave. Our most popular raw texture — versatile, full, and effortlessly glamorous.'],
-        ['raw-kinky-straight.jpg','raw-kinky-straight','Kinky Straight', 'Silky with a natural kink. Blends seamlessly with relaxed or natural hair.'],
-        ['raw-loose-deep.jpg',    'raw-loose-deep',    'Loose Deep',    'Relaxed deep wave. Full, bouncy, and effortlessly glamorous.'],
-        ['raw-loose-wave.jpg',    'raw-loose-wave',    'Loose Wave',    'Soft, flowing wave. The bestselling texture in our Raw collection.'],
-        ['raw-straight.jpg',      'raw-straight',      'Straight',      'Ultra-sleek and pin-straight. Curls and holds a wave when styled.'],
-        ['raw-waver-wave.jpg',    'raw-waver-wave',    'Waver Wave',    'Between a loose wave and a body wave. Unique and full of movement.'],
+        ['raw-straight.jpg',       'straight',       'Straight',       'Ultra-sleek and pin-straight. Curls and holds a wave when styled.'],
+        ['raw-body-wave.jpg',      'body-wave',      'Body Wave',      'Natural S-wave. Our most popular raw texture — versatile, full, and effortlessly glamorous.'],
+        ['raw-loose-wave.jpg',     'loose-wave',     'Loose Wave',     'Soft, flowing wave. The bestselling texture in our Raw collection.'],
+        ['raw-deep-wave.jpg',      'deep-wave',      'Deep Wave',      'Deep S-wave pattern. Holds curl beautifully, wash after wash.'],
+        ['raw-kinky-straight.jpg', 'kinky-straight', 'Kinky Straight', 'Silky with a natural kink. Blends seamlessly with relaxed or natural hair.'],
+        ['raw-loose-deep.jpg',     'loose-deep',     'Loose Deep',     'Relaxed deep wave. Full, bouncy, and effortlessly glamorous.'],
+        ['raw-burmese-curls.jpg',  'burmese-curls',  'Burmese Curls',  'Tight, springy curls with incredible definition and volume.'],
+        ['raw-waver-wave.jpg',     'waver-wave',     'Water Wave',     'Free-flowing beachy wave. Easy wash-and-go style.'],
       ];
       $raw_from = array_values( ah_get_pricing('raw') )[0];
       foreach ( $textures as $i => $t ) :
         [$img, $img_key, $name, $desc] = $t;
-        $opt_img = ah_opt_img( 'raw_tex_' . $img_key );
+        $opt_key = 'raw_tex_' . $img_key;
+        $opt_img = ah_opt_img( $opt_key );
         $img_src = $opt_img['url'] ?: AH_URI . '/assets/images/' . $img;
         ?>
         <div class="ah-texture-card ah-reveal ah-reveal--delay-<?php echo ($i % 4) + 1; ?>">
@@ -148,10 +149,10 @@ echo ah_schema_faq( $raw_faqs );
 <section class="s s--off" id="pricing" aria-labelledby="pricing-heading">
   <div class="wrap">
     <div class="sh sh--c reveal">
-      <span class="t-label">Transparent Pricing</span>
-      <h2 id="pricing-heading" class="t-h2">Raw Hair Price Per Bundle</h2>
+      <span class="t-label"><?php echo esc_html(ah_opt('raw_price_label','Transparent Pricing')); ?></span>
+      <h2 id="pricing-heading" class="t-h2"><?php echo esc_html(ah_opt('raw_price_title','Raw Hair Price Per Bundle')); ?></h2>
       <span class="rule rule--center"></span>
-      <p class="t-body">All textures are priced equally by length. Prices are per bundle.</p>
+      <p class="t-body"><?php echo esc_html(ah_opt('raw_price_desc','All textures are priced equally by length. Prices are per bundle.')); ?></p>
     </div>
     <div style="max-width:700px;margin:0 auto;" class="reveal">
       <?php ah_pricing_table('raw', 'Cambodian Raw Hair', 'Prices are per bundle. All textures priced equally. Lengths 10"–30" available.'); ?>
@@ -167,14 +168,10 @@ echo ah_schema_faq( $raw_faqs );
          loading="lazy" width="800" height="1000">
   </div>
   <div class="split__body reveal">
-    <span class="t-label">Protect Your Investment</span>
-    <h2 class="t-h3" style="margin:1rem 0;">How to Make It Last 5 Years</h2>
+    <span class="t-label"><?php echo esc_html(ah_opt('raw_care_label','Protect Your Investment')); ?></span>
+    <h2 class="t-h3" style="margin:1rem 0;"><?php echo esc_html(ah_opt('raw_care_title','How to Make It Last 5 Years')); ?></h2>
     <span class="rule"></span>
-    <p class="t-body">
-      Raw hair is durable by nature, but the right care routine makes all the difference
-      between 2 years and 5. Gentle washing, deep conditioning, minimal heat, and proper
-      storage are the four pillars of long-lasting raw hair.
-    </p>
+    <p class="t-body"><?php echo esc_html(ah_opt('raw_care_body','Raw hair is durable by nature, but the right care routine makes all the difference between 2 years and 5.')); ?></p>
     <a href="<?php echo esc_url(home_url('/hair-care-guide/')); ?>"
        class="btn btn--ob" style="margin-top:1.5rem;">
       Read the Hair Care Guide <?php echo ah_svg('arrow-right'); ?>
@@ -191,7 +188,13 @@ echo ah_schema_faq( $raw_faqs );
       <span class="rule rule--center"></span>
     </div>
     <div class="acc reveal">
-      <?php foreach ( $raw_faqs as $faq ) : ?>
+      <?php
+      // Merge page-options FAQs (added via admin) with hardcoded defaults
+      $po_faqs = ah_opt_repeater('faq');
+      $display_faqs = !empty($po_faqs)
+          ? array_map(fn($r) => ['question'=>$r['q']??'','answer'=>$r['a']??''], array_filter($po_faqs, fn($r)=>!empty($r['q'])))
+          : $raw_faqs;
+      foreach ( $display_faqs as $faq ) : ?>
         <div class="accordion__item">
           <button class="acc__trigger" type="button" aria-expanded="false">
             <span class="acc__q"><?php echo esc_html($faq['question']); ?></span>
