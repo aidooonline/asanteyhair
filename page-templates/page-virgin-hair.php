@@ -60,7 +60,7 @@ echo ah_schema_faq($faqs);
       Asantey virgin hair adapts to your style — not the other way around.
     </p>
     <div class="btns" style="margin-top:1.5rem;">
-      <a href="#pricing" class="btn btn--bk">View Pricing <?php echo ah_svg('arrow-right'); ?></a>
+
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order Cambodian Virgin Hair.')); ?>"
          class="btn btn--ob" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order Now
@@ -117,19 +117,6 @@ echo ah_schema_faq($faqs);
           <p class="t-body" style="margin-top:0.5rem;"><?php echo esc_html($desc); ?></p>
         </div>
       <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
-<section class="s s--off" id="pricing">
-  <div class="wrap">
-    <div class="sh sh--c reveal">
-      <span class="t-label">Transparent Pricing</span>
-      <h2 class="t-h2">Virgin Hair Price Per Bundle</h2>
-      <span class="rule rule--center"></span>
-    </div>
-    <div style="max-width:700px;margin:0 auto;" class="reveal">
-      <?php ah_pricing_table('virgin','Cambodian Virgin Hair','All textures priced equally per length. Prices are per bundle.'); ?>
     </div>
   </div>
 </section>

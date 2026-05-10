@@ -124,10 +124,7 @@ $wa_url = $wa_num ? 'https://wa.me/' . preg_replace('/[^0-9]/','', $wa_num) . '?
         </div>
         <?php endif; ?>
 
-        <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="wcp-atc-btn" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:1rem;">
-            Order This Hair
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+
 
         <?php if ($wa_url) : ?>
         <a href="<?php echo esc_url($wa_url); ?>" class="wcp-wa" target="_blank" rel="noopener noreferrer">

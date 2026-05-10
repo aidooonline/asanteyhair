@@ -4,65 +4,6 @@
 (function($){
 'use strict';
 
-/* ── MINI CART ─────────────────────────────────────────────── */
-function initMiniCart(){
-  var cart     = document.getElementById('ah-mini-cart');
-  var overlay  = document.getElementById('ah-mini-cart-overlay');
-  var closeBtn = document.getElementById('ah-mini-cart-close');
-  var cartIcon = document.getElementById('ah-cart-icon');
-
-  if(!cart) return;
-
-  function openCart(){
-    cart.classList.add('open');
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    if(closeBtn) closeBtn.focus();
-  }
-  function closeCart(){
-    cart.classList.remove('open');
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  if(cartIcon) cartIcon.addEventListener('click', openCart);
-  if(closeBtn) closeBtn.addEventListener('click', closeCart);
-  if(overlay)  overlay.addEventListener('click', closeCart);
-
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeCart();
-  });
-
-  // Open cart automatically after adding item
-  $(document.body).on('wc_fragments_refreshed added_to_cart', function(){
-    openCart();
-    // Re-bind remove buttons in mini cart
-    bindMiniCartRemove();
-  });
-}
-
-function bindMiniCartRemove(){
-  var body = document.getElementById('ah-mini-cart-body');
-  if(!body) return;
-  body.querySelectorAll('.remove_from_cart_button').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      var productId = btn.dataset.product_id;
-      var cartKey   = btn.dataset.cart_item_key;
-      if(!cartKey) return;
-      if(typeof wc_cart_params === 'undefined') return;
-      $.ajax({
-        type: 'POST',
-        url: wc_cart_params.wc_ajax_url.replace('%%endpoint%%','remove_from_cart'),
-        data: { cart_item_key: cartKey },
-        success: function(){
-          $(document.body).trigger('wc_fragment_refresh');
-        }
-      });
-    });
-  });
-}
-
 /* ── QUANTITY +/- BUTTONS ─────────────────────────────────── */
 function initQtyButtons(){
   // Add +/- buttons around qty inputs on product pages
@@ -206,8 +147,6 @@ function initCartAutoUpdate(){
 
 /* ── INIT ─────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function(){
-  initMiniCart();
-  bindMiniCartRemove();
   initQtyButtons();
   initProductGallery();
   initStickyCart();

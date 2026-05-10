@@ -88,40 +88,7 @@ add_filter( 'loop_shop_per_page', fn() => 12 );
 remove_action( 'woocommerce_before_single_product', 'woocommerce_breadcrumb', 20 );
 
 /* ============================================================
-   6. MINI-CART / CART ICON IN HEADER
-   ============================================================ */
-add_action( 'wp_footer', function () {
-    if ( ! is_cart() && ! is_checkout() ) : ?>
-    <div class="ah-mini-cart" id="ah-mini-cart" aria-label="Mini cart" role="dialog" aria-modal="true">
-        <div class="ah-mini-cart__inner">
-            <div class="ah-mini-cart__head">
-                <span class="ah-mini-cart__title">Your Bag</span>
-                <button class="ah-mini-cart__close" id="ah-mini-cart-close" aria-label="Close cart">&times;</button>
-            </div>
-            <div class="ah-mini-cart__body" id="ah-mini-cart-body">
-                <?php woocommerce_mini_cart(); ?>
-            </div>
-        </div>
-    </div>
-    <div class="ah-mini-cart__overlay" id="ah-mini-cart-overlay"></div>
-    <?php endif;
-} );
-
-// AJAX refresh mini-cart fragment
-add_filter( 'woocommerce_add_to_cart_fragments', function ( $fragments ) {
-    ob_start();
-    woocommerce_mini_cart();
-    $fragments['#ah-mini-cart-body'] = '<div class="ah-mini-cart__body" id="ah-mini-cart-body">' . ob_get_clean() . '</div>';
-
-    // Cart count bubble
-    $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
-    $fragments['.ah-cart-count'] = '<span class="ah-cart-count' . ( $count ? ' has-items' : '' ) . '">' . $count . '</span>';
-
-    return $fragments;
-} );
-
-/* ============================================================
-   7. CHECKOUT TWEAKS
+   6. CHECKOUT TWEAKS
    ============================================================ */
 // Reorder checkout fields
 add_filter( 'woocommerce_checkout_fields', function ( $fields ) {

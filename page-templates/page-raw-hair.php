@@ -70,9 +70,7 @@ echo ah_schema_faq( $raw_faqs );
       clients actually experience.
     </p>
     <div class="btns" style="margin-top:1.5rem;">
-      <a href="#pricing" class="btn btn--bk">
-        View Pricing <?php echo ah_svg('arrow-right'); ?>
-      </a>
+
       <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order Cambodian Raw Hair.')); ?>"
          class="btn btn--ob" target="_blank" rel="noopener noreferrer">
         <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
@@ -141,21 +139,6 @@ echo ah_schema_faq( $raw_faqs );
           <p class="t-body" style="margin-top:0.5rem;"><?php echo esc_html($desc); ?></p>
         </div>
       <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
-<!-- Full Pricing Table -->
-<section class="s s--off" id="pricing" aria-labelledby="pricing-heading">
-  <div class="wrap">
-    <div class="sh sh--c reveal">
-      <span class="t-label"><?php echo esc_html(ah_opt('raw_price_label','Transparent Pricing')); ?></span>
-      <h2 id="pricing-heading" class="t-h2"><?php echo esc_html(ah_opt('raw_price_title','Raw Hair Price Per Bundle')); ?></h2>
-      <span class="rule rule--center"></span>
-      <p class="t-body"><?php echo esc_html(ah_opt('raw_price_desc','All textures are priced equally by length. Prices are per bundle.')); ?></p>
-    </div>
-    <div style="max-width:700px;margin:0 auto;" class="reveal">
-      <?php ah_pricing_table('raw', 'Cambodian Raw Hair', 'Prices are per bundle. All textures priced equally. Lengths 10"–30" available.'); ?>
     </div>
   </div>
 </section>
