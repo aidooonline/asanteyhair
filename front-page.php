@@ -77,6 +77,14 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
                 preg_match('/(?:v=|\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $slide['video'], $yt);
                 $yt_id = $yt[1] ?? '';
                 ?>
+                <?php if ( $slide['image'] ) : ?>
+                <img class="hs-slide__fallback"
+                     src="<?php echo esc_url($slide['image']); ?>"
+                     alt="" aria-hidden="true"
+                     loading="<?php echo $idx === 0 ? 'eager' : 'lazy'; ?>"
+                     fetchpriority="<?php echo $idx === 0 ? 'high' : 'auto'; ?>"
+                     width="1920" height="1080">
+                <?php endif; ?>
                 <iframe class="hs-slide__video hs-yt"
                     id="hs-yt-<?php echo $idx; ?>"
                     src="https://www.youtube.com/embed/<?php echo esc_attr($yt_id); ?>?autoplay=<?php echo $idx === 0 ? '1' : '0'; ?>&mute=<?php echo $muted ? '1' : '0'; ?>&loop=1&playlist=<?php echo esc_attr($yt_id); ?>&controls=0&showinfo=0&modestbranding=1&rel=0&enablejsapi=1"
@@ -84,8 +92,17 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
                     loading="<?php echo $idx === 0 ? 'eager' : 'lazy'; ?>" frameborder="0">
                 </iframe>
             <?php elseif ( $is_mp4 ) : ?>
+                <?php if ( $slide['image'] ) : ?>
+                <img class="hs-slide__fallback"
+                     src="<?php echo esc_url($slide['image']); ?>"
+                     alt="" aria-hidden="true"
+                     loading="<?php echo $idx === 0 ? 'eager' : 'lazy'; ?>"
+                     fetchpriority="<?php echo $idx === 0 ? 'high' : 'auto'; ?>"
+                     width="1920" height="1080">
+                <?php endif; ?>
                 <video class="hs-slide__video hs-mp4"
-                       autoplay <?php echo $muted ? 'muted' : ''; ?> loop playsinline preload="auto">
+                       autoplay <?php echo $muted ? 'muted' : ''; ?> loop playsinline preload="auto"
+                       <?php if ($slide['image']) echo 'poster="' . esc_url($slide['image']) . '"'; ?>>
                     <source src="<?php echo esc_url($slide['video']); ?>" type="video/mp4">
                 </video>
             <?php elseif ( $slide['image'] ) : ?>
