@@ -101,7 +101,6 @@ echo ah_schema_faq($faqs);
         ['raw-loose-deep.jpg',    'loose-deep',    'Loose Deep',     'Relaxed deep wave. Full volume from root to tip.'],
         ['raw-waver-wave.jpg',    'waver-wave',    'Waver Wave',     'Unique texture — between a loose and body wave.'],
       ];
-      $from = array_values(ah_get_pricing('virgin'))[0];
       foreach($textures as $i=>$t):[$img,$img_key,$name,$desc]=$t;
         $opt_img = ah_opt_img('vir_tex_'.$img_key);
         $img_src = $opt_img['url'] ?: AH_URI.'/assets/images/'.$img;
@@ -113,7 +112,6 @@ echo ah_schema_faq($faqs);
                  loading="lazy" width="300" height="400">
           </div>
           <h3 class="texture-item__name"><?php echo esc_html($name); ?></h3>
-          <p class="texture-item__from">from &pound;<?php echo esc_html($from); ?></p>
           <p class="t-body" style="margin-top:0.5rem;"><?php echo esc_html($desc); ?></p>
         </div>
       <?php endforeach; ?>

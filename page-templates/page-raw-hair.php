@@ -121,7 +121,6 @@ echo ah_schema_faq( $raw_faqs );
         ['raw-burmese-curls.jpg',  'burmese-curls',  'Burmese Curls',  'Tight, springy curls with incredible definition and volume.'],
         ['raw-waver-wave.jpg',     'waver-wave',     'Water Wave',     'Free-flowing beachy wave. Easy wash-and-go style.'],
       ];
-      $raw_from = array_values( ah_get_pricing('raw') )[0];
       foreach ( $textures as $i => $t ) :
         [$img, $img_key, $name, $desc] = $t;
         $opt_key = 'raw_tex_' . $img_key;
@@ -135,7 +134,6 @@ echo ah_schema_faq( $raw_faqs );
                  loading="lazy" width="300" height="400">
           </div>
           <h3 class="texture-item__name"><?php echo esc_html($name); ?></h3>
-          <p class="texture-item__from">from &pound;<?php echo esc_html($raw_from); ?></p>
           <p class="t-body" style="margin-top:0.5rem;"><?php echo esc_html($desc); ?></p>
         </div>
       <?php endforeach; ?>
