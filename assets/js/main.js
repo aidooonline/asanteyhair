@@ -264,6 +264,23 @@ function initHeroSlider(){
   if(slides.length === 0) return;
   if(slides[0]) slides[0].classList.add('hs-slide--active');
 
+  /* --- Video fade-in: show fallback image until video is ready --- */
+  function initVideoFadeIn(videoEl){
+    if(!videoEl) return;
+    function markReady(){ videoEl.classList.add('hs-video--ready'); }
+    if(videoEl.readyState >= 3){ // HAVE_FUTURE_DATA or better
+      markReady();
+    } else {
+      videoEl.addEventListener('canplay',   markReady, {once:true});
+      videoEl.addEventListener('loadeddata',markReady, {once:true});
+      // Fallback: if video never fires canplay (e.g. blocked autoplay), show after 3s
+      setTimeout(markReady, 3000);
+    }
+  }
+
+  // Init all videos on page load
+  document.querySelectorAll('video.hs-mp4').forEach(initVideoFadeIn);
+
   /* --- Progress bar --- */
   function startProgress(duration){
     if(!progBar) return;
@@ -306,6 +323,7 @@ function initHeroSlider(){
       mp4.currentTime = 0;
       mp4.muted = isMuted;
       mp4.play().catch(function(){});
+      initVideoFadeIn(mp4);
     }
 
     // Pause videos on old slide
