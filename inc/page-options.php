@@ -629,9 +629,9 @@ function ahp_cls_sizes_cb(): void {
 
 function ahp_cls_imgs_cb(): void {
     echo '<div class="ahp">';
-    _sec('Page Images','col2');
-    _fi('cls_pricelist','Price List / Header Image','Shows as the main visual for closures');
-    _fi('cls_size_guide','HD Lace Size Guide Image','Diagram showing lace sizes');
+    _sec('Section Images','col2');
+    _fi('cls_intro_image','Left Section Image','Image shown in the split section beside the HD lace intro text');
+    _fi('cls_size_guide', 'Size Guide Image',  'Diagram showing closure/frontal sizes (fallback if no intro image set)');
     _end();
     echo '</div>';
 }

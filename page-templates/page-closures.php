@@ -44,10 +44,14 @@ echo ah_schema_faq($faqs);
 <section class="split">
   <div class="split__media">
     <?php
-    $cls_guide = ah_opt_img('cls_size_guide');
+    $cls_split_img = ah_opt_img('cls_intro_image');
+    $cls_split_src = $cls_split_img['url'] ?: '';
+    $cls_guide     = ah_opt_img('cls_size_guide');
     $cls_guide_src = $cls_guide['url'] ?: AH_URI.'/assets/images/hd-lace-sizes.png';
+    // Use intro image if set, otherwise fall back to size guide
+    $split_src = $cls_split_src ?: $cls_guide_src;
     ?>
-    <img src="<?php echo esc_url($cls_guide_src); ?>"
+    <img src="<?php echo esc_url($split_src); ?>"
          alt="HD lace closure and frontal sizes guide"
          loading="lazy" width="800" height="800">
   </div>
@@ -149,25 +153,6 @@ echo ah_schema_faq($faqs);
   </div>
 </section>
 
-<!-- Full Pricing Tables -->
-<section class="s s--white" id="pricing">
-  <div class="wrap">
-    <div class="sh sh--c reveal">
-      <span class="t-label">Full Pricing</span>
-      <h2 class="t-h2">Closures &amp; Frontals — Price Lists</h2>
-      <span class="rule rule--center"></span>
-    </div>
-    <div class="grid-2 reveal">
-      <?php ah_pricing_table('2x6',  '2x6 HD Lace Closure',  '12"–22" available'); ?>
-      <?php ah_pricing_table('4x4',  '4x4 HD Lace Closure',  '12"–22" available'); ?>
-      <?php ah_pricing_table('5x5',  '5x5 HD Lace Closure',  '12"–22" available'); ?>
-      <?php ah_pricing_table('6x6',  '6x6 HD Lace Closure',  '12"–22" available'); ?>
-      <?php ah_pricing_table('13x4', '13x4 HD Lace Frontal', '12"–22" available'); ?>
-      <?php ah_pricing_table('13x6', '13x6 HD Lace Frontal', '12"–22" available'); ?>
-    </div>
-  </div>
-</section>
-
 <!-- How Many Bundles Guide -->
 <section class="s s--off">
   <div class="wrap wrap--narrow reveal">
@@ -179,10 +164,10 @@ echo ah_schema_faq($faqs);
     <div class="prose">
       <table>
         <thead><tr><th>Length</th><th>With Closure</th><th>With Frontal</th></tr></thead>
-        <tbody>
-          <tr><td>12"–18"</td><td>2 Bundles</td><td>1–2 Bundles</td></tr>
-          <tr><td>20"–24"</td><td>2–3 Bundles</td><td>2 Bundles</td></tr>
-          <tr><td>26"–30"</td><td>3 Bundles</td><td>2–3 Bundles</td></tr>
+        <tbody style="color:#111111;">
+          <tr><td>12&Prime;&ndash;18&Prime;</td><td>2 Bundles</td><td>1&ndash;2 Bundles</td></tr>
+          <tr><td>20&Prime;&ndash;24&Prime;</td><td>2&ndash;3 Bundles</td><td>2 Bundles</td></tr>
+          <tr><td>26&Prime;&ndash;30&Prime;</td><td>3 Bundles</td><td>2&ndash;3 Bundles</td></tr>
         </tbody>
       </table>
       <p style="font-size:0.875rem;color:var(--g9);font-style:italic;">
