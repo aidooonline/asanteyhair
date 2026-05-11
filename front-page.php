@@ -176,17 +176,28 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 <div class="marquee-strip marquee-strip--dark">
     <div class="marquee-track">
         <?php
-        $marquee_raw = ah_opt('marquee_items', "sparkle|Premium Cambodian Hair\ngem|HD Lace Specialists\nshield|3-5 Year Lifespan\ncheck|Minimal Shedding\nlocation|UK Based - Nottingham\nheart|Single Donor\nsparkle|Cuticle Aligned\ntruck|Fast UK Dispatch" );
-        $marquee_lines = array_filter( array_map( 'trim', explode( "\n", $marquee_raw ) ) );
-        // Double items for infinite scroll effect
-        $all_items = array_merge( $marquee_lines, $marquee_lines );
-        foreach ( $all_items as $line ) :
-            $parts = explode( '|', $line, 2 );
-            $icon  = trim( $parts[0] ?? 'sparkle' );
-            $label = trim( $parts[1] ?? '' );
-            if ( ! $label ) continue;
+        // Read from repeater (set via Homepage > Marquee Strip meta box)
+        $_marq_rows = ah_opt_repeater('marquee');
+        if (!empty($_marq_rows)) {
+            $_marq_items = array_filter($_marq_rows, fn($r) => !empty($r['text']));
+        } else {
+            // Fall back to old textarea format
+            $marquee_raw = ah_opt('marquee_items', "sparkle|Premium Cambodian Hair\ngem|HD Lace Specialists\nshield|3-5 Year Lifespan\ncheck|Minimal Shedding\nlocation|UK Based - Nottingham\nheart|Single Donor\nsparkle|Cuticle Aligned\ntruck|Fast UK Dispatch");
+            $_marq_items = [];
+            foreach (array_filter(array_map('trim', explode("\n", $marquee_raw))) as $line) {
+                $parts = explode('|', $line, 2);
+                $_marq_items[] = ['icon' => trim($parts[0] ?? 'sparkle'), 'text' => trim($parts[1] ?? '')];
+            }
+            $_marq_items = array_filter($_marq_items, fn($r) => !empty($r['text']));
+        }
+        // Double items for seamless infinite scroll
+        $_all = array_merge(array_values($_marq_items), array_values($_marq_items));
+        foreach ($_all as $item):
+            $icon  = $item['icon'] ?? 'sparkle';
+            $label = $item['text'] ?? '';
+            if (!$label) continue;
         ?>
-            <span class="marquee-item"><?php echo ah_svg( $icon ); ?><?php echo esc_html( $label ); ?></span>
+            <span class="marquee-item"><?php echo ah_svg($icon); ?><?php echo esc_html($label); ?></span>
         <?php endforeach; ?>
     </div>
 </div>

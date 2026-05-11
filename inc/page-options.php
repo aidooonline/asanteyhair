@@ -478,12 +478,89 @@ function ahp_home_cta_cb(): void {
 }
 
 function ahp_home_marq_cb(): void {
+    global $post;
+
+    // Read saved repeater rows
+    $rows = get_post_meta($post->ID, '_ahp_rep_marquee', true);
+
+    // Migrate from old textarea format if needed
+    if (!is_array($rows) || empty($rows)) {
+        $old_raw = get_post_meta($post->ID, '_ahp_marquee_items', true);
+        if ($old_raw) {
+            $rows = [];
+            foreach (array_filter(array_map('trim', explode("\n", $old_raw))) as $line) {
+                $parts  = explode('|', $line, 2);
+                $rows[] = ['icon' => trim($parts[0] ?? ''), 'text' => trim($parts[1] ?? '')];
+            }
+        }
+    }
+
+    // Defaults
+    if (empty($rows)) {
+        $rows = [
+            ['icon'=>'sparkle', 'text'=>'Premium Cambodian Hair'],
+            ['icon'=>'gem',     'text'=>'HD Lace Specialists'],
+            ['icon'=>'shield',  'text'=>'3-5 Year Lifespan'],
+            ['icon'=>'check',   'text'=>'Minimal Shedding'],
+            ['icon'=>'location','text'=>'UK Based - Nottingham'],
+            ['icon'=>'heart',   'text'=>'Single Donor'],
+            ['icon'=>'sparkle', 'text'=>'Cuticle Aligned'],
+            ['icon'=>'truck',   'text'=>'Fast UK Dispatch'],
+        ];
+    }
+
+    $icons = ['sparkle','gem','shield','check','location','heart','truck','star','fire','crown'];
+
     echo '<div class="ahp">';
-    _sec('Scrolling Trust Strip');
-    _ft('marquee_items','One item per line — format: icon|Text',
-        "sparkle|Premium Cambodian Hair\ngem|HD Lace Specialists\nshield|3-5 Year Lifespan\ncheck|Minimal Shedding\nlocation|UK Based - Nottingham\nheart|Single Donor\nsparkle|Cuticle Aligned\ntruck|Fast UK Dispatch",
-        'Icons available: sparkle, gem, shield, check, location, heart, truck, star');
-    _end();
+    echo '<p class="ahp-hint" style="margin:0 0 10px;">Each item scrolls in the marquee strip below the hero. Add, edit or remove items then click Update.</p>';
+    echo '<div id="ahp-marq-list" style="margin-bottom:10px;">';
+
+    foreach ($rows as $i => $row):
+        $ic = esc_attr($row['icon'] ?? 'sparkle');
+        $tx = esc_attr($row['text'] ?? '');
+        echo "<div class='ahp-rep-item' style='display:flex;align-items:center;gap:10px;padding:8px 12px;'>"
+           . "<div class='ahp-field' style='flex:0 0 150px;'>"
+           . "<label style='font-size:11px;'>Icon</label>"
+           . "<select name='ahp_rep[marquee][{$i}][icon]' style='font-size:13px;padding:5px 8px;'>";
+        foreach ($icons as $opt) {
+            $sel = $ic === $opt ? ' selected' : '';
+            echo "<option value='{$opt}'{$sel}>" . esc_html(ucfirst($opt)) . "</option>";
+        }
+        echo   "</select></div>"
+           . "<div class='ahp-field' style='flex:1;'>"
+           . "<label style='font-size:11px;'>Text</label>"
+           . "<input type='text' name='ahp_rep[marquee][{$i}][text]' value='{$tx}'>"
+           . "</div>"
+           . "<button type='button' class='ahp-rep-del' style='flex-shrink:0;margin-top:16px;'>✕ Remove</button>"
+           . "</div>";
+    endforeach;
+
+    echo '</div>';
+    echo '<button type="button" class="button button-primary" id="ahp-marq-add">+ Add Item</button>';
+    echo '<p class="ahp-hint" style="margin-top:8px;">Available icons: sparkle, gem, shield, check, location, heart, truck, star, fire, crown</p>';
+
+    $idx  = count($rows);
+    $opts = '';
+    foreach ($icons as $opt) $opts .= "<option value='{$opt}'>" . ucfirst($opt) . "</option>";
+
+    echo "<script>
+    (function(){
+        var idx = {$idx};
+        document.getElementById('ahp-marq-add').addEventListener('click', function(){
+            var d = document.createElement('div');
+            d.className = 'ahp-rep-item';
+            d.style.cssText = 'display:flex;align-items:center;gap:10px;padding:8px 12px;';
+            d.innerHTML = '<div class=\"ahp-field\" style=\"flex:0 0 150px;\"><label style=\"font-size:11px;\">Icon</label>'
+                + '<select name=\"ahp_rep[marquee][' + idx + '][icon]\" style=\"font-size:13px;padding:5px 8px;\">{$opts}</select></div>'
+                + '<div class=\"ahp-field\" style=\"flex:1;\"><label style=\"font-size:11px;\">Text</label>'
+                + '<input type=\"text\" name=\"ahp_rep[marquee][' + idx + '][text]\"></div>'
+                + '<button type=\"button\" class=\"ahp-rep-del\" style=\"flex-shrink:0;margin-top:16px;\">✕ Remove</button>';
+            document.getElementById('ahp-marq-list').appendChild(d);
+            idx++;
+        });
+    })();
+    </script>";
+
     echo '</div>';
 }
 
