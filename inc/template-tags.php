@@ -126,10 +126,10 @@ function ah_pricing_table( string $type, string $caption = '', string $note = ''
     echo '</tr></thead><tbody>';
 
     foreach ( $rows as $length => $price ) {
-        $wa_msg = 'Hello! I\'d like to order ' . $caption . ' ' . $length . '\" at £' . $price . '.';
+        $wa_msg = 'Hello! I\'d like to order ' . $caption . ' ' . $length . '\" at ' . ah_currency_symbol() . $price . '.';
         echo '<tr>';
         echo '<td>' . esc_html( $length ) . '"</td>';
-        echo '<td class="price-col">&pound;' . esc_html( $price ) . '</td>';
+        echo '<td class="price-col">' . esc_html(ah_currency_symbol()) . esc_html( $price ) . '</td>';
         echo '<td><a href="' . esc_url( ah_whatsapp_url( $wa_msg ) ) . '" class="btn btn--wa btn--sm" target="_blank" rel="noopener noreferrer">' . ah_svg( 'whatsapp' ) . ' Order</a></td>';
         echo '</tr>';
     }
@@ -211,7 +211,7 @@ function ah_product_card( WP_Post $post ): void {
             <h3 class="product-card__title"><?php echo esc_html( get_the_title( $post ) ); ?></h3>
             <p class="product-card__desc"><?php echo esc_html( get_the_excerpt( $post ) ); ?></p>
             <?php if ( $price_from ) : ?>
-                <p class="product-card__price">from &pound;<?php echo esc_html( $price_from ); ?> <span>per bundle</span></p>
+                <p class="product-card__price"><?php echo esc_html(ah_currency_symbol()); ?><?php echo esc_html( $price_from ); ?> <span>per bundle</span></p>
             <?php endif; ?>
             <div class="product-card__actions">
                 <a href="<?php echo esc_url( ah_whatsapp_url( $wa_msg ) ); ?>"

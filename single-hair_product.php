@@ -29,8 +29,9 @@ $all_images      = $feat_img_id ? array_merge( [$feat_img_id], $gallery_ids ) : 
 $lengths = $lengths_raw ? array_map( 'trim', explode( ',', $lengths_raw ) ) : [];
 
 // Price display
-$price_display = $price_from ? '£' . $price_from : '';
-if ( $price_to ) $price_display .= ' – £' . $price_to;
+$sym = ah_currency_symbol();
+$price_display = $price_from ? $sym . $price_from : '';
+if ( $price_to ) $price_display .= ' – ' . $sym . $price_to;
 
 // Category
 $categories = get_the_terms( get_the_ID(), 'hair_category' );
