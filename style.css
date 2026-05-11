@@ -373,7 +373,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 .split--white .rule{background:var(--ink);opacity:.2}
 
 /* ─── CATEGORY EDITORIAL CARDS ─────────────────────────────── */
-.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:0 var(--gap);max-width:var(--max);margin-inline:auto}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:0;max-width:var(--max);margin-inline:auto}
 
 .cat-card{
   position:relative;overflow:hidden;
@@ -889,7 +889,7 @@ select.form-control{
   .grid-4{grid-template-columns:1fr}
   .cat-card{height:320px}
   .cat-card__title{font-size:1.6rem}
-  .cat-grid{gap:.5rem}
+  .cat-grid{gap:0}
   .wfp-grid{grid-template-columns:1fr 1fr !important}
   .wfp-card__img{aspect-ratio:3/4}
 }
@@ -1357,7 +1357,7 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 /* ─── HOMEPAGE MOBILE IMPROVEMENTS ──────────────────────────── */
 @media(max-width:768px){
   /* Category cards: single column on mobile */
-  .cat-grid{grid-template-columns:1fr;padding:0 var(--gap)}
+  .cat-grid{grid-template-columns:1fr;padding:0}
   .cat-card{height:360px}
 
   /* CTA band text */
