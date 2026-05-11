@@ -230,8 +230,7 @@ add_action('add_meta_boxes', function(): void {
         _reg('ahp_home_why',     '✅ Why Asantey',                     'ahp_home_why_cb');
         _reg('ahp_home_prods',   '🛍 Featured Products (fallback)',    'ahp_home_prods_cb');
         _reg('ahp_home_gallery', '🖼 Homepage Gallery',               'ahp_home_gallery_cb');
-        _reg('ahp_home_testi',   '💬 Testimonials',                   'ahp_home_testi_cb');
-        _reg('ahp_home_story',   '📖 Brand Story',                    'ahp_home_story_cb');
+        _reg('ahp_home_testi',   '💬 Testimonials / Reviews',         'ahp_home_testi_cb');
         _reg('ahp_home_cta',     '📣 CTA Band',                       'ahp_home_cta_cb');
         _reg('ahp_home_marq',    '📰 Marquee Strip',                  'ahp_home_marq_cb');
     }
@@ -402,18 +401,58 @@ function ahp_home_gallery_cb(): void {
 }
 
 function ahp_home_testi_cb(): void {
-    $d=[1=>['I have been buying hair for over 10 years and Asantey is hands down the best.','Naomi A., London'],
-        2=>['My 28 inch raw body wave is still going strong 2 years later.','Blessing O., Birmingham'],
-        3=>['The HD lace frontal is unreal. My stylist could not believe it.','Jade K., Manchester']];
+    global $post;
+    // Read saved repeater rows
+    $rows = get_post_meta($post->ID, '_ahp_rep_testimonials', true);
+    if (!is_array($rows) || empty($rows)) {
+        $rows = [
+            ['quote'=>'I have been buying hair for over 10 years and Asantey is hands down the best quality I have ever experienced.','author'=>'Naomi A., London','stars'=>'5'],
+            ['quote'=>'My 28 inch raw body wave bundle is still going strong 2 years later. Worth every penny.','author'=>'Blessing O., Birmingham','stars'=>'5'],
+            ['quote'=>'The HD lace frontal is unreal. My stylist could not believe it was not my natural hairline.','author'=>'Jade K., Manchester','stars'=>'5'],
+        ];
+    }
     echo '<div class="ahp">';
     _sec('Section Heading','col2');
-    _f('test_label','Label','Client Love'); _f('test_title','Title','What Our Clients Say');
+    _f('test_label','Label','Client Love');
+    _f('test_title','Title','What Our Clients Say');
     _end();
-    foreach ($d as $i=>$c) {
-        _sec("Testimonial {$i}",'col2');
-        _ft("test{$i}_quote","Quote",$c[0]); _f("test{$i}_author","Author",$c[1]);
-        _end();
+    _sec('Reviews — add as many as you like. Click + Add Review to grow the list.');
+    echo '<div id="ahp-testi-list">';
+    foreach ($rows as $i => $row) {
+        $q = esc_textarea($row['quote']  ?? '');
+        $a = esc_attr($row['author']     ?? '');
+        $s = esc_attr($row['stars']      ?? '5');
+        echo "<div class='ahp-rep-item'>"
+           . "<button type='button' class='ahp-rep-del'>✕ Remove</button>"
+           . "<div class='ahp-body ahp-col2' style='padding:0;border:none;gap:8px;'>"
+           . "<div class='ahp-field ahp-full'><label>Review Text</label><textarea name='ahp_rep[testimonials][{$i}][quote]'>{$q}</textarea></div>"
+           . "<div class='ahp-field'><label>Reviewer Name</label><input type='text' name='ahp_rep[testimonials][{$i}][author]' value='{$a}'></div>"
+           . "<div class='ahp-field'><label>Stars (1–5)</label><input type='number' name='ahp_rep[testimonials][{$i}][stars]' value='{$s}' min='1' max='5' style='width:70px'></div>"
+           . "</div></div>";
     }
+    echo '</div>';
+    echo '<button type="button" class="button button-primary ahp-rep-add" id="ahp-testi-add">+ Add Review</button>';
+    echo '<script>
+    (function(){
+        var idx = ' . count($rows) . ';
+        document.getElementById("ahp-testi-add").addEventListener("click", function(){
+            var d = document.createElement("div");
+            d.className = "ahp-rep-item";
+            d.innerHTML = "<button type=\'button\' class=\'ahp-rep-del\'>✕ Remove</button>"
+                + "<div class=\'ahp-body ahp-col2\' style=\'padding:0;border:none;gap:8px;\'>"
+                + "<div class=\'ahp-field ahp-full\'><label>Review Text</label>"
+                + "<textarea name=\'ahp_rep[testimonials][" + idx + "][quote]\'></textarea></div>"
+                + "<div class=\'ahp-field\'><label>Reviewer Name</label>"
+                + "<input type=\'text\' name=\'ahp_rep[testimonials][" + idx + "][author]\'></div>"
+                + "<div class=\'ahp-field\'><label>Stars (1–5)</label>"
+                + "<input type=\'number\' name=\'ahp_rep[testimonials][" + idx + "][stars]\' value=\'5\' min=\'1\' max=\'5\' style=\'width:70px\'></div>"
+                + "</div>";
+            document.getElementById("ahp-testi-list").appendChild(d);
+            idx++;
+        });
+    })();
+    </script>';
+    _end();
     echo '</div>';
 }
 

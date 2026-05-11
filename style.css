@@ -1380,3 +1380,11 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
   /* Marquee readable on mobile */
   .marquee-item{font-size:.7rem;gap:.5rem}
 }
+
+/* ─── TESTIMONIALS GRID (dynamic count) ─────────────────────── */
+.tcard-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem}
+@media(max-width:960px){.tcard-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.tcard-grid{grid-template-columns:1fr}}

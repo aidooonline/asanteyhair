@@ -394,26 +394,6 @@ $wfp_has_wc  = $wfp_query && $wfp_query->have_posts();
 </section>
 
 <!-- ============================================================ BRAND STORY SPLIT -->
-<?php
-$story_label  = get_theme_mod('ah_story_label', 'Our Story');
-$story_title  = get_theme_mod('ah_story_title', 'The Asantey Standard');
-$story_body1  = ah_opt('story_body1', 'Founded on the belief that every woman deserves hair she is genuinely proud of. We source our Cambodian hair directly — single donor, cuticle-aligned, never chemically altered.');
-$story_body2  = ah_opt('story_body2', 'What you receive is exactly as nature intended: just better selected, better prepared, and built to last 3-5 years with the right care.');
-?>
-<div class="s s--mid">
-    <div class="wrap">
-        <div class="split__body reveal" style="max-width:680px;margin:0 auto;text-align:center;">
-            <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $story_label, ENT_QUOTES ) ); ?></span>
-            <h2 class="t-h2" style="color:var(--paper);margin-top:1.125rem;"><?php echo esc_html( wp_specialchars_decode( $story_title, ENT_QUOTES ) ); ?></h2>
-            <div class="rule rule--gold" style="margin-top:1.5rem;"></div>
-            <?php if($story_body1): ?><p class="t-body--lg" style="margin-top:1.5rem;"><?php echo esc_html( wp_specialchars_decode( $story_body1, ENT_QUOTES ) ); ?></p><?php endif; ?>
-            <?php if($story_body2): ?><p class="t-body" style="margin-top:1rem;"><?php echo esc_html( wp_specialchars_decode( $story_body2, ENT_QUOTES ) ); ?></p><?php endif; ?>
-            <div class="btns" style="margin-top:2.5rem;justify-content:center;">
-                <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn--ow">Our Story <?php echo ah_svg('arrow-right'); ?></a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- ============================================================ CLIENT RESULTS -->
 <?php
@@ -463,12 +443,24 @@ $gal_title = ah_opt('gal_title','See It to Believe It');
 <!-- ============================================================ TESTIMONIALS -->
 <?php
 $test_label = ah_opt('test_label','Client Love');
-$test_title = get_theme_mod('ah_test_title', 'What Our Clients Say');
-$tests = [
-    [get_theme_mod('ah_test1_quote','I have been buying hair for over 10 years and Asantey is hands down the best quality I have ever experienced. No shedding, silky soft, and took colour perfectly.'), get_theme_mod('ah_test1_author','Naomi A., London'), 5],
-    [get_theme_mod('ah_test2_quote','My 28 inch raw body wave bundle is still going strong 2 years later. Worth every penny.'), get_theme_mod('ah_test2_author','Blessing O., Birmingham'), 5],
-    [get_theme_mod('ah_test3_quote','The HD lace frontal is unreal. My stylist could not believe it was not my natural hairline. Ordered on WhatsApp and received it in 2 days.'), get_theme_mod('ah_test3_author','Jade K., Manchester'), 5],
-];
+$test_title = ah_opt('test_title','What Our Clients Say');
+
+// Read testimonials from page-options repeater (Homepage > Testimonials in WP Admin)
+// Falls back to hardcoded defaults if none saved yet
+$_saved_tests = ah_opt_repeater('testimonials');
+if (!empty($_saved_tests)) {
+    $tests = array_map(fn($r) => [
+        $r['quote']  ?? '',
+        $r['author'] ?? '',
+        (int)($r['stars'] ?? 5),
+    ], array_filter($_saved_tests, fn($r) => !empty($r['quote'])));
+} else {
+    $tests = [
+        [ah_opt('test1_quote','I have been buying hair for over 10 years and Asantey is hands down the best quality I have ever experienced.'), ah_opt('test1_author','Naomi A., London'), 5],
+        [ah_opt('test2_quote','My 28 inch raw body wave bundle is still going strong 2 years later. Worth every penny.'), ah_opt('test2_author','Blessing O., Birmingham'), 5],
+        [ah_opt('test3_quote','The HD lace frontal is unreal. My stylist could not believe it was not my natural hairline.'), ah_opt('test3_author','Jade K., Manchester'), 5],
+    ];
+}
 ?>
 <section class="s" aria-labelledby="test-heading">
     <div class="wrap">
@@ -476,9 +468,9 @@ $tests = [
             <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $test_label, ENT_QUOTES ) ); ?></span>
             <h2 id="test-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $test_title, ENT_QUOTES ) ); ?></h2>
         </div>
-        <div class="grid-3">
+        <div class="tcard-grid">
             <?php foreach($tests as $i=>$t): ?>
-                <div class="tcard reveal d<?php echo $i+1; ?>">
+                <div class="tcard reveal d<?php echo ($i%3)+1; ?>">
                     <?php echo ah_stars($t[2]); ?>
                     <p class="tcard__quote">&ldquo;<?php echo esc_html($t[0]); ?>&rdquo;</p>
                     <span class="tcard__author">&mdash; <?php echo esc_html($t[1]); ?></span>
