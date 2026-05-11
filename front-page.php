@@ -280,43 +280,116 @@ $feat_defaults = [
 <?php
 $prod_label = ah_opt('prod_label','Featured Products');
 $prod_title = ah_opt('prod_title','Shop the Collection');
+
+// Query WooCommerce featured products
+$wfp_args = [
+    'post_type'      => 'product',
+    'posts_per_page' => 4,
+    'post_status'    => 'publish',
+    'tax_query'      => [[
+        'taxonomy' => 'product_visibility',
+        'field'    => 'name',
+        'terms'    => 'featured',
+    ]],
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+];
+$wfp_query   = class_exists('WooCommerce') ? new WP_Query($wfp_args) : null;
+$wfp_has_wc  = $wfp_query && $wfp_query->have_posts();
 ?>
 <section class="s" aria-labelledby="prod-heading">
     <div class="wrap" style="max-width:var(--max);padding-inline:clamp(1rem,3vw,2.5rem);">
-        <div class="sh reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+        <div class="sh reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;">
             <div>
                 <span class="t-label" style="display:block;margin-bottom:1rem;"><?php echo esc_html( wp_specialchars_decode( $prod_label, ENT_QUOTES ) ); ?></span>
                 <h2 id="prod-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $prod_title, ENT_QUOTES ) ); ?></h2>
             </div>
             <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn--ow btn--sm">View All <?php echo ah_svg('arrow-right'); ?></a>
         </div>
-        <div class="grid-4">
-            <?php
-            $products = get_posts(['post_type'=>'hair_product','posts_per_page'=>4,'orderby'=>'date','order'=>'DESC']);
-            if($products): foreach($products as $p) ah_product_card($p); wp_reset_postdata();
-            else:
-                $fb=[
-                    ['Cambodian Raw Hair — Body Wave','raw-hair','60','feat_prod1_image','raw-body-wave.jpg','Unprocessed single-donor. 10"–30".'],
-                    ['Cambodian Raw Hair — Deep Wave','raw-hair','60','feat_prod2_image','raw-deep-wave.jpg','Natural S-wave. Never treated. 10"–30".'],
-                    ['Virgin Hair — Body Wave','virgin-hair','50','feat_prod3_image','raw-loose-wave.jpg','Pure quality. 3–5 year lifespan.'],
-                    ['HD Lace Closure — 4x4','closures-frontals','51','feat_prod4_image','hd-lace-sizes.png','Invisible HD lace. All textures.'],
-                ];
-                foreach($fb as $f): [$t,$c,$p,$opt_key,$fallback_img,$d]=$f;
-                    $_fi=ah_opt_img($opt_key); $_src=$_fi['url'] ?: AH_URI.'/assets/images/'.$fallback_img;
-                ?>
-                    <article class="product-card" data-category="<?php echo esc_attr($c); ?>">
-                        <div class="product-card__img"><img src="<?php echo esc_url($_src); ?>" alt="<?php echo esc_attr($t); ?>" loading="lazy" width="600" height="800"><span class="product-card__badge"><?php echo esc_html(ucwords(str_replace('-',' ',$c))); ?></span></div>
-                        <div class="product-card__body">
-                            <span class="product-card__cat"><?php echo esc_html(ucwords(str_replace('-',' ',$c))); ?></span>
-                            <h3 class="product-card__title"><?php echo esc_html( wp_specialchars_decode( $t, ENT_QUOTES ) ); ?></h3>
-                            <p class="product-card__desc"><?php echo esc_html( wp_specialchars_decode( $d, ENT_QUOTES ) ); ?></p>
-                            <div class="product-card__price">from &pound;<?php echo esc_html( wp_specialchars_decode( $p, ENT_QUOTES ) ); ?> <small>per bundle</small></div>
-                            <div class="product-card__actions"><a href="<?php echo esc_url(ah_whatsapp_url('Hello! I am interested in: '.$t)); ?>" class="btn btn--w btn--sm" target="_blank" rel="noopener noreferrer"><?php echo ah_svg('whatsapp'); ?> Order</a></div>
-                        </div>
-                    </article>
-                <?php endforeach;
-            endif; ?>
+
+        <?php if ( $wfp_has_wc ) : ?>
+        <div class="wfp-grid">
+            <?php while ( $wfp_query->have_posts() ) : $wfp_query->the_post();
+                global $product;
+                $img_id  = $product->get_image_id();
+                $img_src = $img_id ? wp_get_attachment_image_url($img_id,'woocommerce_thumbnail') : wc_placeholder_img_src();
+                $cats    = strip_tags( wc_get_product_category_list(get_the_ID(),' &middot; ') );
+                $price   = $product->get_price_html();
+                $link    = get_permalink();
+            ?>
+            <a href="<?php echo esc_url($link); ?>" class="wfp-card">
+                <div class="wfp-card__img">
+                    <img src="<?php echo esc_url($img_src); ?>"
+                         alt="<?php echo esc_attr(get_the_title()); ?>"
+                         loading="lazy" width="600" height="750">
+                </div>
+                <div class="wfp-card__body">
+                    <?php if ($cats) : ?><span class="wfp-card__cat"><?php echo $cats; ?></span><?php endif; ?>
+                    <h3 class="wfp-card__name"><?php the_title(); ?></h3>
+                    <div class="wfp-card__price"><?php echo $price; ?></div>
+                </div>
+            </a>
+            <?php endwhile; wp_reset_postdata(); ?>
         </div>
+
+        <?php else :
+            // Fallback: custom hair_product CPT
+            $cpt_products = get_posts(['post_type'=>'hair_product','posts_per_page'=>4,'meta_key'=>'_ah_is_featured','meta_value'=>'1','orderby'=>'date','order'=>'DESC']);
+            if (!$cpt_products) $cpt_products = get_posts(['post_type'=>'hair_product','posts_per_page'=>4,'orderby'=>'date','order'=>'DESC']);
+            if ($cpt_products) :
+        ?>
+        <div class="wfp-grid">
+            <?php foreach($cpt_products as $p) :
+                $img_id  = (int)get_post_meta($p->ID,'_ah_feat_img_id',true) ?: get_post_thumbnail_id($p->ID);
+                $img_src = $img_id ? wp_get_attachment_image_url($img_id,'woocommerce_thumbnail') : '';
+                $price   = get_post_meta($p->ID,'_ah_price_from',true);
+                $link    = get_permalink($p->ID);
+                $terms   = get_the_terms($p->ID,'hair_category');
+                $cat_str = ($terms && !is_wp_error($terms)) ? $terms[0]->name : '';
+            ?>
+            <a href="<?php echo esc_url($link); ?>" class="wfp-card">
+                <div class="wfp-card__img">
+                    <?php if ($img_src) : ?>
+                    <img src="<?php echo esc_url($img_src); ?>"
+                         alt="<?php echo esc_attr($p->post_title); ?>"
+                         loading="lazy" width="600" height="750">
+                    <?php else : ?>
+                    <div style="width:100%;height:100%;background:var(--mid);display:flex;align-items:center;justify-content:center;color:var(--g5);">No image</div>
+                    <?php endif; ?>
+                </div>
+                <div class="wfp-card__body">
+                    <?php if ($cat_str) : ?><span class="wfp-card__cat"><?php echo esc_html($cat_str); ?></span><?php endif; ?>
+                    <h3 class="wfp-card__name"><?php echo esc_html($p->post_title); ?></h3>
+                    <?php if ($price) : ?><div class="wfp-card__price">from &pound;<?php echo esc_html($price); ?></div><?php endif; ?>
+                </div>
+            </a>
+            <?php endforeach; ?>
+        </div>
+        <?php else :
+            // Last fallback: static cards if no products at all
+            $fb=[
+                ['Cambodian Raw Hair — Body Wave','raw-hair','60','feat_prod1_image','raw-body-wave.jpg'],
+                ['Cambodian Raw Hair — Deep Wave','raw-hair','60','feat_prod2_image','raw-deep-wave.jpg'],
+                ['Virgin Hair — Body Wave','virgin-hair','50','feat_prod3_image','raw-loose-wave.jpg'],
+                ['HD Lace Closure — 4x4','closures-frontals','51','feat_prod4_image','hd-lace-sizes.png'],
+            ];
+        ?>
+        <div class="wfp-grid">
+        <?php foreach($fb as $f):[$t,$cat,$p,$opt_key,$img]=$f;$_fi=ah_opt_img($opt_key);$_src=$_fi['url']?:AH_URI.'/assets/images/'.$img;?>
+            <a href="<?php echo esc_url(home_url('/'.$cat.'/')); ?>" class="wfp-card">
+                <div class="wfp-card__img">
+                    <img src="<?php echo esc_url($_src); ?>" alt="<?php echo esc_attr($t); ?>" loading="lazy" width="600" height="750">
+                </div>
+                <div class="wfp-card__body">
+                    <span class="wfp-card__cat"><?php echo esc_html(ucwords(str_replace('-',' ',$cat))); ?></span>
+                    <h3 class="wfp-card__name"><?php echo esc_html($t); ?></h3>
+                    <div class="wfp-card__price">from &pound;<?php echo esc_html($p); ?></div>
+                </div>
+            </a>
+        <?php endforeach; ?>
+        </div>
+        <?php endif; endif; ?>
+
     </div>
 </section>
 
