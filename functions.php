@@ -297,8 +297,26 @@ add_action( 'wp_head', function () {
 }, 2 );
 
 /* ============================================================
-   BODY CLASSES
+   BLOCK WOOCOMMERCE RECAPTCHA — prevents 'I'm not a robot'
+   popup appearing for visitors on new devices
    ============================================================ */
+add_filter( 'woocommerce_recaptcha_enabled',          '__return_false' );
+add_filter( 'woocommerce_recaptcha_on_login',         '__return_false' );
+add_filter( 'woocommerce_recaptcha_on_checkout',      '__return_false' );
+add_filter( 'woocommerce_recaptcha_on_registration',  '__return_false' );
+add_filter( 'woocommerce_recaptcha_on_lost_password', '__return_false' );
+
+add_action( 'wp_enqueue_scripts', function () {
+    // Dequeue any reCAPTCHA scripts WooCommerce or plugins may load
+    wp_dequeue_script( 'google-recaptcha' );
+    wp_dequeue_script( 'wc-recaptcha' );
+    wp_dequeue_script( 'recaptcha' );
+}, 999 );
+
+add_action( 'wp_head', function () {
+    // Remove any reCAPTCHA inline scripts or API calls
+    remove_action( 'wp_head', 'wc_recaptcha_api_script', 10 );
+}, 1 );
 add_filter( 'body_class', function ( $classes ) {
     if ( is_singular() ) {
         $classes[] = 'ah-singular';
