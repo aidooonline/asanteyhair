@@ -87,7 +87,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
                 <?php endif; ?>
                 <iframe class="hs-slide__video hs-yt"
                     id="hs-yt-<?php echo $idx; ?>"
-                    src="https://www.youtube.com/embed/<?php echo esc_attr($yt_id); ?>?autoplay=<?php echo $idx === 0 ? '1' : '0'; ?>&mute=<?php echo $muted ? '1' : '0'; ?>&loop=1&playlist=<?php echo esc_attr($yt_id); ?>&controls=0&showinfo=0&modestbranding=1&rel=0&enablejsapi=1"
+                    src="https://www.youtube-nocookie.com/embed/<?php echo esc_attr($yt_id); ?>?autoplay=<?php echo $idx === 0 ? '1' : '0'; ?>&mute=<?php echo $muted ? '1' : '0'; ?>&loop=1&playlist=<?php echo esc_attr($yt_id); ?>&controls=0&showinfo=0&modestbranding=1&rel=0&enablejsapi=1"
                     allow="autoplay; encrypted-media" allowfullscreen
                     loading="<?php echo $idx === 0 ? 'eager' : 'lazy'; ?>" frameborder="0">
                 </iframe>
