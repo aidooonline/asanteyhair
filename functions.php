@@ -79,12 +79,14 @@ add_action( 'after_setup_theme', function () {
    ============================================================ */
 add_action( 'wp_enqueue_scripts', function () {
 
+    $v = AH_VERSION . '.' . ( file_exists( AH_DIR . '/style.css' ) ? filemtime( AH_DIR . '/style.css' ) : time() );
+
     // Main CSS (font-face + component styles)
     wp_enqueue_style(
         'ah-main-css',
         AH_ASSETS . '/css/main.css',
         [],
-        filemtime( AH_DIR . '/assets/css/main.css' )
+        file_exists( AH_DIR . '/assets/css/main.css' ) ? filemtime( AH_DIR . '/assets/css/main.css' ) : AH_VERSION
     );
 
     // Theme stylesheet (design system)
@@ -92,7 +94,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'ah-theme',
         get_stylesheet_uri(),
         [ 'ah-main-css' ],
-        filemtime( AH_DIR . '/style.css' )
+        $v
     );
 
     // Main JS
@@ -100,7 +102,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'ah-main-js',
         AH_ASSETS . '/js/main.js',
         [],
-        filemtime( AH_DIR . '/assets/js/main.js' ),
+        file_exists( AH_DIR . '/assets/js/main.js' ) ? filemtime( AH_DIR . '/assets/js/main.js' ) : AH_VERSION,
         true
     );
 
