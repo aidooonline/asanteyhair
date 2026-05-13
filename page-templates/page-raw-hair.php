@@ -31,7 +31,7 @@ echo ah_schema_breadcrumb([
 <!-- What is Raw Hair -->
 <section class="split" id="what-is-raw-hair">
   <div class="split__media">
-    <img src="<?php echo esc_url( ah_opt_img('raw_intro_image')['url'] ?: AH_URI.'/assets/images/raw-kinky-straight.jpg' ); ?>"
+    <img src="<?php echo esc_url( (ah_opt_img('raw_intro_image')['url'] ?? '') ?: AH_URI.'/assets/images/raw-kinky-straight.jpg' ); ?>"
          alt="Cambodian raw kinky straight hair — unprocessed single-donor"
          loading="lazy" width="800" height="1000">
   </div>
@@ -130,7 +130,7 @@ echo ah_schema_breadcrumb([
 <!-- Care Teaser -->
 <section class="split split--rev">
   <div class="split__media">
-    <img src="<?php echo esc_url( ah_opt_img('raw_care_image')['url'] ?: AH_URI.'/assets/images/raw-loose-wave.jpg' ); ?>"
+    <img src="<?php echo esc_url( (ah_opt_img('raw_care_image')['url'] ?? '') ?: AH_URI.'/assets/images/raw-loose-wave.jpg' ); ?>"
          alt="Caring for your Cambodian raw hair extensions"
          loading="lazy" width="800" height="1000">
   </div>

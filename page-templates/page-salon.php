@@ -183,7 +183,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 <!-- Booking + Location -->
 <section class="split" id="visit-us">
   <div class="split__media">
-    <img src="<?php echo esc_url(ah_opt_img('salon_split_img2')['url'] ?: AH_URI.'/assets/images/client-result-3.jpg'); ?>"
+    <img src="<?php echo esc_url((ah_opt_img('salon_split_img2')['url'] ?? '') ?: AH_URI.'/assets/images/client-result-3.jpg'); ?>"
          alt="AHB Salon — Nottingham hair and beauty salon"
          loading="lazy" width="800" height="1000">
   </div>

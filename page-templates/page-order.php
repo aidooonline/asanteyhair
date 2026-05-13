@@ -82,21 +82,21 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
             ah_opt('order_prod1_desc','Unprocessed. Single-donor. 10+ textures, 10"-30".'),
             ah_opt('order_prod1_price','60'),
             ah_opt('order_prod1_url',home_url('/raw-hair/')),
-            ah_opt_img('order_img1')['url'] ?: AH_URI.'/assets/images/raw-straight.jpg',
+            (ah_opt_img('order_img1')['url'] ?? '') ?: AH_URI.'/assets/images/raw-straight.jpg',
         ],
         [
             ah_opt('order_prod2_title','Cambodian Virgin Hair'),
             ah_opt('order_prod2_desc','Pure quality. Minimal shedding. 3–5 year lifespan.'),
             ah_opt('order_prod2_price','50'),
             ah_opt('order_prod2_url',home_url('/virgin-hair/')),
-            ah_opt_img('order_img2')['url'] ?: AH_URI.'/assets/images/raw-body-wave.jpg',
+            (ah_opt_img('order_img2')['url'] ?? '') ?: AH_URI.'/assets/images/raw-body-wave.jpg',
         ],
         [
             ah_opt('order_prod3_title','HD Lace Closures & Frontals'),
             ah_opt('order_prod3_desc','Invisible HD lace. 6 sizes. All textures available.'),
             ah_opt('order_prod3_price','49'),
             ah_opt('order_prod3_url',home_url('/closures-frontals/')),
-            ah_opt_img('order_img3')['url'] ?: AH_URI.'/assets/images/hd-lace-sizes.png',
+            (ah_opt_img('order_img3')['url'] ?? '') ?: AH_URI.'/assets/images/hd-lace-sizes.png',
         ],
       ];
       foreach($products as $i=>$p): ?>

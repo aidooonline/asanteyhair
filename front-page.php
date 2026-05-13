@@ -208,7 +208,7 @@ $cat_defaults = [
             $title = get_theme_mod("ah_cat{$i}_title", $d['title']);
             $tag   = get_theme_mod("ah_cat{$i}_tag",   $d['tag']);
             $from  = get_theme_mod("ah_cat{$i}_from",  $d['from']);
-            $image = ah_opt_img("cat{$i}_image")['url'] ?: AH_URI.'/assets/images/'.$d['img'];
+            $image = (ah_opt_img("cat{$i}_image")['url'] ?? '') ?: AH_URI.'/assets/images/'.$d['img'];
             $url   = get_theme_mod("ah_cat{$i}_url",   $d['url']);
             $url   = ( strpos($url, 'http') === 0 ) ? $url : home_url($url);
         ?>
@@ -286,7 +286,7 @@ $wfp_args = [
     'orderby'        => 'date',
     'order'          => 'DESC',
 ];
-$wfp_query   = class_exists('WooCommerce') ? new WP_Query($wfp_args) : null;
+$wfp_query   = (class_exists('WooCommerce') && post_type_exists('product')) ? new WP_Query($wfp_args) : null;
 $wfp_has_wc  = $wfp_query && $wfp_query->have_posts();
 ?>
 <section class="s" aria-labelledby="prod-heading">
@@ -367,7 +367,7 @@ $wfp_has_wc  = $wfp_query && $wfp_query->have_posts();
             ];
         ?>
         <div class="wfp-grid">
-        <?php foreach($fb as $f):[$t,$cat,$p,$opt_key,$img]=$f;$_fi=ah_opt_img($opt_key);$_src=$_fi['url']?:AH_URI.'/assets/images/'.$img;?>
+        <?php foreach($fb as $f):[$t,$cat,$p,$opt_key,$img]=$f;$_fi=ah_opt_img($opt_key);$_src=($_fi['url']??'')?:AH_URI.'/assets/images/'.$img;?>
             <a href="<?php echo esc_url(home_url('/'.$cat.'/')); ?>" class="wfp-card">
                 <div class="wfp-card__img">
                     <img src="<?php echo esc_url($_src); ?>" alt="<?php echo esc_attr($t); ?>" loading="lazy" width="600" height="750">
@@ -400,7 +400,7 @@ $gal_title = ah_opt('gal_title','See It to Believe It');
         </div>
         <div class="gallery reveal">
             <?php for($i=1;$i<=6;$i++):
-                $img = ah_opt_img("gal_image_{$i}")['url'] ?: AH_URI.'/assets/images/client-result-'.$i.'.jpg';
+                $img = (ah_opt_img("gal_image_{$i}")['url'] ?? '') ?: AH_URI.'/assets/images/client-result-'.$i.'.jpg';
             ?>
                 <div class="gallery-item">
                     <img src="<?php echo esc_url($img); ?>"
