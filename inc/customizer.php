@@ -391,7 +391,7 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
     $wp_customize->add_section( 'ah_hero_slides', [
         'title' => 'Hero Section',
         'panel' => 'ah_panel',
-        'description' => 'Edit the hero at the top of the homepage. Set up to 3 slides, each can be an image or a video (YouTube URL or direct MP4 URL).',
+        'description' => 'Edit the hero at the top of the homepage. Set up to 3 slides, each can be an image or an MP4 video (upload via the Video Upload field below).',
     ] );
 
     for ( $i = 1; $i <= 3; $i++ ) :
@@ -418,7 +418,7 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
             'section'    => 'ah_hero_slides',
             'mime_type'  => 'video',
         ] ) );
-        $url( "ah_slide{$i}_video", "Slide {$i} -- OR Video URL (YouTube/MP4 link)", 'ah_hero_slides', '' );
+        $url( "ah_slide{$i}_video", "Slide {$i} — Video URL (MP4 direct link only)", 'ah_hero_slides', '' );
 
         // Mute toggle
         $wp_customize->add_setting( "ah_slide{$i}_muted", [

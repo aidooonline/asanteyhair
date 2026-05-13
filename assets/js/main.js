@@ -364,7 +364,7 @@ function initHeroSlider(){
   function updateMuteButton(){
     if(!muteBtn) return;
     var slide = slides[cur];
-    var hasVideo = slide.querySelector('video.hs-mp4') || slide.querySelector('iframe.hs-yt');
+    var hasVideo = slide.querySelector('video.hs-mp4');
     muteBtn.style.display = hasVideo ? 'flex' : 'none';
     muteBtn.setAttribute('data-state', isMuted ? 'muted' : 'unmuted');
   }
@@ -383,17 +383,6 @@ function initHeroSlider(){
       slides.forEach(function(s){
         var v = s.querySelector('video.hs-mp4');
         if(v) v.muted = isMuted;
-      });
-
-      // Toggle YouTube iframes (via postMessage)
-      slides.forEach(function(s){
-        var iframe = s.querySelector('iframe.hs-yt');
-        if(iframe && iframe.contentWindow){
-          iframe.contentWindow.postMessage(JSON.stringify({
-            event: 'command',
-            func: isMuted ? 'mute' : 'unMute'
-          }), '*');
-        }
       });
     });
   }

@@ -60,38 +60,19 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 <section class="hero-slider" aria-label="Hero" id="hero-slider">
 
     <?php foreach ( $slides as $idx => $slide ) :
-        $is_video   = $slide['type'] === 'video' && $slide['video'];
-        $is_youtube = $is_video && ( strpos($slide['video'], 'youtube') !== false || strpos($slide['video'], 'youtu.be') !== false );
-        $is_mp4     = $is_video && ! $is_youtube;
-        $muted      = $slide['muted'] === 'muted';
+        $is_video = $slide['type'] === 'video' && $slide['video'];
+        $is_mp4   = $is_video; // MP4 only — YouTube removed
+        $muted    = $slide['muted'] === 'muted';
     ?>
     <div class="hs-slide<?php echo $idx === 0 ? ' hs-slide--active' : ''; ?>"
          data-index="<?php echo $idx; ?>"
-         data-type="<?php echo $is_video ? 'video' : 'image'; ?>"
+         data-type="<?php echo $is_mp4 ? 'video' : 'image'; ?>"
          data-duration="<?php echo esc_attr($slide['duration']); ?>"
          data-muted="<?php echo $muted ? 'true' : 'false'; ?>">
 
         <!-- Background: image or video -->
         <div class="hs-slide__bg">
-            <?php if ( $is_youtube ) :
-                preg_match('/(?:v=|\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $slide['video'], $yt);
-                $yt_id = $yt[1] ?? '';
-                ?>
-                <?php if ( $slide['image'] ) : ?>
-                <img class="hs-slide__fallback"
-                     src="<?php echo esc_url($slide['image']); ?>"
-                     alt="" aria-hidden="true"
-                     loading="<?php echo $idx === 0 ? 'eager' : 'lazy'; ?>"
-                     fetchpriority="<?php echo $idx === 0 ? 'high' : 'auto'; ?>"
-                     width="1920" height="1080">
-                <?php endif; ?>
-                <iframe class="hs-slide__video hs-yt"
-                    id="hs-yt-<?php echo $idx; ?>"
-                    src="https://www.youtube-nocookie.com/embed/<?php echo esc_attr($yt_id); ?>?autoplay=<?php echo $idx === 0 ? '1' : '0'; ?>&mute=<?php echo $muted ? '1' : '0'; ?>&loop=1&playlist=<?php echo esc_attr($yt_id); ?>&controls=0&showinfo=0&modestbranding=1&rel=0"
-                    allow="autoplay; encrypted-media" allowfullscreen
-                    loading="<?php echo $idx === 0 ? 'eager' : 'lazy'; ?>" frameborder="0">
-                </iframe>
-            <?php elseif ( $is_mp4 ) : ?>
+            <?php if ( $is_mp4 ) : ?>
                 <?php if ( $slide['image'] ) : ?>
                 <img class="hs-slide__fallback"
                      src="<?php echo esc_url($slide['image']); ?>"
