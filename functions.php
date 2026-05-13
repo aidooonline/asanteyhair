@@ -79,14 +79,20 @@ add_action( 'after_setup_theme', function () {
    ============================================================ */
 add_action( 'wp_enqueue_scripts', function () {
 
-    $v = AH_VERSION . '.' . ( file_exists( AH_DIR . '/style.css' ) ? filemtime( AH_DIR . '/style.css' ) : time() );
+    $main_css  = AH_DIR . '/assets/css/main.css';
+    $style_css = AH_DIR . '/style.css';
+    $main_js   = AH_DIR . '/assets/js/main.js';
+
+    $v_main   = file_exists($main_css)  ? filemtime($main_css)  : AH_VERSION;
+    $v_style  = file_exists($style_css) ? filemtime($style_css) : AH_VERSION;
+    $v_js     = file_exists($main_js)   ? filemtime($main_js)   : AH_VERSION;
 
     // Main CSS (font-face + component styles)
     wp_enqueue_style(
         'ah-main-css',
         AH_ASSETS . '/css/main.css',
         [],
-        file_exists( AH_DIR . '/assets/css/main.css' ) ? filemtime( AH_DIR . '/assets/css/main.css' ) : AH_VERSION
+        $v_main
     );
 
     // Theme stylesheet (design system)
@@ -94,7 +100,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'ah-theme',
         get_stylesheet_uri(),
         [ 'ah-main-css' ],
-        $v
+        $v_style
     );
 
     // Main JS
@@ -102,7 +108,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'ah-main-js',
         AH_ASSETS . '/js/main.js',
         [],
-        file_exists( AH_DIR . '/assets/js/main.js' ) ? filemtime( AH_DIR . '/assets/js/main.js' ) : AH_VERSION,
+        $v_js,
         true
     );
 

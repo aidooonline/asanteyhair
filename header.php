@@ -9,6 +9,21 @@
 <meta charset="<?php bloginfo('charset'); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?php wp_head(); ?>
+<?php
+// Bulletproof CSS — loads directly even if wp_enqueue_scripts fails
+$theme_uri = get_template_directory_uri();
+$main_css  = get_template_directory() . '/assets/css/main.css';
+$style_css = get_template_directory() . '/style.css';
+$main_v    = file_exists($main_css)  ? filemtime($main_css)  : '1';
+$style_v   = file_exists($style_css) ? filemtime($style_css) : '1';
+// Only output direct links if our theme stylesheet wasn't already enqueued
+global $wp_styles;
+$already_loaded = isset($wp_styles) && isset($wp_styles->done) && in_array('ah-theme', $wp_styles->done);
+if (!$already_loaded):
+?>
+<link rel="stylesheet" href="<?php echo esc_url($theme_uri); ?>/assets/css/main.css?v=<?php echo $main_v; ?>">
+<link rel="stylesheet" href="<?php echo esc_url($theme_uri); ?>/style.css?v=<?php echo $style_v; ?>">
+<?php endif; ?>
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
