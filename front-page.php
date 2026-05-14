@@ -325,40 +325,7 @@ $wfp_has_wc  = $wfp_query && $wfp_query->have_posts();
         </div>
 
         <?php else :
-            // Fallback: custom hair_product CPT
-            $cpt_products = get_posts(['post_type'=>'hair_product','posts_per_page'=>4,'meta_key'=>'_ah_is_featured','meta_value'=>'1','orderby'=>'date','order'=>'DESC']);
-            if (!$cpt_products) $cpt_products = get_posts(['post_type'=>'hair_product','posts_per_page'=>4,'orderby'=>'date','order'=>'DESC']);
-            if ($cpt_products) :
-        ?>
-        <div class="wfp-grid">
-            <?php foreach($cpt_products as $p) :
-                $img_id  = (int)get_post_meta($p->ID,'_ah_feat_img_id',true) ?: get_post_thumbnail_id($p->ID);
-                $img_src = $img_id ? wp_get_attachment_image_url($img_id,'woocommerce_thumbnail') : '';
-                $price   = get_post_meta($p->ID,'_ah_price_from',true);
-                $link    = get_permalink($p->ID);
-                $terms   = get_the_terms($p->ID,'hair_category');
-                $cat_str = ($terms && !is_wp_error($terms)) ? $terms[0]->name : '';
-            ?>
-            <a href="<?php echo esc_url($link); ?>" class="wfp-card">
-                <div class="wfp-card__img">
-                    <?php if ($img_src) : ?>
-                    <img src="<?php echo esc_url($img_src); ?>"
-                         alt="<?php echo esc_attr($p->post_title); ?>"
-                         loading="lazy" width="600" height="750">
-                    <?php else : ?>
-                    <div style="width:100%;height:100%;background:var(--mid);display:flex;align-items:center;justify-content:center;color:var(--g5);">No image</div>
-                    <?php endif; ?>
-                </div>
-                <div class="wfp-card__body">
-                    <?php if ($cat_str) : ?><span class="wfp-card__cat"><?php echo esc_html($cat_str); ?></span><?php endif; ?>
-                    <h3 class="wfp-card__name"><?php echo esc_html($p->post_title); ?></h3>
-                    <?php if ($price) : ?><div class="wfp-card__price">from &pound;<?php echo esc_html($price); ?></div><?php endif; ?>
-                </div>
-            </a>
-            <?php endforeach; ?>
-        </div>
-        <?php else :
-            // Last fallback: static cards if no products at all
+            // Fallback: static cards — add products in WooCommerce to replace these
             $fb=[
                 ['Cambodian Raw Hair — Body Wave','raw-hair','60','feat_prod1_image','raw-body-wave.jpg'],
                 ['Cambodian Raw Hair — Deep Wave','raw-hair','60','feat_prod2_image','raw-deep-wave.jpg'],
@@ -380,7 +347,7 @@ $wfp_has_wc  = $wfp_query && $wfp_query->have_posts();
             </a>
         <?php endforeach; ?>
         </div>
-        <?php endif; endif; ?>
+        <?php endif; ?>
 
     </div>
 </section>

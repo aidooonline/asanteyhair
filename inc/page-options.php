@@ -205,7 +205,7 @@ function _ahp_save(int $post_id): void {
     }
 }
 add_action('save_post_page',         '_ahp_save', 10);
-add_action('save_post_hair_product', '_ahp_save', 10);
+
 
 /* Nonce injected once */
 add_action('edit_form_after_title', function(): void {
