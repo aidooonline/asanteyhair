@@ -373,7 +373,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 .split--white .rule{background:var(--ink);opacity:.2}
 
 /* ─── CATEGORY EDITORIAL CARDS ─────────────────────────────── */
-.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:0;width:100%}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0;width:100%}
 
 .cat-card{
   position:relative;overflow:hidden;
@@ -889,7 +889,7 @@ select.form-control{
   .grid-4{grid-template-columns:1fr}
   .cat-card{height:320px}
   .cat-card__title{font-size:1.6rem}
-  .cat-grid{gap:0}
+  .cat-grid{gap:10px}
   .wfp-grid{grid-template-columns:1fr 1fr !important}
   .wfp-card__img{aspect-ratio:3/4}
 }
