@@ -195,8 +195,8 @@ $cat_defaults = [
     3 => ['label'=>'HD Lace','title'=>'Closures & Frontals','from'=>'49','tag'=>'Invisible HD Lace. The Perfect Finish.','url'=>'/closures-frontals/','img'=>'closures-frontals-pricelist.jpg'],
 ];
 ?>
-<section class="s s--sm" style="padding-inline:0;background:var(--ink);" aria-labelledby="cat-heading">
-    <div class="wrap" style="margin-bottom:3rem;">
+<section class="s" style="padding:0;background:var(--ink);" aria-labelledby="cat-heading">
+    <div class="wrap" style="padding-top:clamp(3rem,6vw,6rem);margin-bottom:2rem;">
         <div class="sh sh--c reveal">
             <span class="t-label"><?php echo esc_html( wp_specialchars_decode( $cats_label, ENT_QUOTES ) ); ?></span>
             <h2 id="cat-heading" class="t-h2"><?php echo esc_html( wp_specialchars_decode( $cats_title, ENT_QUOTES ) ); ?></h2>
