@@ -373,7 +373,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:400;
 .split--white .rule{background:var(--ink);opacity:.2}
 
 /* ─── CATEGORY EDITORIAL CARDS ─────────────────────────────── */
-.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0;width:100%}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 2rem;width:100%;box-sizing:border-box}
 
 .cat-card{
   position:relative;overflow:hidden;
