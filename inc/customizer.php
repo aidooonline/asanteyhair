@@ -497,3 +497,34 @@ function ah_whatsapp_url( string $message = '' ): string {
     $msg = $message ?: 'Hello! I would like to place an order with Asantey Hair & Beauty.';
     return 'https://wa.me/' . preg_replace( '/[^0-9]/', '', $number ) . '?text=' . rawurlencode( $msg );
 }
+
+/* ============================================================
+   LOGO & BRANDING — Customizer Panel
+   Makes logo visible and editable in Appearance > Customize
+   ============================================================ */
+add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize ): void {
+
+    // Ensure Site Identity section exists and is prominent
+    $wp_customize->get_section('title_tagline') && $wp_customize->get_section('title_tagline')->priority = 1;
+
+    // Logo upload control (uses WordPress native custom_logo)
+    // Already registered via add_theme_support('custom-logo') in functions.php
+    // This just makes it appear prominently in the Customizer
+
+    // Site name
+    $wp_customize->add_setting( 'blogname', [
+        'default'    => get_option('blogname'),
+        'type'       => 'option',
+        'capability' => 'manage_options',
+        'transport'  => 'postMessage',
+    ] );
+
+    // Tagline
+    $wp_customize->add_setting( 'blogdescription', [
+        'default'    => get_option('blogdescription'),
+        'type'       => 'option',
+        'capability' => 'manage_options',
+        'transport'  => 'postMessage',
+    ] );
+
+}, 20 );

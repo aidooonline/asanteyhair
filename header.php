@@ -34,12 +34,14 @@ if (!$already_loaded):
   <div class="hdr__inner">
 
     <!-- 1. Logo — always first -->
-    <a class="site-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Asantey Hair &amp; Beauty — Home">
-      <?php if(has_custom_logo()):
-        $logo_id = get_theme_mod('custom_logo');
-        echo '<img src="'.esc_url(wp_get_attachment_image_url($logo_id,'full')).'" alt="Asantey Hair &amp; Beauty" width="160" height="40">';
-      else: ?>
-        <span class="site-logo__name">Asantey</span>
+    <a class="site-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?> — Home">
+      <?php if ( has_custom_logo() ) :
+        $logo_id  = get_theme_mod('custom_logo');
+        $logo_url = wp_get_attachment_image_url($logo_id, 'full');
+        $logo_alt = get_bloginfo('name');
+        echo '<img src="'.esc_url($logo_url).'" alt="'.esc_attr($logo_alt).'" width="160" height="40">';
+      else : ?>
+        <span class="site-logo__name"><?php echo esc_html(get_bloginfo('name') ?: 'Asantey'); ?></span>
         <span class="site-logo__sub">Hair &amp; Beauty</span>
       <?php endif; ?>
     </a>
