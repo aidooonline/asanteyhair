@@ -186,10 +186,10 @@ function ah_buy_now_button_text() {
 }
 
 /* ============================================================
-   16. REDIRECT TO CHECKOUT AFTER ADD TO CART
+   16. REDIRECT TO CART AFTER ADD TO CART
    ============================================================ */
 add_filter( 'woocommerce_add_to_cart_redirect', function() {
-    return wc_get_checkout_url();
+    return wc_get_cart_url();
 } );
 
 /* ============================================================

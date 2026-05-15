@@ -129,7 +129,7 @@ function ah_pricing_table( string $type, string $caption = '', string $note = ''
         echo '<tr>';
         echo '<td>' . esc_html( $length ) . '"</td>';
         echo '<td class="price-col">' . esc_html(ah_currency_symbol()) . esc_html( $price ) . '</td>';
-        echo '<td><a href="' . esc_url( wc_get_page_permalink( 'checkout' ) ) . '" class="btn btn--bk btn--sm">Buy Now</a></td>';
+        echo '<td><a href="' . esc_url( wc_get_page_permalink( 'shop' ) ) . '" class="btn btn--bk btn--sm">Buy Now</a></td>';
         echo '</tr>';
     }
 

@@ -127,16 +127,9 @@ $wa_url = $wa_num ? 'https://wa.me/' . preg_replace('/[^0-9]/','', $wa_num) . '?
 
 
 
-        <?php if ($wa_url) : ?>
-        <a href="<?php echo esc_url(get_theme_mod('ah_booking_url','https://asanteyhair.as.me/')); ?>" class="wcp-book-btn" target="_blank" rel="noopener noreferrer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Book a Salon Appointment
-        </a>
-
-        <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>" class="wcp-wa">
+        <a href="<?php echo esc_url( wc_get_page_permalink( 'cart' ) ); ?>" class="wcp-wa">
             Buy Now
         </a>
-        <?php endif; ?>
 
         <div class="wcp-trust">
             <div class="wcp-trust__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Secure Checkout</div>

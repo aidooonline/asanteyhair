@@ -60,7 +60,7 @@ echo ah_schema_faq($faqs);
       Asantey virgin hair adapts to your style — not the other way around.
     </p>
     <div class="btns" style="margin-top:1.5rem;">
-      <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
+      <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
          class="btn btn--ob">
         Buy Now
       </a>
@@ -147,7 +147,7 @@ echo ah_schema_faq($faqs);
     <h2 class="t-h1">Order Your Virgin Hair Bundles</h2>
     <p class="t-body">WhatsApp us or use our order form — we confirm within hours and dispatch in 2–3 business days.</p>
     <div class="btns" style="justify-content:center;">
-      <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
+      <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
          class="btn btn--wa">
         Buy Now
       </a>

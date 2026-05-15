@@ -208,7 +208,7 @@ echo ah_schema_faq($faqs);
     <h2 class="t-h1">Order Your HD Lace Today</h2>
     <p class="t-body">Tell us your closure size, texture, and length — we will send your invoice within hours.</p>
     <div class="btns" style="justify-content:center;">
-      <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
+      <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
          class="btn btn--wa">
         Buy Now
       </a>
