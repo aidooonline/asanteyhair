@@ -186,7 +186,14 @@ function ah_buy_now_button_text() {
 }
 
 /* ============================================================
-   16. CART PAGE — empty cart CTA
+   16. REDIRECT TO CHECKOUT AFTER ADD TO CART
+   ============================================================ */
+add_filter( 'woocommerce_add_to_cart_redirect', function() {
+    return wc_get_checkout_url();
+} );
+
+/* ============================================================
+   17. CART PAGE — empty cart CTA
    ============================================================ */
 add_action( 'woocommerce_cart_is_empty', function () {
     echo '<div class="wc-empty-cart">

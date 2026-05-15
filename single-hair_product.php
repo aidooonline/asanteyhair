@@ -133,7 +133,7 @@ $wa_url = $wa_num ? 'https://wa.me/' . preg_replace('/[^0-9]/','', $wa_num) . '?
             Book a Salon Appointment
         </a>
 
-        <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>" class="wcp-wa">
+        <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>" class="wcp-wa">
             Buy Now
         </a>
         <?php endif; ?>

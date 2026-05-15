@@ -56,7 +56,7 @@ echo ah_schema_breadcrumb([
       clients actually experience.
     </p>
     <div class="btns" style="margin-top:1.5rem;">
-      <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+      <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
          class="btn btn--ob">
         Buy Now
       </a>
@@ -156,7 +156,7 @@ echo ah_schema_breadcrumb([
         availability and send you an invoice within hours.
       </p>
       <div class="btns" style="justify-content:center;">
-        <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+        <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
            class="btn btn--wa">
           Buy Now
         </a>

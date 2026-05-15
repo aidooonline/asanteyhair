@@ -107,7 +107,7 @@ if ( empty( $gallery_items ) ) {
             <a href="<?php echo esc_url( home_url('/shop/') ); ?>" class="btn btn--bk">
                 Shop Collections <?php echo ah_svg('arrow-right'); ?>
             </a>
-            <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+            <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
                class="btn btn--outline-white">
                 Buy Now
             </a>

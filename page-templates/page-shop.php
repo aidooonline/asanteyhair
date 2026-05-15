@@ -78,7 +78,7 @@ echo ah_schema_breadcrumb([
               <p class="product-card__desc"><?php echo esc_html($desc); ?></p>
               <p class="product-card__price">from &pound;<?php echo esc_html($price); ?> <span>per bundle</span></p>
               <div class="product-card__actions">
-                <a href="<?php echo esc_url(home_url('/'.$cat.'/')); ?>"
+                <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
                    class="btn btn--bk btn--sm">
                   Buy Now
                 </a>

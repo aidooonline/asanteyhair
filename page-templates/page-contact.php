@@ -103,7 +103,7 @@ $map_url = ah_opt('map_embed','');
         </div><!-- /.ah-contact-info -->
 
         <!-- WhatsApp CTA -->
-        <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+        <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
            class="btn btn--bk"
            style="margin-top:2rem;">
           Buy Now
@@ -175,7 +175,7 @@ $map_url = ah_opt('map_embed','');
         guide you through every step of the process.
       </p>
       <div class="btns" style="justify-content:center;">
-        <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+        <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
            class="btn btn--wa">
           Buy Now
         </a>

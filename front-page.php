@@ -116,7 +116,7 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
                     </a>
                 <?php endif; ?>
                 <?php if ( $slide['cta2'] ) : ?>
-                    <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+                    <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>"
                        class="btn btn--ow">
                         <?php echo esc_html($slide['cta2']); ?>
                     </a>
@@ -456,7 +456,7 @@ $cta_btn2  = ah_opt('cta_btn2',  'Buy Now');
             <a href="<?php echo esc_url($cta_btn1u); ?>" class="btn btn--w">
                 <?php echo esc_html( wp_specialchars_decode( $cta_btn1, ENT_QUOTES ) ); ?> <?php echo ah_svg('arrow-right'); ?>
             </a>
-            <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>" class="btn btn--ow">
+            <a href="<?php echo esc_url( wc_get_page_permalink( 'checkout' ) ); ?>" class="btn btn--ow">
                 <?php echo esc_html( wp_specialchars_decode( $cta_btn2, ENT_QUOTES ) ); ?>
             </a>
             <a href="<?php echo esc_url( get_theme_mod( 'ah_booking_url', 'https://asanteyhair.as.me/' ) ); ?>" class="btn btn--ow" target="_blank" rel="noopener noreferrer">
