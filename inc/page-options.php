@@ -328,7 +328,7 @@ function ahp_home_hero_cb(): void {
         _ft("slide{$i}_sub",     "Subtitle",           $i===1?"Premium Cambodian Raw and Virgin Hair Extensions.":"");
         _f("slide{$i}_cta1",     "Button 1 Text",      $i===1?"Shop Collections":"");
         _f("slide{$i}_cta1_url", "Button 1 URL",       $i===1?"/shop/":"");
-        _f("slide{$i}_cta2",     "Button 2 Text",      $i===1?"Order on WhatsApp":"");
+        _f("slide{$i}_cta2",     "Button 2 Text",      $i===1?"Buy Now":"");
         _end();
     }
     echo '</div>';
@@ -470,9 +470,9 @@ function ahp_home_cta_cb(): void {
     echo '<div class="ahp">';
     _sec('CTA Band','col2');
     _f('cta_label','Label','Ready to Elevate Your Look?'); _f('cta_title','Title','Your Best Hair Starts Here');
-    _ft('cta_body','Body','Browse our full collection or order directly on WhatsApp.');
+    _ft('cta_body','Body','Browse our full collection or order directly.');
     _f('cta_btn1','Button 1 Text','Shop Collections'); _f('cta_btn1_url','Button 1 URL','/shop/');
-    _f('cta_btn2','Button 2 Text (WhatsApp)','WhatsApp Order');
+    _f('cta_btn2','Button 2 Text','Buy Now');
     _end();
     echo '</div>';
 }

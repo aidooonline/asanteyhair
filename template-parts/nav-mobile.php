@@ -25,9 +25,9 @@
          class="btn btn--ow btn--sm" target="_blank" rel="noopener noreferrer">
         Book Appointment
       </a>
-      <a href="<?php echo esc_url(ah_whatsapp_url()); ?>"
-         class="btn btn--wa btn--sm" target="_blank" rel="noopener noreferrer">
-        <?php echo ah_svg('whatsapp'); ?> Order Hair
+      <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+         class="btn btn--wa btn--sm">
+        Buy Now
       </a>
     </div>
     <div class="mnav__social">

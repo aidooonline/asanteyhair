@@ -19,19 +19,19 @@ $url      = home_url('/');
   <p>These Terms and Conditions govern your use of the <?php echo esc_html($business); ?> website at <?php echo esc_url($url); ?> and your purchase of products from us. By using our website or placing an order, you agree to be bound by these terms. Please read them carefully.</p>
 
   <h2>2. About Us</h2>
-  <p><?php echo esc_html($business); ?> is a UK-based business specialising in premium Cambodian hair extensions, HD lace closures, and frontals. We operate online and take orders via our website and WhatsApp.</p>
+  <p><?php echo esc_html($business); ?> is a UK-based business specialising in premium Cambodian hair extensions, HD lace closures, and frontals. We operate online through our secure website checkout.</p>
 
   <h2>3. Products</h2>
   <p>All product descriptions, images, and pricing on our website are as accurate as possible. However, we reserve the right to correct any errors and to update product information at any time. Product images are for illustrative purposes; natural hair products may have slight variations in shade, texture, or appearance.</p>
 
   <h2>4. Ordering</h2>
-  <p>Orders can be placed via our Order Enquiry form or directly via WhatsApp. Your order is not confirmed until you have received a written confirmation from us and payment has been received. We reserve the right to decline any order at our discretion.</p>
+  <p>Orders can be placed directly through our website. Your order is not confirmed until payment has been received and you have received a confirmation email from us. We reserve the right to decline any order at our discretion.</p>
 
   <h2>5. Pricing</h2>
   <p>All prices are listed in pounds sterling (GBP) and are correct at the time of publication. We reserve the right to change prices at any time. If a pricing error is discovered after your order is placed, we will contact you before processing your order.</p>
 
   <h2>6. Payment</h2>
-  <p>Full payment is required before orders are dispatched. Payment details are provided with your invoice. We accept bank transfer and major debit/credit cards. All payments must clear before the order is processed.</p>
+  <p>Full payment is required before orders are dispatched. We accept all major debit/credit cards through our secure checkout. All payments must clear before the order is processed.</p>
 
   <h2>7. Delivery</h2>
   <p>We aim to dispatch all orders within 2–3 business days of confirmed payment. Delivery timeframes are estimates and are not guaranteed. We are not liable for delays caused by the courier, customs, or circumstances beyond our control. Please refer to our <a href="<?php echo esc_url(home_url('/shipping-returns/')); ?>">Shipping &amp; Returns page</a> for full details.</p>

@@ -41,11 +41,11 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')],['name'=>'Order
         </div>
 
         <div style="margin-top:2.5rem;padding:1.5rem;background:#f8f8f8;border-left:3px solid var(--gold);">
-          <h4 style="font-family:var(--serif);font-size:1.5rem;margin-bottom:0.5rem;">Prefer WhatsApp?</h4>
-          <p class="t-body" style="margin-bottom:1.25rem;">If you&rsquo;d rather order directly and get an instant response, WhatsApp is always the fastest route.</p>
-          <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to place an order.')); ?>"
+          <h4 style="font-family:var(--serif);font-size:1.5rem;margin-bottom:0.5rem;">Need Help?</h4>
+          <p class="t-body" style="margin-bottom:1.25rem;">If you&rsquo;d like help choosing the right hair for you, or have questions before you buy, contact us on WhatsApp.</p>
+          <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I have a question about Asantey Hair & Beauty.')); ?>"
              class="btn btn--wa" target="_blank" rel="noopener noreferrer">
-            <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
+            Chat with Us
           </a>
         </div>
       </div>

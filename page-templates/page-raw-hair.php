@@ -56,10 +56,9 @@ echo ah_schema_breadcrumb([
       clients actually experience.
     </p>
     <div class="btns" style="margin-top:1.5rem;">
-
-      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order Cambodian Raw Hair.')); ?>"
-         class="btn btn--ob" target="_blank" rel="noopener noreferrer">
-        <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
+      <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+         class="btn btn--ob">
+        Buy Now
       </a>
     </div>
   </div>
@@ -157,9 +156,9 @@ echo ah_schema_breadcrumb([
         availability and send you an invoice within hours.
       </p>
       <div class="btns" style="justify-content:center;">
-        <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order Cambodian Raw Hair bundles.')); ?>"
-           class="btn btn--wa" target="_blank" rel="noopener noreferrer">
-          <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
+        <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+           class="btn btn--wa">
+          Buy Now
         </a>
         <a href="<?php echo esc_url(home_url('/order/')); ?>" class="btn btn--outline-white">
           Use Order Form

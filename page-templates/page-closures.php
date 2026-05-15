@@ -208,9 +208,9 @@ echo ah_schema_faq($faqs);
     <h2 class="t-h1">Order Your HD Lace Today</h2>
     <p class="t-body">Tell us your closure size, texture, and length — we will send your invoice within hours.</p>
     <div class="btns" style="justify-content:center;">
-      <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order an HD Lace Closure or Frontal.')); ?>"
-         class="btn btn--wa" target="_blank" rel="noopener noreferrer">
-        <?php echo ah_svg('whatsapp'); ?> Order on WhatsApp
+      <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+         class="btn btn--wa">
+        Buy Now
       </a>
       <a href="<?php echo esc_url(home_url('/order/')); ?>" class="btn btn--outline-white">Use Order Form</a>
     </div>

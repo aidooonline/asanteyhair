@@ -103,11 +103,10 @@ $map_url = ah_opt('map_embed','');
         </div><!-- /.ah-contact-info -->
 
         <!-- WhatsApp CTA -->
-        <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I have an enquiry for Asantey Hair & Beauty.')); ?>"
-           class="btn btn--wa"
-           style="margin-top:2rem;"
-           target="_blank" rel="noopener noreferrer">
-          <?php echo ah_svg('whatsapp'); ?> Start a WhatsApp Chat
+        <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+           class="btn btn--bk"
+           style="margin-top:2rem;">
+          Buy Now
         </a>
 
         <!-- Social links -->
@@ -176,9 +175,9 @@ $map_url = ah_opt('map_embed','');
         guide you through every step of the process.
       </p>
       <div class="btns" style="justify-content:center;">
-        <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to place an order.')); ?>"
-           class="btn btn--wa" target="_blank" rel="noopener noreferrer">
-          <?php echo ah_svg('whatsapp'); ?> WhatsApp Order
+        <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+           class="btn btn--wa">
+          Buy Now
         </a>
         <a href="<?php echo esc_url(home_url('/order/')); ?>" class="btn btn--ob">
           Use Order Form

@@ -177,7 +177,16 @@ add_filter( 'woocommerce_enqueue_styles', function ( $enqueue_styles ) {
 } );
 
 /* ============================================================
-   15. CART PAGE — empty cart CTA
+   15. BUTTON TEXT — Change to "Buy Now"
+   ============================================================ */
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'ah_buy_now_button_text' );
+add_filter( 'woocommerce_product_add_to_cart_text', 'ah_buy_now_button_text' );
+function ah_buy_now_button_text() {
+    return __( 'Buy Now', 'asantey-theme' );
+}
+
+/* ============================================================
+   16. CART PAGE — empty cart CTA
    ============================================================ */
 add_action( 'woocommerce_cart_is_empty', function () {
     echo '<div class="wc-empty-cart">

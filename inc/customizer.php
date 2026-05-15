@@ -347,7 +347,7 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
     $textarea( 'ah_cta_body',     'CTA Body',     'ah_homepage', 'Browse our full collection or order directly on WhatsApp. We guide you through every step.' );
     $text(     'ah_cta_btn1',     'CTA Button 1', 'ah_homepage', 'Shop Collections' );
     $url(      'ah_cta_btn1_url', 'CTA Button 1 URL', 'ah_homepage', '/shop/' );
-    $text(     'ah_cta_btn2',     'CTA Button 2', 'ah_homepage', 'WhatsApp Order' );
+    $text(     'ah_cta_btn2',     'CTA Button 2', 'ah_homepage', 'Buy Now' );
 
     /* --------------------------------------------------------
        SECTION: GALLERY IMAGES (6 slots)
@@ -441,7 +441,7 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
         $textarea( "ah_slide{$i}_sub",   "Slide {$i} -- Subtitle", 'ah_hero_slides', $i === 1 ? 'Premium Cambodian Raw and Virgin Hair Extensions -- crafted for women who demand quality that lasts 3-5 years.' : '' );
         $text(  "ah_slide{$i}_cta1",     "Slide {$i} -- CTA 1 Text", 'ah_hero_slides', $i === 1 ? 'Shop Collections' : '' );
         $url(   "ah_slide{$i}_cta1_url", "Slide {$i} -- CTA 1 URL",  'ah_hero_slides', $i === 1 ? '/shop/' : '' );
-        $text(  "ah_slide{$i}_cta2",     "Slide {$i} -- CTA 2 Text", 'ah_hero_slides', $i === 1 ? 'Order on WhatsApp' : '' );
+        $text(  "ah_slide{$i}_cta2",     "Slide {$i} -- CTA 2 Text", 'ah_hero_slides', $i === 1 ? 'Buy Now' : '' );
     endfor;
 
 } );

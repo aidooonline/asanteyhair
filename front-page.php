@@ -31,7 +31,7 @@ for ( $i = 1; $i <= 3; $i++ ) {
         'sub'      => get_theme_mod( "ah_slide{$i}_sub",      $i === 1 ? 'Premium Cambodian Raw and Virgin Hair Extensions -- crafted for women who demand quality that lasts 3-5 years.' : '' ),
         'cta1'     => get_theme_mod( "ah_slide{$i}_cta1",     $i === 1 ? 'Shop Collections' : '' ),
         'cta1_url' => get_theme_mod( "ah_slide{$i}_cta1_url", $i === 1 ? home_url('/shop/') : '' ),
-        'cta2'     => get_theme_mod( "ah_slide{$i}_cta2",     $i === 1 ? 'Order on WhatsApp' : '' ),
+        'cta2'     => get_theme_mod( "ah_slide{$i}_cta2",     $i === 1 ? 'Buy Now' : '' ),
     ];
 }
 if ( empty($slides) ) {
@@ -47,7 +47,7 @@ if ( empty($slides) ) {
         'sub'      => 'Premium Cambodian Raw and Virgin Hair Extensions -- crafted for women who demand quality that lasts 3-5 years.',
         'cta1'     => 'Shop Collections',
         'cta1_url' => home_url('/shop/'),
-        'cta2'     => 'Order on WhatsApp',
+        'cta2'     => 'Buy Now',
     ];
 }
 
@@ -116,9 +116,9 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
                     </a>
                 <?php endif; ?>
                 <?php if ( $slide['cta2'] ) : ?>
-                    <a href="<?php echo esc_url(ah_whatsapp_url('Hello! I would like to order hair extensions.')); ?>"
-                       class="btn btn--ow" target="_blank" rel="noopener noreferrer">
-                        <?php echo ah_svg('whatsapp'); ?> <?php echo esc_html($slide['cta2']); ?>
+                    <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+                       class="btn btn--ow">
+                        <?php echo esc_html($slide['cta2']); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -442,10 +442,10 @@ if (!empty($_saved_tests)) {
 <!-- ============================================================ CTA BAND -->
 <?php
 $cta_title = ah_opt('cta_title', 'Your Best Hair Starts Here');
-$cta_body  = ah_opt('cta_body',  'Browse our full collection or order directly on WhatsApp. We guide you through every step.');
+$cta_body  = ah_opt('cta_body',  'Browse our full collection or order directly. We guide you through every step.');
 $cta_btn1  = ah_opt('cta_btn1',  'Shop Collections');
 $cta_btn1u = ah_opt('cta_btn1_url', home_url('/shop/'));
-$cta_btn2  = ah_opt('cta_btn2',  'WhatsApp Order');
+$cta_btn2  = ah_opt('cta_btn2',  'Buy Now');
 ?>
 <div class="cta-band dark">
     <div class="wrap wrap--narrow reveal">
@@ -456,8 +456,8 @@ $cta_btn2  = ah_opt('cta_btn2',  'WhatsApp Order');
             <a href="<?php echo esc_url($cta_btn1u); ?>" class="btn btn--w">
                 <?php echo esc_html( wp_specialchars_decode( $cta_btn1, ENT_QUOTES ) ); ?> <?php echo ah_svg('arrow-right'); ?>
             </a>
-            <a href="<?php echo esc_url(ah_whatsapp_url()); ?>" class="btn btn--ow" target="_blank" rel="noopener noreferrer">
-                <?php echo ah_svg('whatsapp'); ?> <?php echo esc_html( wp_specialchars_decode( $cta_btn2, ENT_QUOTES ) ); ?>
+            <a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>" class="btn btn--ow">
+                <?php echo esc_html( wp_specialchars_decode( $cta_btn2, ENT_QUOTES ) ); ?>
             </a>
             <a href="<?php echo esc_url( get_theme_mod( 'ah_booking_url', 'https://asanteyhair.as.me/' ) ); ?>" class="btn btn--ow" target="_blank" rel="noopener noreferrer">
                 Book Appointment
