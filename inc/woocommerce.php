@@ -203,3 +203,25 @@ add_action( 'woocommerce_cart_is_empty', function () {
         <a href="' . esc_url( wc_get_page_permalink( 'shop' ) ) . '" class="btn btn--w">Shop Collections</a>
     </div>';
 } );
+
+/* ============================================================
+   CART ICON FRAGMENT — updates count live after add to cart
+   ============================================================ */
+add_filter( 'woocommerce_add_to_cart_fragments', function( array $fragments ): array {
+    $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
+    ob_start();
+    ?>
+    <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="hdr-cart" aria-label="Your bag (<?php echo $count; ?> items)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <?php if ( $count > 0 ) : ?>
+        <span class="hdr-cart__count"><?php echo $count; ?></span>
+        <?php endif; ?>
+    </a>
+    <?php
+    $fragments['.hdr-cart'] = ob_get_clean();
+    return $fragments;
+} );

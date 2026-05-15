@@ -1388,3 +1388,32 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
   gap:1.5rem}
 @media(max-width:960px){.tcard-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:540px){.tcard-grid{grid-template-columns:1fr}}
+
+/* ── HEADER CART BUTTON ─────────────────────────────────────── */
+.hdr-cart{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;
+  color:var(--ink);
+  text-decoration:none;
+  transition:color var(--t)}
+.hdr-cart:hover{color:var(--g3)}
+.hdr-cart svg{display:block;flex-shrink:0}
+.hdr-cart__count{
+  position:absolute;
+  top:-2px;right:-4px;
+  min-width:18px;height:18px;
+  background:var(--ink);
+  color:var(--paper);
+  border-radius:50%;
+  font-family:var(--sans);
+  font-size:.6rem;
+  font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 3px;
+  line-height:1;
+  border:2px solid var(--paper)}
+/* on dark header */
+.site-header .hdr-cart{color:var(--paper)}
+.site-header .hdr-cart:hover{color:rgba(255,255,255,.6)}
+.site-header .hdr-cart__count{background:var(--paper);color:var(--ink);border-color:var(--ink)}
