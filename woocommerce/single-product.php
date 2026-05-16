@@ -142,7 +142,7 @@ $wa_url = $wa_num ? 'https://wa.me/' . preg_replace('/[^0-9]/','', $wa_num) . '?
         <?php endif; ?>
 
         <!-- WooCommerce Add to Cart -->
-        <div class="wcp-add-to-cart">
+        <div class="wcp-add-to-cart wcp-form-wrap">
             <?php woocommerce_template_single_add_to_cart(); ?>
         </div>
 
