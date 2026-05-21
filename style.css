@@ -1021,6 +1021,7 @@ iframe.hs-slide__video{
 /* Overlay */
 .hs-slide__overlay{
   position:absolute;inset:0;
+  z-index:2;
   background:linear-gradient(
     to top,
     rgba(0,0,0,.75) 0%,
@@ -1030,7 +1031,7 @@ iframe.hs-slide__video{
 
 /* Content with staggered entrance */
 .hs-slide__content{
-  position:relative;z-index:2;width:100%;
+  position:relative;z-index:3;width:100%;
   padding:0 var(--gap) clamp(4rem,8vw,7rem);
   max-width:var(--max);margin-inline:auto}
 .hs-slide__eyebrow{
