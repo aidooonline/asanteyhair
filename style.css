@@ -1023,9 +1023,9 @@ iframe.hs-slide__video{
   position:absolute;inset:0;
   background:linear-gradient(
     to top,
-    rgba(0,0,0,.92) 0%,
-    rgba(0,0,0,.4) 45%,
-    rgba(0,0,0,.1) 100%)}
+    rgba(0,0,0,.65) 0%,
+    rgba(0,0,0,.3) 50%,
+    rgba(0,0,0,.15) 100%)}
 
 /* Content with staggered entrance */
 .hs-slide__content{
@@ -1305,7 +1305,7 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .wfp-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:1.5rem}
+  gap:1rem}
 
 .wfp-card{
   display:flex;
@@ -1318,7 +1318,7 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .wfp-card:hover{transform:translateY(-4px)}
 
 .wfp-card__img{
-  aspect-ratio:3/4;
+  aspect-ratio:4/5;
   overflow:hidden;
   background:var(--g3);
   flex-shrink:0}
@@ -1330,15 +1330,15 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .wfp-card:hover .wfp-card__img img{transform:scale(1.05)}
 
 .wfp-card__body{
-  padding:1.25rem 1.25rem 1.5rem;
-  display:flex;flex-direction:column;gap:.3rem}
+  padding:.85rem 1rem 1rem;
+  display:flex;flex-direction:column;gap:.25rem}
 .wfp-card__cat{
   font-family:var(--sans);
   font-size:.6rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--g5)}
 .wfp-card__name{
   font-family:var(--serif);
-  font-size:clamp(1rem,1.4vw,1.3rem);
+  font-size:clamp(.9rem,1.2vw,1.1rem);
   font-weight:400;color:var(--paper);
   line-height:1.15;margin:0}
 .wfp-card__price .price,

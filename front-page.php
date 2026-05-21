@@ -37,7 +37,7 @@ for ( $i = 1; $i <= 3; $i++ ) {
 if ( empty($slides) ) {
     $slides[] = [
         'type'     => 'image',
-        'image'    => 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=88&auto=format&fit=crop',
+        'image'    => '', /* Set your hero image in WP Admin > Appearance > Customize > Hero Section */
         'video'    => '',
         'muted'    => 'muted',
         'duration' => 6,
@@ -217,13 +217,15 @@ $cat_defaults = [
             $title = get_theme_mod("ah_cat{$i}_title", $d['title']);
             $tag   = get_theme_mod("ah_cat{$i}_tag",   $d['tag']);
             $from  = get_theme_mod("ah_cat{$i}_from",  $d['from']);
-            $image = (ah_opt_img("cat{$i}_image")['url'] ?? '') ?: AH_URI.'/assets/images/'.$d['img'];
+            $image = (ah_opt_img("cat{$i}_image")['url'] ?? '');
             $url   = get_theme_mod("ah_cat{$i}_url",   $d['url']);
             $url   = ( strpos($url, 'http') === 0 ) ? $url : home_url($url);
         ?>
             <a href="<?php echo esc_url($url); ?>" class="cat-card reveal d<?php echo $i; ?>">
+                <?php if ($image) : ?>
                 <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>"
                      loading="<?php echo $i===1?'eager':'lazy'; ?>" width="640" height="853">
+                <?php endif; ?>
                 <div class="cat-card__ov"></div>
                 <div class="cat-card__body">
                     <span class="cat-card__label">from &pound;<?php echo esc_html( wp_specialchars_decode( $from, ENT_QUOTES ) ); ?></span>
@@ -343,7 +345,7 @@ $wfp_has_wc  = $wfp_query && $wfp_query->have_posts();
             ];
         ?>
         <div class="wfp-grid">
-        <?php foreach($fb as $f):[$t,$cat,$p,$opt_key,$img]=$f;$_fi=ah_opt_img($opt_key);$_src=($_fi['url']??'')?:AH_URI.'/assets/images/'.$img;?>
+        <?php foreach($fb as $f):[$t,$cat,$p,$opt_key,$img]=$f;$_fi=ah_opt_img($opt_key);$_src=($_fi['url']??'');?>
             <a href="<?php echo esc_url(home_url('/'.$cat.'/')); ?>" class="wfp-card">
                 <div class="wfp-card__img">
                     <img src="<?php echo esc_url($_src); ?>" alt="<?php echo esc_attr($t); ?>" loading="lazy" width="600" height="750">
@@ -376,7 +378,8 @@ $gal_title = ah_opt('gal_title','See It to Believe It');
         </div>
         <div class="gallery reveal">
             <?php for($i=1;$i<=6;$i++):
-                $img = (ah_opt_img("gal_image_{$i}")['url'] ?? '') ?: AH_URI.'/assets/images/client-result-'.$i.'.jpg';
+                $img = (ah_opt_img("gal_image_{$i}")['url'] ?? '');
+                if (!$img) continue; // skip empty slots
             ?>
                 <div class="gallery-item">
                     <img src="<?php echo esc_url($img); ?>"
