@@ -75,21 +75,37 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       <?php
       // Read hair services from repeater (WP Admin > Salon Services > Hair Service Cards)
       $rep_hair = ah_opt_repeater('hair_services');
-      $hair_services = !empty($rep_hair) ? $rep_hair : [
-          ['title'=>'Braids',                 'price'=>'','desc'=>'From knotless box braids to jumbo braids — protective styles built to last.','link'=>'','image_id'=>0],
-          ['title'=>'Cornrows',               'price'=>'','desc'=>'Classic and intricate cornrow styles including straight backs and feed-in techniques.','link'=>'','image_id'=>0],
-          ['title'=>'Hair Treatments',        'price'=>'','desc'=>'Deep conditioning and scalp care to restore moisture and promote healthy growth.','link'=>'','image_id'=>0],
-          ['title'=>'Sew-In Installs',        'price'=>'','desc'=>'Professional sew-in installation for bundles and closures/frontals.','link'=>'','image_id'=>0],
-          ['title'=>'Closure & Frontal Install','price'=>'','desc'=>'Expert HD lace closure and frontal installation. Natural hairline, seamless blend.','link'=>'','image_id'=>0],
-          ['title'=>'Natural Hair Care',      'price'=>'','desc'=>'Wash, condition, detangle, and style services for natural hair textures.','link'=>'','image_id'=>0],
-      ];
+      if (!empty($rep_hair)) {
+          $hair_services = $rep_hair;
+      } else {
+          // Migrate old individual image meta keys so existing images still show
+          $hair_keys = [
+              ['key'=>'braids',        'title'=>'Braids',                  'price'=>'','desc'=>'From knotless box braids to jumbo braids — protective styles built to last.'],
+              ['key'=>'cornrows',      'title'=>'Cornrows',                'price'=>'','desc'=>'Classic and intricate cornrow styles including straight backs and feed-in techniques.'],
+              ['key'=>'hair-treatment','title'=>'Hair Treatments',         'price'=>'','desc'=>'Deep conditioning and scalp care to restore moisture and promote healthy growth.'],
+              ['key'=>'sew-in',        'title'=>'Sew-In Installs',         'price'=>'','desc'=>'Professional sew-in installation for bundles and closures/frontals.'],
+              ['key'=>'closure',       'title'=>'Closure & Frontal Install','price'=>'','desc'=>'Expert HD lace closure and frontal installation. Natural hairline, seamless blend.'],
+              ['key'=>'natural-hair',  'title'=>'Natural Hair Care',        'price'=>'','desc'=>'Wash, condition, detangle, and style services for natural hair textures.'],
+          ];
+          $hair_services = array_map(function($s) {
+              $img = ah_opt_img("svc_{$s['key']}_image");
+              return [
+                  'title'    => $s['title'],
+                  'price'    => $s['price'],
+                  'desc'     => $s['desc'],
+                  'link'     => ah_opt("svc_{$s['key']}_link",''),
+                  'image_id' => $img['id'] ?? 0,
+                  '_img_url' => $img['url'] ?? '', // direct URL fallback
+              ];
+          }, $hair_keys);
+      }
       foreach($hair_services as $i => $s):
           $svc_link  = $s['link'] ?? '';
           $svc_title = $s['title'] ?? '';
           $svc_desc  = $s['desc']  ?? '';
           $svc_price = $s['price'] ?? '';
           $svc_imgid = (int)($s['image_id'] ?? 0);
-          $svc_img   = $svc_imgid ? wp_get_attachment_image_url($svc_imgid,'large') : '';
+          $svc_img   = $svc_imgid ? wp_get_attachment_image_url($svc_imgid,'large') : ($s['_img_url'] ?? '');
       ?>
         <?php if ($svc_link): ?>
         <a href="<?php echo esc_url($svc_link); ?>" class="service-card service-card--linked reveal d<?php echo ($i%3)+1; ?>">
@@ -134,18 +150,33 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       <?php
       // Read beauty services from repeater (WP Admin > Salon Services > Beauty Service Cards)
       $rep_beauty = ah_opt_repeater('beauty_services');
-      $beauty_services = !empty($rep_beauty) ? $rep_beauty : [
-          ['title'=>'Lash Extensions',  'price'=>'','desc'=>'Semi-permanent lash extensions for a fuller, longer lash look without mascara.','link'=>'','image_id'=>0],
-          ['title'=>'Eyebrow Waxing',   'price'=>'','desc'=>'Precise eyebrow shaping using wax for a clean, defined arch.','link'=>'','image_id'=>0],
-          ['title'=>'Eyebrow Threading','price'=>'','desc'=>'Traditional threading technique for precise brow shaping. Ideal for sensitive skin.','link'=>'','image_id'=>0],
-      ];
+      if (!empty($rep_beauty)) {
+          $beauty_services = $rep_beauty;
+      } else {
+          $beauty_keys = [
+              ['key'=>'lash-extensions', 'title'=>'Lash Extensions',  'price'=>'','desc'=>'Semi-permanent lash extensions for a fuller, longer lash look without mascara.'],
+              ['key'=>'eyebrow-wax',     'title'=>'Eyebrow Waxing',   'price'=>'','desc'=>'Precise eyebrow shaping using wax for a clean, defined arch.'],
+              ['key'=>'eyebrow-thread',  'title'=>'Eyebrow Threading', 'price'=>'','desc'=>'Traditional threading technique for precise brow shaping. Ideal for sensitive skin.'],
+          ];
+          $beauty_services = array_map(function($s) {
+              $img = ah_opt_img("svc_{$s['key']}_image");
+              return [
+                  'title'    => $s['title'],
+                  'price'    => $s['price'],
+                  'desc'     => $s['desc'],
+                  'link'     => ah_opt("svc_{$s['key']}_link",''),
+                  'image_id' => $img['id'] ?? 0,
+                  '_img_url' => $img['url'] ?? '',
+              ];
+          }, $beauty_keys);
+      }
       foreach($beauty_services as $i => $s):
           $svc_link  = $s['link'] ?? '';
           $svc_title = $s['title'] ?? '';
           $svc_desc  = $s['desc']  ?? '';
           $svc_price = $s['price'] ?? '';
           $svc_imgid = (int)($s['image_id'] ?? 0);
-          $svc_img   = $svc_imgid ? wp_get_attachment_image_url($svc_imgid,'large') : '';
+          $svc_img   = $svc_imgid ? wp_get_attachment_image_url($svc_imgid,'large') : ($s['_img_url'] ?? '');
       ?>
         <?php if ($svc_link): ?>
         <a href="<?php echo esc_url($svc_link); ?>" class="service-card service-card--linked reveal d<?php echo $i+1; ?>">
