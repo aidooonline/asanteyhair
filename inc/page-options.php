@@ -756,45 +756,139 @@ function ahp_cls_imgs_cb(): void {
    SPRINT 6 — SALON SERVICES
    ============================================================ */
 function ahp_salon_svcs_cb(): void {
-    $svcs=[
-        ['braids','Braids'],['cornrows','Cornrows'],['hair-treatment','Hair Treatment'],
-        ['sew-in','Sew-In'],['closure','Closure Install'],['natural-hair','Natural Hair'],
-        ['knotless-braids','Knotless Braids'],['goddess-braids','Goddess Braids'],
-        ['wig-install','Wig Install'],
-    ];
+    global $post;
+    $rows = get_post_meta($post->ID, '_ahp_rep_hair_services', true);
+    if (!is_array($rows) || empty($rows)) {
+        $rows = [
+            ['title'=>'Braids',                'price'=>'','desc'=>'From knotless box braids to jumbo braids — protective styles that are clean, neat, and built to last.','link'=>''],
+            ['title'=>'Cornrows',              'price'=>'','desc'=>'Classic and intricate cornrow styles including straight backs, curved designs, and feed-in techniques.','link'=>''],
+            ['title'=>'Hair Treatments',       'price'=>'','desc'=>'Deep conditioning, protein treatments, and scalp care to restore moisture and promote healthy growth.','link'=>''],
+            ['title'=>'Sew-In Installs',       'price'=>'','desc'=>'Professional sew-in installation for bundles and closures/frontals. Flawless, long-lasting install.','link'=>''],
+            ['title'=>'Closure & Frontal Install','price'=>'','desc'=>'Expert HD lace closure and frontal installation. Natural hairline, seamless blend.','link'=>''],
+            ['title'=>'Natural Hair Care',     'price'=>'','desc'=>'Wash, condition, detangle, and style services for natural hair textures.','link'=>''],
+        ];
+    }
     echo '<div class="ahp">';
-    _sec('Hair Services Section Heading','col2');
-    _f('salon_hair_label','Label','Hair Services'); _f('salon_hair_title','Title','Expert Hair Services');
+    _sec('Section Heading','col2');
+    _f('salon_hair_label','Label','Hair Services');
+    _f('salon_hair_title','Title','Expert Hair Services');
     _ft('salon_hair_desc','Description','');
     _end();
-    foreach ($svcs as [$key,$name]) {
-        _sec("Service: {$name}",'col2');
-        _fi("svc_{$key}_image","Image");
-        _f("svc_{$key}_title","Title",$name);
-        _f("svc_{$key}_price","Price (e.g. From £45)","");
-        _ft("svc_{$key}_desc","Short Description","");
-        _f("svc_{$key}_link","Link URL (optional)","","e.g. https://asanteyhair.as.me/ or /contact/");
-        _end();
-    }
+    echo '<p class="ahp-hint" style="margin:0 0 10px;">Add, edit or remove services. Click <strong>+ Add Service</strong> to grow the list.</p>';
+    echo '<div id="ahp-hair-svc-list">';
+    foreach ($rows as $i => $row):
+        $t = esc_attr($row['title'] ?? '');
+        $p = esc_attr($row['price'] ?? '');
+        $d = esc_textarea($row['desc']  ?? '');
+        $l = esc_attr($row['link']  ?? '');
+        $img_id  = (int)($row['image_id'] ?? 0);
+        $img_src = $img_id ? wp_get_attachment_image_url($img_id,'thumbnail') : '';
+        echo "<div class='ahp-rep-item'>"
+           . "<button type='button' class='ahp-rep-del'>✕ Remove</button>"
+           . "<div class='ahp-body ahp-col2' style='padding:0;border:none;gap:8px;'>"
+           . "<div class='ahp-field ahp-full'><label>Service Title</label><input type='text' name='ahp_rep[hair_services][{$i}][title]' value='{$t}'></div>"
+           . "<div class='ahp-field'><label>Price (e.g. From £45)</label><input type='text' name='ahp_rep[hair_services][{$i}][price]' value='{$p}'></div>"
+           . "<div class='ahp-field'><label>Link URL (optional)</label><input type='text' name='ahp_rep[hair_services][{$i}][link]' value='{$l}' placeholder='https://asanteyhair.as.me/'></div>"
+           . "<div class='ahp-field ahp-full'><label>Description</label><textarea name='ahp_rep[hair_services][{$i}][desc]'>{$d}</textarea></div>"
+           . "<div class='ahp-field ahp-full'><label>Service Image</label>"
+           . "<div style='display:flex;align-items:center;gap:10px;'>"
+           . ($img_src ? "<img src='{$img_src}' style='width:70px;height:70px;object-fit:cover;'>" : "<div style='width:70px;height:70px;background:#f0f0f0;border:1px dashed #ccc;'></div>")
+           . "<div><button type='button' class='button ahp-pick-img' data-target='hair_svc_img_{$i}'>Choose Image</button>"
+           . "<button type='button' class='button ahp-remove-img' data-target='hair_svc_img_{$i}' style='margin-left:5px;'>Remove</button></div></div>"
+           . "<input type='hidden' name='ahp_rep[hair_services][{$i}][image_id]' id='hair_svc_img_{$i}' value='{$img_id}'>"
+           . "</div></div></div>";
+    endforeach;
+    echo '</div>';
+    $idx = count($rows);
+    echo "<button type='button' class='button button-primary ahp-rep-add' id='ahp-hair-svc-add'>+ Add Service</button>";
+    echo "<script>
+    (function(){
+        var idx={$idx};
+        document.getElementById('ahp-hair-svc-add').addEventListener('click',function(){
+            var d=document.createElement('div');d.className='ahp-rep-item';
+            d.innerHTML='<button type=\"button\" class=\"ahp-rep-del\">✕ Remove</button>'
+                +'<div class=\"ahp-body ahp-col2\" style=\"padding:0;border:none;gap:8px;\">'
+                +'<div class=\"ahp-field ahp-full\"><label>Service Title</label><input type=\"text\" name=\"ahp_rep[hair_services]['+idx+'][title]\"></div>'
+                +'<div class=\"ahp-field\"><label>Price</label><input type=\"text\" name=\"ahp_rep[hair_services]['+idx+'][price]\"></div>'
+                +'<div class=\"ahp-field\"><label>Link URL</label><input type=\"text\" name=\"ahp_rep[hair_services]['+idx+'][link]\" placeholder=\"https://asanteyhair.as.me/\"></div>'
+                +'<div class=\"ahp-field ahp-full\"><label>Description</label><textarea name=\"ahp_rep[hair_services]['+idx+'][desc]\"></textarea></div>'
+                +'<div class=\"ahp-field ahp-full\"><label>Service Image</label>'
+                +'<div style=\"display:flex;align-items:center;gap:10px;\">'
+                +'<div style=\"width:70px;height:70px;background:#f0f0f0;border:1px dashed #ccc;\" id=\"hair_svc_prev_'+idx+'\"></div>'
+                +'<div><button type=\"button\" class=\"button ahp-pick-img\" data-target=\"hair_svc_img_'+idx+'\">Choose Image</button></div></div>'
+                +'<input type=\"hidden\" name=\"ahp_rep[hair_services]['+idx+'][image_id]\" id=\"hair_svc_img_'+idx+'\" value=\"\"></div>'
+                +'</div></div>';
+            document.getElementById('ahp-hair-svc-list').appendChild(d);
+            idx++;
+        });
+    })();
+    </script>";
     echo '</div>';
 }
 
 function ahp_salon_bsvc_cb(): void {
-    $svcs=[['lash-extensions','Lash Extensions'],['eyebrow-wax','Eyebrow Waxing'],['eyebrow-thread','Eyebrow Threading']];
+    global $post;
+    $rows = get_post_meta($post->ID, '_ahp_rep_beauty_services', true);
+    if (!is_array($rows) || empty($rows)) {
+        $rows = [
+            ['title'=>'Lash Extensions',  'price'=>'','desc'=>'Semi-permanent lash extensions for a fuller, longer lash look without mascara.','link'=>''],
+            ['title'=>'Eyebrow Waxing',   'price'=>'','desc'=>'Precise eyebrow shaping using wax for a clean, defined arch.','link'=>''],
+            ['title'=>'Eyebrow Threading','price'=>'','desc'=>'Traditional threading technique for precise brow shaping. Ideal for sensitive skin.','link'=>''],
+        ];
+    }
     echo '<div class="ahp">';
-    _sec('Beauty Services Section Heading','col2');
-    _f('salon_beauty_label','Label','Beauty Services'); _f('salon_beauty_title','Title','Complete Beauty Services');
+    _sec('Section Heading','col2');
+    _f('salon_beauty_label','Label','Beauty Services');
+    _f('salon_beauty_title','Title','Complete Beauty Services');
     _ft('salon_beauty_desc','Description','Finish your look from lash to brow.');
     _end();
-    foreach ($svcs as [$key,$name]) {
-        _sec("Service: {$name}",'col2');
-        _fi("svc_{$key}_image","Image");
-        _f("svc_{$key}_title","Title",$name);
-        _f("svc_{$key}_price","Price","");
-        _ft("svc_{$key}_desc","Short Description","");
-        _f("svc_{$key}_link","Link URL (optional)","","e.g. https://asanteyhair.as.me/ or /contact/");
-        _end();
-    }
+    echo '<p class="ahp-hint" style="margin:0 0 10px;">Add, edit or remove beauty services. Click <strong>+ Add Service</strong> to grow the list.</p>';
+    echo '<div id="ahp-beauty-svc-list">';
+    foreach ($rows as $i => $row):
+        $t = esc_attr($row['title'] ?? '');
+        $p = esc_attr($row['price'] ?? '');
+        $d = esc_textarea($row['desc']  ?? '');
+        $l = esc_attr($row['link']  ?? '');
+        $img_id  = (int)($row['image_id'] ?? 0);
+        $img_src = $img_id ? wp_get_attachment_image_url($img_id,'thumbnail') : '';
+        echo "<div class='ahp-rep-item'>"
+           . "<button type='button' class='ahp-rep-del'>✕ Remove</button>"
+           . "<div class='ahp-body ahp-col2' style='padding:0;border:none;gap:8px;'>"
+           . "<div class='ahp-field ahp-full'><label>Service Title</label><input type='text' name='ahp_rep[beauty_services][{$i}][title]' value='{$t}'></div>"
+           . "<div class='ahp-field'><label>Price</label><input type='text' name='ahp_rep[beauty_services][{$i}][price]' value='{$p}'></div>"
+           . "<div class='ahp-field'><label>Link URL (optional)</label><input type='text' name='ahp_rep[beauty_services][{$i}][link]' value='{$l}' placeholder='https://asanteyhair.as.me/'></div>"
+           . "<div class='ahp-field ahp-full'><label>Description</label><textarea name='ahp_rep[beauty_services][{$i}][desc]'>{$d}</textarea></div>"
+           . "<div class='ahp-field ahp-full'><label>Service Image</label>"
+           . "<div style='display:flex;align-items:center;gap:10px;'>"
+           . ($img_src ? "<img src='{$img_src}' style='width:70px;height:70px;object-fit:cover;'>" : "<div style='width:70px;height:70px;background:#f0f0f0;border:1px dashed #ccc;'></div>")
+           . "<div><button type='button' class='button ahp-pick-img' data-target='beauty_svc_img_{$i}'>Choose Image</button>"
+           . "<button type='button' class='button ahp-remove-img' data-target='beauty_svc_img_{$i}' style='margin-left:5px;'>Remove</button></div></div>"
+           . "<input type='hidden' name='ahp_rep[beauty_services][{$i}][image_id]' id='beauty_svc_img_{$i}' value='{$img_id}'>"
+           . "</div></div></div>";
+    endforeach;
+    echo '</div>';
+    $idx = count($rows);
+    echo "<button type='button' class='button button-primary ahp-rep-add' id='ahp-beauty-svc-add'>+ Add Service</button>";
+    echo "<script>
+    (function(){
+        var idx={$idx};
+        document.getElementById('ahp-beauty-svc-add').addEventListener('click',function(){
+            var d=document.createElement('div');d.className='ahp-rep-item';
+            d.innerHTML='<button type=\"button\" class=\"ahp-rep-del\">✕ Remove</button>'
+                +'<div class=\"ahp-body ahp-col2\" style=\"padding:0;border:none;gap:8px;\">'
+                +'<div class=\"ahp-field ahp-full\"><label>Service Title</label><input type=\"text\" name=\"ahp_rep[beauty_services]['+idx+'][title]\"></div>'
+                +'<div class=\"ahp-field\"><label>Price</label><input type=\"text\" name=\"ahp_rep[beauty_services]['+idx+'][price]\"></div>'
+                +'<div class=\"ahp-field\"><label>Link URL</label><input type=\"text\" name=\"ahp_rep[beauty_services]['+idx+'][link]\" placeholder=\"https://asanteyhair.as.me/\"></div>'
+                +'<div class=\"ahp-field ahp-full\"><label>Description</label><textarea name=\"ahp_rep[beauty_services]['+idx+'][desc]\"></textarea></div>'
+                +'<div class=\"ahp-field ahp-full\"><label>Service Image</label>'
+                +'<input type=\"hidden\" name=\"ahp_rep[beauty_services]['+idx+'][image_id]\" id=\"beauty_svc_img_'+idx+'\" value=\"\">'
+                +'<button type=\"button\" class=\"button ahp-pick-img\" data-target=\"beauty_svc_img_'+idx+'\">Choose Image</button>'
+                +'</div></div></div>';
+            document.getElementById('ahp-beauty-svc-list').appendChild(d);
+            idx++;
+        });
+    })();
+    </script>";
     echo '</div>';
 }
 

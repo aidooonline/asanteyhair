@@ -73,47 +73,23 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 
     <div class="grid-3" style="gap:1.5rem;">
       <?php
-      // Images: Unsplash free licence — load directly from CDN on live server
-      $hair_services = [
-        [
-          'image_key' => 'svc_braids_image',
-          'svc_key' => 'braids', 'image_fallback' => 'braids.jpg',
-          'title' => 'Braids',
-          'body'  => 'From knotless box braids to jumbo braids — protective styles that are clean, neat, and built to last. Book online for a consultation.',
-        ],
-        [
-          'image_key' => 'svc_cornrows_image',
-          'svc_key' => 'cornrows', 'image_fallback' => 'cornrows.jpg',
-          'title' => 'Cornrows',
-          'body'  => 'Classic and intricate cornrow styles including straight backs, curved designs, and feed-in techniques. Natural or with extensions.',
-        ],
-        [
-          'image_key' => 'svc_hair-treatment_image',
-          'svc_key' => 'hair-treatment', 'image_fallback' => 'hair-treatment.jpg',
-          'title' => 'Hair Treatments',
-          'body'  => 'Deep conditioning, protein treatments, and scalp care designed to restore moisture, reduce breakage, and promote healthy hair growth.',
-        ],
-        [
-          'image_key' => 'svc_sew-in_image',
-          'svc_key' => 'sew-in', 'image_fallback' => 'sew-in.jpg',
-          'title' => 'Sew-In Installs',
-          'body'  => 'Professional sew-in installation for bundles and closures/frontals. Achieve a flawless, long-lasting install every time.',
-        ],
-        [
-          'image_key' => 'svc_closure_image',
-          'svc_key' => 'closure', 'image_fallback' => 'closure.jpg',
-          'title' => 'Closure & Frontal Installs',
-          'body'  => 'Expert HD lace closure and frontal installation. Natural hairline, seamless blend, undetectable finish.',
-        ],
-        [
-          'image_key' => 'svc_natural-hair_image',
-          'svc_key' => 'natural-hair', 'image_fallback' => 'natural-hair.jpg',
-          'title' => 'Natural Hair Care',
-          'body'  => 'Wash, condition, detangle, and style services for natural hair textures. Designed to maintain length and promote healthy growth.',
-        ],
+      // Read hair services from repeater (WP Admin > Salon Services > Hair Service Cards)
+      $rep_hair = ah_opt_repeater('hair_services');
+      $hair_services = !empty($rep_hair) ? $rep_hair : [
+          ['title'=>'Braids',                 'price'=>'','desc'=>'From knotless box braids to jumbo braids — protective styles built to last.','link'=>'','image_id'=>0],
+          ['title'=>'Cornrows',               'price'=>'','desc'=>'Classic and intricate cornrow styles including straight backs and feed-in techniques.','link'=>'','image_id'=>0],
+          ['title'=>'Hair Treatments',        'price'=>'','desc'=>'Deep conditioning and scalp care to restore moisture and promote healthy growth.','link'=>'','image_id'=>0],
+          ['title'=>'Sew-In Installs',        'price'=>'','desc'=>'Professional sew-in installation for bundles and closures/frontals.','link'=>'','image_id'=>0],
+          ['title'=>'Closure & Frontal Install','price'=>'','desc'=>'Expert HD lace closure and frontal installation. Natural hairline, seamless blend.','link'=>'','image_id'=>0],
+          ['title'=>'Natural Hair Care',      'price'=>'','desc'=>'Wash, condition, detangle, and style services for natural hair textures.','link'=>'','image_id'=>0],
       ];
       foreach($hair_services as $i => $s):
-          $svc_link = ah_opt('svc_'.($s['svc_key'] ?? '').'_link', '');
+          $svc_link  = $s['link'] ?? '';
+          $svc_title = $s['title'] ?? '';
+          $svc_desc  = $s['desc']  ?? '';
+          $svc_price = $s['price'] ?? '';
+          $svc_imgid = (int)($s['image_id'] ?? 0);
+          $svc_img   = $svc_imgid ? wp_get_attachment_image_url($svc_imgid,'large') : '';
       ?>
         <?php if ($svc_link): ?>
         <a href="<?php echo esc_url($svc_link); ?>" class="service-card service-card--linked reveal d<?php echo ($i%3)+1; ?>">
@@ -121,11 +97,14 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
         <div class="service-card reveal d<?php echo ($i%3)+1; ?>">
         <?php endif; ?>
           <div class="service-card__img">
-            <?php ah_opt_img_tag( $s['image_key'] ?? '', '', $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
+            <?php if ($svc_img): ?>
+            <img src="<?php echo esc_url($svc_img); ?>" alt="<?php echo esc_attr($svc_title); ?>" loading="lazy">
+            <?php endif; ?>
           </div>
           <div class="service-card__body">
-            <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
-            <p class="service-card__desc"><?php echo esc_html($s['body']); ?></p>
+            <h3 class="service-card__title"><?php echo esc_html($svc_title); ?></h3>
+            <?php if ($svc_price): ?><p class="service-card__price"><?php echo esc_html($svc_price); ?></p><?php endif; ?>
+            <p class="service-card__desc"><?php echo esc_html($svc_desc); ?></p>
             <?php if ($svc_link): ?>
             <span class="service-card__cta">Book Now <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             <?php endif; ?>
@@ -153,28 +132,20 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 
     <div class="grid-3" style="gap:1.5rem;">
       <?php
-      $beauty_services = [
-        [
-          'image_key' => 'svc_lash-extensions_image',
-          'svc_key' => 'lash-extensions', 'image_fallback' => 'lash-extensions.jpg',
-          'title' => 'Lash Extensions',
-          'body'  => 'Classic, hybrid, and volume lash sets that enhance your natural eye shape. Long-lasting, lightweight, and beautifully finished.',
-        ],
-        [
-          'image_key' => 'svc_eyebrow-wax_image',
-          'svc_key' => 'eyebrow-wax', 'image_fallback' => 'eyebrow-wax.jpg',
-          'title' => 'Eyebrow Waxing',
-          'body'  => 'Precise eyebrow shaping using wax for a clean, defined arch that frames your face perfectly.',
-        ],
-        [
-          'image_key' => 'svc_eyebrow-thread_image',
-          'svc_key' => 'eyebrow-thread', 'image_fallback' => 'eyebrow-thread.jpg',
-          'title' => 'Eyebrow Threading',
-          'body'  => 'Traditional threading technique for precise, pain-managed brow shaping. Ideal for sensitive skin or fine brow hair.',
-        ],
+      // Read beauty services from repeater (WP Admin > Salon Services > Beauty Service Cards)
+      $rep_beauty = ah_opt_repeater('beauty_services');
+      $beauty_services = !empty($rep_beauty) ? $rep_beauty : [
+          ['title'=>'Lash Extensions',  'price'=>'','desc'=>'Semi-permanent lash extensions for a fuller, longer lash look without mascara.','link'=>'','image_id'=>0],
+          ['title'=>'Eyebrow Waxing',   'price'=>'','desc'=>'Precise eyebrow shaping using wax for a clean, defined arch.','link'=>'','image_id'=>0],
+          ['title'=>'Eyebrow Threading','price'=>'','desc'=>'Traditional threading technique for precise brow shaping. Ideal for sensitive skin.','link'=>'','image_id'=>0],
       ];
       foreach($beauty_services as $i => $s):
-          $svc_link = ah_opt('svc_'.($s['svc_key'] ?? '').'_link', '');
+          $svc_link  = $s['link'] ?? '';
+          $svc_title = $s['title'] ?? '';
+          $svc_desc  = $s['desc']  ?? '';
+          $svc_price = $s['price'] ?? '';
+          $svc_imgid = (int)($s['image_id'] ?? 0);
+          $svc_img   = $svc_imgid ? wp_get_attachment_image_url($svc_imgid,'large') : '';
       ?>
         <?php if ($svc_link): ?>
         <a href="<?php echo esc_url($svc_link); ?>" class="service-card service-card--linked reveal d<?php echo $i+1; ?>">
@@ -182,11 +153,14 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
         <div class="service-card reveal d<?php echo $i+1; ?>">
         <?php endif; ?>
           <div class="service-card__img">
-            <?php ah_opt_img_tag( $s['image_key'] ?? '', '', $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
+            <?php if ($svc_img): ?>
+            <img src="<?php echo esc_url($svc_img); ?>" alt="<?php echo esc_attr($svc_title); ?>" loading="lazy">
+            <?php endif; ?>
           </div>
           <div class="service-card__body">
-            <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
-            <p class="service-card__desc"><?php echo esc_html($s['body']); ?></p>
+            <h3 class="service-card__title"><?php echo esc_html($svc_title); ?></h3>
+            <?php if ($svc_price): ?><p class="service-card__price"><?php echo esc_html($svc_price); ?></p><?php endif; ?>
+            <p class="service-card__desc"><?php echo esc_html($svc_desc); ?></p>
             <?php if ($svc_link): ?>
             <span class="service-card__cta">Book Now <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
             <?php endif; ?>
