@@ -27,7 +27,7 @@ echo ah_schema_faq($faqs);
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', (ah_opt_img('vir_intro_image')['url'] ?? '') ?: AH_URI.'/assets/images/virgin-body-wave.png', '', '', 'eager' ); ?>
+    <?php ah_opt_img_tag( 'hero_image', (ah_opt_img('vir_intro_image')['url'] ?? '') ?: '', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">Cambodian Hair Collection</span>
@@ -40,7 +40,7 @@ echo ah_schema_faq($faqs);
 
 <section class="split">
   <div class="split__media">
-    <img src="<?php echo esc_url( (ah_opt_img('vir_intro_image')['url'] ?? '') ?: AH_URI.'/assets/images/virgin-body-wave.png' ); ?>"
+    <img src="<?php echo esc_url( (ah_opt_img('vir_intro_image')['url'] ?? '') ?: '' ); ?>"
          alt="Cambodian virgin hair body wave bundles"
          loading="lazy" width="800" height="1000">
   </div>
@@ -102,7 +102,7 @@ echo ah_schema_faq($faqs);
       ];
       foreach($textures as $i=>$t):[$img,$img_key,$name,$desc]=$t;
         $opt_img = ah_opt_img('vir_tex_'.$img_key);
-        $img_src = $opt_img['url'] ?: AH_URI.'/assets/images/'.$img;
+        $img_src = $opt_img['url'] ?: '';
       ?>
         <div class="ah-texture-card ah-reveal ah-reveal--delay-<?php echo ($i%4)+1; ?>">
           <div class="texture-item__img">

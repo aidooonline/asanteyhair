@@ -28,7 +28,7 @@ echo ah_schema_faq($faqs);
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-loose-deep.jpg', '', '', 'eager' ); ?>
+    <?php ah_opt_img_tag( 'hero_image', '', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">Education &amp; Care</span>

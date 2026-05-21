@@ -13,7 +13,7 @@ echo ah_schema_breadcrumb([
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-straight.jpg', '', '', 'eager' ); ?>
+    <?php ah_opt_img_tag( 'hero_image', '', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">The Asantey Collection</span>
@@ -67,7 +67,7 @@ echo ah_schema_breadcrumb([
           ?>
           <article class="product-card" data-category="<?php echo esc_attr($cat); ?>">
             <div class="product-card__img">
-              <?php $shop_img=ah_opt_img($img_key??''); $shop_src=$shop_img['url'] ?: AH_URI.'/assets/images/'.$img; ?>
+              <?php $shop_img=ah_opt_img($img_key??''); $shop_src=$shop_img['url'] ?: ''; ?>
               <img src="<?php echo esc_url($shop_src); ?>"
                    alt="<?php echo esc_attr($title); ?>" loading="lazy" width="600" height="800">
               <span class="product-card__badge"><?php echo esc_html(ucwords(str_replace('-', ' ', $cat))); ?></span>

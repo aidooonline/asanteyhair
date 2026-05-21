@@ -264,7 +264,7 @@ function ah_get_og_image(): string {
     if ( has_post_thumbnail() ) {
         return get_the_post_thumbnail_url( null, 'ah-wide' );
     }
-    return AH_URI . '/assets/images/raw-body-wave.jpg';
+    return '';
 }
 
 /* ============================================================

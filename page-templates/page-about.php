@@ -16,7 +16,7 @@ echo ah_schema_breadcrumb([
 <!-- Page Hero -->
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-loose-wave.jpg', '', '', 'eager' ); ?>
+    <?php ah_opt_img_tag( 'hero_image', '', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">Our Story</span>
@@ -33,7 +33,7 @@ echo ah_schema_breadcrumb([
 <section class="split" id="our-story" aria-labelledby="story-heading">
   <div class="split__media">
     <?php $about_img1=ah_opt_img('about_img1'); ?>
-    <img src="<?php echo esc_url($about_img1['url'] ?: AH_URI.'/assets/images/raw-body-wave.jpg'); ?>"
+    <img src="<?php echo esc_url($about_img1['url'] ?: ''); ?>"
          alt="Asantey Hair &amp; Beauty — premium Cambodian hair bundles"
          loading="lazy" width="800" height="1000">
   </div>
@@ -93,7 +93,7 @@ echo ah_schema_breadcrumb([
 <section class="split split--rev" id="cambodian-hair" aria-labelledby="cambodian-heading">
   <div class="split__media">
     <?php $about_img2=ah_opt_img('about_img2'); ?>
-    <img src="<?php echo esc_url($about_img2['url'] ?: AH_URI.'/assets/images/raw-deep-wave.jpg'); ?>"
+    <img src="<?php echo esc_url($about_img2['url'] ?: ''); ?>"
          alt="Cambodian raw hair extensions — deep wave texture"
          loading="lazy" width="800" height="1000">
   </div>

@@ -29,7 +29,7 @@ echo ah_schema_faq($faqs);
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/closures-frontals-pricelist.jpg', '', '', 'eager' ); ?>
+    <?php ah_opt_img_tag( 'hero_image', '', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">The Perfect Finish</span>
@@ -47,7 +47,7 @@ echo ah_schema_faq($faqs);
     $cls_split_img = ah_opt_img('cls_intro_image');
     $cls_split_src = $cls_split_img['url'] ?: '';
     $cls_guide     = ah_opt_img('cls_size_guide');
-    $cls_guide_src = $cls_guide['url'] ?: AH_URI.'/assets/images/hd-lace-sizes.png';
+    $cls_guide_src = $cls_guide['url'] ?: '';
     // Use intro image if set, otherwise fall back to size guide
     $split_src = $cls_split_src ?: $cls_guide_src;
     ?>

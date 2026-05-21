@@ -15,7 +15,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/client-result-1.jpg', '', '', 'eager' ); ?>
+    <?php ah_opt_img_tag( 'hero_image', '', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label">Nottingham Salon</span>
@@ -115,7 +115,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       foreach($hair_services as $i => $s): ?>
         <div class="service-card reveal d<?php echo ($i%3)+1; ?>">
           <div class="service-card__img">
-            <?php ah_opt_img_tag( $s['image_key'] ?? '', AH_URI.'/assets/images/'.($s['image_fallback']??''), $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
+            <?php ah_opt_img_tag( $s['image_key'] ?? '', '', $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
           </div>
           <div class="service-card__body">
             <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
@@ -167,7 +167,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
       foreach($beauty_services as $i => $s): ?>
         <div class="service-card reveal d<?php echo $i+1; ?>">
           <div class="service-card__img">
-            <?php ah_opt_img_tag( $s['image_key'] ?? '', AH_URI.'/assets/images/'.($s['image_fallback']??''), $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
+            <?php ah_opt_img_tag( $s['image_key'] ?? '', '', $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
           </div>
           <div class="service-card__body">
             <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
@@ -183,7 +183,7 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
 <!-- Booking + Location -->
 <section class="split" id="visit-us">
   <div class="split__media">
-    <img src="<?php echo esc_url((ah_opt_img('salon_split_img2')['url'] ?? '') ?: AH_URI.'/assets/images/client-result-3.jpg'); ?>"
+    <img src="<?php echo esc_url((ah_opt_img('salon_split_img2')['url'] ?? '')); ?>"
          alt="AHB Salon — Nottingham hair and beauty salon"
          loading="lazy" width="800" height="1000">
   </div>

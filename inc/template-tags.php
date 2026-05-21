@@ -192,7 +192,7 @@ function ah_product_card( WP_Post $post ): void {
     $wa_msg      = 'Hello! I\'m interested in: ' . get_the_title( $post );
     $img_src     = has_post_thumbnail( $post->ID )
                    ? get_the_post_thumbnail_url( $post->ID, 'ah-product' )
-                   : AH_URI . '/assets/images/' . ( $image_file ?: 'logo.jpg' );
+                   : '';
     ?>
     <article class="product-card" data-category="<?php echo esc_attr( sanitize_title( $category ) ); ?>">
         <div class="product-card__img">

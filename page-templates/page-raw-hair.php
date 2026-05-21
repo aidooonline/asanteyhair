@@ -15,7 +15,7 @@ echo ah_schema_breadcrumb([
 
 <section class="page-hero">
   <div class="page-hero__bg">
-    <?php ah_opt_img_tag( 'hero_image', AH_URI . '/assets/images/raw-body-wave.jpg', '', '', 'eager' ); ?>
+    <?php ah_opt_img_tag( 'hero_image', '', '', '', 'eager' ); ?>
   </div>
   <div class="page-hero__content">
     <span class="t-label"><?php echo esc_html(ah_opt('hero_label','Cambodian Hair Collection')); ?></span>
@@ -31,7 +31,7 @@ echo ah_schema_breadcrumb([
 <!-- What is Raw Hair -->
 <section class="split" id="what-is-raw-hair">
   <div class="split__media">
-    <img src="<?php echo esc_url( (ah_opt_img('raw_intro_image')['url'] ?? '') ?: AH_URI.'/assets/images/raw-kinky-straight.jpg' ); ?>"
+    <img src="<?php echo esc_url( (ah_opt_img('raw_intro_image')['url'] ?? '') ?: '' ); ?>"
          alt="Cambodian raw kinky straight hair — unprocessed single-donor"
          loading="lazy" width="800" height="1000">
   </div>
@@ -110,7 +110,7 @@ echo ah_schema_breadcrumb([
         [$img, $img_key, $name, $desc] = $t;
         $opt_key = 'raw_tex_' . $img_key;
         $opt_img = ah_opt_img( $opt_key );
-        $img_src = $opt_img['url'] ?: AH_URI . '/assets/images/' . $img;
+        $img_src = $opt_img['url'] ?: '';
         ?>
         <div class="ah-texture-card ah-reveal ah-reveal--delay-<?php echo ($i % 4) + 1; ?>">
           <div class="texture-item__img">
@@ -129,7 +129,7 @@ echo ah_schema_breadcrumb([
 <!-- Care Teaser -->
 <section class="split split--rev">
   <div class="split__media">
-    <img src="<?php echo esc_url( (ah_opt_img('raw_care_image')['url'] ?? '') ?: AH_URI.'/assets/images/raw-loose-wave.jpg' ); ?>"
+    <img src="<?php echo esc_url( (ah_opt_img('raw_care_image')['url'] ?? '') ?: '' ); ?>"
          alt="Caring for your Cambodian raw hair extensions"
          loading="lazy" width="800" height="1000">
   </div>
