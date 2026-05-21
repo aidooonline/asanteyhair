@@ -112,16 +112,25 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
           'body'  => 'Wash, condition, detangle, and style services for natural hair textures. Designed to maintain length and promote healthy growth.',
         ],
       ];
-      foreach($hair_services as $i => $s): ?>
+      foreach($hair_services as $i => $s):
+          $svc_link = ah_opt('svc_'.($s['svc_key'] ?? '').'_link', '');
+      ?>
+        <?php if ($svc_link): ?>
+        <a href="<?php echo esc_url($svc_link); ?>" class="service-card service-card--linked reveal d<?php echo ($i%3)+1; ?>">
+        <?php else: ?>
         <div class="service-card reveal d<?php echo ($i%3)+1; ?>">
+        <?php endif; ?>
           <div class="service-card__img">
             <?php ah_opt_img_tag( $s['image_key'] ?? '', '', $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
           </div>
           <div class="service-card__body">
             <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
             <p class="service-card__desc"><?php echo esc_html($s['body']); ?></p>
+            <?php if ($svc_link): ?>
+            <span class="service-card__cta">Book Now <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            <?php endif; ?>
           </div>
-        </div>
+        <?php echo $svc_link ? '</a>' : '</div>'; ?>
       <?php endforeach; ?>
     </div>
 
@@ -164,16 +173,25 @@ $booking_url = get_theme_mod('ah_booking_url', 'https://asanteyhair.as.me/');
           'body'  => 'Traditional threading technique for precise, pain-managed brow shaping. Ideal for sensitive skin or fine brow hair.',
         ],
       ];
-      foreach($beauty_services as $i => $s): ?>
+      foreach($beauty_services as $i => $s):
+          $svc_link = ah_opt('svc_'.($s['svc_key'] ?? '').'_link', '');
+      ?>
+        <?php if ($svc_link): ?>
+        <a href="<?php echo esc_url($svc_link); ?>" class="service-card service-card--linked reveal d<?php echo $i+1; ?>">
+        <?php else: ?>
         <div class="service-card reveal d<?php echo $i+1; ?>">
+        <?php endif; ?>
           <div class="service-card__img">
             <?php ah_opt_img_tag( $s['image_key'] ?? '', '', $s['title'].' at AHB Salon Nottingham', '', 'lazy' ); ?>
           </div>
           <div class="service-card__body">
             <h3 class="service-card__title"><?php echo esc_html($s['title']); ?></h3>
             <p class="service-card__desc"><?php echo esc_html($s['body']); ?></p>
+            <?php if ($svc_link): ?>
+            <span class="service-card__cta">Book Now <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            <?php endif; ?>
           </div>
-        </div>
+        <?php echo $svc_link ? '</a>' : '</div>'; ?>
       <?php endforeach; ?>
     </div>
 

@@ -773,6 +773,7 @@ function ahp_salon_svcs_cb(): void {
         _f("svc_{$key}_title","Title",$name);
         _f("svc_{$key}_price","Price (e.g. From £45)","");
         _ft("svc_{$key}_desc","Short Description","");
+        _f("svc_{$key}_link","Link URL (optional)","","e.g. https://asanteyhair.as.me/ or /contact/");
         _end();
     }
     echo '</div>';
@@ -791,6 +792,7 @@ function ahp_salon_bsvc_cb(): void {
         _f("svc_{$key}_title","Title",$name);
         _f("svc_{$key}_price","Price","");
         _ft("svc_{$key}_desc","Short Description","");
+        _f("svc_{$key}_link","Link URL (optional)","","e.g. https://asanteyhair.as.me/ or /contact/");
         _end();
     }
     echo '</div>';

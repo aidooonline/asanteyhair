@@ -1419,3 +1419,17 @@ body.page-template-page-templates-page-gallery .s { background:#ffffff;color:#11
 .site-header .hdr-cart{color:var(--paper)}
 .site-header .hdr-cart:hover{color:rgba(255,255,255,.6)}
 .site-header .hdr-cart__count{background:var(--paper);color:var(--ink);border-color:var(--ink)}
+
+/* ── SERVICE CARD LINK ───────────────────────────────────────── */
+a.service-card--linked{
+  text-decoration:none;color:inherit;
+  cursor:pointer;display:block}
+a.service-card--linked:hover{transform:translateY(-4px)}
+a.service-card--linked:hover .service-card__img img{transform:scale(1.05)}
+.service-card__cta{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--sans);font-size:.7rem;
+  font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink);
+  margin-top:.75rem}
+.service-card__cta svg{stroke:var(--ink)}
