@@ -21,7 +21,7 @@ for ( $i = 1; $i <= 3; $i++ ) {
     $video        = $video_upload ?: $video_url;
     $slides[] = [
         'type'     => $type,
-        'image'    => get_theme_mod( "ah_slide{$i}_image",    $i === 1 ? 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=88&auto=format&fit=crop' : '' ),
+        'image'    => get_theme_mod( "ah_slide{$i}_image",    '' ),
         'video'    => $video,
         'muted'    => get_theme_mod( "ah_slide{$i}_muted",    'muted' ),
         'duration' => intval( get_theme_mod( "ah_slide{$i}_duration", '6' ) ) ?: 6,
@@ -57,7 +57,16 @@ echo ah_schema_breadcrumb([['name'=>'Home','url'=>home_url('/')]]);
 ?>
 
 <!-- ============================================================ HERO SLIDER -->
-<section class="hero-slider" aria-label="Hero" id="hero-slider">
+<?php
+// Hero fallback background — uses dedicated fallback image, falls back to Slide 1 image
+// Shows instantly before any JS or img elements load
+$_hero_bg_img = get_theme_mod('ah_hero_fallback_image','')
+    ?: get_theme_mod('ah_slide1_image','');
+$_hero_bg_style = $_hero_bg_img
+    ? ' style="background-image:url(' . esc_url($_hero_bg_img) . ')"'
+    : '';
+?>
+<section class="hero-slider" aria-label="Hero" id="hero-slider"<?php echo $_hero_bg_style; ?>>
 
     <?php foreach ( $slides as $idx => $slide ) :
         $is_video = $slide['type'] === 'video' && $slide['video'];

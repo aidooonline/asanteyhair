@@ -954,7 +954,7 @@ select.form-control{
   position:relative;
   height:100svh;min-height:660px;
   overflow:hidden;
-  background:var(--ink) url('/wp-content/themes/asanteyhair/assets/images/hero-main.jpg') center/cover no-repeat}
+  background:var(--ink) center/cover no-repeat}/* bg-image set via PHP inline style */
 
 /* Each slide - crossfade with clip reveal */
 .hs-slide{

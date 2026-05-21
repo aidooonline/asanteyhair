@@ -394,6 +394,11 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp_customize 
         'description' => 'Edit the hero at the top of the homepage. Set up to 3 slides, each can be an image or an MP4 video (upload via the Video Upload field below).',
     ] );
 
+    // Hero fallback/preload image — shows instantly before slides load
+    $image( 'ah_hero_fallback_image', 'Hero Fallback Image (shows before video loads)', 'ah_hero_slides' );
+    $wp_customize->get_control('ah_hero_fallback_image') &&
+        $wp_customize->get_control('ah_hero_fallback_image')->description = 'This image shows immediately on page load before the video or slide image loads. Use a high-quality still frame from your hero video. Recommended: 1920x1080px JPG.';
+
     for ( $i = 1; $i <= 3; $i++ ) :
         $wp_customize->add_setting( "ah_slide{$i}_type", [
             'default'           => $i === 1 ? 'image' : '',
