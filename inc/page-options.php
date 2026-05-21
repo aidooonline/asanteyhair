@@ -108,58 +108,62 @@ add_action('admin_enqueue_scripts', function(string $hook): void {
         var i = document.getElementById(iId); if(i) i.value='';
     };
     /* Repeater delete */
-    document.addEventListener('click', function(e){\
-        if(e.target.classList.contains('ahp-rep-del')){\
-            if(confirm('Remove this item?')) e.target.closest('.ahp-rep-item').remove();\
-        }\
-    });\
-    /* Image pick buttons (data-target = hidden input ID) */\
-    document.addEventListener('click', function(e){\
-        var btn = e.target.closest('.ahp-pick-img');\
-        if (!btn) return;\
-        e.preventDefault();\
-        var inputId = btn.getAttribute('data-target');\
-        var previewId = btn.getAttribute('data-preview') || inputId.replace('_img_','_prev_');\
-        var f = wp.media({title:'Select Image',multiple:false,button:{text:'Use this image'},library:{type:'image'}});\
-        f.on('select', function(){\
-            var a = f.state().get('selection').first().toJSON();\
-            var s = (a.sizes && a.sizes.medium) ? a.sizes.medium.url : a.url;\
-            var inp = document.getElementById(inputId); if(inp) inp.value = a.id;\
-            var prev = document.getElementById(previewId);\
-            if(prev){\
-                if(prev.tagName === 'IMG'){ prev.src = s; }\
-                else { prev.innerHTML = '<img src="'+s+'" style="width:70px;height:70px;object-fit:cover;">'; }\
-            } else {\
-                /* find closest img inside the same field div */\
-                var wrap = btn.closest('.ahp-field');\
-                if(wrap){\
-                    var img = wrap.querySelector('img');\
-                    if(img){ img.src = s; }\
-                    else {\
-                        var div = wrap.querySelector('div[style*="70px"]');\
-                        if(div) div.innerHTML = '<img src="'+s+'" style="width:70px;height:70px;object-fit:cover;">';\
-                    }\
-                }\
-            }\
-        });\
-        f.open();\
-    });\
-    /* Image remove buttons */\
-    document.addEventListener('click', function(e){\
-        var btn = e.target.closest('.ahp-remove-img');\
-        if (!btn) return;\
-        e.preventDefault();\
-        var inputId = btn.getAttribute('data-target');\
-        var inp = document.getElementById(inputId); if(inp) inp.value = '';\
-        var wrap = btn.closest('.ahp-field');\
-        if(wrap){\
-            var img = wrap.querySelector('img');\
-            if(img) img.src = '';\
-            var div = wrap.querySelector('div[style*="70px"]');\
-            if(div) div.innerHTML = '';\
-        }\
+    document.addEventListener('click', function(e){
+        if(e.target.classList.contains('ahp-rep-del')){
+            if(confirm('Remove this item?')) e.target.closest('.ahp-rep-item').remove();
+        }
     });
-    </script>
+    /* Image pick — delegated handler for all .ahp-pick-img buttons */
+    document.addEventListener('click', function(e){
+        var btn = e.target.closest('.ahp-pick-img');
+        if (!btn) return;
+        e.preventDefault();
+        var inputId = btn.getAttribute('data-target');
+        if (!inputId) return;
+        var frame = wp.media({
+            title: 'Select Image',
+            multiple: false,
+            button: { text: 'Use this image' },
+            library: { type: 'image' }
+        });
+        frame.on('select', function(){
+            var att = frame.state().get('selection').first().toJSON();
+            var url = (att.sizes && att.sizes.medium) ? att.sizes.medium.url : att.url;
+            var inp = document.getElementById(inputId);
+            if (inp) inp.value = att.id;
+            /* Update preview — find closest img or placeholder div in same field */
+            var field = btn.closest('.ahp-field');
+            if (field) {
+                var img = field.querySelector('img');
+                if (img) {
+                    img.src = url;
+                    img.style.display = 'block';
+                } else {
+                    var placeholder = field.querySelector('div[style*="70px"]');
+                    if (placeholder) {
+                        placeholder.innerHTML = '<img src="' + url + '" style="width:70px;height:70px;object-fit:cover;display:block;">';
+                    }
+                }
+            }
+        });
+        frame.open();
+    });
+    /* Image remove */
+    document.addEventListener('click', function(e){
+        var btn = e.target.closest('.ahp-remove-img');
+        if (!btn) return;
+        e.preventDefault();
+        var inputId = btn.getAttribute('data-target');
+        var inp = document.getElementById(inputId);
+        if (inp) inp.value = '';
+        var field = btn.closest('.ahp-field');
+        if (field) {
+            var img = field.querySelector('img');
+            if (img) img.src = '';
+            var placeholder = field.querySelector('div[style*="70px"]');
+            if (placeholder) placeholder.innerHTML = '';
+        }
+    });    </script>
     <?php
 });
 
