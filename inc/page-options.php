@@ -93,6 +93,29 @@ add_action('admin_enqueue_scripts', function(string $hook): void {
     </style>
     <script>
     /* Image picker */
+    window.ahpPickSvc = function(prevId, inputId) {
+        var frame = wp.media({title:'Select Image',multiple:false,button:{text:'Use this image'},library:{type:'image'}});
+        frame.on('select', function(){
+            var att = frame.state().get('selection').first().toJSON();
+            var url = (att.sizes && att.sizes.thumbnail) ? att.sizes.thumbnail.url : att.url;
+            var inp = document.getElementById(inputId);
+            if (inp) inp.value = att.id;
+            var prev = document.getElementById(prevId);
+            if (prev) {
+                if (prev.tagName === 'IMG') { prev.src = url; prev.style.display='block'; }
+                else { prev.outerHTML = '<img id="'+prevId+'" src="'+url+'" style="width:70px;height:70px;object-fit:cover;">'; }
+            }
+        });
+        frame.open();
+    };
+    window.ahpRemoveSvc = function(prevId, inputId) {
+        var inp = document.getElementById(inputId); if(inp) inp.value = '';
+        var prev = document.getElementById(prevId);
+        if (prev) {
+            if (prev.tagName === 'IMG') { prev.src=''; prev.style.display='none'; }
+            else { prev.innerHTML = ''; }
+        }
+    };
     window.ahpPick = function(pId, iId) {
         var f = wp.media({title:'Select Image',multiple:false,button:{text:'Use this image'},library:{type:'image'}});
         f.on('select', function(){
@@ -843,8 +866,9 @@ function ahp_salon_svcs_cb(): void {
            . "<div class='ahp-field ahp-full'><label>Service Image</label>"
            . "<div style='display:flex;align-items:center;gap:10px;'>"
            . ($img_src ? "<img src='{$img_src}' style='width:70px;height:70px;object-fit:cover;'>" : "<div style='width:70px;height:70px;background:#f0f0f0;border:1px dashed #ccc;'></div>")
-           . "<div><button type='button' class='button ahp-pick-img' data-target='hair_svc_img_{$i}'>Choose Image</button>"
-           . "<button type='button' class='button ahp-remove-img' data-target='hair_svc_img_{$i}' style='margin-left:5px;'>Remove</button></div></div>"
+           . "<div style='display:flex;flex-direction:column;gap:4px;'>"
+           . "<button type='button' class='button button-primary' onclick=\"ahpPickSvc('hair_svc_prev_{$i}','hair_svc_img_{$i}')\">📁 Choose Image</button>"
+           . "<button type='button' class='button' onclick=\"ahpRemoveSvc('hair_svc_prev_{$i}','hair_svc_img_{$i}')\">✕ Remove</button></div></div>"
            . "<input type='hidden' name='ahp_rep[hair_services][{$i}][image_id]' id='hair_svc_img_{$i}' value='{$img_id}'>"
            . "</div></div></div>";
     endforeach;
@@ -911,8 +935,9 @@ function ahp_salon_bsvc_cb(): void {
            . "<div class='ahp-field ahp-full'><label>Service Image</label>"
            . "<div style='display:flex;align-items:center;gap:10px;'>"
            . ($img_src ? "<img src='{$img_src}' style='width:70px;height:70px;object-fit:cover;'>" : "<div style='width:70px;height:70px;background:#f0f0f0;border:1px dashed #ccc;'></div>")
-           . "<div><button type='button' class='button ahp-pick-img' data-target='beauty_svc_img_{$i}'>Choose Image</button>"
-           . "<button type='button' class='button ahp-remove-img' data-target='beauty_svc_img_{$i}' style='margin-left:5px;'>Remove</button></div></div>"
+           . "<div style='display:flex;flex-direction:column;gap:4px;'>"
+           . "<button type='button' class='button button-primary' onclick=\"ahpPickSvc('beauty_svc_prev_{$i}','beauty_svc_img_{$i}')\">📁 Choose Image</button>"
+           . "<button type='button' class='button' onclick=\"ahpRemoveSvc('beauty_svc_prev_{$i}','beauty_svc_img_{$i}')\">✕ Remove</button></div></div>"
            . "<input type='hidden' name='ahp_rep[beauty_services][{$i}][image_id]' id='beauty_svc_img_{$i}' value='{$img_id}'>"
            . "</div></div></div>";
     endforeach;
